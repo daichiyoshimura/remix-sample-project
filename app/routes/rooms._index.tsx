@@ -6,9 +6,24 @@ import { RoomProfileProps } from '~/components/RoomProfile';
 export const loader: LoaderFunction = async () => {
 	// ここでデータを取得するロジックを追加（APIからデータを取得するなど）
 	const rooms: RoomProfileProps[] = [
-		{ id: '1', name: 'Room 1' },
-		{ id: '2', name: 'Room 2' },
-		{ id: '3', name: 'Room 3' },
+		{
+			id: '1',
+			name: 'Room 1',
+			createdAt: '2024-03-24 00:51:00',
+			createdBy: 'owner',
+		},
+		{
+			id: '2',
+			name: 'Room 2',
+			createdAt: '2024-03-24 00:51:00',
+			createdBy: 'owner',
+		},
+		{
+			id: '3',
+			name: 'Room 3',
+			createdAt: '2024-03-24 00:51:00',
+			createdBy: 'owner',
+		},
 	];
 	return json({ rooms });
 };

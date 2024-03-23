@@ -1,9 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-
+module.exports = {
+	purge: [],
+	darkMode: false,
+	theme: {
+		extend: {
+			colors: {
+				darkslategray: '#2f4f4f',
+			},
+		},
+	},
+	variants: {
+		extend: {},
+	},
+	plugins: [],
+};

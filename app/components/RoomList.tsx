@@ -8,7 +8,7 @@ const RoomList = ({ rooms }: RoomListProps) => {
 	return (
 		<div>
 			{rooms.map((room) => (
-				<Room key={room.id} id={room.id} name={room.name} />
+				<Room key={room.id} id={room.id} name={room.name} createdAt={room.createdAt} createdBy={room.createdBy} />
 			))}
 		</div>
 	);

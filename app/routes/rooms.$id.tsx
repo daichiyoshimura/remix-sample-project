@@ -5,7 +5,12 @@ import RoomProfile, { RoomProfileProps } from '../components/RoomProfile';
 export const loader: LoaderFunction = async ({ params }) => {
 	const id = params.id as string; // paramsからidを取得
 	// ここでidに基づいて部屋の詳細データを取得するロジックを追加
-	const roomProfileProps: RoomProfileProps = { id, name: `Room ${id}` }; // サンプルデータ
+	const roomProfileProps: RoomProfileProps = {
+		id,
+		name: `Room ${id}`,
+		createdAt: '2024-03-24 00:53:00',
+		createdBy: 'Owner',
+	}; // サンプルデータ
 
 	return roomProfileProps;
 };
@@ -19,6 +24,8 @@ const RoomProfilePage = () => {
 			<RoomProfile
 				id={roomProfileProps.id}
 				name={roomProfileProps.name}
+				createdAt={roomProfileProps.createdAt}
+				createdBy={roomProfileProps.createdBy}
 			/>
 		</div>
 	);
