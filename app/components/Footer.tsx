@@ -1,13 +1,11 @@
 import '../styles/components/Footer.css';
 
-interface FooterProps {
-	copyRights: string;
-}
+interface FooterProps {}
 
-const Footer: React.FC<FooterProps> = ({copyRights}) => {
+const Footer: React.FC<FooterProps> = ({}) => {
 	return (
 		<footer className="footer">
-			<p>&copy; {copyRights}</p>
+			<p>&copy; 2024 All Rights Reserved</p>
 		</footer>
 	);
 };

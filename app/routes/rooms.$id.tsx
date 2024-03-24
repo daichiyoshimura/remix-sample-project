@@ -22,7 +22,7 @@ const RoomProfilePage = () => {
 	const roomProfileProps: RoomProfileProps = useLoaderData();
 
 	return (
-		<div>
+		<>
 			<Header currentPageTitle="Room Profile" />
 			<ContentArea>
 				<RoomProfile
@@ -32,8 +32,8 @@ const RoomProfilePage = () => {
 					createdBy={roomProfileProps.createdBy}
 				/>
 			</ContentArea>
-			<Footer copyRights="2024 All Rights Reserved" />
-		</div>
+			<Footer />
+		</>
 	);
 };
 

@@ -37,7 +37,7 @@ const RoomsPage = () => {
 	const { rooms } = useLoaderData<typeof loader>();
 
 	return (
-		<div>
+		<>
 			<Header currentPageTitle="Rooms" />
 			<ContentArea>
 				<Box>
@@ -47,8 +47,8 @@ const RoomsPage = () => {
 					<LinkButton to="/rooms/new">Create New Room</LinkButton>
 				</Box>
 			</ContentArea>
-			<Footer copyRights="2024 All Rights Reserved" />
-		</div>
+			<Footer />
+		</>
 	);
 };
 

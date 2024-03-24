@@ -1,10 +1,10 @@
 // rooms.new.tsx
 
-import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Box from '../components/Box';
 import NewRoomForm, { FormData } from '../components/NewRoomForm'; // FormData をインポート
+import ContentArea from '~/components/ContentArea';
 
 const NewRoomPage = () => {
 	const handleSubmit = (formData: FormData) => {
@@ -13,13 +13,15 @@ const NewRoomPage = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<Header currentPageTitle="Create Room" />
-			<Box>
-				<NewRoomForm onSubmit={handleSubmit} />
-			</Box>
-			<Footer copyRights="2024 All Rights Reserved" />
-		</div>
+			<ContentArea>
+				<Box>
+					<NewRoomForm onSubmit={handleSubmit} />
+				</Box>
+			</ContentArea>
+			<Footer />
+		</>
 	);
 };
 
