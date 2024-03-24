@@ -6,9 +6,15 @@ export interface RoomListProps {
 
 const RoomList = ({ rooms }: RoomListProps) => {
 	return (
-		<div>
+		<div className="space-y-4">
 			{rooms.map((room) => (
-				<Room key={room.id} id={room.id} name={room.name} createdAt={room.createdAt} createdBy={room.createdBy} />
+				<Room
+					key={room.id}
+					id={room.id}
+					name={room.name}
+					createdAt={room.createdAt}
+					createdBy={room.createdBy}
+				/>
 			))}
 		</div>
 	);
