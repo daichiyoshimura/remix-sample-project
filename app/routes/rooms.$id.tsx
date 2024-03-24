@@ -1,6 +1,8 @@
 import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import RoomProfile, { RoomProfileProps } from '../components/RoomProfile';
+import Header from '~/components/Header';
+import Footer from '~/components/Footer';
 
 export const loader: LoaderFunction = async ({ params }) => {
 	const id = params.id as string; // paramsからidを取得
@@ -20,6 +22,7 @@ const RoomProfilePage = () => {
 
 	return (
 		<div>
+			<Header currentPageTitle="Room Profile" />
 			<h1>Room Profile</h1>
 			<RoomProfile
 				id={roomProfileProps.id}
@@ -27,6 +30,7 @@ const RoomProfilePage = () => {
 				createdAt={roomProfileProps.createdAt}
 				createdBy={roomProfileProps.createdBy}
 			/>
+			<Footer />
 		</div>
 	);
 };

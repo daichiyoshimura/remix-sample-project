@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react';
+import LinkButton from './LinkButton';
 
 export interface RoomProps {
 	id: string;
@@ -17,13 +18,10 @@ const Room = ({ id, name, imageUrl, createdAt, createdBy }: RoomProps) => {
 				<div className="text-sm mb-2">Created at: {createdAt}</div>
 				<div className="text-sm mb-2">Created by: {createdBy}</div>
 			</div>
-			<div className="w-1/6 flex items-center justify-end pr-4">
-				<Link
-					to={`/rooms/${id}`}
-					className="block p-4 border border-gray-200 rounded-md hover:bg-gray-50 hover:text-black"
-				>
+			<div className="ml-auto flex items-center">
+				<LinkButton to={`/rooms/${id}`} className="mr-4">
 					Enter
-				</Link>
+				</LinkButton>
 			</div>
 		</div>
 	);

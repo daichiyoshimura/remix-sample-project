@@ -1,17 +1,19 @@
 import React from 'react';
 
-interface TextInputProps {
+export interface TextInputProps {
 	value: string;
 	onChange: (value: string) => void;
 	placeholder?: string;
 	className?: string;
+	required?: boolean; // requiredプロパティを追加
 }
 
 const TextInput = ({
-	value,
+	value = '',
 	onChange,
 	placeholder = '',
 	className = '',
+	required = false,
 }: TextInputProps) => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		onChange(event.target.value);
@@ -24,6 +26,7 @@ const TextInput = ({
 			value={value}
 			onChange={handleChange}
 			placeholder={placeholder}
+			required={required}
 		/>
 	);
 };
