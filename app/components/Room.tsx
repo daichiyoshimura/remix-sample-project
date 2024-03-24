@@ -1,4 +1,5 @@
 import LinkButton from './LinkButton';
+import '../styles/components/Room.css';
 
 export interface RoomProps {
 	id: string;
@@ -10,15 +11,17 @@ export interface RoomProps {
 
 const Room = ({ id, name, imageUrl, createdAt, createdBy }: RoomProps) => {
 	return (
-		<div className="max-w-full rounded overflow-hidden shadow-lg bg-darkslategray text-white flex">
-			{imageUrl && <img className="w-1/5" src={imageUrl} alt={name} />}
-			<div className="flex-1 flex flex-col justify-between px-6 py-4">
-				<div className="font-bold text-xl mb-2">{name}</div>
-				<div className="text-sm mb-2">Created at: {createdAt}</div>
-				<div className="text-sm mb-2">Created by: {createdBy}</div>
+		<div className="room-container">
+			{imageUrl && (
+				<img className="room-image" src={imageUrl} alt={name} />
+			)}
+			<div className="room-details">
+				<div className="room-name">{name}</div>
+				<div className="room-info">Created at: {createdAt}</div>
+				<div className="room-info">Created by: {createdBy}</div>
 			</div>
-			<div className="ml-auto flex items-center">
-				<LinkButton to={`/rooms/${id}`} className="mr-4">
+			<div className="room-actions">
+				<LinkButton to={`/rooms/${id}`} className="enter-button">
 					Enter
 				</LinkButton>
 			</div>
