@@ -1,15 +1,12 @@
 import React, { ReactNode } from 'react';
+import '../styles/components/Box.css';
 
 interface BoxProps {
-	children: ReactNode; // Boxコンポーネントの中に配置される要素
-	className?: string; // 追加のクラス名
+	children: ReactNode;
 }
 
-const Box: React.FC<BoxProps> = ({ children, className }) => {
-	// 追加のクラス名が指定されていれば、それを適用する
-	const classes = `border border-gray-300 p-4 rounded-md ${className}`;
-
-	return <div className={classes}>{children}</div>;
+const Box: React.FC<BoxProps> = ({ children }) => {
+	return <div className="box">{children}</div>;
 };
 
 export default Box;

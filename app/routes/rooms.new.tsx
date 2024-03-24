@@ -14,11 +14,11 @@ const NewRoomPage = () => {
 
 	return (
 		<div>
-			<Header currentPageTitle="New Room" />
-			<Box className="mx-auto mt-16">
+			<Header currentPageTitle="Create Room" />
+			<Box>
 				<NewRoomForm onSubmit={handleSubmit} />
 			</Box>
-			<Footer />
+			<Footer copyRights="2024 All Rights Reserved" />
 		</div>
 	);
 };

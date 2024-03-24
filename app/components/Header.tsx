@@ -1,18 +1,13 @@
-import { Link } from '@remix-run/react';
-import Logo from './Logo'; // ロゴコンポーネントのインポート
+import '../styles/components/Header.css';
 
 interface HeaderProps {
-	currentPageTitle: string; // 現在のページのタイトル
+	currentPageTitle: string;
 }
 
-const Header = ({ currentPageTitle }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ currentPageTitle }) => {
 	return (
-		<header className="bg-darkslategray py-4 fixed top-0 w-full z-10">
-			<div className="container mx-auto flex justify-between items-center">
-				<h1 className="text-white text-lg font-semibold flex-grow text-center">
-					{currentPageTitle}
-				</h1>
-			</div>
+		<header className="header">
+			<h1>{currentPageTitle}</h1>
 		</header>
 	);
 };

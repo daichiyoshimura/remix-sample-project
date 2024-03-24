@@ -1,12 +1,12 @@
 import type { LoaderFunction } from '@remix-run/node';
-import { Link } from '@remix-run/react';
-import RoomList from '../components/RoomList';
 import { json, useLoaderData } from '@remix-run/react';
 import { RoomProfileProps } from '~/components/RoomProfile';
+import RoomList from '../components/RoomList';
 import Header from '../components/Header';
-import Box from '../components/Box'; // Boxコンポーネントのインポート
+import Box from '../components/Box';
 import Footer from '~/components/Footer';
 import LinkButton from '../components/LinkButton';
+import ContentArea from '~/components/ContentArea';
 
 export const loader: LoaderFunction = async () => {
 	// ここでデータを取得するロジックを追加（APIからデータを取得するなど）
@@ -39,13 +39,15 @@ const RoomsPage = () => {
 	return (
 		<div>
 			<Header currentPageTitle="Rooms" />
-			<Box className="mx-auto mt-16">
-				<RoomList rooms={rooms} />
-			</Box>
-			<Box className="flex justify-center mt-8">
-				<LinkButton to="/rooms/new">Create New Room</LinkButton>
-			</Box>
-			<Footer />
+			<ContentArea>
+				<Box>
+					<RoomList rooms={rooms} />
+				</Box>
+				<Box>
+					<LinkButton to="/rooms/new">Create New Room</LinkButton>
+				</Box>
+			</ContentArea>
+			<Footer copyRights="2024 All Rights Reserved" />
 		</div>
 	);
 };

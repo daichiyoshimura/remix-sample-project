@@ -1,9 +1,13 @@
-const Footer = () => {
+import '../styles/components/Footer.css';
+
+interface FooterProps {
+	copyRights: string;
+}
+
+const Footer: React.FC<FooterProps> = ({copyRights}) => {
 	return (
-		<footer className="bg-darkslategray py-4 fixed bottom-0 w-full">
-			<div className="container mx-auto text-center text-white">
-				<p>&copy; 2024 Your Website. All Rights Reserved.</p>
-			</div>
+		<footer className="footer">
+			<p>&copy; {copyRights}</p>
 		</footer>
 	);
 };
