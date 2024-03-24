@@ -1,0 +1,25 @@
+.new-room-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group label {
+	margin-bottom: 4px;
+}
+
+.button-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 16px;
+}
+
+.button-container {
+	display: flex;
+	gap: 8px;
+}

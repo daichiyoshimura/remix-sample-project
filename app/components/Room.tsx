@@ -1,4 +1,3 @@
-import { Link } from '@remix-run/react';
 import LinkButton from './LinkButton';
 
 export interface RoomProps {

@@ -5,7 +5,7 @@ export interface TextInputProps {
 	onChange: (value: string) => void;
 	placeholder?: string;
 	className?: string;
-	required?: boolean; // requiredプロパティを追加
+	required?: boolean;
 }
 
 const TextInput = ({

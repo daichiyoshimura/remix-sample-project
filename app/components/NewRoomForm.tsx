@@ -1,10 +1,8 @@
-// NewRoomForm.tsx
-
 import React, { useState } from 'react';
 import TextInput from './TextInput';
-import Button from './Button'; // Buttonコンポーネントのインポート
-import '../styles/NewRoomForm.css'; // NewRoomForm.cssのインポート
+import Button from './Button';
 import LinkButton from './LinkButton';
+import '../styles/components/NewRoomForm.css';
 
 export interface FormData {
 	name: string;

@@ -1,7 +1,7 @@
 .content-area {
 	position: relative;
-	top: 64px; /* Headerの高さに合わせて調整 */
-	bottom: 64px; /* Footerの高さに合わせて調整 */
-	height: calc(100vh - 128px); /* HeaderとFooterの高さを除いた高さ */
-	overflow-y: auto; /* コンテンツが領域外にはみ出た場合にスクロールバーを表示 */
+	top: 64px;
+	bottom: 64px;
+	height: calc(100vh - 128px);
+	overflow-y: auto;
 }
