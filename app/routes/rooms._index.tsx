@@ -1,7 +1,7 @@
 import type { LoaderFunction } from '@remix-run/node';
 import { json, useLoaderData } from '@remix-run/react';
 import { RoomProfileProps } from '~/components/RoomProfile/RoomProfile';
-import RoomList from '../components/RoomList/RoomList';
+import RoomList from '../components/RoomCardList/RoomCardList';
 import Header from '../components/Header/Header';
 import Box from '../components/Box/Box';
 import Footer from '~/components/Footer/Footer';

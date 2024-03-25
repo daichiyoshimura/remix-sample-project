@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import TextInput from '../TextInput/TextInput';
-import './NewRoomForm.css';
 
 export interface FormData {
 	name: string;
@@ -50,17 +49,21 @@ const NewRoomForm: React.FC<NewRoomFormProps> = ({ onSubmit }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="new-room-form">
-			<div className="form-group">
-				<label htmlFor="name">Room Name:</label>
+		<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+			<div className="flex flex-col">
+				<label htmlFor="name" className="mb-1">
+					Room Name:
+				</label>
 				<TextInput
 					value={formData.name}
 					onChange={(value) => handleChange('name', value)}
 					required
 				/>
 			</div>
-			<div className="form-group">
-				<label htmlFor="image">Image:</label>
+			<div className="flex flex-col">
+				<label htmlFor="image" className="mb-1">
+					Image:
+				</label>
 				<input
 					type="file"
 					id="image"

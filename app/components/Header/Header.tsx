@@ -1,4 +1,4 @@
-import './Header.css';
+import React from 'react';
 
 interface HeaderProps {
 	currentPageTitle: string;
@@ -6,7 +6,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentPageTitle }) => {
 	return (
-		<header className="header">
+		<header className="fixed top-0 left-0 w-full bg-darkslategray text-white py-2 text-center">
 			<h1>{currentPageTitle}</h1>
 		</header>
 	);

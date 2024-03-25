@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface RoomProfileProps {
 	id: string;
 	name: string;
@@ -6,13 +8,13 @@ export interface RoomProfileProps {
 	createdBy: string;
 }
 
-const RoomProfile = ({
+const RoomProfile: React.FC<RoomProfileProps> = ({
 	id,
 	name,
 	imageUrl,
 	createdAt,
 	createdBy,
-}: RoomProfileProps) => {
+}) => {
 	return (
 		<>
 			<div>

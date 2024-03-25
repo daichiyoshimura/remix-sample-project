@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from '@remix-run/react';
-import './LinkButton.css';
 
 interface LinkButtonProps {
 	to: string;
@@ -14,7 +13,10 @@ const LinkButton: React.FC<LinkButtonProps> = ({
 	children,
 }) => {
 	return (
-		<Link to={to} className={`link-button ${className}`}>
+		<Link
+			to={to}
+			className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${className}`}
+		>
 			{children}
 		</Link>
 	);

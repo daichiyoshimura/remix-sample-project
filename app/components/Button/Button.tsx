@@ -1,5 +1,4 @@
 import React from 'react';
-import './Button.css';
 
 interface ButtonProps {
 	onClick: () => void;
@@ -16,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
 	return (
 		<button
-			className={`button ${className}`}
+			className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${className}`}
 			onClick={onClick}
 			disabled={disabled}
 		>

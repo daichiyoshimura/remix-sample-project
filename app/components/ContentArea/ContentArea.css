@@ -1,7 +1,0 @@
-.content-area {
-	position: relative;
-	top: 64px;
-	bottom: 64px;
-	height: calc(100vh - 128px);
-	overflow-y: auto;
-}

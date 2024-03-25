@@ -1,12 +1,11 @@
 import React from 'react';
-import './ButtonContainer.css';
 
 interface ButtonContainerProps {
 	children?: React.ReactNode;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = ({ children }) => {
-	return <div className="button-container">{children}</div>;
+	return <div className="flex justify-center mt-4 gap-4">{children}</div>;
 };
 
 export default ButtonContainer;
