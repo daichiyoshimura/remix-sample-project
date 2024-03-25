@@ -1,6 +1,9 @@
 import React from 'react';
+import { ParticipantCardProps } from '../ParticipantCard/ParticipantCard';
+import ParticipantCardList from '../ParticipantCardList/ParticipantCardList';
 
 export interface RoomProfileProps {
+	participants: ParticipantCardProps[];
 	id: string;
 	name: string;
 	imageUrl?: string;
@@ -10,13 +13,15 @@ export interface RoomProfileProps {
 
 const RoomProfile: React.FC<RoomProfileProps> = ({
 	id,
-	name
+	name,
+	participants,
 }) => {
 	return (
 		<>
 			<div>
 				<h2>{name}</h2>
 				<p>ID: {id}</p>
+				<ParticipantCardList participants={participants} />
 			</div>
 		</>
 	);

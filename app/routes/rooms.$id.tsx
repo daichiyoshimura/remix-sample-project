@@ -19,6 +19,20 @@ export const loader: LoaderFunction = async ({ params }) => {
 		name: `Room ${id}`,
 		createdAt: '2024-03-24 00:53:00',
 		createdBy: 'Owner',
+		participants: [
+			{
+				name: 'john',
+				part: 'Tp',
+			},
+			{
+				name: 'emma',
+				part: 'Sax',
+			},
+			{
+				name: 'kate',
+				part: 'Pf',
+			},
+		],
 	}; // サンプルデータ
 
 	return roomProfileProps;
@@ -37,6 +51,7 @@ const RoomProfilePage = () => {
 						name={roomProfileProps.name}
 						createdAt={roomProfileProps.createdAt}
 						createdBy={roomProfileProps.createdBy}
+						participants={roomProfileProps.participants}
 					/>
 				</Box>
 				<ButtonContainer>
