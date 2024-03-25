@@ -1,6 +1,8 @@
 import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import RoomProfile, { RoomProfileProps } from '../components/RoomProfile/RoomProfile';
+import RoomProfile, {
+	RoomProfileProps,
+} from '../components/RoomProfile/RoomProfile';
 import Header from '~/components/Header/Header';
 import Footer from '~/components/Footer/Footer';
 import ContentArea from '~/components/ContentArea/ContentArea';
@@ -44,7 +46,7 @@ const RoomProfilePage = () => {
 							throw new Error('Function not implemented.');
 						}}
 					>
-						Create Room
+						Delete This Room
 					</Button>
 				</ButtonContainer>
 			</ContentArea>
