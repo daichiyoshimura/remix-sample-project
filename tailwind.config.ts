@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-export default {
+const config: Config = {
 	content: ['./app/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		extend: {
@@ -16,8 +16,6 @@ export default {
 		},
 	},
 	plugins: [],
-	purge: {
-		content: ['./app/**/*.{js,jsx,ts,tsx}'],
-		safelist: ['app/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-	},
-} satisfies Config;
+};
+
+export default config;
