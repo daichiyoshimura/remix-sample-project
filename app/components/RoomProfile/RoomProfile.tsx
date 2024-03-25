@@ -1,9 +1,7 @@
 import React from 'react';
-import { ParticipantCardProps } from '../ParticipantCard/ParticipantCard';
-import ParticipantCardList from '../ParticipantCardList/ParticipantCardList';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 export interface RoomProfileProps {
-	participants: ParticipantCardProps[];
 	id: string;
 	name: string;
 	imageUrl?: string;
@@ -14,16 +12,23 @@ export interface RoomProfileProps {
 const RoomProfile: React.FC<RoomProfileProps> = ({
 	id,
 	name,
-	participants,
+	createdAt,
+	createdBy,
 }) => {
 	return (
-		<>
+		<div className="flex items-center">
+			<MeetingRoomIcon
+				className="mr-4 flex-shrink-0"
+				fontSize="large"
+				fill="currentColor"
+			/>
 			<div>
-				<h2>{name}</h2>
+				<h2 className="text-lg font-semibold">{name}</h2>
 				<p>ID: {id}</p>
-				<ParticipantCardList participants={participants} />
+				<p>Created At: {createdAt}</p>
+				<p>Created By: {createdBy}</p>
 			</div>
-		</>
+		</div>
 	);
 };
 

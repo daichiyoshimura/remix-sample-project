@@ -10,15 +10,21 @@ import Box from '~/components/Box/Box';
 import LinkButton from '~/components/LinkButton/LinkButton';
 import Button from '~/components/Button/Button';
 import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
+import ParticipantCardList, {
+	ParticipantCardListProps,
+} from '~/components/ParticipantCardList/ParticipantCardList';
 
 export const loader: LoaderFunction = async ({ params }) => {
-	const id = params.id as string; // paramsからidを取得
-	// ここでidに基づいて部屋の詳細データを取得するロジックを追加
+	const id = params.id as string;
+
 	const roomProfileProps: RoomProfileProps = {
 		id,
 		name: `Room ${id}`,
 		createdAt: '2024-03-24 00:53:00',
 		createdBy: 'Owner',
+	};
+
+	const participantCardListProps: ParticipantCardListProps = {
 		participants: [
 			{
 				name: 'john',
@@ -33,13 +39,17 @@ export const loader: LoaderFunction = async ({ params }) => {
 				part: 'Pf',
 			},
 		],
-	}; // サンプルデータ
+	};
 
-	return roomProfileProps;
+	return {
+		...roomProfileProps,
+		...participantCardListProps,
+	};
 };
 
 const RoomProfilePage = () => {
-	const roomProfileProps: RoomProfileProps = useLoaderData();
+	const roomProfilePageProps: RoomProfileProps & ParticipantCardListProps =
+		useLoaderData();
 
 	return (
 		<>
@@ -47,11 +57,15 @@ const RoomProfilePage = () => {
 			<ContentArea>
 				<Box>
 					<RoomProfile
-						id={roomProfileProps.id}
-						name={roomProfileProps.name}
-						createdAt={roomProfileProps.createdAt}
-						createdBy={roomProfileProps.createdBy}
-						participants={roomProfileProps.participants}
+						id={roomProfilePageProps.id}
+						name={roomProfilePageProps.name}
+						createdAt={roomProfilePageProps.createdAt}
+						createdBy={roomProfilePageProps.createdBy}
+					/>
+				</Box>
+				<Box>
+					<ParticipantCardList
+						participants={roomProfilePageProps.participants}
 					/>
 				</Box>
 				<ButtonContainer>
