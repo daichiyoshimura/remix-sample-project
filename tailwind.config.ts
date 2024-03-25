@@ -13,4 +13,10 @@ export default {
 		},
 	},
 	plugins: [],
+	purge: {
+		content: [
+			'./app/**/*.{js,jsx,ts,tsx}',
+		],
+		safelist: ['app/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+	},
 } satisfies Config;
