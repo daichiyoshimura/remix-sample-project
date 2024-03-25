@@ -1,4 +1,4 @@
-import Room, { RoomProps } from './Room';
+import Room, { RoomProps } from '../Room/Room';
 
 export interface RoomListProps {
 	rooms: RoomProps[];

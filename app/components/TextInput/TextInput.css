@@ -1,0 +1,10 @@
+.text-input {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 8px 12px;
+	outline: none;
+}
+
+.text-input:focus {
+	border-color: #007bff;
+}

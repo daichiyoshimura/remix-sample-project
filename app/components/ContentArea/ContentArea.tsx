@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/components/ContentArea.css';
+import './ContentArea.css';
 
 interface ContentAreaProps {
 	children?: React.ReactNode;

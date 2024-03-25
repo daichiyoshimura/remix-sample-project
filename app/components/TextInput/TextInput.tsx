@@ -1,4 +1,5 @@
 import React from 'react';
+import './TextInput.css';
 
 export interface TextInputProps {
 	value: string;
@@ -8,13 +9,13 @@ export interface TextInputProps {
 	required?: boolean;
 }
 
-const TextInput = ({
+const TextInput: React.FC<TextInputProps> = ({
 	value = '',
 	onChange,
 	placeholder = '',
 	className = '',
 	required = false,
-}: TextInputProps) => {
+}) => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		onChange(event.target.value);
 	};
@@ -22,7 +23,7 @@ const TextInput = ({
 	return (
 		<input
 			type="text"
-			className={`border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500 ${className}`}
+			className={`text-input ${className}`}
 			value={value}
 			onChange={handleChange}
 			placeholder={placeholder}

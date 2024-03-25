@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import TextInput from './TextInput';
-import Button from './Button';
-import LinkButton from './LinkButton';
-import '../styles/components/NewRoomForm.css';
+import TextInput from '../TextInput/TextInput';
+import './NewRoomForm.css';
 
 export interface FormData {
 	name: string;
@@ -69,16 +67,6 @@ const NewRoomForm: React.FC<NewRoomFormProps> = ({ onSubmit }) => {
 					accept="image/*"
 					onChange={handleImageChange}
 				/>
-			</div>
-			<div className="button-container">
-				<LinkButton to="/rooms">Back</LinkButton>
-				<Button
-					onClick={function (): void {
-						throw new Error('Function not implemented.');
-					}}
-				>
-					Create Room
-				</Button>
 			</div>
 		</form>
 	);

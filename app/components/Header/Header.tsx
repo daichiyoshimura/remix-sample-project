@@ -1,4 +1,4 @@
-import '../styles/components/Header.css';
+import './Header.css';
 
 interface HeaderProps {
 	currentPageTitle: string;

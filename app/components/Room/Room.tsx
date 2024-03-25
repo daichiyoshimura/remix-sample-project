@@ -1,5 +1,5 @@
-import LinkButton from './LinkButton';
-import '../styles/components/Room.css';
+import LinkButton from '../LinkButton/LinkButton';
+import './Room.css';
 
 export interface RoomProps {
 	id: string;

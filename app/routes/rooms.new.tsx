@@ -1,10 +1,11 @@
-// rooms.new.tsx
-
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Box from '../components/Box';
-import NewRoomForm, { FormData } from '../components/NewRoomForm'; // FormData をインポート
-import ContentArea from '~/components/ContentArea';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+import Box from '../components/Box/Box';
+import NewRoomForm, { FormData } from '../components/NewRoomForm/NewRoomForm';
+import ContentArea from '~/components/ContentArea/ContentArea';
+import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
+import LinkButton from '~/components/LinkButton/LinkButton';
+import Button from '~/components/Button/Button';
 
 const NewRoomPage = () => {
 	const handleSubmit = (formData: FormData) => {
@@ -19,6 +20,16 @@ const NewRoomPage = () => {
 				<Box>
 					<NewRoomForm onSubmit={handleSubmit} />
 				</Box>
+				<ButtonContainer>
+					<LinkButton to="/rooms">Back</LinkButton>
+					<Button
+						onClick={function (): void {
+							throw new Error('Function not implemented.');
+						}}
+					>
+						Create Room
+					</Button>
+				</ButtonContainer>
 			</ContentArea>
 			<Footer />
 		</>

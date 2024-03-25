@@ -1,9 +1,13 @@
 import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import RoomProfile, { RoomProfileProps } from '../components/RoomProfile';
-import Header from '~/components/Header';
-import Footer from '~/components/Footer';
-import ContentArea from '~/components/ContentArea';
+import RoomProfile, { RoomProfileProps } from '../components/RoomProfile/RoomProfile';
+import Header from '~/components/Header/Header';
+import Footer from '~/components/Footer/Footer';
+import ContentArea from '~/components/ContentArea/ContentArea';
+import Box from '~/components/Box/Box';
+import LinkButton from '~/components/LinkButton/LinkButton';
+import Button from '~/components/Button/Button';
+import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
 
 export const loader: LoaderFunction = async ({ params }) => {
 	const id = params.id as string; // paramsからidを取得
@@ -25,12 +29,24 @@ const RoomProfilePage = () => {
 		<>
 			<Header currentPageTitle="Room Profile" />
 			<ContentArea>
-				<RoomProfile
-					id={roomProfileProps.id}
-					name={roomProfileProps.name}
-					createdAt={roomProfileProps.createdAt}
-					createdBy={roomProfileProps.createdBy}
-				/>
+				<Box>
+					<RoomProfile
+						id={roomProfileProps.id}
+						name={roomProfileProps.name}
+						createdAt={roomProfileProps.createdAt}
+						createdBy={roomProfileProps.createdBy}
+					/>
+				</Box>
+				<ButtonContainer>
+					<LinkButton to="/rooms">Back</LinkButton>
+					<Button
+						onClick={function (): void {
+							throw new Error('Function not implemented.');
+						}}
+					>
+						Create Room
+					</Button>
+				</ButtonContainer>
 			</ContentArea>
 			<Footer />
 		</>

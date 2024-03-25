@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import '../styles/components/Box.css';
+import './Box.css';
 
 interface BoxProps {
 	children: ReactNode;
