@@ -45,6 +45,7 @@ const RoomProfilePage = () => {
 						onClick={function (): void {
 							throw new Error('Function not implemented.');
 						}}
+						color="red"
 					>
 						Delete This Room
 					</Button>
