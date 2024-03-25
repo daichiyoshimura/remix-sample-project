@@ -17,6 +17,9 @@ dependencies:
   isbot:
     specifier: ^4.1.0
     version: 4.4.0
+  material-icons:
+    specifier: ^1.13.12
+    version: 1.13.12
   prisma:
     specifier: ^5.11.0
     version: 5.11.0
@@ -4831,6 +4834,10 @@ packages:
     resolution: {integrity: sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /material-icons@1.13.12:
+    resolution: {integrity: sha512-/2YoaB79IjUK2B2JB+vIXXYGtBfHb/XG66LvoKVM5ykHW7yfrV5SP6d7KLX6iijY6/G9GqwgtPQ/sbhFnOURVA==}
+    dev: false
 
   /mdast-util-definitions@5.1.2:
     resolution: {integrity: sha512-8SVPMuHqlPME/z3gqVwWY4zVXn8lqKv/pAhC57FuJ40ImXyBpmO5ukh98zB2v7Blql2FiHjHv9LVztSIqjY+MA==}
