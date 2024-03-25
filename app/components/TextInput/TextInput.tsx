@@ -12,7 +12,6 @@ const TextInput: React.FC<TextInputProps> = ({
 	value = '',
 	onChange,
 	placeholder = '',
-	className = '',
 	required = false,
 }) => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import RoomCard, { RoomCardProps } from '../RoomCard/RoomCard';
 
 export interface RoomCardListProps {

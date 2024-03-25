@@ -10,10 +10,7 @@ export interface RoomProfileProps {
 
 const RoomProfile: React.FC<RoomProfileProps> = ({
 	id,
-	name,
-	imageUrl,
-	createdAt,
-	createdBy,
+	name
 }) => {
 	return (
 		<>
