@@ -14,31 +14,21 @@ import ParticipantCardList, {
 	ParticipantCardListProps,
 } from '~/components/ParticipantCardList/ParticipantCardList';
 
+// participants.server.ts をインポート
+import { GetParticipantsMock } from '../loaders/participants.server';
+
 export const loader: LoaderFunction = async ({ params }) => {
 	const id = params.id as string;
+
+	// GetParticipants 関数を呼び出して参加者データを取得
+	const participantCardListProps: ParticipantCardListProps =
+		await GetParticipantsMock({ roomId: id });
 
 	const roomProfileProps: RoomProfileProps = {
 		id,
 		name: `Room ${id}`,
 		createdAt: '2024-03-24 00:53:00',
 		createdBy: 'Owner',
-	};
-
-	const participantCardListProps: ParticipantCardListProps = {
-		participants: [
-			{
-				name: 'john',
-				part: 'Tp',
-			},
-			{
-				name: 'emma',
-				part: 'Sax',
-			},
-			{
-				name: 'kate',
-				part: 'Pf',
-			},
-		],
 	};
 
 	return {
