@@ -13,8 +13,7 @@ import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
 import ParticipantCardList, {
 	ParticipantCardListProps,
 } from '~/components/ParticipantCardList/ParticipantCardList';
-
-import { GetParticipantsMock } from '../loaders/participants.server';
+import { GetParticipantsMock } from '~/loaders/participants.server';
 import { GetRoomMock } from '~/loaders/rooms.server';
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -34,8 +33,8 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 const RoomProfilePage = () => {
-	const roomProfilePageProps: RoomProfileProps & ParticipantCardListProps =
-		useLoaderData();
+	const roomProfilePageProps =
+		useLoaderData<RoomProfileProps & ParticipantCardListProps>();
 
 	return (
 		<>
