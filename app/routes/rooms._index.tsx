@@ -9,7 +9,7 @@ import Footer from '~/components/Footer/Footer';
 import LinkButton from '~/components/LinkButton/LinkButton';
 import ContentArea from '~/components/ContentArea/ContentArea';
 import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
-import { GetRoomsMock } from '~/loaders/rooms.server';
+import { GetRoomsMock } from '~/loaders/rooms';
 
 export const loader: LoaderFunction = async () => {
 	const roomCardListProps: RoomCardListProps = await GetRoomsMock({

@@ -12,9 +12,10 @@ const ParticipantCardList: React.FC<ParticipantCardListProps> = ({
 }) => {
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-			{participants.map((participant, index) => (
+			{participants.map((participant) => (
 				<ParticipantCard
-					key={index}
+					key={participant.id}
+					id={participant.id}
 					name={participant.name}
 					part={participant.part}
 				/>

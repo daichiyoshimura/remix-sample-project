@@ -2,7 +2,7 @@ import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import RoomProfile, {
 	RoomProfileProps,
-} from '../components/RoomProfile/RoomProfile';
+} from '~/components/RoomProfile/RoomProfile';
 import Header from '~/components/Header/Header';
 import Footer from '~/components/Footer/Footer';
 import ContentArea from '~/components/ContentArea/ContentArea';
@@ -13,28 +13,57 @@ import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
 import ParticipantCardList, {
 	ParticipantCardListProps,
 } from '~/components/ParticipantCardList/ParticipantCardList';
-import { GetParticipantsMock } from '~/loaders/participants.server';
-import { GetRoomMock } from '~/loaders/rooms.server';
+import { GetParticipantsMock } from '~/loaders/participants';
+import { GetRoomMock } from '~/loaders/rooms';
 
-export const loader: LoaderFunction = async ({ params }) => {
-	const id = params.id as string;
+type LoaderData = RoomProfileProps & ParticipantCardListProps;
 
-	const participantCardListProps: ParticipantCardListProps =
-		await GetParticipantsMock({ roomId: id });
+export const loader: LoaderFunction = async ({
+	params,
+}): Promise<LoaderData> => {
+	try {
+		const id = params.id as string;
 
-	const roomProfileProps: RoomProfileProps = await GetRoomMock({
-		roomId: id,
-	});
+		// Get room profile props
+		const roomProfileProps: RoomProfileProps = await GetRoomMock({
+			roomId: id,
+		});
 
-	return {
-		...roomProfileProps,
-		...participantCardListProps,
-	};
+		// Get participant card list props
+		const participantCardListProps: ParticipantCardListProps =
+			await GetParticipantsMock({ roomId: id });
+
+		// Return props if both requests succeed
+		return {
+			...roomProfileProps,
+			...participantCardListProps,
+		};
+	} catch (error) {
+		console.error('Error fetching data:', error);
+		throw new Response('Oh no! Something went wrong!', {
+			status: 500,
+		});
+	}
 };
 
 const RoomProfilePage = () => {
-	const roomProfilePageProps =
-		useLoaderData<RoomProfileProps & ParticipantCardListProps>();
+	const loaderData: LoaderData = useLoaderData<LoaderData>();
+
+	// Check if both room profile and participant card list data exist
+	if (
+		!loaderData ||
+		!loaderData.id ||
+		!loaderData.name ||
+		!loaderData.createdAt ||
+		!loaderData.createdBy ||
+		!loaderData.participants
+	) {
+		// If any of the data is missing, display a loading indicator or error message
+		return <div>Loading...</div>;
+	}
+
+	const { participants, id, name, createdAt, createdBy } = loaderData;
+	console.log('Participant Props:', participants);
 
 	return (
 		<>
@@ -42,16 +71,14 @@ const RoomProfilePage = () => {
 			<ContentArea>
 				<Box>
 					<RoomProfile
-						id={roomProfilePageProps.id}
-						name={roomProfilePageProps.name}
-						createdAt={roomProfilePageProps.createdAt}
-						createdBy={roomProfilePageProps.createdBy}
+						id={id}
+						name={name}
+						createdAt={createdAt}
+						createdBy={createdBy}
 					/>
 				</Box>
 				<Box>
-					<ParticipantCardList
-						participants={roomProfilePageProps.participants}
-					/>
+					<ParticipantCardList participants={participants} />
 				</Box>
 				<ButtonContainer>
 					<LinkButton to="/rooms">Back</LinkButton>

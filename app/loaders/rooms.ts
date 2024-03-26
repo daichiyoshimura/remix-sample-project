@@ -1,4 +1,4 @@
-import { callBackendAPI } from './httpclient.server';
+import { callBackendAPI } from './httpclient';
 
 interface GetRoomUrlParams {
 	roomId: string;

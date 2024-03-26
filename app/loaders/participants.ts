@@ -1,4 +1,4 @@
-import { callBackendAPI } from './httpclient.server';
+import { callBackendAPI } from './httpclient';
 
 interface GetParticipantsQueryParams {
 	roomId: string;
@@ -41,12 +41,14 @@ export async function GetParticipants({
 	}
 }
 
-
-export async function GetParticipantsMock({ roomId }: GetParticipantsQueryParams): Promise<GetParticipantsResponseBody> {
-	const mockParticipants: Participant[] = [
-		{ id: '1', name: 'John', part: 'Tp' },
-		{ id: '2', name: 'Emma', part: 'Sax' },
-		{ id: '3', name: 'Kate', part: 'Pf' },
-	];
-    return { participants: mockParticipants };
+export async function GetParticipantsMock({
+	roomId,
+}: GetParticipantsQueryParams): Promise<GetParticipantsResponseBody> {
+	return {
+		participants: [
+			{ id: '1', name: 'John', part: 'Tp' },
+			{ id: '2', name: 'Emma', part: 'Sax' },
+			{ id: '3', name: 'Kate', part: 'Pf' },
+		],
+	};
 }
