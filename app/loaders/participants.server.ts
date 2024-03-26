@@ -1,14 +1,14 @@
 import { callBackendAPI } from './httpclient.server';
 
-export interface GetParticipantsQueryParams {
+interface GetParticipantsQueryParams {
 	roomId: string;
 }
 
-export interface GetParticipantsResponseBody {
+interface GetParticipantsResponseBody {
 	participants: Participant[];
 }
 
-export interface Participant {
+interface Participant {
 	id: string;
 	name: string;
 	part: string;
