@@ -14,7 +14,7 @@ const ParticipantCard: React.FC<ParticipantCardProps> = ({
 	part,
 }) => {
 	return (
-		<Card className="flex flex-col rounded items-center bg-slategray text-white p-4">
+		<Card>
 			<AccountCircleIcon fontSize="large" fill="currentColor" />
 			<div className="text-sm mt-1">{name}</div>
 			<div className="text-xs">&lt;{part}&gt;</div>
