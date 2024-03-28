@@ -16,6 +16,7 @@ const ParticipantCard: React.FC<ParticipantCardProps> = ({
 	return (
 		<Card>
 			<AccountCircleIcon fontSize="large" fill="currentColor" />
+			<div className="hidden">{id}</div>
 			<div className="text-sm mt-1">{name}</div>
 			<div className="text-xs">&lt;{part}&gt;</div>
 		</Card>
