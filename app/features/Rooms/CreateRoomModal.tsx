@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '~/components/Modal/Modal';
-import ButtonContainer from '~/components/Container/Container';
+import Container from '~/components/Container/Container';
 import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 
@@ -9,7 +9,10 @@ interface CreateRoomModalProps {
 	onClose: () => void;
 }
 
-const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
+const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
+	isOpen,
+	onClose,
+}) => {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleCreate = async () => {
@@ -39,17 +42,19 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) =>
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleCancel}>
-			<h2 className="text-lg font-bold">create room</h2>
-			<TextInput
-				value={inputValue}
-				onChange={setInputValue}
-				placeholder="room name"
-				required
-			/>
-			<ButtonContainer>
+			<h2 className="text-lg font-bold text-center">create room</h2>
+			<Container>
+				<TextInput
+					value={inputValue}
+					onChange={setInputValue}
+					placeholder="room name"
+					required
+				/>
+			</Container>
+			<Container>
 				<Button onClick={handleCancel}>do not create</Button>
 				<Button onClick={handleCreate}>create</Button>
-			</ButtonContainer>
+			</Container>
 		</Modal>
 	);
 };
