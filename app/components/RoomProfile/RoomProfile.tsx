@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
-import EditIcon from '@mui/icons-material/Edit';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import TextInput from '~/components/TextInput/TextInput';
-import Button from '~/components/Button/Button';
+import EditButton from '~/components/Button/EditButton';
+import SaveButton from '~/components/Button/SaveButton';
 
 export interface RoomProfileProps {
 	id: string;
@@ -61,21 +60,9 @@ const RoomProfile: React.FC<RoomProfileProps> = ({
 						<h2 className="text-lg font-semibold">{editedName}</h2>
 					)}
 					{editing ? (
-						<Button
-							onClick={handleSaveClick}
-							color="blue"
-							className="p-0 bg-blue-100 text-blue-500 max-w-max"
-						>
-							<CheckCircleIcon />
-						</Button>
+						<SaveButton onClick={handleSaveClick} />
 					) : (
-						<Button
-							onClick={handleEditClick}
-							color="blue"
-							className="p-0 bg-blue-100 text-blue-500 max-w-max"
-						>
-							<EditIcon />
-						</Button>
+						<EditButton onClick={handleEditClick} />
 					)}
 				</div>
 				<p>ID: {id}</p>

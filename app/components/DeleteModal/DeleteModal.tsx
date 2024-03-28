@@ -58,7 +58,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 				<Button onClick={handleCancel}>キャンセル</Button>
 				<Button
 					onClick={handleDelete}
-					color="red"
+					warning={true}
 					disabled={inputValue !== roomName}
 				>
 					削除

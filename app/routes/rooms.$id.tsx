@@ -83,7 +83,7 @@ const RoomProfilePage = () => {
 				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
 					<Button
-						color="red"
+						warning={true}
 						onClick={function (): void {
 							throw new Error('Function not implemented.');
 						}}
