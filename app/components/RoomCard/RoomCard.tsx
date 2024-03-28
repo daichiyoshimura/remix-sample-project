@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkButton from '~/components/LinkButton/LinkButton';
+import LinkButton from '~/components/Button/LinkButton';
 
 export interface RoomCardProps {
 	id: string;
@@ -29,12 +29,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
 				</div>
 			</div>
 			<div className="flex items-center room-actions">
-				<LinkButton
-					to={`/rooms/${id}`}
-					className="mr-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded enter-button"
-				>
-					Enter
-				</LinkButton>
+				<LinkButton to={`/rooms/${id}`}>Enter</LinkButton>
 			</div>
 		</div>
 	);

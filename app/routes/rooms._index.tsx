@@ -6,7 +6,7 @@ import RoomCardList, {
 import Header from '~/components/Header/Header';
 import Box from '~/components/Box/Box';
 import Footer from '~/components/Footer/Footer';
-import LinkButton from '~/components/LinkButton/LinkButton';
+import LinkButton from '~/components/Button/LinkButton';
 import ContentArea from '~/components/ContentArea/ContentArea';
 import Container from '~/components/Container/Container';
 import { GetRoomsMock } from '~/loaders/rooms';

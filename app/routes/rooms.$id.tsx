@@ -7,7 +7,7 @@ import Header from '~/components/Header/Header';
 import Footer from '~/components/Footer/Footer';
 import ContentArea from '~/components/ContentArea/ContentArea';
 import Box from '~/components/Box/Box';
-import LinkButton from '~/components/LinkButton/LinkButton';
+import LinkButton from '~/components/Button/LinkButton';
 import Button from '~/components/Button/Button';
 import Container from '~/components/Container/Container';
 import ParticipantCardList, {

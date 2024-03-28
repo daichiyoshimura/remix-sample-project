@@ -4,7 +4,7 @@ import Box from '../components/Box/Box';
 import NewRoomForm, { FormData } from '../components/NewRoomForm/NewRoomForm';
 import ContentArea from '~/components/ContentArea/ContentArea';
 import Container from '~/components/Container/Container';
-import LinkButton from '~/components/LinkButton/LinkButton';
+import LinkButton from '~/components/Button/LinkButton';
 import Button from '~/components/Button/Button';
 
 const NewRoomPage = () => {
