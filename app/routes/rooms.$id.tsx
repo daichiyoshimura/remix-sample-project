@@ -9,7 +9,7 @@ import ContentArea from '~/components/ContentArea/ContentArea';
 import Box from '~/components/Box/Box';
 import LinkButton from '~/components/LinkButton/LinkButton';
 import Button from '~/components/Button/Button';
-import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
+import ButtonContainer from '~/components/Container/Container';
 import ParticipantCardList, {
 	ParticipantCardListProps,
 } from '~/components/ParticipantCardList/ParticipantCardList';
@@ -83,9 +83,11 @@ const RoomProfilePage = () => {
 				<ButtonContainer>
 					<LinkButton to="/rooms">Back</LinkButton>
 					<Button
-						color="red" onClick={function (): void {
+						color="red"
+						onClick={function (): void {
 							throw new Error('Function not implemented.');
-						} }					>
+						}}
+					>
 						Delete This Room
 					</Button>
 				</ButtonContainer>

@@ -8,7 +8,7 @@ import Box from '~/components/Box/Box';
 import Footer from '~/components/Footer/Footer';
 import LinkButton from '~/components/LinkButton/LinkButton';
 import ContentArea from '~/components/ContentArea/ContentArea';
-import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
+import ButtonContainer from '~/components/Container/ButtonContainer';
 import { GetRoomsMock } from '~/loaders/rooms';
 
 export const loader: LoaderFunction = async () => {

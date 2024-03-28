@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '~/components/Modal/Modal';
-import ButtonContainer from '~/components/ButtonContainer/ButtonContainer';
+import ButtonContainer from '~/components/Container/Container';
 import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 
@@ -40,8 +40,6 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 		setRoomName('');
 		setInputValue('');
 	};
-
-
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleCancel}>
