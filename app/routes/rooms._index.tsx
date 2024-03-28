@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import type { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import RoomCardList, { RoomCardListProps } from '~/features/Rooms/RoomCardList';
@@ -8,6 +9,7 @@ import ContentArea from '~/components/ContentArea/ContentArea';
 import Container from '~/components/Container/Container';
 import { GetRoomsMock } from '~/loaders/rooms';
 import Button from '~/components/Button/Button';
+import CreateRoomModal from '~/features/Rooms/CreateRoomModal';
 
 export const loader: LoaderFunction = async () => {
 	const roomCardListProps: RoomCardListProps = await GetRoomsMock({
@@ -17,7 +19,12 @@ export const loader: LoaderFunction = async () => {
 };
 
 const RoomsPage = () => {
+	const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
 	const { rooms } = useLoaderData<RoomCardListProps>();
+
+	const toggleCreateRoomModal = () => {
+		setIsCreateRoomModalOpen(!isCreateRoomModalOpen);
+	};
 
 	return (
 		<>
@@ -27,8 +34,14 @@ const RoomsPage = () => {
 					<RoomCardList rooms={rooms} />
 				</Box>
 				<Container>
-					<Button>New Room</Button>
+					<Button onClick={toggleCreateRoomModal}>Create Room</Button>
 				</Container>
+				{isCreateRoomModalOpen && (
+					<CreateRoomModal
+						isOpen={isCreateRoomModalOpen}
+						onClose={toggleCreateRoomModal}
+					/>
+				)}
 			</ContentArea>
 			<Footer />
 		</>

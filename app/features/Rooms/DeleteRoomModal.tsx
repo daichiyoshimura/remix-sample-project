@@ -6,39 +6,33 @@ import Button from '~/components/Button/Button';
 
 interface DeleteModalProps {
 	isOpen: boolean;
-	pathToDelete: string;
+	name: string
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, pathToDelete }) => {
-	const [name, setName] = useState('');
+const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, name }) => {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleDelete = async () => {
 		try {
-			const response = await fetch(pathToDelete, {
+			const response = await fetch('path/to/delete', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ name }),
+				body: JSON.stringify({ inputValue }),
 			});
 
 			if (response.ok) {
-				// 削除が成功した場合の処理を記述
+				// on success
 			} else {
-				// 削除が失敗した場合の処理を記述
+				// on failed
 			}
 		} catch (error) {
-			// エラー処理を記述
-			console.error(
-				'削除リクエストの送信中にエラーが発生しました:',
-				error,
-			);
+			console.error('error has occured:', error);
 		}
 	};
 
 	const handleCancel = () => {
-		setName('');
 		setInputValue('');
 	};
 
@@ -52,8 +46,8 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, pathToDelete }) => {
 				press the delete button.
 			</p>
 			<TextInput
-				value={name}
-				onChange={setName}
+				value={inputValue}
+				onChange={setInputValue}
 				placeholder={name}
 				required
 			/>

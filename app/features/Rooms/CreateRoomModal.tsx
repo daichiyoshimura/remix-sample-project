@@ -6,12 +6,10 @@ import Button from '~/components/Button/Button';
 
 interface CreateRoomModalProps {
 	isOpen: boolean;
-	pathToCreate: string;
-	title: string;
-	description: string;
+	onClose: () => void;
 }
 
-const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen }) => {
+const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleCreate = async () => {
@@ -36,6 +34,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen }) => {
 
 	const handleCancel = () => {
 		setInputValue('');
+		onClose();
 	};
 
 	return (
