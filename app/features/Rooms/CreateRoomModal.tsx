@@ -53,7 +53,12 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 			</Container>
 			<Container>
 				<Button onClick={handleCancel}>do not create</Button>
-				<Button onClick={handleCreate}>create</Button>
+				<Button
+					onClick={handleCreate}
+					disabled={inputValue.length === 0}
+				>
+					create
+				</Button>
 			</Container>
 		</Modal>
 	);
