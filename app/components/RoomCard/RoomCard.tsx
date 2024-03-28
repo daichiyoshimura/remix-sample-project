@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkButton from '../LinkButton/LinkButton';
+import LinkButton from '~/components/LinkButton/LinkButton';
 
 export interface RoomCardProps {
 	id: string;

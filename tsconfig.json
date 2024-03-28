@@ -16,8 +16,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"baseUrl": ".",
 		"paths": {
-			"~/*": ["./app/*"],
-			"@components/*": ["./app/components/*"]
+			"~/*": ["./app/*"]
 		},
 		"noEmit": false
 	}
