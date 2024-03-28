@@ -54,7 +54,6 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 				value={roomName}
 				onChange={setRoomName}
 				placeholder="Room名"
-				className="mb-4"
 				required
 			/>
 			<ButtonContainer>

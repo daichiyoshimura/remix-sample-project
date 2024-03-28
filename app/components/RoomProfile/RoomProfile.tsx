@@ -53,7 +53,6 @@ const RoomProfile: React.FC<RoomProfileProps> = ({
 							value={editedName}
 							onChange={handleChange}
 							placeholder="Room Name"
-							className="mr-2"
 							required
 						/>
 					) : (
