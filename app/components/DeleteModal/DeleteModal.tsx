@@ -41,8 +41,10 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 		setInputValue('');
 	};
 
+
+
 	return (
-		<Modal isOpen={isOpen}>
+		<Modal isOpen={isOpen} onClose={handleCancel}>
 			<h2 className="text-lg font-bold">本当に削除しますか？</h2>
 			<p className="text-sm text-gray-600 mb-4">
 				削除するためには下記のテキストボックスにRoom名を入力して削除ボタンを押してください

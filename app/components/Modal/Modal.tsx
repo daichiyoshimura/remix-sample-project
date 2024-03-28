@@ -1,19 +1,23 @@
 import React from 'react';
+import ReactModal from 'react-modal';
 
 interface ModalProps {
 	isOpen: boolean;
+	onClose: () => void;
 	children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 	return (
-		<>
-			{isOpen && (
-				<div className="modal-overlay">
-					<div className="modal-content">{children}</div>
-				</div>
-			)}
-		</>
+		<ReactModal
+			isOpen={isOpen}
+			onRequestClose={onClose}
+			ariaHideApp={false}
+			overlayClassName="modal-overlay"
+			className="modal-content"
+		>
+			{children}
+		</ReactModal>
 	);
 };
 
