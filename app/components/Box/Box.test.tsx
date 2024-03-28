@@ -4,9 +4,7 @@ import Box from './Box';
 describe('Box', () => {
 	it('renders children correctly', () => {
 		const childComponent = <div>Box</div>;
-		const boxProps = { children: childComponent };
-		const box = Box(boxProps);
-
+		const box = <Box>{childComponent}</Box>;
 		expect(box).toBeDefined();
 	});
 });
