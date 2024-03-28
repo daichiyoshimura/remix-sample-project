@@ -43,9 +43,12 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleCancel}>
-			<h2 className="text-lg font-bold">本当に削除しますか？</h2>
+			<h2 className="text-lg font-bold">
+				Are you sure you want to delete?
+			</h2>
 			<p className="text-sm text-gray-600 mb-4">
-				削除するためには下記のテキストボックスにRoom名を入力して削除ボタンを押してください
+				To delete, please enter the room name in the textbox below and
+				press the delete button.
 			</p>
 			<TextInput
 				value={roomName}
@@ -55,13 +58,13 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 				required
 			/>
 			<ButtonContainer>
-				<Button onClick={handleCancel}>キャンセル</Button>
+				<Button onClick={handleCancel}>do not delete</Button>
 				<Button
 					onClick={handleDelete}
 					warning={true}
 					disabled={inputValue !== roomName}
 				>
-					削除
+					delete
 				</Button>
 			</ButtonContainer>
 		</Modal>
