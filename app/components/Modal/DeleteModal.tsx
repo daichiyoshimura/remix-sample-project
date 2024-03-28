@@ -6,20 +6,21 @@ import Button from '~/components/Button/Button';
 
 interface DeleteModalProps {
 	isOpen: boolean;
+	pathToDelete: string;
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
-	const [roomName, setRoomName] = useState('');
+const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, pathToDelete }) => {
+	const [name, setName] = useState('');
 	const [inputValue, setInputValue] = useState('');
 
 	const handleDelete = async () => {
 		try {
-			const response = await fetch('/delete-room', {
+			const response = await fetch(pathToDelete, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ roomName }),
+				body: JSON.stringify({ name }),
 			});
 
 			if (response.ok) {
@@ -37,7 +38,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 	};
 
 	const handleCancel = () => {
-		setRoomName('');
+		setName('');
 		setInputValue('');
 	};
 
@@ -47,13 +48,13 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 				Are you sure you want to delete?
 			</h2>
 			<p className="text-sm text-gray-600 mb-4">
-				To delete, please enter the room name in the textbox below and
+				To delete, please enter the same name in the textbox below and
 				press the delete button.
 			</p>
 			<TextInput
-				value={roomName}
-				onChange={setRoomName}
-				placeholder="Room名"
+				value={name}
+				onChange={setName}
+				placeholder={name}
 				required
 			/>
 			<ButtonContainer>
@@ -61,7 +62,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen }) => {
 				<Button
 					onClick={handleDelete}
 					warning={true}
-					disabled={inputValue !== roomName}
+					disabled={inputValue !== name}
 				>
 					delete
 				</Button>
