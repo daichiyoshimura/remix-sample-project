@@ -1,6 +1,6 @@
 import React from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Card from '../Card/Card';
+import Card from '~/components/Card/Card';
 
 export interface ParticipantCardProps {
 	id: string;

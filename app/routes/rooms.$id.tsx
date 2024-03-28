@@ -9,7 +9,7 @@ import ContentArea from '~/components/ContentArea/ContentArea';
 import Box from '~/components/Box/Box';
 import LinkButton from '~/components/LinkButton/LinkButton';
 import Button from '~/components/Button/Button';
-import ButtonContainer from '~/components/Container/Container';
+import Container from '~/components/Container/Container';
 import ParticipantCardList, {
 	ParticipantCardListProps,
 } from '~/components/ParticipantCardList/ParticipantCardList';
@@ -80,7 +80,7 @@ const RoomProfilePage = () => {
 				<Box>
 					<ParticipantCardList participants={participants} />
 				</Box>
-				<ButtonContainer>
+				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
 					<Button
 						color="red"
@@ -90,7 +90,7 @@ const RoomProfilePage = () => {
 					>
 						Delete This Room
 					</Button>
-				</ButtonContainer>
+				</Container>
 			</ContentArea>
 			<Footer />
 		</>

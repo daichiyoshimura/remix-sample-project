@@ -3,7 +3,7 @@ import Footer from '../components/Footer/Footer';
 import Box from '../components/Box/Box';
 import NewRoomForm, { FormData } from '../components/NewRoomForm/NewRoomForm';
 import ContentArea from '~/components/ContentArea/ContentArea';
-import ButtonContainer from '~/components/Container/ButtonContainer';
+import Container from '~/components/Container/Container';
 import LinkButton from '~/components/LinkButton/LinkButton';
 import Button from '~/components/Button/Button';
 
@@ -20,7 +20,7 @@ const NewRoomPage = () => {
 				<Box>
 					<NewRoomForm onSubmit={handleSubmit} />
 				</Box>
-				<ButtonContainer>
+				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
 					<Button
 						onClick={function (): void {
@@ -29,7 +29,7 @@ const NewRoomPage = () => {
 					>
 						Create Room
 					</Button>
-				</ButtonContainer>
+				</Container>
 			</ContentArea>
 			<Footer />
 		</>

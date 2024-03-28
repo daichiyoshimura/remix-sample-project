@@ -8,7 +8,7 @@ import Box from '~/components/Box/Box';
 import Footer from '~/components/Footer/Footer';
 import LinkButton from '~/components/LinkButton/LinkButton';
 import ContentArea from '~/components/ContentArea/ContentArea';
-import ButtonContainer from '~/components/Container/ButtonContainer';
+import Container from '~/components/Container/Container';
 import { GetRoomsMock } from '~/loaders/rooms';
 
 export const loader: LoaderFunction = async () => {
@@ -28,9 +28,9 @@ const RoomsPage = () => {
 				<Box>
 					<RoomCardList rooms={rooms} />
 				</Box>
-				<ButtonContainer>
+				<Container>
 					<LinkButton to="/rooms/new">Create New Room</LinkButton>
-				</ButtonContainer>
+				</Container>
 			</ContentArea>
 			<Footer />
 		</>
