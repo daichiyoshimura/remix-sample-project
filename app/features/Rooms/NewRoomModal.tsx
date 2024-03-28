@@ -8,11 +8,11 @@ export interface FormData {
 	createdBy: string;
 }
 
-interface NewRoomFormProps {
+interface NewRoomModalProps {
 	onSubmit: (data: FormData) => void;
 }
 
-const NewRoomForm: React.FC<NewRoomFormProps> = ({ onSubmit }) => {
+const NewRoomModal: React.FC<NewRoomModalProps> = ({ onSubmit }) => {
 	const [formData, setFormData] = useState<FormData>({
 		name: '',
 		imageUrl: '',
@@ -75,4 +75,4 @@ const NewRoomForm: React.FC<NewRoomFormProps> = ({ onSubmit }) => {
 	);
 };
 
-export default NewRoomForm;
+export default NewRoomModal;
