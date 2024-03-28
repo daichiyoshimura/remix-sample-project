@@ -15,8 +15,16 @@ const Button: React.FC<ButtonProps> = ({
 	size = 'middle',
 	children,
 }) => {
-	const bgColor = warning ? 'bg-red-500' : 'bg-blue-500';
-	const hoverBgColor = warning ? 'hover:bg-red-700' : 'hover:bg-blue-700';
+	const bgColor = disabled
+		? 'bg-gray-500'
+		: warning
+		? 'bg-red-500'
+		: 'bg-blue-500';
+	const hoverBgColor = disabled
+		? 'bg-gray-500'
+		: warning
+		? 'hover:bg-red-700'
+		: 'hover:bg-blue-700';
 	const shape = size === 'middle' ? 'py-1 px-2' : 'p-0';
 
 	return (

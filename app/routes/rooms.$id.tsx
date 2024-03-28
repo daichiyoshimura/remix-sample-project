@@ -13,6 +13,8 @@ import ParticipantCardList, {
 } from '~/features/Participants/ParticipantCardList';
 import { GetParticipantsMock } from '~/loaders/participants';
 import { GetRoomMock } from '~/loaders/rooms';
+import { useState } from 'react';
+import DeleteRoomModal from '~/features/Rooms/DeleteRoomModal';
 
 type LoaderData = RoomProfileProps & ParticipantCardListProps;
 
@@ -45,7 +47,12 @@ export const loader: LoaderFunction = async ({
 };
 
 const RoomProfilePage = () => {
+	const [isDeleteRoomModalOpen, setIsDeleteRoomModalOpen] = useState(false);
 	const loaderData: LoaderData = useLoaderData<LoaderData>();
+
+	const toggleDeleteRoomModal = () => {
+		setIsDeleteRoomModalOpen(!isDeleteRoomModalOpen);
+	};
 
 	// Check if both room profile and participant card list data exist
 	if (
@@ -61,7 +68,6 @@ const RoomProfilePage = () => {
 	}
 
 	const { participants, id, name, createdAt, createdBy } = loaderData;
-	console.log('Participant Props:', participants);
 
 	return (
 		<>
@@ -80,8 +86,17 @@ const RoomProfilePage = () => {
 				</Box>
 				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
-					<Button warning={true}>Delete This Room</Button>
+					<Button warning={true} onClick={toggleDeleteRoomModal}>
+						Delete This Room
+					</Button>
 				</Container>
+				{isDeleteRoomModalOpen && (
+					<DeleteRoomModal
+						isOpen={isDeleteRoomModalOpen}
+						onClose={toggleDeleteRoomModal}
+						name={name}
+					/>
+				)}
 			</ContentArea>
 			<Footer />
 		</>

@@ -6,10 +6,11 @@ import Button from '~/components/Button/Button';
 
 interface DeleteModalProps {
 	isOpen: boolean;
-	name: string
+	name: string;
+	onClose: () => void;
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, name }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, name, onClose }) => {
 	const [inputValue, setInputValue] = useState('');
 
 	const handleDelete = async () => {
@@ -34,6 +35,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, name }) => {
 
 	const handleCancel = () => {
 		setInputValue('');
+		onClose();
 	};
 
 	return (
