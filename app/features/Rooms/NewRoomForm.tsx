@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TextInput from '../TextInput/TextInput';
+import TextInput from '../../components/TextInput/TextInput';
 
 export interface FormData {
 	name: string;

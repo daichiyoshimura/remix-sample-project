@@ -1,8 +1,6 @@
 import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import RoomProfile, {
-	RoomProfileProps,
-} from '~/components/RoomProfile/RoomProfile';
+import RoomProfile, { RoomProfileProps } from '~/features/Rooms/RoomProfile';
 import Header from '~/components/Header/Header';
 import Footer from '~/components/Footer/Footer';
 import ContentArea from '~/components/ContentArea/ContentArea';
@@ -12,7 +10,7 @@ import Button from '~/components/Button/Button';
 import Container from '~/components/Container/Container';
 import ParticipantCardList, {
 	ParticipantCardListProps,
-} from '~/components/ParticipantCardList/ParticipantCardList';
+} from '~/features/Participants/ParticipantCardList';
 import { GetParticipantsMock } from '~/loaders/participants';
 import { GetRoomMock } from '~/loaders/rooms';
 
@@ -82,14 +80,7 @@ const RoomProfilePage = () => {
 				</Box>
 				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
-					<Button
-						warning={true}
-						onClick={function (): void {
-							throw new Error('Function not implemented.');
-						}}
-					>
-						Delete This Room
-					</Button>
+					<Button warning={true}>Delete This Room</Button>
 				</Container>
 			</ContentArea>
 			<Footer />

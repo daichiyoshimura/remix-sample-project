@@ -1,7 +1,7 @@
 import React from 'react';
 import ParticipantCard, {
 	ParticipantCardProps,
-} from '../ParticipantCard/ParticipantCard';
+} from './ParticipantCard';
 
 export interface ParticipantCardListProps {
 	participants: ParticipantCardProps[];

@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomCard, { RoomCardProps } from '../RoomCard/RoomCard';
+import RoomCard, { RoomCardProps } from './RoomCard';
 
 export interface RoomCardListProps {
 	rooms: RoomCardProps[];
