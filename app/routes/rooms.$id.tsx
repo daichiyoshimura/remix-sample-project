@@ -60,26 +60,20 @@ const RoomProfilePage = () => {
 		!loaderData.id ||
 		!loaderData.name ||
 		!loaderData.createdAt ||
-		!loaderData.createdBy ||
 		!loaderData.participants
 	) {
 		// If any of the data is missing, display a loading indicator or error message
 		return <div>Loading...</div>;
 	}
 
-	const { participants, id, name, createdAt, createdBy } = loaderData;
+	const { participants, id, name, createdAt } = loaderData;
 
 	return (
 		<>
 			<Header currentPageTitle="Room Profile" />
 			<ContentArea>
 				<Box>
-					<RoomProfile
-						id={id}
-						name={name}
-						createdAt={createdAt}
-						createdBy={createdBy}
-					/>
+					<RoomProfile id={id} name={name} createdAt={createdAt} />
 				</Box>
 				<Box>
 					<ParticipantCardList participants={participants} />

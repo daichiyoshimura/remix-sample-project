@@ -7,18 +7,10 @@ import SaveButton from '~/components/Button/SaveButton';
 export interface RoomProfileProps {
 	id: string;
 	name: string;
-	imageUrl?: string;
 	createdAt: string;
-	createdBy: string;
 }
 
-const RoomProfile: React.FC<RoomProfileProps> = ({
-	id,
-	name,
-	imageUrl,
-	createdAt,
-	createdBy,
-}) => {
+const RoomProfile: React.FC<RoomProfileProps> = ({ id, name, createdAt }) => {
 	const [editing, setEditing] = useState(false);
 	const [editedName, setEditedName] = useState(name);
 
@@ -66,7 +58,6 @@ const RoomProfile: React.FC<RoomProfileProps> = ({
 				</div>
 				<p>ID: {id}</p>
 				<p>Created At: {createdAt}</p>
-				<p>Created By: {createdBy}</p>
 			</div>
 		</div>
 	);

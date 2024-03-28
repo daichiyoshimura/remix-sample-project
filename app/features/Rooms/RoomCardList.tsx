@@ -14,7 +14,6 @@ const RoomCardList: React.FC<RoomCardListProps> = ({ rooms }) => {
 					id={room.id}
 					name={room.name}
 					createdAt={room.createdAt}
-					createdBy={room.createdBy}
 				/>
 			))}
 		</div>
