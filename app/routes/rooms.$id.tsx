@@ -83,11 +83,9 @@ const RoomProfilePage = () => {
 				<ButtonContainer>
 					<LinkButton to="/rooms">Back</LinkButton>
 					<Button
-						onClick={function (): void {
+						color="red" onClick={function (): void {
 							throw new Error('Function not implemented.');
-						}}
-						color="red"
-					>
+						} }					>
 						Delete This Room
 					</Button>
 				</ButtonContainer>
