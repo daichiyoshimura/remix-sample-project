@@ -42,9 +42,11 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleCancel}>
-			<h2 className="text-lg font-bold">create room</h2>
+			<h2 className="text-lg font-bold">Create room</h2>
 			<p className="text-sm text-gray-600 mb-4">
-				
+				Please enter only alphanumeric characters in this field. It is
+				limited to a maximum length of 64 characters. The use of symbols
+				such as underscores, hyphens, and spaces is not permitted.
 			</p>
 			<TextInput
 				value={inputValue}
@@ -52,7 +54,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 				placeholder="room name"
 				required
 			/>
-			<Container>
+			<Container alignment="right">
 				<Button onClick={handleCancel}>do not create</Button>
 				<Button
 					onClick={handleCreate}

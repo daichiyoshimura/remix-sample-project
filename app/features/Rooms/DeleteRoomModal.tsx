@@ -53,7 +53,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, name, onClose }) => {
 				placeholder={name}
 				required
 			/>
-			<Container>
+			<Container alignment='right'>
 				<Button onClick={handleCancel}>do not delete</Button>
 				<Button
 					onClick={handleDelete}
