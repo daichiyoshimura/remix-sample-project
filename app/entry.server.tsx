@@ -26,17 +26,17 @@ export default function handleRequest(
 ) {
 	return isbot(request.headers.get('user-agent') || '')
 		? handleBotRequest(
-			request,
-			responseStatusCode,
-			responseHeaders,
-			remixContext,
-		)
+				request,
+				responseStatusCode,
+				responseHeaders,
+				remixContext,
+		  )
 		: handleBrowserRequest(
-			request,
-			responseStatusCode,
-			responseHeaders,
-			remixContext,
-		);
+				request,
+				responseStatusCode,
+				responseHeaders,
+				remixContext,
+		  );
 }
 
 function handleBotRequest(
@@ -109,7 +109,10 @@ function handleBrowserRequest(
 					const body = new PassThrough();
 					const stream = createReadableStreamFromReadable(body);
 
-					responseHeaders.set('Content-Type', 'text/html');
+					responseHeaders.set(
+						'Content-Type',
+						'text/html; charset=utf-8',
+					);
 
 					resolve(
 						new Response(stream, {
