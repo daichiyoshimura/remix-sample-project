@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { CheckCircle } from '@mui/icons-material';
 import Button from './Button';
 
 interface SaveButtonProps {
@@ -13,7 +13,7 @@ const SaveButton: React.FC<SaveButtonProps> = ({
 }) => {
 	return (
 		<Button onClick={onClick} disabled={disabled} size="tiny">
-			<CheckCircleIcon />
+			<CheckCircle />
 		</Button>
 	);
 };

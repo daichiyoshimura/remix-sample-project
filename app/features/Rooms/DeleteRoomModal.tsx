@@ -35,7 +35,6 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 				},
 				body: JSON.stringify({ inputValue }),
 			});
-			console.log('deleteRoomModal:' + JSON.stringify(response));
 
 			if (response.ok) {
 				setDeleteStatus('success');

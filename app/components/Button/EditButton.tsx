@@ -1,5 +1,5 @@
 import React from 'react';
-import EditIcon from '@mui/icons-material/Edit';
+import { Edit } from '@mui/icons-material';
 import Button from './Button';
 
 interface EditButtonProps {
@@ -13,7 +13,7 @@ const EditButton: React.FC<EditButtonProps> = ({
 }) => {
 	return (
 		<Button onClick={onClick} disabled={disabled} size="tiny">
-			<EditIcon />
+			<Edit />
 		</Button>
 	);
 };

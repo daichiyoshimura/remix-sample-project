@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import { MeetingRoom } from '@mui/icons-material';
 import TextInput from '~/components/TextInput/TextInput';
 import EditButton from '~/components/Button/EditButton';
 import SaveButton from '~/components/Button/SaveButton';
@@ -33,7 +33,7 @@ const RoomProfile: React.FC<RoomProfileProps> = ({ id, name, createdAt }) => {
 
 	return (
 		<div className="flex items-center">
-			<MeetingRoomIcon
+			<MeetingRoom
 				className="mr-4 flex-shrink-0"
 				fontSize="large"
 				fill="currentColor"

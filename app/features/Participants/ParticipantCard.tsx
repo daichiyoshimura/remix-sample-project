@@ -1,5 +1,5 @@
 import React from 'react';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { AccountCircle } from '@mui/icons-material';
 import Card from '~/components/Card/Card';
 
 export interface ParticipantCardProps {
@@ -15,7 +15,7 @@ const ParticipantCard: React.FC<ParticipantCardProps> = ({
 }) => {
 	return (
 		<Card>
-			<AccountCircleIcon fontSize="large" fill="currentColor" />
+			<AccountCircle fontSize="large" fill="currentColor" />
 			<div className="hidden">{id}</div>
 			<div className="text-sm mt-1">{name}</div>
 			<div className="text-xs">&lt;{part}&gt;</div>

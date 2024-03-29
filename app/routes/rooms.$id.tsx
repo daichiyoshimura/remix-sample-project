@@ -21,11 +21,7 @@ import { GetRoomMock } from '~/loaders/rooms';
 import { useState } from 'react';
 import DeleteRoomModal from '~/features/Rooms/DeleteRoomModal';
 
-type LoaderData = RoomProfileProps & ParticipantCardListProps;
-
-export const loader: LoaderFunction = async ({
-	params,
-}): Promise<LoaderData> => {
+export const loader: LoaderFunction = async ({ params }) => {
 	try {
 		const id = params.id as string;
 
@@ -37,14 +33,15 @@ export const loader: LoaderFunction = async ({
 		// Get participant card list props
 		const participantCardListProps: ParticipantCardListProps =
 			await GetParticipantsMock({ roomId: id });
-		
-		console.log('loader:' + JSON.stringify(roomProfileProps));
 
 		// Return props if both requests succeed
-		return {
-			...roomProfileProps,
-			...participantCardListProps,
-		};
+		return json(
+			{
+				...roomProfileProps,
+				...participantCardListProps,
+			},
+			200,
+		);
 	} catch (error) {
 		console.error('Error fetching data:', error);
 		throw new Response('Oh no! Something went wrong!', {
@@ -63,7 +60,7 @@ export const action: ActionFunction = async ({
 
 const RoomProfilePage = () => {
 	const [isDeleteRoomModalOpen, setIsDeleteRoomModalOpen] = useState(false);
-	const loaderData: LoaderData = useLoaderData<LoaderData>();
+	const loaderData = useLoaderData<typeof loader>();
 
 	const toggleDeleteRoomModal = () => {
 		setIsDeleteRoomModalOpen(!isDeleteRoomModalOpen);
