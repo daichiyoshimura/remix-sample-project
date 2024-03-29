@@ -7,80 +7,70 @@ import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 
-interface DeleteRoomModalProps {
+interface EditRoomModalProps {
 	isOpen: boolean;
 	name: string;
 	onClose: () => void;
 	roomId: string;
 }
 
-const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
+const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	isOpen,
 	name,
 	onClose,
 	roomId,
 }) => {
-	const [inputValue, setInputValue] = useState('');
-	const [deleteStatus, setDeleteStatus] = useState<
+	const [editStatus, setEditStatus] = useState<
 		'init' | 'success' | 'failure' | 'loading'
 	>('init');
+	const [editedName, setEditedName] = useState('');
 
-	const handleDelete = async (roomId: string) => {
+	const handleEdit = async (roomId: string) => {
 		try {
-			setDeleteStatus('loading');
+			setEditStatus('loading');
 			const response = await fetch(`${roomId}`, {
-				method: 'DELETE',
+				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ inputValue }),
+				body: JSON.stringify({ editedName }),
 			});
 
 			if (response.ok) {
-				setDeleteStatus('success');
+				setEditStatus('success');
 				return;
 			}
 			throw new Error('bad status code');
 		} catch (error) {
 			console.error('error has occured:', error);
-			setDeleteStatus('failure');
+			setEditStatus('failure');
 		}
 	};
 
 	const handleClose = () => {
-		setInputValue('');
-		setDeleteStatus('init');
+		setEditStatus('init');
 		onClose();
 	};
 
 	const renderContent = () => {
-		switch (deleteStatus) {
+		switch (editStatus) {
 			case 'init':
 				return (
 					<>
-						<ModalTitle
-							title={'Are you sure you want to delete?'}
-						/>
-						<ModalDescription
-							description={`
-								To delete, please enter the same name in the textbox below and
-								press the delete button.
-							`}
-						/>
+						<ModalTitle title={'Are you sure you want to edit?'} />
 						<TextInput
-							value={inputValue}
-							onChange={setInputValue}
+							value={editedName}
+							onChange={setEditedName}
 							placeholder={name}
 							required
 						/>
 						<Container alignment="right">
-							<Button onClick={handleClose}>do not delete</Button>
+							<Button onClick={handleClose}>do not save</Button>
 							<Button
-								onClick={() => handleDelete(roomId)}
-								warning={true}
-								disabled={inputValue !== name}
+								onClick={() => handleEdit(roomId)}
+								disabled={editedName === name}
 							>
-								delete
+								save
 							</Button>
 						</Container>
 					</>
@@ -99,7 +89,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 			case 'failure':
 				return (
 					<>
-						<ModalTitle title={'Failed to create room'} />
+						<ModalTitle title={'Failed to save room'} />
 						<ModalDescription
 							description={`
 							Please try again later, or contact support if the issue persists
@@ -122,4 +112,4 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 	);
 };
 
-export default DeleteRoomModal;
+export default EditRoomModal;

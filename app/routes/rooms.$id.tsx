@@ -20,6 +20,8 @@ import { GetParticipantsMock } from '~/loaders/participants';
 import { GetRoomMock } from '~/loaders/rooms';
 import { useState } from 'react';
 import DeleteRoomModal from '~/features/Rooms/DeleteRoomModal';
+import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import EditRoomModal from '~/features/Rooms/EditRoomModal';
 
 export const loader: LoaderFunction = async ({ params }) => {
 	try {
@@ -54,19 +56,20 @@ export const action: ActionFunction = async ({
 	request,
 }: ActionFunctionArgs) => {
 	const body = await request.text();
-	console.log(body);
-	return json({ message: 'success' }, 200);
+	switch (request.method) {
+		case 'DELETE':
+			console.log('DELETE:' + body);
+			return json({ message: 'success' }, 200);
+		case 'PATCH':
+			console.log('PATCH:' + body);
+			return json({ message: 'success' }, 200);
+		default:
+			return json({ message: 'invalid method' }, 400);
+	}
 };
 
 const RoomProfilePage = () => {
-	const [isDeleteRoomModalOpen, setIsDeleteRoomModalOpen] = useState(false);
 	const loaderData = useLoaderData<typeof loader>();
-
-	const toggleDeleteRoomModal = () => {
-		setIsDeleteRoomModalOpen(!isDeleteRoomModalOpen);
-	};
-
-	// Check if both room profile and participant card list data exist
 	if (
 		!loaderData ||
 		!loaderData.id ||
@@ -74,17 +77,39 @@ const RoomProfilePage = () => {
 		!loaderData.createdAt ||
 		!loaderData.participants
 	) {
-		// If any of the data is missing, display a loading indicator or error message
-		return <div>Loading...</div>;
+		return <LoadingIcon />;
 	}
 	const { participants, id, name, createdAt } = loaderData;
+
+	const [isEditRoomModalOpen, setIsEditRoomModalOpen] = useState(false);
+	const toggleEditRoomModal = () => {
+		setIsEditRoomModalOpen(!isEditRoomModalOpen);
+	};
+
+	const [isDeleteRoomModalOpen, setIsDeleteRoomModalOpen] = useState(false);
+	const toggleDeleteRoomModal = () => {
+		setIsDeleteRoomModalOpen(!isDeleteRoomModalOpen);
+	};
 
 	return (
 		<>
 			<Header currentPageTitle="Room Profile" />
 			<ContentArea>
 				<Box>
-					<RoomProfile id={id} name={name} createdAt={createdAt} />
+					<RoomProfile
+						id={id}
+						name={name}
+						createdAt={createdAt}
+						onClick={toggleEditRoomModal}
+					/>
+					{isEditRoomModalOpen && (
+						<EditRoomModal
+							isOpen={isEditRoomModalOpen}
+							onClose={toggleEditRoomModal}
+							name={name}
+							roomId={id}
+						/>
+					)}
 				</Box>
 				<Box>
 					<ParticipantCardList participants={participants} />
