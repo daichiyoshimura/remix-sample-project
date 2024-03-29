@@ -3,7 +3,7 @@
 
 /* ページ全体の背景色を設定 */
 body {
-	background-color: gainsboro; /* 背景色をwhitesmokeに設定 */
+	background-color: 'bg-background';
 }
 
 @tailwind utilities;

@@ -9,6 +9,9 @@ const config: Config = {
 				darkolivegreen: '#556b2f',
 				slategray: '#708090',
 				olivedrab: '#6b8e23',
+				primary: '#2f4f4f',
+				secondary: '#708090',
+				backgroud: '#DCDCDC',
 			},
 			fontSize: {
 				large: '1.25rem',

@@ -7,7 +7,7 @@ interface BoxProps {
 const Box: React.FC<BoxProps> = ({ children }) => {
 	return (
 		<div
-			className={`bg-lightgray p-4 m-4 rounded-lg shadow-md flex justify-center items-center`}
+			className={`bg-background p-4 mrl-4 rounded-lg shadow-md flex justify-center items-center`}
 		>
 			{children}
 		</div>
