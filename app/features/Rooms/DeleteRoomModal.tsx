@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '~/components/Modal/Modal';
-import ButtonContainer from '~/components/Container/Container';
+import Container from '~/components/Container/Container';
 import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 
@@ -53,7 +53,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, name, onClose }) => {
 				placeholder={name}
 				required
 			/>
-			<ButtonContainer>
+			<Container>
 				<Button onClick={handleCancel}>do not delete</Button>
 				<Button
 					onClick={handleDelete}
@@ -62,7 +62,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, name, onClose }) => {
 				>
 					delete
 				</Button>
-			</ButtonContainer>
+			</Container>
 		</Modal>
 	);
 };

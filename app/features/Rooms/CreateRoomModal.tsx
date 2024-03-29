@@ -42,15 +42,16 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleCancel}>
-			<h2 className="text-lg font-bold text-center">create room</h2>
-			<Container>
-				<TextInput
-					value={inputValue}
-					onChange={setInputValue}
-					placeholder="room name"
-					required
-				/>
-			</Container>
+			<h2 className="text-lg font-bold">create room</h2>
+			<p className="text-sm text-gray-600 mb-4">
+				
+			</p>
+			<TextInput
+				value={inputValue}
+				onChange={setInputValue}
+				placeholder="room name"
+				required
+			/>
 			<Container>
 				<Button onClick={handleCancel}>do not create</Button>
 				<Button

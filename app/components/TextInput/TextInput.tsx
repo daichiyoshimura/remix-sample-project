@@ -20,7 +20,7 @@ const TextInput: React.FC<TextInputProps> = ({
 	return (
 		<input
 			type="text"
-			className="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:border-blue-500"
+			className="w-full border border-gray-300 rounded px-3 py-1 focus:outline-none focus:border-blue-500"
 			value={value}
 			onChange={handleChange}
 			placeholder={placeholder}
