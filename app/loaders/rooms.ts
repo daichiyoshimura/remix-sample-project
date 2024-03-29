@@ -8,7 +8,6 @@ interface GetRoomResponseBody {
 	id: string;
 	name: string;
 	createdAt: string;
-	createdBy: string;
 }
 
 export async function GetRoom({
@@ -44,7 +43,6 @@ export async function GetRoomMock({
 		id: roomId,
 		name: `Room ${roomId}`,
 		createdAt: '2024-03-24 00:53:00',
-		createdBy: 'Owner',
 	};
 }
 
@@ -60,7 +58,6 @@ interface Room {
 	id: string;
 	name: string;
 	createdAt: string;
-	createdBy: string;
 }
 
 export async function GetRooms({
@@ -92,19 +89,16 @@ export async function GetRoomsMock({
 				id: '1',
 				name: 'Room 1',
 				createdAt: '2024-03-24 00:51:00',
-				createdBy: 'owner',
 			},
 			{
 				id: '2',
 				name: 'Room 2',
 				createdAt: '2024-03-24 00:51:00',
-				createdBy: 'owner',
 			},
 			{
 				id: '3',
 				name: 'Room 3',
 				createdAt: '2024-03-24 00:51:00',
-				createdBy: 'owner',
 			},
 		],
 	};

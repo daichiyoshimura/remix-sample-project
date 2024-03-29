@@ -1,4 +1,9 @@
-import { LoaderFunction } from '@remix-run/node';
+import {
+	ActionFunction,
+	ActionFunctionArgs,
+	LoaderFunction,
+	json,
+} from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import RoomProfile, { RoomProfileProps } from '~/features/Rooms/RoomProfile';
 import Header from '~/components/Header/Header';
@@ -32,6 +37,8 @@ export const loader: LoaderFunction = async ({
 		// Get participant card list props
 		const participantCardListProps: ParticipantCardListProps =
 			await GetParticipantsMock({ roomId: id });
+		
+		console.log('loader:' + JSON.stringify(roomProfileProps));
 
 		// Return props if both requests succeed
 		return {
@@ -44,6 +51,14 @@ export const loader: LoaderFunction = async ({
 			status: 500,
 		});
 	}
+};
+
+export const action: ActionFunction = async ({
+	request,
+}: ActionFunctionArgs) => {
+	const body = await request.text();
+	console.log(body);
+	return json({ message: 'success' }, 200);
 };
 
 const RoomProfilePage = () => {
@@ -65,7 +80,6 @@ const RoomProfilePage = () => {
 		// If any of the data is missing, display a loading indicator or error message
 		return <div>Loading...</div>;
 	}
-
 	const { participants, id, name, createdAt } = loaderData;
 
 	return (
@@ -89,6 +103,7 @@ const RoomProfilePage = () => {
 						isOpen={isDeleteRoomModalOpen}
 						onClose={toggleDeleteRoomModal}
 						name={name}
+						roomId={id}
 					/>
 				)}
 			</ContentArea>

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import type { LoaderFunction } from '@remix-run/node';
+import {
+	ActionFunctionArgs,
+	type ActionFunction,
+	type LoaderFunction,
+	json,
+} from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import RoomCardList, { RoomCardListProps } from '~/features/Rooms/RoomCardList';
 import Header from '~/components/Header/Header';
@@ -16,6 +21,14 @@ export const loader: LoaderFunction = async () => {
 		accountId: '1',
 	});
 	return roomCardListProps;
+};
+
+export const action: ActionFunction = async ({
+	request,
+}: ActionFunctionArgs) => {
+	const body = await request.text();
+	console.log(body);
+	return json({ message: 'success' }, 200);
 };
 
 const RoomsPage = () => {
