@@ -114,7 +114,7 @@ const RoomProfilePage = () => {
 				</Box>
 				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
-					<Button warning={true} onClick={toggleDeleteRoomModal}>
+					<Button color={'caution'} onClick={toggleDeleteRoomModal}>
 						Delete This Room
 					</Button>
 				</Container>

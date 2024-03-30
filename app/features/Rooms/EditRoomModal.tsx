@@ -48,6 +48,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	};
 
 	const handleClose = () => {
+		setEditedName('');
 		setEditStatus('init');
 		onClose();
 	};
@@ -58,6 +59,13 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 				return (
 					<>
 						<ModalTitle title={'Edit'} />
+						<ModalDescription
+							description={`
+						    Please enter only alphanumeric characters in this field. 
+							It is limited to a maximum length of 64 characters. 
+							The use of symbols such as underscores, hyphens, and spaces is not permitted.
+						`}
+						/>
 						<TextInput
 							value={editedName}
 							onChange={setEditedName}
@@ -68,7 +76,11 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 							<Button onClick={handleClose}>Do not save</Button>
 							<Button
 								onClick={() => handleEdit(roomId)}
-								disabled={editedName === name}
+								disabled={
+									editedName === name ||
+									editedName.length === 0
+								}
+								color="safe"
 							>
 								Save
 							</Button>
@@ -82,7 +94,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 					<>
 						<ModalTitle title={'Success'} />
 						<Container alignment="right">
-							<Button onClick={onClose}>Close</Button>
+							<Button onClick={handleClose}>Close</Button>
 						</Container>
 					</>
 				);
@@ -96,7 +108,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 						`}
 						/>
 						<Container alignment="right">
-							<Button onClick={onClose}>close</Button>
+							<Button onClick={handleClose}>close</Button>
 						</Container>
 					</>
 				);

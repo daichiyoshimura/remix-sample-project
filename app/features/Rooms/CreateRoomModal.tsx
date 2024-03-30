@@ -73,6 +73,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 							<Button
 								onClick={handleCreate}
 								disabled={inputValue.length === 0}
+								color='safe'
 							>
 								create
 							</Button>
@@ -86,7 +87,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 					<>
 						<ModalTitle title={'Success'} />
 						<Container alignment="right">
-							<Button onClick={onClose}>close</Button>
+							<Button onClick={handleClose}>close</Button>
 						</Container>
 					</>
 				);
@@ -100,7 +101,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 						`}
 						/>
 						<Container alignment="right">
-							<Button onClick={onClose}>close</Button>
+							<Button onClick={handleClose}>close</Button>
 						</Container>
 					</>
 				);

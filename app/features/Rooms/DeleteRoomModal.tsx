@@ -77,7 +77,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 							<Button onClick={handleClose}>do not delete</Button>
 							<Button
 								onClick={() => handleDelete(roomId)}
-								warning={true}
+								color="caution"
 								disabled={inputValue !== name}
 							>
 								delete
@@ -92,7 +92,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 					<>
 						<ModalTitle title={'Success'} />
 						<Container alignment="right">
-							<Button onClick={onClose}>close</Button>
+							<Button onClick={handleClose}>close</Button>
 						</Container>
 					</>
 				);
@@ -106,7 +106,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 						`}
 						/>
 						<Container alignment="right">
-							<Button onClick={onClose}>close</Button>
+							<Button onClick={handleClose}>close</Button>
 						</Container>
 					</>
 				);

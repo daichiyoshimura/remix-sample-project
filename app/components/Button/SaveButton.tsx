@@ -12,7 +12,7 @@ const SaveButton: React.FC<SaveButtonProps> = ({
 	disabled = false,
 }) => {
 	return (
-		<Button onClick={onClick} disabled={disabled} size="tiny">
+		<Button onClick={onClick} disabled={disabled} size="icon">
 			<CheckCircle />
 		</Button>
 	);
