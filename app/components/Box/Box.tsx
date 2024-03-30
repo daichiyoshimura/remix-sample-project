@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface BoxProps {
+export interface BoxProps {
 	children: React.ReactNode;
 }
 

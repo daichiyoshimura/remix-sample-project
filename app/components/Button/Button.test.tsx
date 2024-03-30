@@ -10,7 +10,7 @@ describe('Button', () => {
 	});
 
 	it('calls onClick function when clicked', async () => {
-		const onClickMock = vi.fn(); // モック関数を作成
+		const onClickMock = vi.fn();
 		const { getByText } = render(
 			<Button onClick={onClickMock}>Click me</Button>,
 		);

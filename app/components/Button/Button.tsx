@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ButtonProps {
+export interface ButtonProps {
 	onClick?: () => void;
 	disabled?: boolean;
 	color?: 'default' | 'safe' | 'caution';

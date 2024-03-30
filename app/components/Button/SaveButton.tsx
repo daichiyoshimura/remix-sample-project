@@ -2,7 +2,7 @@ import React from 'react';
 import { CheckCircle } from '@mui/icons-material';
 import Button from './Button';
 
-interface SaveButtonProps {
+export interface SaveButtonProps {
 	onClick?: () => void;
 	disabled?: boolean;
 }

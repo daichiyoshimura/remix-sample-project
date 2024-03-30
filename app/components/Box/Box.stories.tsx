@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
-import Box from './Box';
+import Box, { BoxProps } from './Box';
 
 const meta = {
 	title: 'Box',
@@ -9,8 +9,19 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof Box>;
+const Template: StoryFn<BoxProps> = (args) => <Box {...args} />;
 
-export const HelloBox: Story = {
-	render: () => <Box>Hello World</Box>,
+export const Single = Template.bind({});
+Single.args = {
+	children: <div>Text</div>,
+};
+
+export const Complex = Template.bind({});
+Complex.args = {
+	children: (
+		<>
+			<div>Text1</div>
+			<div>Text2</div>
+		</>
+	),
 };

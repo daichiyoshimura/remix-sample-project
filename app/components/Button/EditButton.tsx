@@ -2,7 +2,7 @@ import React from 'react';
 import { Edit } from '@mui/icons-material';
 import Button from './Button';
 
-interface EditButtonProps {
+export interface EditButtonProps {
 	onClick?: () => void;
 	disabled?: boolean;
 }
