@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ContainerProps {
+export interface ContainerProps {
 	children?: React.ReactNode;
 	alignment?: 'center' | 'right';
 }

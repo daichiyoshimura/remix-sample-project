@@ -8,7 +8,7 @@ describe('Footer', () => {
 		const footer = container.querySelector('footer');
 		expect(footer).not.toBeNull(); 
 		expect(footer?.className).toContain(
-			'fixed bottom-0 left-0 w-full bg-darkslategray text-white py-2 text-center',
+			'fixed bottom-0 left-0 w-full bg-primary text-white py-2 text-center',
 		); 
 	});
 });

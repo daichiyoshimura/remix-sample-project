@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface ModalTitle {
+export interface ModalTitleProps {
 	title: string;
 }
 
-const ModalTitle: React.FC<ModalTitle> = ({ title }) => {
+const ModalTitle: React.FC<ModalTitleProps> = ({ title }) => {
 	return (
 		<>
 			<h2 className="text-lg font-bold">{title}</h2>

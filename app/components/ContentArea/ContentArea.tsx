@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ContentAreaProps {
+export interface ContentAreaProps {
 	children?: React.ReactNode;
 }
 
