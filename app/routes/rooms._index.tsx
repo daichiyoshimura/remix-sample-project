@@ -49,12 +49,10 @@ const RoomsPage = () => {
 				<Container>
 					<Button onClick={toggleCreateRoomModal}>Create Room</Button>
 				</Container>
-				{isCreateRoomModalOpen && (
-					<CreateRoomModal
-						isOpen={isCreateRoomModalOpen}
-						onClose={toggleCreateRoomModal}
-					/>
-				)}
+				<CreateRoomModal
+					isOpen={isCreateRoomModalOpen}
+					onClose={toggleCreateRoomModal}
+				/>
 			</ContentArea>
 			<Footer />
 		</>

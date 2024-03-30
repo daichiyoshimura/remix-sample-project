@@ -102,14 +102,12 @@ const RoomProfilePage = () => {
 						createdAt={createdAt}
 						onClick={toggleEditRoomModal}
 					/>
-					{isEditRoomModalOpen && (
-						<EditRoomModal
-							isOpen={isEditRoomModalOpen}
-							onClose={toggleEditRoomModal}
-							name={name}
-							roomId={id}
-						/>
-					)}
+					<EditRoomModal
+						isOpen={isEditRoomModalOpen}
+						onClose={toggleEditRoomModal}
+						name={name}
+						roomId={id}
+					/>
 				</Box>
 				<Box>
 					<ParticipantCardList participants={participants} />
@@ -120,14 +118,12 @@ const RoomProfilePage = () => {
 						Delete This Room
 					</Button>
 				</Container>
-				{isDeleteRoomModalOpen && (
-					<DeleteRoomModal
-						isOpen={isDeleteRoomModalOpen}
-						onClose={toggleDeleteRoomModal}
-						name={name}
-						roomId={id}
-					/>
-				)}
+				<DeleteRoomModal
+					isOpen={isDeleteRoomModalOpen}
+					onClose={toggleDeleteRoomModal}
+					name={name}
+					roomId={id}
+				/>
 			</ContentArea>
 			<Footer />
 		</>

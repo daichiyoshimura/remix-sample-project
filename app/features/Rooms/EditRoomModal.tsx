@@ -57,7 +57,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 			case 'init':
 				return (
 					<>
-						<ModalTitle title={'Are you sure you want to edit?'} />
+						<ModalTitle title={'Edit'} />
 						<TextInput
 							value={editedName}
 							onChange={setEditedName}
@@ -65,12 +65,12 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 							required
 						/>
 						<Container alignment="right">
-							<Button onClick={handleClose}>do not save</Button>
+							<Button onClick={handleClose}>Do not save</Button>
 							<Button
 								onClick={() => handleEdit(roomId)}
 								disabled={editedName === name}
 							>
-								save
+								Save
 							</Button>
 						</Container>
 					</>
@@ -82,7 +82,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 					<>
 						<ModalTitle title={'Success'} />
 						<Container alignment="right">
-							<Button onClick={onClose}>close</Button>
+							<Button onClick={onClose}>Close</Button>
 						</Container>
 					</>
 				);
