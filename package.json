@@ -32,6 +32,7 @@
     "@chromatic-com/storybook": "^1.2.25",
     "@prisma/client": "^5.11.0",
     "@remix-run/dev": "^2.8.1",
+    "@remix-run/testing": "^2.8.1",
     "@storybook/addon-essentials": "^8.0.5",
     "@storybook/addon-interactions": "^8.0.5",
     "@storybook/addon-links": "^8.0.5",
