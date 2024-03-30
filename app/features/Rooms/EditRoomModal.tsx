@@ -7,7 +7,7 @@ import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 
-interface EditRoomModalProps {
+export interface EditRoomModalProps {
 	isOpen: boolean;
 	name: string;
 	onClose: () => void;

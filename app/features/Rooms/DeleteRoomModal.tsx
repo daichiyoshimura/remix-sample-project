@@ -7,7 +7,7 @@ import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 
-interface DeleteRoomModalProps {
+export interface DeleteRoomModalProps {
 	isOpen: boolean;
 	name: string;
 	onClose: () => void;
