@@ -16,8 +16,8 @@ import Container from '~/components/Container/Container';
 import ParticipantCardList, {
 	ParticipantCardListProps,
 } from '~/features/Participants/ParticipantCardList';
-import { GetParticipantsMock } from '~/loaders/participants';
-import { GetRoomMock } from '~/loaders/rooms';
+import { GetParticipantsMock } from '~/loaders/participants.server';
+import { GetRoomMock } from '~/loaders/rooms.server';
 import { useState } from 'react';
 import DeleteRoomModal from '~/features/Rooms/DeleteRoomModal';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';

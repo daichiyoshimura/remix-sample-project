@@ -12,7 +12,7 @@ import Box from '~/components/Box/Box';
 import Footer from '~/components/Footer/Footer';
 import ContentArea from '~/components/ContentArea/ContentArea';
 import Container from '~/components/Container/Container';
-import { GetRoomsMock } from '~/loaders/rooms';
+import { GetRoomsMock } from '~/loaders/rooms.server';
 import Button from '~/components/Button/Button';
 import CreateRoomModal from '~/features/Rooms/CreateRoomModal';
 
