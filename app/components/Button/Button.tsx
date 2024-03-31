@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
 		disabled: boolean,
 	): string[] => {
 		if (disabled) {
-			return ['bg-gray-500', 'bg-gray-500'];
+			return ['bg-gray-500', 'hover:bg-gray-500'];
 		}
 
 		if (color === 'safe') {
