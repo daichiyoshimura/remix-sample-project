@@ -70,16 +70,6 @@ export const action: ActionFunction = async ({
 
 const RoomProfilePage = () => {
 	const loaderData = useLoaderData<typeof loader>();
-	if (
-		!loaderData ||
-		!loaderData.id ||
-		!loaderData.name ||
-		!loaderData.createdAt ||
-		!loaderData.participants
-	) {
-		return <LoadingIcon />;
-	}
-	const { participants, id, name, createdAt } = loaderData;
 
 	const [isEditRoomModalOpen, setIsEditRoomModalOpen] = useState(false);
 	const toggleEditRoomModal = () => {
@@ -90,6 +80,17 @@ const RoomProfilePage = () => {
 	const toggleDeleteRoomModal = () => {
 		setIsDeleteRoomModalOpen(!isDeleteRoomModalOpen);
 	};
+
+	if (
+		!loaderData ||
+		!loaderData.id ||
+		!loaderData.name ||
+		!loaderData.createdAt ||
+		!loaderData.participants
+	) {
+		return <LoadingIcon />;
+	}
+	const { participants, id, name, createdAt } = loaderData;
 
 	return (
 		<>
