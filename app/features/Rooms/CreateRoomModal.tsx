@@ -6,6 +6,7 @@ import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import useHttpClient from '~/hooks/useHttpClient';
 
 export interface CreateRoomModalProps {
 	isOpen: boolean;
@@ -23,22 +24,14 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 
 	const handleCreate = async () => {
 		try {
-			setCreateStatus('loading');
-			const response = await fetch('rooms', {
+			await useHttpClient({
+				path: 'rooms',
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
 				body: JSON.stringify({ inputValue }),
+				setRequestStatus: setCreateStatus,
 			});
-			if (response.ok) {
-				setCreateStatus('success');
-				return;
-			}
-			throw new Error('bad status code');
 		} catch (error) {
-			console.error('error has occurred:', error);
-			setCreateStatus('failure');
+			console.error('Error while creating room:', error);
 		}
 	};
 
@@ -71,7 +64,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 						<Container alignment="right">
 							<Button onClick={handleClose}>do not create</Button>
 							<Button
-								onClick={handleCreate}
+								onClick={() => handleCreate()}
 								disabled={inputValue.length === 0}
 								color='safe'
 							>

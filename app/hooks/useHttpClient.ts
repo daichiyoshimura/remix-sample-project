@@ -14,7 +14,7 @@ export const useHttpClient = async ({
 	body = undefined,
 	params = '',
 	setRequestStatus,
-}: useHttpClientArgs): Promise<Response> => {
+}: useHttpClientArgs) => {
 	try {
 		setRequestStatus('loading');
 		const response = await fetch(`${path}${params}`, {
@@ -24,9 +24,9 @@ export const useHttpClient = async ({
 			},
 			body: body,
 		});
-		if (!response.ok) {
+		if (response.ok) {
 			setRequestStatus('success');
-			return response;
+			return;
 		}
 		throw new Error('bad status code');
 	} catch (error) {
