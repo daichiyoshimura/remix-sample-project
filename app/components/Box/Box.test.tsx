@@ -3,8 +3,11 @@ import Box from './Box';
 
 describe('Box', () => {
 	it('renders children correctly', () => {
-		const childComponent = <div>Box</div>;
-		const box = <Box>{childComponent}</Box>;
+		const box = (
+			<Box>
+				<div>Box</div>
+			</Box>
+		);
 		expect(box).toBeDefined();
 	});
 });

@@ -6,6 +6,7 @@ export default VitestConfig.defineConfig({
 		globals: true,
 		environment: 'jsdom',
 		include: ['app/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+		setupFiles: ['vitest.setup.ts'],
 	},
 	resolve: {
 		alias: {
