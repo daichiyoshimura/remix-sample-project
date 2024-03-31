@@ -1,36 +1,25 @@
-# Welcome to Remix + Vite!
+# Sample app made by remix + vite
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+## Technical Stack
 
-## Development
+| content           | description |
+| ----------------- | ----------- |
+| language          | typescript  |
+| framework         | remix       |
+| library           | react       |
+| css library       | tailwind    |
+| build tool        | vite        |
+| unit test         | vitest      |
+| component catalog | storybook   |
+| liinter           | eslint      |
+| formatter         | prettier    |
 
-Run the Vite dev server:
+## Roles of Each Directory
 
-```shellscript
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
+| directory    | description                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------- |
+| /components/ | Directory for placing generic components                                                    |
+| /features/   | Directory for placing components mixed with domain knowledge                                |
+| /loaders/    | Directory for placing loader functions that are loaded at the time of server-side rendering |
+| /routes/     | Directory for determining page structure based on Remix framework features                  |
+| /styles/     | Directory for placing global styling CSS                                                    |
