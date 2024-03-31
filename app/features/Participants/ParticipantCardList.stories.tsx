@@ -6,6 +6,7 @@ import ParticipantCardList, {
 const meta: Meta = {
 	title: 'ParticipantCardList',
 	component: ParticipantCardList,
+	tags: ['autodocs'],
 };
 
 export default meta;

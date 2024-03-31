@@ -5,6 +5,7 @@ import CreateRoomModal, { CreateRoomModalProps } from './CreateRoomModal';
 const meta: Meta = {
 	title: 'CreateRoomModal',
 	component: CreateRoomModal,
+	tags: ['autodocs'],
 };
 
 export default meta;

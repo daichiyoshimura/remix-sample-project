@@ -4,6 +4,7 @@ import SaveButton, { SaveButtonProps } from './SaveButton';
 const meta: Meta = {
 	title: 'SaveButton',
 	component: SaveButton,
+	tags: ['autodocs'],
 	argTypes: {
 		onClick: { action: 'clicked' },
 	},

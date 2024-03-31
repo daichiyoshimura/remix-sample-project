@@ -5,6 +5,7 @@ import LinkButton, { LinkButtonProps } from './LinkButton';
 const meta: Meta = {
 	title: 'LinkButton',
 	component: LinkButton,
+	tags: ['autodocs'],
 	decorators: [
 		(Story) => {
 			const RemixStub = createRemixStub([
@@ -18,7 +19,6 @@ const meta: Meta = {
 			return <RemixStub />;
 		},
 	],
-	tags: ['autodocs'],
 	args: {
 		children: "I'm a link",
 		to: '/',

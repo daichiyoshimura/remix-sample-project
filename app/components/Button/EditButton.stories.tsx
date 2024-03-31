@@ -4,6 +4,7 @@ import EditButton, { EditButtonProps } from './EditButton';
 const meta: Meta<EditButtonProps> = {
 	title: 'EditButton',
 	component: EditButton,
+	tags: ['autodocs'],
 	argTypes: {
 		onClick: { action: 'clicked' },
 	},

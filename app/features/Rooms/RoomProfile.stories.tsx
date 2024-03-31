@@ -4,6 +4,7 @@ import RoomProfile, { RoomProfileProps } from './RoomProfile';
 const meta: Meta = {
 	title: 'RoomProfile',
 	component: RoomProfile,
+	tags: ['autodocs'],
 };
 
 export default meta;

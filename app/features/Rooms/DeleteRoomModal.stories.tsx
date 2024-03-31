@@ -4,6 +4,7 @@ import DeleteRoomModal, { DeleteRoomModalProps } from './DeleteRoomModal';
 const meta: Meta = {
 	title: 'DeleteRoomModal',
 	component: DeleteRoomModal,
+	tags: ['autodocs'],
 };
 
 export default meta;

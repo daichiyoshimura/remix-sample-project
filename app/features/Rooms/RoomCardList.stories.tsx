@@ -4,6 +4,7 @@ import RoomCardList, { RoomCardListProps } from './RoomCardList';
 const meta: Meta = {
 	title: 'RoomCardList',
 	component: RoomCardList,
+	tags: ['autodocs'],
 };
 
 export default meta;

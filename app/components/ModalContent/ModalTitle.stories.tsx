@@ -4,6 +4,7 @@ import ModalTitle, { ModalTitleProps } from './ModalTitle';
 const meta: Meta = {
 	title: 'ModalTitle',
 	component: ModalTitle,
+	tags: ['autodocs'],
 };
 
 export default meta;

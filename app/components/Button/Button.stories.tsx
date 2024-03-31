@@ -4,6 +4,7 @@ import Button, { ButtonProps } from './Button';
 const meta: Meta<ButtonProps> = {
 	title: 'Button',
 	component: Button,
+	tags: ['autodocs'],
 	argTypes: {
 		onClick: { action: 'clicked' },
 	},

@@ -4,6 +4,7 @@ import ContentArea, { ContentAreaProps } from './ContentArea';
 const meta: Meta = {
 	title: 'ContentArea',
 	component: ContentArea,
+	tags: ['autodocs'],
 };
 
 export default meta;

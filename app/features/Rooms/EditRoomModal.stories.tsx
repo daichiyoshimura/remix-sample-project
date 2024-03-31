@@ -4,6 +4,7 @@ import EditRoomModal, { EditRoomModalProps } from './EditRoomModal';
 const meta: Meta = {
 	title: 'EditRoomModal',
 	component: EditRoomModal,
+	tags: ['autodocs'],
 };
 
 export default meta;

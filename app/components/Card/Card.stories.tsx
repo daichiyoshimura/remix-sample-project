@@ -4,6 +4,7 @@ import Card, { CardProps } from './Card';
 const meta: Meta = {
 	title: 'Card',
 	component: Card,
+	tags: ['autodocs'],
 };
 
 export default meta;

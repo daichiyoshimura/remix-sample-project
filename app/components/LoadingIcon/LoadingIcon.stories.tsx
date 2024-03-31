@@ -4,6 +4,7 @@ import LoadingIcon from './LoadingIcon';
 const meta: Meta = {
 	title: 'LoadingIcon',
 	component: LoadingIcon,
+	tags: ['autodocs'],
 };
 
 export default meta;

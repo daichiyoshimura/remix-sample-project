@@ -4,6 +4,7 @@ import Modal, { ModalProps } from './Modal';
 const meta: Meta = {
 	title: 'Modal',
 	component: Modal,
+	tags: ['autodocs'],
 };
 
 const Template: StoryFn<ModalProps> = (args) => <Modal {...args} />;

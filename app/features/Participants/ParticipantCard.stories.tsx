@@ -4,6 +4,7 @@ import ParticipantCard, { ParticipantCardProps } from './ParticipantCard';
 const meta: Meta = {
 	title: 'ParticipantCard',
 	component: ParticipantCard,
+	tags: ['autodocs'],
 };
 
 export default meta;

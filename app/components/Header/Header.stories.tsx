@@ -4,6 +4,7 @@ import Header, { HeaderProps } from './Header';
 const meta: Meta = {
 	title: 'Header',
 	component: Header,
+	tags: ['autodocs'],
 };
 
 export default meta;
