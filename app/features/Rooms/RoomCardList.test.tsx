@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import RoomCardList from './RoomCardList';
 
 describe('RoomCardList', () => {
@@ -8,11 +9,15 @@ describe('RoomCardList', () => {
 			{ id: '2', name: 'Room 2', createdAt: '2024-04-01' },
 		];
 
-		const { getByText } = render(<RoomCardList rooms={rooms} />);
+		const { getByText } = render(
+			<MemoryRouter>
+				<RoomCardList rooms={rooms} />
+			</MemoryRouter>,
+		);
 
-		expect(getByText('Room 1')).toBeDefined();
-		expect(getByText('Room 2')).toBeDefined();
-		expect(getByText('Created at: 2024-03-31')).toBeDefined();
-		expect(getByText('Created at: 2024-04-01')).toBeDefined();
+		expect(getByText('Room 1')).toBeInTheDocument();
+		expect(getByText('Room 2')).toBeInTheDocument();
+		expect(getByText('Created at: 2024-03-31')).toBeInTheDocument();
+		expect(getByText('Created at: 2024-04-01')).toBeInTheDocument();
 	});
 });
