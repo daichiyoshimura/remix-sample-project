@@ -20,7 +20,7 @@ describe('CreateRoomModal', () => {
 			<CreateRoomModal isOpen onClose={handleClose} />,
 		);
 
-		const createButton = getByText('create') as HTMLButtonElement;;
+		const createButton = getByText('create') as HTMLButtonElement;
 		expect(createButton.disabled).toBe(true);
 	});
 
