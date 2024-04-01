@@ -16,9 +16,9 @@ export type RoomsResponse = {
 };
 
 export const roomsLoaderMock: LoaderFunction = async ({
-	request
+	request,
 }: LoaderFunctionArgs): Promise<TypedResponse<RoomsResponse>> => {
-	console.log('/rooms ' + request.method);
+	console.log(`/rooms ${request.method}`);
 	return json({
 		rooms: [
 			{

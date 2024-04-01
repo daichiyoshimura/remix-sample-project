@@ -6,7 +6,7 @@ import {
 } from '@remix-run/node';
 import { invalidMethodAction } from './invalidMethodAction.server';
 
-type simpleMessage = { message: string };
+type SimpleMessage = { message: string };
 
 export const roomActionMock: ActionFunction = async (
 	args: ActionFunctionArgs,
@@ -24,15 +24,10 @@ export const roomActionMock: ActionFunction = async (
 const deleteRoomActionMock: ActionFunction = async ({
 	request,
 	params,
-}: ActionFunctionArgs): Promise<TypedResponse<simpleMessage>> => {
+}: ActionFunctionArgs): Promise<TypedResponse<SimpleMessage>> => {
 	const roomId = params.id as string;
 	console.log(
-		'/room/' +
-			roomId +
-			' ' +
-			request.method +
-			' ' +
-			JSON.stringify({ roomId: roomId }),
+		`/room/ ${roomId} ${request.method} ${json({ roomId: roomId })}`,
 	);
 	return json({ message: 'success on mock' }, 200);
 };
@@ -40,15 +35,10 @@ const deleteRoomActionMock: ActionFunction = async ({
 const patchRoomActionMock: ActionFunction = async ({
 	request,
 	params,
-}: ActionFunctionArgs): Promise<TypedResponse<simpleMessage>> => {
+}: ActionFunctionArgs): Promise<TypedResponse<SimpleMessage>> => {
 	const roomId = params.id as string;
 	console.log(
-		'/room/' +
-			roomId +
-			' ' +
-			request.method +
-			' ' +
-			JSON.stringify({ roomId: roomId }),
+		`/room/ ${roomId} ${request.method} ${json({ roomId: roomId })}`,
 	);
 	return json({ message: 'success on mock' }, 200);
 };

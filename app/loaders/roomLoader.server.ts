@@ -23,7 +23,7 @@ export const roomLoaderMock: LoaderFunction = async ({
 	params,
 }: LoaderFunctionArgs): Promise<TypedResponse<RoomProfileResponse>> => {
 	const roomId = params.id as string;
-	console.log('/rooms/' + roomId + ' ' + request.method);
+	console.log(`/rooms/${roomId} ${request.method}`);
 	return json({
 		id: roomId,
 		name: `Room ${roomId}`,
