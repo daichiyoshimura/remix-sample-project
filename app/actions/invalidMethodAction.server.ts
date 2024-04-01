@@ -4,7 +4,7 @@ import {
 	TypedResponse,
 	json,
 } from '@remix-run/node';
-import { Message } from './genericResponse.server';
+import { Message } from '~/hooks/useHttpClient';
 
 export const invalidMethodAction: ActionFunction = async ({
 	request,

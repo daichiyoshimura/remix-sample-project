@@ -7,6 +7,8 @@
 
 import { requestStatus, useRequestState } from './useRequestState';
 
+export type Message = { message: string };
+
 export interface useHttpClientArgs {
 	path: string;
 	method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; //DO NOT APPEND GET
@@ -14,15 +16,19 @@ export interface useHttpClientArgs {
 	params?: string;
 }
 
-export const useHttpClient = ({
+export const useHttpClient = <T>({
 	path,
 	method,
 	body = undefined,
 	params = '',
-}: useHttpClientArgs): [requestStatus, () => void, () => Promise<void>] => {
+}: useHttpClientArgs): [
+	requestStatus,
+	() => void,
+	() => Promise<T | Message>,
+] => {
 	const [requestStatus, setRequestStatus] = useRequestState();
 
-	const sendRequest = async () => {
+	const sendRequest = async (): Promise<T | Message> => {
 		try {
 			setRequestStatus('loading');
 			const response = await fetch(`${path}${params}`, {
@@ -33,12 +39,16 @@ export const useHttpClient = ({
 				body: body,
 			});
 			if (!response.ok) {
-				throw new Error('Request failed');
+				throw new Error('failed to request');
 			}
+			const responseBody: T = await response.json();
 			setRequestStatus('success');
-		} catch (error) {
+			return responseBody;
+		} catch (error: unknown) {
+			const message =
+				error instanceof Error ? error.message : 'unknown error';
 			setRequestStatus('failure');
-			throw error;
+			return { message: message };
 		}
 	};
 

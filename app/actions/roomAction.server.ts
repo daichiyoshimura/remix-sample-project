@@ -5,7 +5,7 @@ import {
 	json,
 } from '@remix-run/node';
 import { invalidMethodAction } from './invalidMethodAction.server';
-import { Message } from './genericResponse.server';
+import { Message } from '~/hooks/useHttpClient';
 
 export const roomActionMock: ActionFunction = async (
 	args: ActionFunctionArgs,
