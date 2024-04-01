@@ -1,3 +1,10 @@
+/*
+ * This hook is for making requests from the client-side to server-side action functions.
+ * If you need to perform HTTP communication with a backend other than Remix server-side,
+ * please go through the action function.
+ * Also, for requests equivalent to GET, please use the loader function.
+ */
+
 export interface useHttpClientArgs {
 	path: string;
 	method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; //DO NOT APPEND GET
