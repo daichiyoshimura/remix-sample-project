@@ -6,6 +6,7 @@ import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import useHttpClient from '~/hooks/useHttpClient';
 
 export interface DeleteRoomModalProps {
 	isOpen: boolean;
@@ -27,23 +28,13 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 
 	const handleDelete = async (roomId: string) => {
 		try {
-			setDeleteStatus('loading');
-			const response = await fetch(`${roomId}`, {
+			await useHttpClient({
+				path: roomId,
 				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ inputValue }),
+				setRequestStatus: setDeleteStatus,
 			});
-
-			if (response.ok) {
-				setDeleteStatus('success');
-				return;
-			}
-			throw new Error('bad status code');
 		} catch (error) {
-			console.error('error has occured:', error);
-			setDeleteStatus('failure');
+			console.error('Error while creating room:', error);
 		}
 	};
 

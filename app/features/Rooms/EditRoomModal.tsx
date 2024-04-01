@@ -6,6 +6,7 @@ import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import useHttpClient from '~/hooks/useHttpClient';
 
 export interface EditRoomModalProps {
 	isOpen: boolean;
@@ -27,23 +28,14 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 
 	const handleEdit = async (roomId: string) => {
 		try {
-			setEditStatus('loading');
-			const response = await fetch(`${roomId}`, {
+			await useHttpClient({
+				path: roomId,
 				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json',
-				},
 				body: JSON.stringify({ editedName }),
+				setRequestStatus: setEditStatus,
 			});
-
-			if (response.ok) {
-				setEditStatus('success');
-				return;
-			}
-			throw new Error('bad status code');
 		} catch (error) {
-			console.error('error has occured:', error);
-			setEditStatus('failure');
+			console.error('Error while edit room:', error);
 		}
 	};
 
