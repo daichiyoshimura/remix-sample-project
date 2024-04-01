@@ -7,6 +7,7 @@ import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 import useHttpClient from '~/hooks/useHttpClient';
+import useRequestState from '~/hooks/useRequestState';
 
 export interface EditRoomModalProps {
 	isOpen: boolean;
@@ -21,18 +22,16 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	onClose,
 	roomId,
 }) => {
-	const [editStatus, setEditStatus] = useState<
-		'init' | 'success' | 'failure' | 'loading'
-	>('init');
-	const [editedName, setEditedName] = useState('');
+	const [inputValue, setInputValue] = useState('');
+	const [requestStatus, setRequestStatus] = useRequestState();
 
 	const handleEdit = async (roomId: string) => {
 		try {
 			await useHttpClient({
 				path: roomId,
 				method: 'PATCH',
-				body: JSON.stringify({ editedName }),
-				setRequestStatus: setEditStatus,
+				body: JSON.stringify({ inputValue }),
+				setRequestStatus: setRequestStatus,
 			});
 		} catch (error) {
 			console.error('Error while edit room:', error);
@@ -40,13 +39,13 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	};
 
 	const handleClose = () => {
-		setEditedName('');
-		setEditStatus('init');
+		setInputValue('');
+		setRequestStatus('init');
 		onClose();
 	};
 
 	const renderContent = () => {
-		switch (editStatus) {
+		switch (requestStatus) {
 			case 'init':
 				return (
 					<>
@@ -59,8 +58,8 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 						`}
 						/>
 						<TextInput
-							value={editedName}
-							onChange={setEditedName}
+							value={inputValue}
+							onChange={setInputValue}
 							placeholder={name}
 							required
 						/>
@@ -69,8 +68,8 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 							<Button
 								onClick={() => handleEdit(roomId)}
 								disabled={
-									editedName === name ||
-									editedName.length === 0
+									inputValue === name ||
+									inputValue.length === 0
 								}
 								color="safe"
 							>

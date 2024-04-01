@@ -7,6 +7,7 @@ import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 import useHttpClient from '~/hooks/useHttpClient';
+import useRequestState from '~/hooks/useRequestState';
 
 export interface CreateRoomModalProps {
 	isOpen: boolean;
@@ -18,9 +19,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 	onClose,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [createStatus, setCreateStatus] = useState<
-		'init' | 'success' | 'failure' | 'loading'
-	>('init');
+	const [requestStatus, setRequestStatus] = useRequestState();
 
 	const handleCreate = async () => {
 		try {
@@ -28,7 +27,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 				path: 'rooms',
 				method: 'POST',
 				body: JSON.stringify({ inputValue }),
-				setRequestStatus: setCreateStatus,
+				setRequestStatus: setRequestStatus,
 			});
 		} catch (error) {
 			console.error('Error while creating room:', error);
@@ -37,12 +36,12 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 
 	const handleClose = () => {
 		setInputValue('');
-		setCreateStatus('init');
+		setRequestStatus('init');
 		onClose();
 	};
 
 	const renderContent = () => {
-		switch (createStatus) {
+		switch (requestStatus) {
 			case 'init':
 				return (
 					<>
@@ -66,7 +65,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 							<Button
 								onClick={() => handleCreate()}
 								disabled={inputValue.length === 0}
-								color='safe'
+								color="safe"
 							>
 								create
 							</Button>

@@ -5,14 +5,15 @@
  * Also, for requests equivalent to GET, please use the loader function.
  */
 
+import { setRequestStatus } from "./useRequestState";
+
+
 export interface useHttpClientArgs {
 	path: string;
 	method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; //DO NOT APPEND GET
 	body?: string;
 	params?: string;
-	setRequestStatus: (
-		value: React.SetStateAction<'loading' | 'success' | 'failure' | 'init'>,
-	) => void;
+	setRequestStatus: setRequestStatus;
 }
 
 export const useHttpClient = async ({
