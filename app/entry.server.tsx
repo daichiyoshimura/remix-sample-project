@@ -14,6 +14,7 @@ import { renderToPipeableStream } from 'react-dom/server';
 
 const ABORT_DELAY = 5_000;
 
+// prettier-ignore
 export default function handleRequest(
 	request: Request,
 	responseStatusCode: number,
@@ -30,13 +31,13 @@ export default function handleRequest(
 				responseStatusCode,
 				responseHeaders,
 				remixContext,
-		  )
+		)
 		: handleBrowserRequest(
 				request,
 				responseStatusCode,
 				responseHeaders,
 				remixContext,
-		  );
+		);
 }
 
 function handleBotRequest(
@@ -109,10 +110,7 @@ function handleBrowserRequest(
 					const body = new PassThrough();
 					const stream = createReadableStreamFromReadable(body);
 
-					responseHeaders.set(
-						'Content-Type',
-						'text/html; charset=utf-8',
-					);
+					responseHeaders.set('Content-Type', 'text/html; charset=utf-8');
 
 					resolve(
 						new Response(stream, {
