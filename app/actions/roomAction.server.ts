@@ -5,8 +5,7 @@ import {
 	json,
 } from '@remix-run/node';
 import { invalidMethodAction } from './invalidMethodAction.server';
-
-type SimpleMessage = { message: string };
+import { Message } from './genericResponse.server';
 
 export const roomActionMock: ActionFunction = async (
 	args: ActionFunctionArgs,
@@ -24,7 +23,7 @@ export const roomActionMock: ActionFunction = async (
 const deleteRoomActionMock: ActionFunction = async ({
 	request,
 	params,
-}: ActionFunctionArgs): Promise<TypedResponse<SimpleMessage>> => {
+}: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
 	const roomId = params.id as string;
 	console.log(
 		`/room/ ${roomId} ${request.method} ${json({ roomId: roomId })}`,
@@ -35,7 +34,7 @@ const deleteRoomActionMock: ActionFunction = async ({
 const patchRoomActionMock: ActionFunction = async ({
 	request,
 	params,
-}: ActionFunctionArgs): Promise<TypedResponse<SimpleMessage>> => {
+}: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
 	const roomId = params.id as string;
 	console.log(
 		`/room/ ${roomId} ${request.method} ${json({ roomId: roomId })}`,
