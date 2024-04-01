@@ -20,24 +20,17 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 	onClose,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [requestStatus, setRequestStatus] = useRequestState();
+	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient({
+		path: 'rooms',
+		method: 'POST',
+		body: JSON.stringify({ inputValue }),
+	});
 
-	const handleCreate = async () => {
-		try {
-			await useHttpClient({
-				path: 'rooms',
-				method: 'POST',
-				body: JSON.stringify({ inputValue }),
-				setRequestStatus: setRequestStatus,
-			});
-		} catch (error) {
-			console.error('Error while creating room:', error);
-		}
-	};
+	const handleCreate = async () => await sendRequest();
 
 	const handleClose = () => {
+		resetRequestStatus();
 		setInputValue('');
-		setRequestStatus('init');
 		onClose();
 	};
 
@@ -64,7 +57,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 						<Container alignment="right">
 							<Button onClick={handleClose}>do not create</Button>
 							<Button
-								onClick={() => handleCreate()}
+								onClick={handleCreate}
 								disabled={inputValue.length === 0}
 								color="safe"
 							>

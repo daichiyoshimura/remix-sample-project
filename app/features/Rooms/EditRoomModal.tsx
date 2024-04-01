@@ -24,24 +24,16 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	roomId,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [requestStatus, setRequestStatus] = useRequestState();
-
-	const handleEdit = async (roomId: string) => {
-		try {
-			await useHttpClient({
-				path: roomId,
-				method: 'PATCH',
-				body: JSON.stringify({ inputValue }),
-				setRequestStatus: setRequestStatus,
-			});
-		} catch (error) {
-			console.error('Error while edit room:', error);
-		}
-	};
+	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient({
+		path: roomId,
+		method: 'PATCH',
+		body: JSON.stringify({ inputValue }),
+	});
+	const handleEdit = async () => await sendRequest();
 
 	const handleClose = () => {
+		resetRequestStatus();
 		setInputValue('');
-		setRequestStatus('init');
 		onClose();
 	};
 
@@ -67,7 +59,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 						<Container alignment="right">
 							<Button onClick={handleClose}>Do not save</Button>
 							<Button
-								onClick={() => handleEdit(roomId)}
+								onClick={handleEdit}
 								disabled={
 									inputValue === name ||
 									inputValue.length === 0

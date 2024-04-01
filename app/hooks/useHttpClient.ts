@@ -5,42 +5,52 @@
  * Also, for requests equivalent to GET, please use the loader function.
  */
 
-import { setRequestStatus } from "./useRequestState";
-
+import {
+	requestStatus,
+	setRequestStatus,
+	useRequestState,
+} from './useRequestState';
 
 export interface useHttpClientArgs {
 	path: string;
 	method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; //DO NOT APPEND GET
 	body?: string;
 	params?: string;
-	setRequestStatus: setRequestStatus;
 }
 
-export const useHttpClient = async ({
+export const useHttpClient = ({
 	path,
 	method,
 	body = undefined,
 	params = '',
-	setRequestStatus,
-}: useHttpClientArgs) => {
-	try {
-		setRequestStatus('loading');
-		const response = await fetch(`${path}${params}`, {
-			method: `${method}`,
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: body,
-		});
-		if (response.ok) {
+}: useHttpClientArgs): [requestStatus, () => void, () => Promise<void>] => {
+	const [requestStatus, setRequestStatus] = useRequestState();
+
+	const sendRequest = async () => {
+		try {
+			setRequestStatus('loading');
+			const response = await fetch(`${path}${params}`, {
+				method: method,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: body,
+			});
+			if (!response.ok) {
+				throw new Error('Request failed');
+			}
 			setRequestStatus('success');
-			return;
+		} catch (error) {
+			setRequestStatus('failure');
+			throw error;
 		}
-		throw new Error('bad status code');
-	} catch (error) {
-		setRequestStatus('failure');
-		throw error;
-	}
+	};
+
+	const resetRequestStatus = () => {
+		setRequestStatus('init');
+	};
+
+	return [requestStatus, resetRequestStatus, sendRequest];
 };
 
 export const buildQueryString = (

@@ -24,23 +24,17 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 	roomId,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [requestStatus, setRequestStatus] = useRequestState();
+	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient({
+		path: roomId,
+		method: 'DELETE',
+		body: JSON.stringify({ inputValue }),
+	});
 
-	const handleDelete = async (roomId: string) => {
-		try {
-			await useHttpClient({
-				path: roomId,
-				method: 'DELETE',
-				setRequestStatus: setRequestStatus,
-			});
-		} catch (error) {
-			console.error('Error while creating room:', error);
-		}
-	};
+	const handleDelete = async () => await sendRequest();
 
 	const handleClose = () => {
+		resetRequestStatus();
 		setInputValue('');
-		setRequestStatus('init');
 		onClose();
 	};
 
@@ -67,7 +61,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 						<Container alignment="right">
 							<Button onClick={handleClose}>do not delete</Button>
 							<Button
-								onClick={() => handleDelete(roomId)}
+								onClick={handleDelete}
 								color="caution"
 								disabled={inputValue !== name}
 							>
