@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHttpClient } from '~/hooks/useHttpClient';
-import { useRequestState } from '~/hooks/useRequestState';
 
 import Modal from '~/components/Modal/Modal';
 import Container from '~/components/Container/Container';

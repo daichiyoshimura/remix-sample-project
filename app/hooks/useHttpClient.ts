@@ -5,11 +5,7 @@
  * Also, for requests equivalent to GET, please use the loader function.
  */
 
-import {
-	requestStatus,
-	setRequestStatus,
-	useRequestState,
-} from './useRequestState';
+import { requestStatus, useRequestState } from './useRequestState';
 
 export interface useHttpClientArgs {
 	path: string;
