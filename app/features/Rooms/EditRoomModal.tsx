@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useHttpClient } from '~/hooks/useHttpClient';
+import { useRequestState } from '~/hooks/useRequestState';
+
 import Modal from '~/components/Modal/Modal';
 import Container from '~/components/Container/Container';
 import TextInput from '~/components/TextInput/TextInput';
@@ -6,8 +9,6 @@ import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
-import useHttpClient from '~/hooks/useHttpClient';
-import useRequestState from '~/hooks/useRequestState';
 
 export interface EditRoomModalProps {
 	isOpen: boolean;

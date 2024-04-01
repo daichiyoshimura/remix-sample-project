@@ -43,8 +43,6 @@ export const useHttpClient = async ({
 	}
 };
 
-export default useHttpClient;
-
 export const buildQueryString = (
 	queryParams: Record<string, string | number>,
 ): string => {

@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useLoaderData } from '@remix-run/react';
 import { roomsActionMock } from '~/actions/roomsAction.server';
 import { RoomsResponse, roomsLoaderMock } from '~/loaders/roomsLoader.server';
+import { useBinaryState } from '~/hooks/useBinaryState';
 
 import RoomCardList from '~/features/Rooms/RoomCardList';
 import Header from '~/components/Header/Header';
@@ -17,12 +17,9 @@ export const loader = roomsLoaderMock;
 export const action = roomsActionMock;
 
 const RoomsPage = () => {
-	const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
 	const { rooms } = useLoaderData<RoomsResponse>();
-
-	const toggleCreateRoomModal = () => {
-		setIsCreateRoomModalOpen(!isCreateRoomModalOpen);
-	};
+	const [isCreateRoomModalOpen, toggleCreateRoomModalOpen] =
+		useBinaryState(false);
 
 	return (
 		<>
@@ -32,11 +29,13 @@ const RoomsPage = () => {
 					<RoomCardList rooms={rooms} />
 				</Box>
 				<Container>
-					<Button onClick={toggleCreateRoomModal}>Create Room</Button>
+					<Button onClick={toggleCreateRoomModalOpen}>
+						Create Room
+					</Button>
 				</Container>
 				<CreateRoomModal
 					isOpen={isCreateRoomModalOpen}
-					onClose={toggleCreateRoomModal}
+					onClose={toggleCreateRoomModalOpen}
 				/>
 			</ContentArea>
 			<Footer />

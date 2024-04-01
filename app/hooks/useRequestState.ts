@@ -11,5 +11,3 @@ export const useRequestState = (): [
 ] => {
 	return useState<requestStatus>('init');
 };
-
-export default useRequestState;

@@ -1,11 +1,11 @@
 import { useLoaderData } from '@remix-run/react';
 import RoomProfile from '~/features/Rooms/RoomProfile';
-import { useState } from 'react';
 import { roomActionMock } from '~/actions/roomAction.server';
 import {
 	RoomProfileResponse,
 	roomLoaderMock,
 } from '~/loaders/roomLoader.server';
+import { useBinaryState } from '~/hooks/useBinaryState';
 
 import Header from '~/components/Header/Header';
 import Footer from '~/components/Footer/Footer';
@@ -25,16 +25,10 @@ export const action = roomActionMock;
 
 const RoomProfilePage = () => {
 	const loaderData = useLoaderData<RoomProfileResponse>();
-
-	const [isEditRoomModalOpen, setIsEditRoomModalOpen] = useState(false);
-	const toggleEditRoomModal = () => {
-		setIsEditRoomModalOpen(!isEditRoomModalOpen);
-	};
-
-	const [isDeleteRoomModalOpen, setIsDeleteRoomModalOpen] = useState(false);
-	const toggleDeleteRoomModal = () => {
-		setIsDeleteRoomModalOpen(!isDeleteRoomModalOpen);
-	};
+	const [isEditRoomModalOpen, toggleEditRoomModalOpen] =
+		useBinaryState(false);
+	const [isDeleteRoomModalOpen, toggleDeleteRoomModalOpen] =
+		useBinaryState(false);
 
 	if (
 		!loaderData ||
@@ -56,11 +50,11 @@ const RoomProfilePage = () => {
 						id={id}
 						name={name}
 						createdAt={createdAt}
-						onClick={toggleEditRoomModal}
+						onClick={toggleEditRoomModalOpen}
 					/>
 					<EditRoomModal
 						isOpen={isEditRoomModalOpen}
-						onClose={toggleEditRoomModal}
+						onClose={toggleEditRoomModalOpen}
 						name={name}
 						roomId={id}
 					/>
@@ -70,13 +64,16 @@ const RoomProfilePage = () => {
 				</Box>
 				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
-					<Button color={'caution'} onClick={toggleDeleteRoomModal}>
+					<Button
+						color={'caution'}
+						onClick={toggleDeleteRoomModalOpen}
+					>
 						Delete This Room
 					</Button>
 				</Container>
 				<DeleteRoomModal
 					isOpen={isDeleteRoomModalOpen}
-					onClose={toggleDeleteRoomModal}
+					onClose={toggleDeleteRoomModalOpen}
 					name={name}
 					roomId={id}
 				/>
