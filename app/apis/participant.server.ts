@@ -1,3 +1,4 @@
+import { isStageDev } from './util/env.server';
 import { httpHandler } from './util/httpHandler.server';
 
 type GetParticipantRequest = {
@@ -11,13 +12,20 @@ type Partisipant = {
 	part: string;
 };
 
-type GetParticipantResponse = Partisipant
-
+type GetParticipantResponse = Partisipant;
 
 export const getParticipant = async ({
 	id,
 	roomId,
 }: GetParticipantRequest): Promise<GetParticipantResponse> => {
+	if (isStageDev()) {
+		return {
+			id: '1',
+			name: 'John',
+			part: 'Tp',
+		};
+	}
+
 	return await httpHandler<GetParticipantResponse>({
 		method: 'GET',
 		url: `/participants/${id}`,
@@ -29,16 +37,25 @@ export const getParticipant = async ({
 };
 
 type GetParticipantListRequest = {
-    roomId: string
-}
+	roomId: string;
+};
 
 type GetParticipantListResponse = {
-    prticipants: Partisipant[]
-}
+	prticipants: Partisipant[];
+};
 
 export const getParticipantList = async ({
 	roomId,
 }: GetParticipantListRequest): Promise<GetParticipantListResponse> => {
+	if (isStageDev()) {
+		return {
+			prticipants: [
+				{ id: '1', name: 'John', part: 'Tp' },
+				{ id: '2', name: 'Emma', part: 'Sax' },
+				{ id: '3', name: 'Kate', part: 'Pf' },
+			],
+		};
+	}
 	return await httpHandler<GetParticipantListResponse>({
 		method: 'GET',
 		url: '/rooms',
