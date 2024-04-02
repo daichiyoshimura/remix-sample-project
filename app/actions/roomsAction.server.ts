@@ -5,7 +5,6 @@ import {
 	json,
 } from '@remix-run/node';
 import { invalidMethodAction } from './invalidMethodAction.server';
-import { Message } from '~/hooks/useHttpClient';
 
 export const roomsActionMock: ActionFunction = async (
 	args: ActionFunctionArgs,
@@ -18,10 +17,15 @@ export const roomsActionMock: ActionFunction = async (
 	}
 };
 
+type Room = {
+	id: string;
+	name: string;
+};
+
 const postRoomsActionMock: ActionFunction = async ({
 	request,
-}: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
+}: ActionFunctionArgs): Promise<TypedResponse<Room>> => {
 	const body = await request.text();
 	console.log(`/rooms ${request.method} ${body}`);
-	return json({ message: 'success on mock' }, 200);
+	return json({ id: '1', name: 'room-1' }, 200);
 };

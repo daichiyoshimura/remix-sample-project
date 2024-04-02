@@ -23,12 +23,20 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	roomId,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient({
-		path: roomId,
-		method: 'PATCH',
-		body: JSON.stringify({ inputValue }),
-	});
-	const handleEdit = async () => await sendRequest();
+	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient();
+	type ReqBody = {
+		name: string;
+	};
+	type ResBody = {
+		id: string;
+		name: string;
+	};
+	const handleEdit = async () =>
+		await sendRequest<ReqBody, ResBody>({
+			url: roomId,
+			method: 'PATCH',
+			body: { name: inputValue },
+		});
 
 	const handleClose = () => {
 		resetRequestStatus();

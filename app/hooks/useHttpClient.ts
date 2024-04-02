@@ -5,61 +5,76 @@
  * Also, for requests equivalent to GET, please use the loader function.
  */
 
-import { MutationStatus, useMutationState } from './useMutationState';
+import { MutationState, useMutationState } from './useMutationState';
 
 export type Message = { message: string };
 
-export interface useHttpClientArgs {
-	path: string;
+export type SendRequestArgs<T> = {
+	url: string;
 	method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; //DO NOT APPEND GET
-	body?: string;
-	params?: string;
-}
+	body?: T | undefined;
+	queryParams?: Record<string, string | number> | undefined;
+	headers?: Record<string, string> | undefined;
+	timeout?: number | undefined;
+};
+type HttpResponse<T> = [IsError: boolean, ResponseBody: T, Message: Message];
+type SendRequest = <ReqBody, ResBody>(
+	args: SendRequestArgs<ReqBody>,
+) => Promise<HttpResponse<ResBody>>;
 
-export const useHttpClient = <T>({
-	path,
-	method,
-	body = undefined,
-	params = '',
-}: useHttpClientArgs): [
-	MutationStatus,
-	() => void,
-	() => Promise<T | Message>,
-] => {
-	const [mutationStatus, setMutationStatus] = useMutationState('init');
+export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
+	const [mutationState, setMutationState] = useMutationState('init');
 
-	const sendRequest = async (): Promise<T | Message> => {
+	const sendRequest: SendRequest = async <ReqBody, ResBody>({
+		url,
+		method,
+		body = undefined,
+		queryParams = undefined,
+		headers = undefined,
+		timeout = undefined,
+	}: SendRequestArgs<ReqBody>): Promise<HttpResponse<ResBody>> => {
+		if (queryParams) {
+			const queryString = buildQueryString(queryParams);
+			url += `?${queryString}`;
+		}
+		const controller = new AbortController();
+		const signal = controller.signal;
+
+		if (timeout) {
+			setTimeout(() => controller.abort(), timeout);
+		}
+
 		try {
-			setMutationStatus('loading');
-			const response = await fetch(`${path}${params}`, {
+			setMutationState('loading');
+			const response = await fetch(url, {
 				method: method,
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: body,
+				headers: headers,
+				body: body ? JSON.stringify(body) : undefined,
+				signal,
 			});
 			if (!response.ok) {
 				throw new Error('failed to request');
 			}
-			const responseBody: T = await response.json();
-			setMutationStatus('success');
-			return responseBody;
+			const responseBody: ResBody = await response.json();
+
+			setMutationState('success');
+			return [false, responseBody, {} as Message];
 		} catch (error: unknown) {
 			const message =
 				error instanceof Error ? error.message : 'unknown error';
-			setMutationStatus('failure');
-			return { message: message };
+			setMutationState('failure');
+			return [true, {} as ResBody, { message }];
 		}
 	};
 
-	const resetMutationStatus = () => {
-		setMutationStatus('init');
+	const resetMutationState = () => {
+		setMutationState('init');
 	};
 
-	return [mutationStatus, resetMutationStatus, sendRequest];
+	return [mutationState, resetMutationState, sendRequest];
 };
 
-export const buildQueryString = (
+const buildQueryString = (
 	queryParams: Record<string, string | number>,
 ): string => {
 	const queryString = new URLSearchParams();

@@ -27,7 +27,7 @@ const deleteRoomActionMock: ActionFunction = async ({
 }: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
 	const roomId = params.id as string;
 	console.log(
-		`/room/ ${roomId} ${request.method} ${JSON.stringify({
+		`/rooms/${roomId} ${request.method} ${JSON.stringify({
 			roomId: roomId,
 		})}`,
 	);
@@ -51,7 +51,7 @@ const patchRoomActionMock: ActionFunction = async ({
 		},
 	});
 	console.log(
-		`/room/${roomId} ${request.method} ${JSON.stringify({
+		`/rooms/${roomId} ${request.method} ${JSON.stringify({
 			roomId: roomId,
 		})}`,
 	);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHttpClient } from '~/hooks/useHttpClient';
+import { Message, useHttpClient } from '~/hooks/useHttpClient';
 
 import Modal from '~/components/Modal/Modal';
 import Container from '~/components/Container/Container';
@@ -19,13 +19,26 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 	onClose,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient({
-		path: 'rooms',
-		method: 'POST',
-		body: JSON.stringify({ inputValue }),
-	});
+	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient();
 
-	const handleCreate = async () => await sendRequest();
+	const handleCreate = async () => {
+		type ReqBody = {
+			name: string;
+		};
+		type ResBody = {
+			message: string;
+		};
+		const [isError, _, message] = await sendRequest<ReqBody, ResBody>({
+			url: '/rooms',
+			method: 'POST',
+			body: { name: inputValue },
+		});
+		if (isError) {
+			const err = message as Message;
+			console.log(err.message);
+			return;
+		}
+	};
 
 	const handleClose = () => {
 		resetRequestStatus();

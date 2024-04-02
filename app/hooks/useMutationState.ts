@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-export type MutationStatus = 'loading' | 'success' | 'failure' | 'init';
-export type SetMutationStatus = React.Dispatch<
-	React.SetStateAction<MutationStatus>
+export type MutationState = 'loading' | 'success' | 'failure' | 'init';
+export type SetMutationState = React.Dispatch<
+	React.SetStateAction<MutationState>
 >;
 
-export const useMutationState = (init: MutationStatus): [
-	status: MutationStatus,
-	setStatus: SetMutationStatus,
+export const useMutationState = (init: MutationState): [
+	status: MutationState,
+	setStatus: SetMutationState,
 ] => {
-	return useState<MutationStatus>(init);
+	return useState<MutationState>(init);
 };
