@@ -4,6 +4,7 @@ import {
 	TypedResponse,
 	json,
 } from '@remix-run/node';
+import { getRoomList } from '~/apis/room.server';
 
 type Room = {
 	id: string;
@@ -18,24 +19,9 @@ export type RoomsResponse = {
 export const roomsLoaderMock: LoaderFunction = async ({
 	request,
 }: LoaderFunctionArgs): Promise<TypedResponse<RoomsResponse>> => {
+	const roomList = await getRoomList({ accountId: 'accountId' });
 	console.log(`/rooms ${request.method}`);
 	return json({
-		rooms: [
-			{
-				id: '1',
-				name: 'Room 1',
-				createdAt: '2024-03-24 00:51:00',
-			},
-			{
-				id: '2',
-				name: 'Room 2',
-				createdAt: '2024-03-24 00:51:00',
-			},
-			{
-				id: '3',
-				name: 'Room 3',
-				createdAt: '2024-03-24 00:51:00',
-			},
-		],
+		rooms: roomList.rooms,
 	});
 };

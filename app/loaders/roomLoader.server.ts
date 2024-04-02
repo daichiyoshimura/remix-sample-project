@@ -4,6 +4,8 @@ import {
 	TypedResponse,
 	json,
 } from '@remix-run/node';
+import { getParticipantList } from '~/apis/participant.server';
+import { getRoom } from '~/apis/room.server';
 
 export type Participant = {
 	id: string;
@@ -23,15 +25,13 @@ export const roomLoaderMock: LoaderFunction = async ({
 	params,
 }: LoaderFunctionArgs): Promise<TypedResponse<RoomProfileResponse>> => {
 	const roomId = params.id as string;
+	const room = await getRoom({ id: roomId, accountId: 'accountId' });
+	const participantList = await getParticipantList({ roomId: roomId });
 	console.log(`/rooms/${roomId} ${request.method}`);
 	return json({
-		id: roomId,
-		name: `Room ${roomId}`,
-		createdAt: '2024-03-24 00:53:00',
-		participants: [
-			{ id: '1', name: 'John', part: 'Tp' },
-			{ id: '2', name: 'Emma', part: 'Sax' },
-			{ id: '3', name: 'Kate', part: 'Pf' },
-		],
+		id: room.id,
+		name: room.name,
+		createdAt: room.createdAt,
+		participants: participantList.prticipants,
 	});
 };

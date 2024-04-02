@@ -1,5 +1,5 @@
 import { isStageDev } from './util/env.server';
-import { MessageResponse, httpHandler } from './util/httpHandler.server';
+import { MessageResponse, httpHandler, MutationTimes } from './util/httpHandler.server';
 
 type GetRoomRequest = {
 	id: string;
@@ -9,21 +9,26 @@ type GetRoomRequest = {
 type Room = {
 	id: string;
 	name: string;
-	createdAt?: string;
-	updatedAt?: string;
-};
+}
 
-type GetRoomResponse = Room;
+type GetRoomResponse = Room & MutationTimes;
 
 export const getRoom = async ({
 	id,
 	accountId,
 }: GetRoomRequest): Promise<GetRoomResponse> => {
+	if (isStageDev()) {
+		return {
+			id: '1',
+			name: 'Room 1',
+			createdAt: '2024-03-24 00:51:00',
+			updatedAt: '2024-03-24 00:51:00',
+		};
+	}
 	return await httpHandler<GetRoomResponse>({
 		method: 'GET',
 		url: `/rooms/${id}`,
 		queryParams: {
-			id: id,
 			accountId: accountId,
 		},
 	});
@@ -34,7 +39,7 @@ type GetRoomListRequest = {
 };
 
 type GetRoomListResponse = {
-	rooms: Room[];
+	rooms: (Room & MutationTimes)[];
 };
 
 export const getRoomList = async ({

@@ -11,6 +11,11 @@ export type MessageResponse = {
 	message: string
 }
 
+export type MutationTimes = {
+	createdAt: string,
+	updatedAt: string,
+}
+
 export const httpHandler = async <T>({
 	method,
 	url,

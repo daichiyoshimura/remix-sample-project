@@ -6,6 +6,7 @@ import {
 } from '@remix-run/node';
 import { invalidMethodAction } from './invalidMethodAction.server';
 import { Message } from '~/hooks/useHttpClient';
+import { patchRoom } from '~/apis/room.server';
 
 export const roomActionMock: ActionFunction = async (
 	args: ActionFunctionArgs,
@@ -26,7 +27,9 @@ const deleteRoomActionMock: ActionFunction = async ({
 }: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
 	const roomId = params.id as string;
 	console.log(
-		`/room/ ${roomId} ${request.method} ${json({ roomId: roomId })}`,
+		`/room/ ${roomId} ${request.method} ${JSON.stringify({
+			roomId: roomId,
+		})}`,
 	);
 	return json({ message: 'success on mock' }, 200);
 };
@@ -36,8 +39,21 @@ const patchRoomActionMock: ActionFunction = async ({
 	params,
 }: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
 	const roomId = params.id as string;
+	const body = (await request.json()) as {
+		id: string;
+		name: string;
+	};
+	patchRoom({
+		accountId: 'accountId',
+		room: {
+			id: roomId,
+			name: body.name,
+		},
+	});
 	console.log(
-		`/room/ ${roomId} ${request.method} ${json({ roomId: roomId })}`,
+		`/room/${roomId} ${request.method} ${JSON.stringify({
+			roomId: roomId,
+		})}`,
 	);
 	return json({ message: 'success on mock' }, 200);
 };
