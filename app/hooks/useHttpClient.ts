@@ -5,7 +5,7 @@
  * Also, for requests equivalent to GET, please use the loader function.
  */
 
-import { requestStatus, useRequestState } from './useRequestState';
+import { MutationStatus, useMutationState } from './useMutationState';
 
 export type Message = { message: string };
 
@@ -22,15 +22,15 @@ export const useHttpClient = <T>({
 	body = undefined,
 	params = '',
 }: useHttpClientArgs): [
-	requestStatus,
+	MutationStatus,
 	() => void,
 	() => Promise<T | Message>,
 ] => {
-	const [requestStatus, setRequestStatus] = useRequestState();
+	const [mutationStatus, setMutationStatus] = useMutationState('init');
 
 	const sendRequest = async (): Promise<T | Message> => {
 		try {
-			setRequestStatus('loading');
+			setMutationStatus('loading');
 			const response = await fetch(`${path}${params}`, {
 				method: method,
 				headers: {
@@ -42,21 +42,21 @@ export const useHttpClient = <T>({
 				throw new Error('failed to request');
 			}
 			const responseBody: T = await response.json();
-			setRequestStatus('success');
+			setMutationStatus('success');
 			return responseBody;
 		} catch (error: unknown) {
 			const message =
 				error instanceof Error ? error.message : 'unknown error';
-			setRequestStatus('failure');
+			setMutationStatus('failure');
 			return { message: message };
 		}
 	};
 
-	const resetRequestStatus = () => {
-		setRequestStatus('init');
+	const resetMutationStatus = () => {
+		setMutationStatus('init');
 	};
 
-	return [requestStatus, resetRequestStatus, sendRequest];
+	return [mutationStatus, resetMutationStatus, sendRequest];
 };
 
 export const buildQueryString = (
