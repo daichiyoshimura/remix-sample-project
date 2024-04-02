@@ -1,4 +1,4 @@
-export type HttpHandlerArgs = {
+type HttpHandlerArgs = {
 	method: string;
 	url: string;
 	body?: object | undefined;
@@ -6,6 +6,10 @@ export type HttpHandlerArgs = {
 	headers?: Record<string, string> | undefined;
 	timeout?: number | undefined;
 };
+
+export type MessageResponse = {
+	message: string
+}
 
 export const httpHandler = async <T>({
 	method,
