@@ -19,7 +19,7 @@ export type SendRequestArgs<T> = {
 	headers?: Record<string, string> | undefined;
 	timeout?: number | undefined;
 };
-type SendRequest = <T>(args: SendRequestArgs<T>) => void;
+export type SendRequest = <T>(args: SendRequestArgs<T>) => void;
 
 export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 	const [mutationState, setMutationState] = useMutationState('init');
