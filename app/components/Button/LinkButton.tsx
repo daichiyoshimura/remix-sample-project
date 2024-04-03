@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from '@remix-run/react';
 import Button from './Button';
 
-export interface LinkButtonProps {
+export type LinkButtonProps = {
 	to: string;
 	children: React.ReactNode;
 }

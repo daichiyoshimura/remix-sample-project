@@ -1,6 +1,4 @@
-import React from 'react';
-
-export interface ModalDescriptionProps {
+export type ModalDescriptionProps = {
 	description: string;
 }
 

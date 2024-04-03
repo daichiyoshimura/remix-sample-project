@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { MutationState } from '~/hooks/useMutationState';
 
 import Modal from '~/components/Modal/Modal';
@@ -15,7 +15,7 @@ export type MutationModalProps = {
 	failedMessage: { title: string; description: string };
 };
 
-const MutationModal: FC<MutationModalProps> = ({
+const MutationModal: React.FC<MutationModalProps> = ({
 	isOpen,
 	mutationState,
 	handleMutation,

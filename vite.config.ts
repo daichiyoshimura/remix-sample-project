@@ -11,10 +11,13 @@ installGlobals();
 export default defineConfig({
 	plugins: [
 		remix({
-			ignoredRouteFiles: [
-				'app/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-			],
+			ignoredRouteFiles: ['app/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
 		}),
 		tsconfigPaths(),
 	],
+	resolve: {
+		alias: {
+			react: 'react',
+		},
+	},
 });

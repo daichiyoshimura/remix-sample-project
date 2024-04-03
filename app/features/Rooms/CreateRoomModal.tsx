@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { useHttpClient } from '~/hooks/useHttpClient';
 
 import Container from '~/components/Container/Container';
@@ -8,12 +8,12 @@ import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import MutationModal from '~/components/Modal/MutationModal';
 
-export interface CreateRoomModalProps {
+export type CreateRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
 }
 
-const CreateRoomModal: FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
+const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
 	const [inputValue, setInputValue] = useState('');
 	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
 

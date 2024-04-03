@@ -1,11 +1,10 @@
-import React from 'react';
 import ReactModal from 'react-modal';
 
-export interface ModalProps {
+export type ModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
 	children: React.ReactNode;
-}
+};
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 	return (

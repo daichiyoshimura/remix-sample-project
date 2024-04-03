@@ -1,8 +1,6 @@
-import React from 'react';
-
-export interface HeaderProps {
+export type HeaderProps = {
 	currentPageTitle: string;
-}
+};
 
 const Header: React.FC<HeaderProps> = ({ currentPageTitle }) => {
 	return (

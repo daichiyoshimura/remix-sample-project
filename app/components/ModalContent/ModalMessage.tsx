@@ -1,4 +1,3 @@
-import React from 'react';
 import ModalTitle from './ModalTitle';
 import ModalDescription from './ModalDescription';
 import Container from '~/components/Container/Container';

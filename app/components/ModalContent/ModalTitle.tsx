@@ -1,6 +1,4 @@
-import React from 'react';
-
-export interface ModalTitleProps {
+export type ModalTitleProps = {
 	title: string;
 }
 

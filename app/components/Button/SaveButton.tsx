@@ -1,16 +1,12 @@
-import React from 'react';
 import { CheckCircle } from '@mui/icons-material';
 import Button from './Button';
 
-export interface SaveButtonProps {
+export type SaveButtonProps = {
 	onClick?: () => void;
 	disabled?: boolean;
-}
+};
 
-const SaveButton: React.FC<SaveButtonProps> = ({
-	onClick = () => {},
-	disabled = false,
-}) => {
+const SaveButton: React.FC<SaveButtonProps> = ({ onClick = () => {}, disabled = false }) => {
 	return (
 		<Button onClick={onClick} disabled={disabled} size="icon">
 			<CheckCircle />

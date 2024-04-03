@@ -1,6 +1,4 @@
-import React from 'react';
-
-export interface TextInputProps {
+export type TextInputProps = {
 	value: string;
 	onChange: (value: string) => void;
 	placeholder?: string;

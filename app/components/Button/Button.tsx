@@ -1,12 +1,10 @@
-import React from 'react';
-
-export interface ButtonProps {
+export type ButtonProps = {
 	onClick?: () => void;
 	disabled?: boolean;
 	color?: 'default' | 'safe' | 'caution';
 	size?: 'icon' | 'text';
 	children: React.ReactNode;
-}
+};
 
 const Button: React.FC<ButtonProps> = ({
 	onClick = () => {},
@@ -15,10 +13,7 @@ const Button: React.FC<ButtonProps> = ({
 	size = 'text',
 	children,
 }) => {
-	const [bgColor, hoverBgColor] = ((
-		color: string,
-		disabled: boolean,
-	): string[] => {
+	const [bgColor, hoverBgColor] = ((color: string, disabled: boolean): string[] => {
 		if (disabled) {
 			return ['bg-gray-500', 'hover:bg-gray-500'];
 		}

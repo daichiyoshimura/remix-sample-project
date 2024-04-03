@@ -1,8 +1,6 @@
-import React from 'react';
-
-export interface CardProps {
+export type CardProps = {
 	children: React.ReactNode;
-}
+};
 
 const Card: React.FC<CardProps> = ({ children }) => {
 	return (

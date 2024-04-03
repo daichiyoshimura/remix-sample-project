@@ -1,13 +1,10 @@
-import React from 'react';
 import ParticipantCard, { ParticipantCardProps } from './ParticipantCard';
 
-export interface ParticipantCardListProps {
+export type ParticipantCardListProps = {
 	participants: ParticipantCardProps[];
 }
 
-const ParticipantCardList: React.FC<ParticipantCardListProps> = ({
-	participants,
-}) => {
+const ParticipantCardList: React.FC<ParticipantCardListProps> = ({ participants }) => {
 	return (
 		<div className="max-w-screen-lg mx-auto">
 			<div className="grid grid-cols-3 gap-4">
