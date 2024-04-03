@@ -65,6 +65,9 @@ module.exports = {
 					},
 				},
 			},
+			rules: {
+				'react/prop-types': 'off',
+			},
 			extends: [
 				'plugin:@typescript-eslint/recommended',
 				'plugin:import/recommended',
