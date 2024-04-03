@@ -83,7 +83,6 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 	return (
 		<MutationModal
 			isOpen={isOpen}
-			onClose={onClose}
 			mutationState={mutationState}
 			handleMutation={handleMutation}
 			handleClose={handleClose}

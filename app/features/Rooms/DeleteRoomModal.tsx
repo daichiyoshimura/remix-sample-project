@@ -7,7 +7,6 @@ import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import MutationModal from '~/components/Modal/MutationModal';
-import ModalMessage from '~/components/ModalContent/ModalMessage';
 
 export interface DeleteRoomModalProps {
 	isOpen: boolean;
@@ -81,7 +80,6 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 	return (
 		<MutationModal
 			isOpen={isOpen}
-			onClose={onClose}
 			mutationState={mutationState}
 			handleMutation={handleMutation}
 			handleClose={handleClose}

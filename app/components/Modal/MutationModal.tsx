@@ -7,7 +7,6 @@ import ModalMessage, { ModalMessageProps } from '../ModalContent/ModalMessage';
 
 export type MutationModalProps = {
 	isOpen: boolean;
-	onClose: () => void;
 	mutationState: MutationState;
 	handleMutation: () => void;
 	handleClose: () => void;
@@ -18,7 +17,6 @@ export type MutationModalProps = {
 
 const MutationModal: FC<MutationModalProps> = ({
 	isOpen,
-	onClose,
 	mutationState,
 	handleMutation,
 	handleClose,
@@ -52,7 +50,7 @@ const MutationModal: FC<MutationModalProps> = ({
 	};
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose}>
+		<Modal isOpen={isOpen} onClose={handleClose}>
 			{renderContent()}
 		</Modal>
 	);

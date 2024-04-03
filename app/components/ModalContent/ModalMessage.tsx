@@ -1,8 +1,8 @@
 import React from 'react';
 import ModalTitle from './ModalTitle';
 import ModalDescription from './ModalDescription';
-import Container from '../Container/Container';
-import Button from '../Button/Button';
+import Container from '~/components/Container/Container';
+import Button from '~/components/Button/Button';
 
 export type ModalMessageProps = {
 	title: string;

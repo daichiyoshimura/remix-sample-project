@@ -6,7 +6,6 @@ import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
-import ModalMessage from '~/components/ModalContent/ModalMessage';
 import MutationModal from '~/components/Modal/MutationModal';
 
 export interface EditRoomModalProps {
@@ -87,7 +86,6 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	return (
 		<MutationModal
 			isOpen={isOpen}
-			onClose={onClose}
 			mutationState={mutationState}
 			handleMutation={handleMutation}
 			handleClose={handleClose}
