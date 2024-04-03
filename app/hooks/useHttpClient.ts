@@ -56,8 +56,8 @@ export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 			}
 			setMutationState('success');
 		} catch (error: unknown) {
-			const message =
-				error instanceof Error ? error.message : 'unknown error';
+			const message = error instanceof Error ? error.message : 'unknown error';
+			console.log(message);
 			setMutationState('failure');
 		}
 	};
@@ -69,9 +69,7 @@ export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 	return [mutationState, resetMutationState, sendRequest];
 };
 
-const buildQueryString = (
-	queryParams: Record<string, string | number>,
-): string => {
+const buildQueryString = (queryParams: Record<string, string | number>): string => {
 	const queryString = new URLSearchParams();
 	for (const [key, value] of Object.entries(queryParams)) {
 		queryString.append(key, String(value));

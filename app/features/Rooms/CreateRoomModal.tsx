@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { useHttpClient } from '~/hooks/useHttpClient';
 
 import Container from '~/components/Container/Container';
@@ -13,10 +13,7 @@ export interface CreateRoomModalProps {
 	onClose: () => void;
 }
 
-const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
-	isOpen,
-	onClose,
-}) => {
+const CreateRoomModal: FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
 	const [inputValue, setInputValue] = useState('');
 	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
 
@@ -76,8 +73,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 
 	const failedMesssage = {
 		title: 'Failed',
-		description:
-			'Please try again later, or contact support if the issue persists',
+		description: 'Please try again later, or contact support if the issue persists',
 	};
 
 	return (
@@ -86,7 +82,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 			mutationState={mutationState}
 			handleMutation={handleMutation}
 			handleClose={handleClose}
-			init={init}
+			mutationContent={init}
 			successMessage={successMessage}
 			failedMessage={failedMesssage}
 		/>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { useHttpClient } from '~/hooks/useHttpClient';
 
 import Container from '~/components/Container/Container';
@@ -15,12 +15,7 @@ export interface EditRoomModalProps {
 	roomId: string;
 }
 
-const EditRoomModal: React.FC<EditRoomModalProps> = ({
-	isOpen,
-	name,
-	onClose,
-	roomId,
-}) => {
+const EditRoomModal: FC<EditRoomModalProps> = ({ isOpen, name, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState('');
 	const [mutationState, resetMutationState, sendRequest] = useHttpClient();
 	type ReqBody = {
@@ -39,7 +34,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 		onClose();
 	};
 
-	const init = () => {
+	const mutationContent = () => {
 		return (
 			<>
 				<ModalTitle title={'Edit'} />
@@ -60,9 +55,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 					<Button onClick={handleClose}>Do not save</Button>
 					<Button
 						onClick={handleMutation}
-						disabled={
-							inputValue === name || inputValue.length === 0
-						}
+						disabled={inputValue === name || inputValue.length === 0}
 						color="safe"
 					>
 						Save
@@ -79,8 +72,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 
 	const failedMesssage = {
 		title: 'Failed',
-		description:
-			'Please try again later, or contact support if the issue persists',
+		description: 'Please try again later, or contact support if the issue persists',
 	};
 
 	return (
@@ -89,7 +81,7 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 			mutationState={mutationState}
 			handleMutation={handleMutation}
 			handleClose={handleClose}
-			init={init}
+			mutationContent={mutationContent}
 			successMessage={successMessage}
 			failedMessage={failedMesssage}
 		/>

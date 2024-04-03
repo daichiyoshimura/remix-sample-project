@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { useHttpClient } from '~/hooks/useHttpClient';
 
 import Container from '~/components/Container/Container';
@@ -15,17 +15,12 @@ export interface DeleteRoomModalProps {
 	roomId: string;
 }
 
-const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
-	isOpen,
-	name,
-	onClose,
-	roomId,
-}) => {
+const DeleteRoomModal: FC<DeleteRoomModalProps> = ({ isOpen, name, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState('');
 	const [mutationState, resetMutationState, sendRequest] = useHttpClient();
 
 	const handleMutation = async () =>
-		sendRequest<{}>({
+		sendRequest<Record<string, never>>({
 			path: roomId,
 			method: 'DELETE',
 		});
@@ -36,7 +31,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 		onClose();
 	};
 
-	const init = () => {
+	const mutationContent = () => {
 		return (
 			<>
 				<ModalTitle title={'Are you sure you want to delete?'} />
@@ -54,11 +49,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 				/>
 				<Container alignment="right">
 					<Button onClick={handleClose}>do not delete</Button>
-					<Button
-						onClick={handleMutation}
-						color="caution"
-						disabled={inputValue !== name}
-					>
+					<Button onClick={handleMutation} color="caution" disabled={inputValue !== name}>
 						delete
 					</Button>
 				</Container>
@@ -73,8 +64,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 
 	const failedMesssage = {
 		title: 'Failed',
-		description:
-			'Please try again later, or contact support if the issue persists',
+		description: 'Please try again later, or contact support if the issue persists',
 	};
 
 	return (
@@ -83,7 +73,7 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 			mutationState={mutationState}
 			handleMutation={handleMutation}
 			handleClose={handleClose}
-			init={init}
+			mutationContent={mutationContent}
 			successMessage={successMessage}
 			failedMessage={failedMesssage}
 		/>

@@ -7,21 +7,14 @@ import Button from '~/components/Button/Button';
 export type ModalMessageProps = {
 	title: string;
 	description: string;
-};
-
-type ModalMessageArgs = {
-	props: ModalMessageProps;
 	handleClose: () => void;
 };
 
-const ModalMessage: React.FC<ModalMessageArgs> = ({
-	props,
-	handleClose,
-}) => {
+const ModalMessage: React.FC<ModalMessageProps> = ({ title, description, handleClose }) => {
 	return (
 		<>
-			<ModalTitle title={props.title} />
-			<ModalDescription description={props.description} />
+			<ModalTitle title={title} />
+			<ModalDescription description={description} />
 			<Container alignment="right">
 				<Button onClick={handleClose}>close</Button>
 			</Container>

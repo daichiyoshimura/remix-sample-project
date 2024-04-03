@@ -1,18 +1,18 @@
 import { FC, ReactNode } from 'react';
+import { MutationState } from '~/hooks/useMutationState';
 
 import Modal from '~/components/Modal/Modal';
-import { MutationState } from '~/hooks/useMutationState';
-import LoadingIcon from '../LoadingIcon/LoadingIcon';
-import ModalMessage, { ModalMessageProps } from '../ModalContent/ModalMessage';
+import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import ModalMessage from '~/components/ModalContent/ModalMessage';
 
 export type MutationModalProps = {
 	isOpen: boolean;
 	mutationState: MutationState;
 	handleMutation: () => void;
 	handleClose: () => void;
-	init: (handleMutation: () => void) => ReactNode;
-	successMessage: ModalMessageProps;
-	failedMessage: ModalMessageProps;
+	mutationContent: (handleMutation: () => void) => ReactNode;
+	successMessage: { title: string; description: string };
+	failedMessage: { title: string; description: string };
 };
 
 const MutationModal: FC<MutationModalProps> = ({
@@ -20,27 +20,29 @@ const MutationModal: FC<MutationModalProps> = ({
 	mutationState,
 	handleMutation,
 	handleClose,
-	init,
+	mutationContent,
 	successMessage,
 	failedMessage,
 }) => {
 	const renderContent = () => {
 		switch (mutationState) {
 			case 'init':
-				return init(handleMutation);
+				return mutationContent(handleMutation);
 			case 'loading':
 				return <LoadingIcon />;
 			case 'success':
 				return (
 					<ModalMessage
-						props={successMessage}
+						title={successMessage.title}
+						description={successMessage.description}
 						handleClose={handleClose}
 					/>
 				);
 			case 'failure':
 				return (
 					<ModalMessage
-						props={failedMessage}
+						title={failedMessage.title}
+						description={failedMessage.description}
 						handleClose={handleClose}
 					/>
 				);
