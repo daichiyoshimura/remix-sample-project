@@ -40,7 +40,7 @@ export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 		const controller = new AbortController();
 		const signal = controller.signal;
 
-		if (timeout) {
+		if (timeout !== undefined) {
 			setTimeout(() => controller.abort(), timeout);
 		}
 
@@ -49,7 +49,7 @@ export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 			const response = await fetch(path, {
 				method: method,
 				headers: headers,
-				body: body ? JSON.stringify(body) : undefined,
+				body: body !== undefined ? JSON.stringify(body) : undefined,
 				signal,
 			});
 			if (!response.ok) {

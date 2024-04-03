@@ -54,6 +54,9 @@ module.exports = {
 			files: ['**/*.{ts,tsx}'],
 			plugins: ['@typescript-eslint', 'import'],
 			parser: '@typescript-eslint/parser',
+			parserOptions: {
+				project: './tsconfig.json',
+			},
 			settings: {
 				'import/internal-regex': '^~/',
 				'import/resolver': {
@@ -67,6 +70,7 @@ module.exports = {
 			},
 			rules: {
 				'react/prop-types': 'off',
+				'@typescript-eslint/strict-boolean-expressions': 'error',
 			},
 			extends: [
 				'plugin:@typescript-eslint/recommended',

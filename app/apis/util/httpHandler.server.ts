@@ -44,7 +44,7 @@ export const httpHandler = async <T>(
 		signal,
 	};
 
-	if (timeout) {
+	if (timeout !== undefined) {
 		setTimeout(() => controller.abort(), timeout);
 	}
 
