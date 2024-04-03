@@ -8,6 +8,8 @@ import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import ModalMessage from '~/components/ModalContent/ModalMessage';
+import MutationModal from '~/components/Modal/MutationModal';
 
 export interface EditRoomModalProps {
 	isOpen: boolean;
@@ -23,11 +25,11 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	roomId,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient();
+	const [mutationState, resetMutationState, sendRequest] = useHttpClient();
 	type ReqBody = {
 		name: string;
 	};
-	const handleEdit = async () =>
+	const handleMutation = async () =>
 		sendRequest<ReqBody>({
 			path: roomId,
 			method: 'PATCH',
@@ -35,79 +37,84 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 		});
 
 	const handleClose = () => {
-		resetRequestStatus();
+		resetMutationState();
 		setInputValue('');
 		onClose();
 	};
 
-	const renderContent = () => {
-		switch (requestStatus) {
-			case 'init':
-				return (
-					<>
-						<ModalTitle title={'Edit'} />
-						<ModalDescription
-							description={`
+	const init = () => {
+		return (
+			<>
+				<ModalTitle title={'Edit'} />
+				<ModalDescription
+					description={`
 						    Please enter only alphanumeric characters in this field. 
 							It is limited to a maximum length of 64 characters. 
 							The use of symbols such as underscores, hyphens, and spaces is not permitted.
 						`}
-						/>
-						<TextInput
-							value={inputValue}
-							onChange={setInputValue}
-							placeholder={name}
-							required
-						/>
-						<Container alignment="right">
-							<Button onClick={handleClose}>Do not save</Button>
-							<Button
-								onClick={handleEdit}
-								disabled={
-									inputValue === name ||
-									inputValue.length === 0
-								}
-								color="safe"
-							>
-								Save
-							</Button>
-						</Container>
-					</>
-				);
-			case 'loading':
-				return <LoadingIcon />;
-			case 'success':
-				return (
-					<>
-						<ModalTitle title={'Success'} />
-						<Container alignment="right">
-							<Button onClick={handleClose}>Close</Button>
-						</Container>
-					</>
-				);
-			case 'failure':
-				return (
-					<>
-						<ModalTitle title={'Failed to save room'} />
-						<ModalDescription
-							description={`
-							Please try again later, or contact support if the issue persists
-						`}
-						/>
-						<Container alignment="right">
-							<Button onClick={handleClose}>close</Button>
-						</Container>
-					</>
-				);
-			default:
-				return null;
-		}
+				/>
+				<TextInput
+					value={inputValue}
+					onChange={setInputValue}
+					placeholder={name}
+					required
+				/>
+				<Container alignment="right">
+					<Button onClick={handleClose}>Do not save</Button>
+					<Button
+						onClick={handleMutation}
+						disabled={
+							inputValue === name || inputValue.length === 0
+						}
+						color="safe"
+					>
+						Save
+					</Button>
+				</Container>
+			</>
+		);
+	};
+
+	const loading = () => {
+		return <LoadingIcon />;
+	};
+
+	const success = () => {
+		return (
+			<>
+				<ModalMessage
+					title={'Success'}
+					description={'The room is edited'}
+					handleClose={handleClose}
+				/>
+			</>
+		);
+	};
+
+	const failed = () => {
+		return (
+			<ModalMessage
+				title={'Failed to save room'}
+				description={
+					'Please try again later, or contact support if the issue persists'
+				}
+				handleClose={handleClose}
+			/>
+		);
 	};
 
 	return (
-		<Modal isOpen={isOpen} onClose={handleClose}>
-			{renderContent()}
-		</Modal>
+		<MutationModal
+			isOpen={isOpen}
+			onClose={onClose}
+			mutationState={mutationState}
+			handleMutation={handleMutation}
+			handleClose={handleClose}
+			init={init}
+			loading={loading}
+			success={success}
+			failed={failed}
+		/>
 	);
 };
 

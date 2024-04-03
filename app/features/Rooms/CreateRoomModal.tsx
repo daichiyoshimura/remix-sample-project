@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useHttpClient } from '~/hooks/useHttpClient';
 
-import Modal from '~/components/Modal/Modal';
 import Container from '~/components/Container/Container';
 import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
+import MutationModal from '~/components/Modal/MutationModal';
+import ModalMessage from '~/components/ModalContent/ModalMessage';
 
 export interface CreateRoomModalProps {
 	isOpen: boolean;
@@ -19,9 +20,9 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 	onClose,
 }) => {
 	const [inputValue, setInputValue] = useState('');
-	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient();
+	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
 
-	const handleCreate = async () => {
+	const handleMutation = async () => {
 		type ReqBody = {
 			name: string;
 		};
@@ -33,77 +34,79 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 	};
 
 	const handleClose = () => {
-		resetRequestStatus();
+		resetMutationStatus();
 		setInputValue('');
 		onClose();
 	};
 
-	const renderContent = () => {
-		switch (requestStatus) {
-			case 'init':
-				return (
-					<>
-						<ModalTitle title={'Create Room'} />
-						<ModalDescription
-							description={`
+	const init = () => {
+		return (
+			<>
+				<ModalTitle title={'Create Room'} />
+				<ModalDescription
+					description={`
 							Please enter only alphanumeric characters in this
 							field. It is limited to a maximum length of 64
 							characters. The use of symbols such as underscores,
 							hyphens, and spaces is not permitted.
 						`}
-						/>
-						<TextInput
-							value={inputValue}
-							onChange={setInputValue}
-							placeholder="room name"
-							required
-						/>
-						<Container alignment="right">
-							<Button onClick={handleClose}>do not create</Button>
-							<Button
-								onClick={handleCreate}
-								disabled={inputValue.length === 0}
-								color="safe"
-							>
-								create
-							</Button>
-						</Container>
-					</>
-				);
-			case 'loading':
-				return <LoadingIcon />;
-			case 'success':
-				return (
-					<>
-						<ModalTitle title={'Success'} />
-						<Container alignment="right">
-							<Button onClick={handleClose}>close</Button>
-						</Container>
-					</>
-				);
-			case 'failure':
-				return (
-					<>
-						<ModalTitle title={'Failed to create room'} />
-						<ModalDescription
-							description={`
-							Please try again later, or contact support if the issue persists
-						`}
-						/>
-						<Container alignment="right">
-							<Button onClick={handleClose}>close</Button>
-						</Container>
-					</>
-				);
-			default:
-				return null;
-		}
+				/>
+				<TextInput
+					value={inputValue}
+					onChange={setInputValue}
+					placeholder="room name"
+					required
+				/>
+				<Container alignment="right">
+					<Button onClick={handleClose}>do not create</Button>
+					<Button
+						onClick={handleMutation}
+						disabled={inputValue.length === 0}
+						color="safe"
+					>
+						create
+					</Button>
+				</Container>
+			</>
+		);
+	};
+
+	const loading = () => {
+		return <LoadingIcon />;
+	};
+
+	const success = () => {
+		return (
+			<ModalMessage
+				title="Success"
+				description="Room is created"
+				handleClose={handleClose}
+			/>
+		);
+	};
+
+	const failed = () => {
+		return (
+			<ModalMessage
+				title="Failed to create room"
+				description="Please try again later, or contact support if the issue persists"
+				handleClose={handleClose}
+			/>
+		);
 	};
 
 	return (
-		<Modal isOpen={isOpen} onClose={handleClose}>
-			{renderContent()}
-		</Modal>
+		<MutationModal
+			isOpen={isOpen}
+			onClose={onClose}
+			mutationState={mutationState}
+			handleMutation={handleMutation}
+			handleClose={handleClose}
+			init={init}
+			loading={loading}
+			success={success}
+			failed={failed}
+		/>
 	);
 };
 
