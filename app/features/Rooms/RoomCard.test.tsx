@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
-import RoomCard from './RoomCard';
+import { RoomCard } from '@features';
 
 describe('RoomCard', () => {
 	it('renders Enter button with correct link', async () => {

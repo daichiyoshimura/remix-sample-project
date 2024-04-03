@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import SaveButton, { SaveButtonProps } from './SaveButton';
+import { SaveButton, SaveButtonProps } from '@components';
 
 const meta: Meta = {
 	title: 'SaveButton',

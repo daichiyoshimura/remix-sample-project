@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import CreateRoomModal from './CreateRoomModal';
+import { CreateRoomModal } from '@features';
 
 describe('CreateRoomModal', () => {
 	it('closes the modal when "do not create" button is clicked', () => {

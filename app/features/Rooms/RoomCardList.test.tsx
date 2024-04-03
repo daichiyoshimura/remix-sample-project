@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import RoomCardList from './RoomCardList';
+import { RoomCardList } from '@features';
 
 describe('RoomCardList', () => {
 	it('renders list of rooms correctly', () => {

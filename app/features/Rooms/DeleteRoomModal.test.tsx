@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import DeleteRoomModal from './DeleteRoomModal';
+import { DeleteRoomModal } from '@features';
 
 describe('DeleteRoomModal', () => {
 	it('closes the modal when "do not delete" button is clicked', () => {

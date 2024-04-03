@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import RoomCardList, { RoomCardListProps } from './RoomCardList';
+import { RoomCardList, RoomCardListProps } from '@features';
 
 const meta: Meta = {
 	title: 'RoomCardList',

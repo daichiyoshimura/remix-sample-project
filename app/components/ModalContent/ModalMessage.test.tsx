@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import ModalMessage from './ModalMessage';
+import { ModalMessage } from '@components';
 
 describe('ModalMessage', () => {
 	it('renders modal message with title and description', () => {

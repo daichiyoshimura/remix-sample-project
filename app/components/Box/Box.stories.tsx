@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import Box, { BoxProps } from './Box';
+import { Box, BoxProps } from '@components';
 
 const meta = {
 	title: 'Box',

@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import ContentArea, { ContentAreaProps } from './ContentArea';
+import { ContentArea, ContentAreaProps } from '@components';
 
 const meta: Meta = {
 	title: 'ContentArea',

@@ -1,5 +1,5 @@
-import Card from '@components/Card/Card';
 import { AccountCircle } from '@mui/icons-material';
+import { Card } from '@components';
 
 export type ParticipantCardProps = {
 	id: string;
@@ -7,7 +7,7 @@ export type ParticipantCardProps = {
 	part: string;
 };
 
-const ParticipantCard: React.FC<ParticipantCardProps> = ({ id, name, part }) => {
+export const ParticipantCard: React.FC<ParticipantCardProps> = ({ id, name, part }) => {
 	return (
 		<Card>
 			<AccountCircle fontSize="large" fill="currentColor" />
@@ -17,5 +17,3 @@ const ParticipantCard: React.FC<ParticipantCardProps> = ({ id, name, part }) => 
 		</Card>
 	);
 };
-
-export default ParticipantCard;

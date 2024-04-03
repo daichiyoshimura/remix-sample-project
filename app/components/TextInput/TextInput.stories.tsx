@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import TextInput, { TextInputProps } from './TextInput';
+import { TextInput, TextInputProps } from '@components';
 
 const meta: Meta = {
 	title: 'TextInput',

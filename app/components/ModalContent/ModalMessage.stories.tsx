@@ -1,5 +1,5 @@
 import { StoryFn, Meta } from '@storybook/react';
-import ModalMessage, { ModalMessageProps } from './ModalMessage';
+import { ModalMessage, ModalMessageProps } from '@components';
 
 export default {
 	title: 'Components/ModalMessage',

@@ -1,10 +1,10 @@
-import ParticipantCard, { ParticipantCardProps } from './ParticipantCard';
+import { ParticipantCard, ParticipantCardProps } from '@features';
 
 export type ParticipantCardListProps = {
 	participants: ParticipantCardProps[];
 };
 
-const ParticipantCardList: React.FC<ParticipantCardListProps> = ({ participants }) => {
+export const ParticipantCardList: React.FC<ParticipantCardListProps> = ({ participants }) => {
 	return (
 		<div className="max-w-screen-lg mx-auto">
 			<div className="grid grid-cols-3 gap-4">
@@ -20,5 +20,3 @@ const ParticipantCardList: React.FC<ParticipantCardListProps> = ({ participants 
 		</div>
 	);
 };
-
-export default ParticipantCardList;

@@ -1,7 +1,4 @@
-import Button from '@components/Button/Button';
-import Container from '@components/Container/Container';
-import ModalDescription from './ModalDescription';
-import ModalTitle from './ModalTitle';
+import { Button, Container, ModalDescription, ModalTitle } from '@components';
 
 export type ModalMessageProps = {
 	title: string;
@@ -9,7 +6,7 @@ export type ModalMessageProps = {
 	handleClose: () => void;
 };
 
-const ModalMessage: React.FC<ModalMessageProps> = ({ title, description, handleClose }) => {
+export const ModalMessage: React.FC<ModalMessageProps> = ({ title, description, handleClose }) => {
 	return (
 		<>
 			<ModalTitle title={title} />
@@ -20,5 +17,3 @@ const ModalMessage: React.FC<ModalMessageProps> = ({ title, description, handleC
 		</>
 	);
 };
-
-export default ModalMessage;

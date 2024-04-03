@@ -5,7 +5,7 @@ export type TextInputProps = {
 	required?: boolean;
 };
 
-const TextInput: React.FC<TextInputProps> = (
+export const TextInput: React.FC<TextInputProps> = (
 	{ value = '', onChange, placeholder = '', required = false },
 ) => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,5 +23,3 @@ const TextInput: React.FC<TextInputProps> = (
 		/>
 	);
 };
-
-export default TextInput;

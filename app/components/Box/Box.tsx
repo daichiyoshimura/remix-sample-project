@@ -2,7 +2,7 @@ export type BoxProps = {
 	children: React.ReactNode;
 };
 
-const Box: React.FC<BoxProps> = ({ children }) => {
+export const Box: React.FC<BoxProps> = ({ children }) => {
 	return (
 		<div
 			className={`bg-background p-4 mrl-4 rounded-lg shadow-md flex justify-center items-center`}
@@ -11,5 +11,3 @@ const Box: React.FC<BoxProps> = ({ children }) => {
 		</div>
 	);
 };
-
-export default Box;

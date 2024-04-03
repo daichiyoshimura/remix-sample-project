@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import EditRoomModal from './EditRoomModal';
+import { EditRoomModal } from '@features';
 
 describe('EditRoomModal', () => {
 	it('closes the modal when "Do not save" button is clicked', () => {

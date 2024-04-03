@@ -2,18 +2,17 @@ import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks/useBinaryState';
 import { roomActionMock } from '@actions/roomAction.server';
 import { RoomProfileResponse, roomLoaderMock } from '@loaders/roomLoader.server';
-import Box from '@components/Box/Box';
-import Button from '@components/Button/Button';
-import LinkButton from '@components/Button/LinkButton';
-import Container from '@components/Container/Container';
-import ContentArea from '@components/ContentArea/ContentArea';
-import Footer from '@components/Footer/Footer';
-import Header from '@components/Header/Header';
-import LoadingIcon from '@components/LoadingIcon/LoadingIcon';
-import ParticipantCardList from '@features/Participants/ParticipantCardList';
-import DeleteRoomModal from '@features/Rooms/DeleteRoomModal';
-import EditRoomModal from '@features/Rooms/EditRoomModal';
-import RoomProfile from '@features/Rooms/RoomProfile';
+import {
+	Box,
+	Button,
+	LinkButton,
+	Container,
+	ContentArea,
+	Footer,
+	Header,
+	LoadingIcon,
+} from '@components';
+import { ParticipantCardList, DeleteRoomModal, EditRoomModal, RoomProfile } from '@features';
 
 export const loader = roomLoaderMock;
 

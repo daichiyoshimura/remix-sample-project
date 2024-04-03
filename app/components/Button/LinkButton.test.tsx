@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
-import LinkButton from './LinkButton';
+import { LinkButton } from '@components';
 
 describe('LinkButton', () => {
 	it('navigates to the correct endpoint when clicked', async () => {

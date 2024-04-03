@@ -9,10 +9,15 @@
 	"sortImports": true,
 	"importOrder": [
 		"^(react/(.*)$)|^(react$)",
+		"^@storybook/(.*)$",
+		"^@testing-library/react$",
 		"^@remix-run/(.*)$",
+		"^@mui/icons-material$",
 		"^@hooks/(.*)$",
 		"^@actions/(.*)$",
 		"^@loaders/(.*)$",
+		"^@components$",
+		"^@features$",
 		"^@(.*)/(.*)$",
 		"^[./]"
 	]

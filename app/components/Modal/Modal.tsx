@@ -6,7 +6,7 @@ export type ModalProps = {
 	children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 	return (
 		<ReactModal
 			isOpen={isOpen}
@@ -19,5 +19,3 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 		</ReactModal>
 	);
 };
-
-export default Modal;

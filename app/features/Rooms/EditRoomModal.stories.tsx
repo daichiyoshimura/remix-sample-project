@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import EditRoomModal, { EditRoomModalProps } from './EditRoomModal';
+import { EditRoomModal, EditRoomModalProps } from '@features';
 
 const meta: Meta = {
 	title: 'EditRoomModal',

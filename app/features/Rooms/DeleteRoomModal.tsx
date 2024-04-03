@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useHttpClient } from '@hooks/useHttpClient';
-import Button from '@components/Button/Button';
-import Container from '@components/Container/Container';
-import MutationModal from '@components/Modal/MutationModal';
-import ModalDescription from '@components/ModalContent/ModalDescription';
-import ModalTitle from '@components/ModalContent/ModalTitle';
-import TextInput from '@components/TextInput/TextInput';
+import {
+	Button,
+	Container,
+	MutationModal,
+	ModalDescription,
+	ModalTitle,
+	TextInput,
+} from '@components';
 
 export type DeleteRoomModalProps = {
 	isOpen: boolean;
@@ -14,7 +16,9 @@ export type DeleteRoomModalProps = {
 	roomId: string;
 };
 
-const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({ isOpen, name, onClose, roomId }) => {
+export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
+	{ isOpen, name, onClose, roomId },
+) => {
 	const [inputValue, setInputValue] = useState('');
 	const [mutationState, resetMutationState, sendRequest] = useHttpClient();
 
@@ -78,5 +82,3 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({ isOpen, name, onClose
 		/>
 	);
 };
-
-export default DeleteRoomModal;

@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import RoomCard, { RoomCardProps } from './RoomCard';
+import { RoomCard, RoomCardProps } from '@features';
 
 const meta: Meta = {
 	title: 'RoomCard',

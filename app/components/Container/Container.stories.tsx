@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import Container, { ContainerProps } from './Container';
+import { Container, ContainerProps } from '@components';
 
 const meta: Meta = {
 	title: 'Container',

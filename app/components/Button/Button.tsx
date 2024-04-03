@@ -6,7 +6,7 @@ export type ButtonProps = {
 	children: React.ReactNode;
 };
 
-const Button: React.FC<ButtonProps> = (
+export const Button: React.FC<ButtonProps> = (
 	{ onClick = () => {}, disabled = false, color = 'default', size = 'text', children },
 ) => {
 	const [bgColor, hoverBgColor] = ((color: string, disabled: boolean): string[] => {
@@ -36,5 +36,3 @@ const Button: React.FC<ButtonProps> = (
 		</button>
 	);
 };
-
-export default Button;

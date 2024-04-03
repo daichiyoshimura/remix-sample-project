@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import CreateRoomModal, { CreateRoomModalProps } from './CreateRoomModal';
+import { CreateRoomModal, CreateRoomModalProps } from '@features';
 
 const meta: Meta = {
 	title: 'CreateRoomModal',

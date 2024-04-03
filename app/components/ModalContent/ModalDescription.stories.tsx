@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import ModalDescription, { ModalDescriptionProps } from './ModalDescription';
+import { ModalDescription, ModalDescriptionProps } from '@components';
 
 const meta: Meta = {
 	title: 'ModalDescription',

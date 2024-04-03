@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import DeleteRoomModal, { DeleteRoomModalProps } from './DeleteRoomModal';
+import { DeleteRoomModal, DeleteRoomModalProps } from '@features';
 
 const meta: Meta = {
 	title: 'DeleteRoomModal',

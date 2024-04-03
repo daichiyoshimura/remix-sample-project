@@ -1,4 +1,4 @@
-import LinkButton from '@components/Button/LinkButton';
+import { LinkButton } from '@components';
 
 export type RoomCardProps = {
 	id: string;
@@ -6,7 +6,7 @@ export type RoomCardProps = {
 	createdAt: string;
 };
 
-const RoomCard: React.FC<RoomCardProps> = ({ id, name, createdAt }) => {
+export const RoomCard: React.FC<RoomCardProps> = ({ id, name, createdAt }) => {
 	return (
 		<div className="max-w-full bg-darkslategray rounded overflow-hidden shadow-md flex room-container p-4">
 			<div className="flex-1 flex flex-col justify-between pr-2 pl-2 room-details text-white">
@@ -19,5 +19,3 @@ const RoomCard: React.FC<RoomCardProps> = ({ id, name, createdAt }) => {
 		</div>
 	);
 };
-
-export default RoomCard;

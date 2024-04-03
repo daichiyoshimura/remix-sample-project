@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import ModalTitle from './ModalTitle';
+import { ModalTitle } from '@components';
 
 describe('ModalTitle', () => {
 	it('renders title correctly', () => {

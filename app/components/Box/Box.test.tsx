@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Box from './Box';
+import { Box } from '@components';
 
 describe('Box', () => {
 	it('renders children correctly', () => {

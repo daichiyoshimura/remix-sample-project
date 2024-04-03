@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useHttpClient } from '@hooks/useHttpClient';
-import Button from '@components/Button/Button';
-import Container from '@components/Container/Container';
-import MutationModal from '@components/Modal/MutationModal';
-import ModalDescription from '@components/ModalContent/ModalDescription';
-import ModalTitle from '@components/ModalContent/ModalTitle';
-import TextInput from '@components/TextInput/TextInput';
+import {
+	Button,
+	Container,
+	MutationModal,
+	ModalDescription,
+	ModalTitle,
+	TextInput,
+} from '@components';
 
 export type EditRoomModalProps = {
 	isOpen: boolean;
@@ -14,7 +16,7 @@ export type EditRoomModalProps = {
 	roomId: string;
 };
 
-const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, name, onClose, roomId }) => {
+export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, name, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState('');
 	const [mutationState, resetMutationState, sendRequest] = useHttpClient();
 	type ReqBody = {
@@ -86,5 +88,3 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, name, onClose, ro
 		/>
 	);
 };
-
-export default EditRoomModal;

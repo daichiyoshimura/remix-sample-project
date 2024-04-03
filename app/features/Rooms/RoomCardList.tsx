@@ -1,10 +1,10 @@
-import RoomCard, { RoomCardProps } from './RoomCard';
+import { RoomCard, RoomCardProps } from '@features';
 
 export type RoomCardListProps = {
 	rooms: RoomCardProps[];
 };
 
-const RoomCardList: React.FC<RoomCardListProps> = ({ rooms }) => {
+export const RoomCardList: React.FC<RoomCardListProps> = ({ rooms }) => {
 	return (
 		<div className="space-y-4">
 			{rooms.map((room) => (
@@ -13,5 +13,3 @@ const RoomCardList: React.FC<RoomCardListProps> = ({ rooms }) => {
 		</div>
 	);
 };
-
-export default RoomCardList;

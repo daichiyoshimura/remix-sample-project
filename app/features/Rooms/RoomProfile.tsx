@@ -1,5 +1,5 @@
-import EditButton from '@components/Button/EditButton';
 import { MeetingRoom } from '@mui/icons-material';
+import { EditButton } from '@components';
 
 export type RoomProfileProps = {
 	id: string;
@@ -7,7 +7,7 @@ export type RoomProfileProps = {
 	createdAt: string;
 };
 
-const RoomProfile: React.FC<RoomProfileProps & { onClick: () => void }> = (
+export const RoomProfile: React.FC<RoomProfileProps & { onClick: () => void }> = (
 	{ id, name, createdAt, onClick },
 ) => {
 	return (
@@ -26,5 +26,3 @@ const RoomProfile: React.FC<RoomProfileProps & { onClick: () => void }> = (
 		</>
 	);
 };
-
-export default RoomProfile;

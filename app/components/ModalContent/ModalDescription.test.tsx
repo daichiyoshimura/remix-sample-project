@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import ModalDescription from './ModalDescription';
+import { ModalDescription } from '@components';
 
 describe('ModalDescription', () => {
 	it('renders description correctly', () => {

@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import SaveButton from './SaveButton';
+import { SaveButton } from '@components';
 
 describe('SaveButton', () => {
 	it('renders', async () => {

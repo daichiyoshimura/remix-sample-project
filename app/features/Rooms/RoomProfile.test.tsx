@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import RoomProfile from './RoomProfile';
+import { RoomProfile } from '@features';
 
 describe('RoomProfile', () => {
 	it('renders room profile correctly', () => {

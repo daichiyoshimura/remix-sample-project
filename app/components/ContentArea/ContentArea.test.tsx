@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import ContentArea from './ContentArea';
+import { ContentArea } from '@components';
 
 describe('ContentArea', () => {
 	it('renders children correctly', async () => {

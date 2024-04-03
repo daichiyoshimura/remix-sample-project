@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import ParticipantCardList from './ParticipantCardList';
+import { ParticipantCardList } from '@features';
 
 describe('ParticipantCardList', () => {
 	it('renders correctly', () => {

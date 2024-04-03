@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Header from './Header';
+import { Header } from '@components';
 
 describe('Header', () => {
 	it('renders title correctly', async () => {

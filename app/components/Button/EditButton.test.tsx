@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import EditButton from './EditButton';
+import { EditButton } from '@components';
 
 describe('EditButton', () => {
 	it('calls onClick function when clicked', async () => {

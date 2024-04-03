@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import TextInput from './TextInput';
+import { TextInput } from '@components';
 
 describe('TextInput', () => {
 	it('renders correctly', () => {

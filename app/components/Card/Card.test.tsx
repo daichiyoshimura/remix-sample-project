@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Card from './Card';
+import { Card } from '@components';
 
 describe('Card', () => {
 	it('renders children correctly', async () => {

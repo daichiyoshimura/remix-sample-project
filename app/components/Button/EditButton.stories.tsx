@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import EditButton, { EditButtonProps } from './EditButton';
+import { EditButton, EditButtonProps } from '@components';
 
 const meta: Meta<EditButtonProps> = {
 	title: 'EditButton',
