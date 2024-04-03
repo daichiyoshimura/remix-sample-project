@@ -1,10 +1,5 @@
-import {
-	LoaderFunction,
-	LoaderFunctionArgs,
-	TypedResponse,
-	json,
-} from '@remix-run/node';
-import { getRoomList } from '~/apis/room.server';
+import { LoaderFunction, LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { getRoomList } from '@apis/room.server';
 
 type Room = {
 	id: string;

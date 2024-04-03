@@ -1,4 +1,4 @@
-import LinkButton from '~/components/Button/LinkButton';
+import LinkButton from '@components/Button/LinkButton';
 
 export type RoomCardProps = {
 	id: string;

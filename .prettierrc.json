@@ -4,5 +4,15 @@
 	"tabWidth": 4,
 	"useTabs": true,
 	"trailingComma": "all",
-	"printWidth": 100
+	"printWidth": 100,
+	"importOrder": [
+		"^@hooks/(.*)$",
+		"^@apis/(.*)$",
+		"^@components/(.*)$",
+		"^@features/(.*)$",
+		"^@loaders/(.*)$",
+		"^@actions/(.*)$",
+		"^[./]"
+	],
+	"importOrderSeparation": true
 }

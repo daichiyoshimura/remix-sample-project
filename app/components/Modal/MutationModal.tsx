@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { MutationState } from '~/hooks/useMutationState';
+import { MutationState } from '@hooks/useMutationState';
 
-import Modal from '~/components/Modal/Modal';
-import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
-import ModalMessage from '~/components/ModalContent/ModalMessage';
+import Modal from '@components/Modal/Modal';
+import LoadingIcon from '@components/LoadingIcon/LoadingIcon';
+import ModalMessage from '@components/ModalContent/ModalMessage';
 
 export type MutationModalProps = {
 	isOpen: boolean;

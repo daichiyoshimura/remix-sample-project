@@ -1,5 +1,5 @@
 import { MeetingRoom } from '@mui/icons-material';
-import EditButton from '~/components/Button/EditButton';
+import EditButton from '@components/Button/EditButton';
 
 export type RoomProfileProps = {
 	id: string;

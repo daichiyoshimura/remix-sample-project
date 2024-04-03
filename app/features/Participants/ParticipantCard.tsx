@@ -1,11 +1,11 @@
 import { AccountCircle } from '@mui/icons-material';
-import Card from '~/components/Card/Card';
+import Card from '@components/Card/Card';
 
 export type ParticipantCardProps = {
 	id: string;
 	name: string;
 	part: string;
-}
+};
 
 const ParticipantCard: React.FC<ParticipantCardProps> = ({ id, name, part }) => {
 	return (

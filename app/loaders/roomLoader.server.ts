@@ -1,11 +1,6 @@
-import {
-	LoaderFunction,
-	LoaderFunctionArgs,
-	TypedResponse,
-	json,
-} from '@remix-run/node';
-import { getParticipantList } from '~/apis/participant.server';
-import { getRoom } from '~/apis/room.server';
+import { LoaderFunction, LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { getParticipantList } from '@apis/participant.server';
+import { getRoom } from '@apis/room.server';
 
 export type Participant = {
 	id: string;
