@@ -25,13 +25,9 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 	const [inputValue, setInputValue] = useState('');
 	const [requestStatus, resetRequestStatus, sendRequest] = useHttpClient();
 
-	type ResBody = {
-		id: string;
-		name: string;
-	};
 	const handleDelete = async () =>
-		await sendRequest<{}, ResBody>({
-			url: roomId,
+		sendRequest<{}>({
+			path: roomId,
 			method: 'DELETE',
 		});
 

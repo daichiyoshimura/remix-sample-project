@@ -27,13 +27,9 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 	type ReqBody = {
 		name: string;
 	};
-	type ResBody = {
-		id: string;
-		name: string;
-	};
 	const handleEdit = async () =>
-		await sendRequest<ReqBody, ResBody>({
-			url: roomId,
+		sendRequest<ReqBody>({
+			path: roomId,
 			method: 'PATCH',
 			body: { name: inputValue },
 		});

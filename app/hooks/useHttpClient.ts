@@ -3,39 +3,38 @@
  * If you need to perform HTTP communication with a backend other than Remix server-side,
  * please go through the action function.
  * Also, for requests equivalent to GET, please use the loader function.
+ *
+ * !Notice! The mutation request from the client-side to the server-side is passed to the action function.
+ * The client-side will not receive the response body even if it is set as the return value.
+ * Use useActionData to retrieve the return value of the action function.
  */
 
 import { MutationState, useMutationState } from './useMutationState';
 
-export type Message = { message: string };
-
 export type SendRequestArgs<T> = {
-	url: string;
+	path: string;
 	method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; //DO NOT APPEND GET
 	body?: T | undefined;
 	queryParams?: Record<string, string | number> | undefined;
 	headers?: Record<string, string> | undefined;
 	timeout?: number | undefined;
 };
-type HttpResponse<T> = [IsError: boolean, ResponseBody: T, Message: Message];
-type SendRequest = <ReqBody, ResBody>(
-	args: SendRequestArgs<ReqBody>,
-) => Promise<HttpResponse<ResBody>>;
+type SendRequest = <T>(args: SendRequestArgs<T>) => void;
 
 export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 	const [mutationState, setMutationState] = useMutationState('init');
 
-	const sendRequest: SendRequest = async <ReqBody, ResBody>({
-		url,
+	const sendRequest: SendRequest = async <T>({
+		path,
 		method,
 		body = undefined,
 		queryParams = undefined,
 		headers = undefined,
 		timeout = undefined,
-	}: SendRequestArgs<ReqBody>): Promise<HttpResponse<ResBody>> => {
+	}: SendRequestArgs<T>): Promise<void> => {
 		if (queryParams) {
 			const queryString = buildQueryString(queryParams);
-			url += `?${queryString}`;
+			path += `?${queryString}`;
 		}
 		const controller = new AbortController();
 		const signal = controller.signal;
@@ -46,7 +45,7 @@ export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 
 		try {
 			setMutationState('loading');
-			const response = await fetch(url, {
+			const response = await fetch(path, {
 				method: method,
 				headers: headers,
 				body: body ? JSON.stringify(body) : undefined,
@@ -55,15 +54,11 @@ export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 			if (!response.ok) {
 				throw new Error('failed to request');
 			}
-			const responseBody: ResBody = await response.json();
-
 			setMutationState('success');
-			return [false, responseBody, {} as Message];
 		} catch (error: unknown) {
 			const message =
 				error instanceof Error ? error.message : 'unknown error';
 			setMutationState('failure');
-			return [true, {} as ResBody, { message }];
 		}
 	};
 

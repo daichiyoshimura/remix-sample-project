@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Message, useHttpClient } from '~/hooks/useHttpClient';
+import { useHttpClient } from '~/hooks/useHttpClient';
 
 import Modal from '~/components/Modal/Modal';
 import Container from '~/components/Container/Container';
@@ -25,19 +25,11 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 		type ReqBody = {
 			name: string;
 		};
-		type ResBody = {
-			message: string;
-		};
-		const [isError, _, message] = await sendRequest<ReqBody, ResBody>({
-			url: '/rooms',
+		sendRequest<ReqBody>({
+			path: 'rooms',
 			method: 'POST',
 			body: { name: inputValue },
 		});
-		if (isError) {
-			const err = message as Message;
-			console.log(err.message);
-			return;
-		}
 	};
 
 	const handleClose = () => {

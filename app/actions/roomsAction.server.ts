@@ -5,6 +5,7 @@ import {
 	json,
 } from '@remix-run/node';
 import { invalidMethodAction } from './invalidMethodAction.server';
+import { Message } from './message.server';
 
 export const roomsActionMock: ActionFunction = async (
 	args: ActionFunctionArgs,
@@ -17,10 +18,15 @@ export const roomsActionMock: ActionFunction = async (
 	}
 };
 
-type Room = {
+export type Room = {
 	id: string;
 	name: string;
 };
+
+export type RoomsActionResponse = {
+	room: Room,
+	message: Message,
+}
 
 const postRoomsActionMock: ActionFunction = async ({
 	request,
