@@ -4,21 +4,24 @@ import ModalDescription from './ModalDescription';
 import Container from '../Container/Container';
 import Button from '../Button/Button';
 
-export interface ModalMessageProps {
+export type ModalMessageProps = {
 	title: string;
 	description: string;
-	handleClose: () => void;
-}
+};
 
-const ModalMessage: React.FC<ModalMessageProps> = ({
-	title,
-	description,
+type ModalMessageArgs = {
+	props: ModalMessageProps;
+	handleClose: () => void;
+};
+
+const ModalMessage: React.FC<ModalMessageArgs> = ({
+	props,
 	handleClose,
 }) => {
 	return (
 		<>
-			<ModalTitle title={title} />
-			<ModalDescription description={description} />
+			<ModalTitle title={props.title} />
+			<ModalDescription description={props.description} />
 			<Container alignment="right">
 				<Button onClick={handleClose}>close</Button>
 			</Container>

@@ -73,28 +73,15 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 		);
 	};
 
-	const success = () => {
-		return (
-			<>
-				<ModalMessage
-					title={'Success'}
-					description={'The room is edited'}
-					handleClose={handleClose}
-				/>
-			</>
-		);
+	const successMessage = {
+		title: 'Success',
+		description: 'The room is edited',
 	};
 
-	const failed = () => {
-		return (
-			<ModalMessage
-				title={'Failed to save room'}
-				description={
-					'Please try again later, or contact support if the issue persists'
-				}
-				handleClose={handleClose}
-			/>
-		);
+	const failedMesssage = {
+		title: 'Failed',
+		description:
+			'Please try again later, or contact support if the issue persists',
 	};
 
 	return (
@@ -105,8 +92,8 @@ const EditRoomModal: React.FC<EditRoomModalProps> = ({
 			handleMutation={handleMutation}
 			handleClose={handleClose}
 			init={init}
-			success={success}
-			failed={failed}
+			successMessage={successMessage}
+			failedMessage={failedMesssage}
 		/>
 	);
 };

@@ -67,30 +67,15 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 		);
 	};
 
-	const success = () => {
-		return (
-			<>
-				<ModalMessage
-					title={'Success'}
-					description={'The room is deleted'}
-					handleClose={handleClose}
-				/>
-			</>
-		);
+	const successMessage = {
+		title: 'Success',
+		description: 'The room is deleted',
 	};
 
-	const failed = () => {
-		return (
-			<>
-				<ModalMessage
-					title={'Failed to create room'}
-					description={
-						'Please try again later, or contact support if the issue persists'
-					}
-					handleClose={handleClose}
-				/>
-			</>
-		);
+	const failedMesssage = {
+		title: 'Failed',
+		description:
+			'Please try again later, or contact support if the issue persists',
 	};
 
 	return (
@@ -101,8 +86,8 @@ const DeleteRoomModal: React.FC<DeleteRoomModalProps> = ({
 			handleMutation={handleMutation}
 			handleClose={handleClose}
 			init={init}
-			success={success}
-			failed={failed}
+			successMessage={successMessage}
+			failedMessage={failedMesssage}
 		/>
 	);
 };

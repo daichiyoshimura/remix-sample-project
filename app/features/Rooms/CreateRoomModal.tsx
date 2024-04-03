@@ -7,7 +7,6 @@ import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
 import MutationModal from '~/components/Modal/MutationModal';
-import ModalMessage from '~/components/ModalContent/ModalMessage';
 
 export interface CreateRoomModalProps {
 	isOpen: boolean;
@@ -70,24 +69,15 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 		);
 	};
 
-	const success = () => {
-		return (
-			<ModalMessage
-				title="Success"
-				description="Room is created"
-				handleClose={handleClose}
-			/>
-		);
+	const successMessage = {
+		title: 'Success',
+		description: 'The Room is created',
 	};
 
-	const failed = () => {
-		return (
-			<ModalMessage
-				title="Failed to create room"
-				description="Please try again later, or contact support if the issue persists"
-				handleClose={handleClose}
-			/>
-		);
+	const failedMesssage = {
+		title: 'Failed',
+		description:
+			'Please try again later, or contact support if the issue persists',
 	};
 
 	return (
@@ -98,8 +88,8 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 			handleMutation={handleMutation}
 			handleClose={handleClose}
 			init={init}
-			success={success}
-			failed={failed}
+			successMessage={successMessage}
+			failedMessage={failedMesssage}
 		/>
 	);
 };
