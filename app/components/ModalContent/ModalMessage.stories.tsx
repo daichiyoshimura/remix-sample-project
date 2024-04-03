@@ -6,9 +6,7 @@ export default {
 	component: ModalMessage,
 } as Meta;
 
-const Template: StoryFn<ModalMessageProps> = (args) => (
-	<ModalMessage {...args} />
-);
+const Template: StoryFn<ModalMessageProps> = (args) => <ModalMessage {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

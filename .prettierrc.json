@@ -5,14 +5,15 @@
 	"useTabs": true,
 	"trailingComma": "all",
 	"printWidth": 100,
+	"plugins": ["@trivago/prettier-plugin-sort-imports"],
+	"sortImports": true,
 	"importOrder": [
+		"^(react/(.*)$)|^(react$)",
+		"^@remix-run/(.*)$",
 		"^@hooks/(.*)$",
-		"^@apis/(.*)$",
-		"^@components/(.*)$",
-		"^@features/(.*)$",
-		"^@loaders/(.*)$",
 		"^@actions/(.*)$",
+		"^@loaders/(.*)$",
+		"^@(.*)/(.*)$",
 		"^[./]"
-	],
-	"importOrderSeparation": true
+	]
 }

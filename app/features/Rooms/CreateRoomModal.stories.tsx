@@ -12,13 +12,7 @@ export default meta;
 
 const Template: StoryFn<CreateRoomModalProps> = (args) => {
 	const [isOpen, setIsOpen] = useState(true);
-	return (
-		<CreateRoomModal
-			{...args}
-			isOpen={isOpen}
-			onClose={() => setIsOpen(false)}
-		/>
-	);
+	return <CreateRoomModal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />;
 };
 
 export const Default = Template.bind({});

@@ -9,9 +9,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<ModalDescriptionProps> = (args) => (
-	<ModalDescription {...args} />
-);
+const Template: StoryFn<ModalDescriptionProps> = (args) => <ModalDescription {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

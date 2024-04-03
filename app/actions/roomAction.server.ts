@@ -1,7 +1,7 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { patchRoom } from '@apis/room.server';
 import { invalidMethodAction } from './invalidMethodAction.server';
 import { Message } from './message.server';
-import { patchRoom } from '@apis/room.server';
 
 export const roomActionMock: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
@@ -14,10 +14,9 @@ export const roomActionMock: ActionFunction = async (args: ActionFunctionArgs) =
 	}
 };
 
-const deleteRoomActionMock: ActionFunction = async ({
-	request,
-	params,
-}: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
+const deleteRoomActionMock: ActionFunction = async (
+	{ request, params }: ActionFunctionArgs,
+): Promise<TypedResponse<Message>> => {
 	const roomId = params.id as string;
 	console.log(
 		`/rooms/${roomId} ${request.method} ${JSON.stringify({
@@ -27,10 +26,9 @@ const deleteRoomActionMock: ActionFunction = async ({
 	return json({ message: 'success on mock' }, 200);
 };
 
-const patchRoomActionMock: ActionFunction = async ({
-	request,
-	params,
-}: ActionFunctionArgs): Promise<TypedResponse<Message>> => {
+const patchRoomActionMock: ActionFunction = async (
+	{ request, params }: ActionFunctionArgs,
+): Promise<TypedResponse<Message>> => {
 	const roomId = params.id as string;
 	const body = (await request.json()) as {
 		id: string;

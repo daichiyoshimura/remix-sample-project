@@ -1,5 +1,5 @@
-import { MeetingRoom } from '@mui/icons-material';
 import EditButton from '@components/Button/EditButton';
+import { MeetingRoom } from '@mui/icons-material';
 
 export type RoomProfileProps = {
 	id: string;
@@ -7,12 +7,9 @@ export type RoomProfileProps = {
 	createdAt: string;
 };
 
-const RoomProfile: React.FC<RoomProfileProps & { onClick: () => void }> = ({
-	id,
-	name,
-	createdAt,
-	onClick,
-}) => {
+const RoomProfile: React.FC<RoomProfileProps & { onClick: () => void }> = (
+	{ id, name, createdAt, onClick },
+) => {
 	return (
 		<>
 			<div className="flex items-center">

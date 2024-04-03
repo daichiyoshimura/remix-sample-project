@@ -9,9 +9,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<DeleteRoomModalProps> = (args) => (
-	<DeleteRoomModal {...args} />
-);
+const Template: StoryFn<DeleteRoomModalProps> = (args) => <DeleteRoomModal {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

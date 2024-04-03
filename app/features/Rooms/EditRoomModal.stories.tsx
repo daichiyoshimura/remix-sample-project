@@ -9,9 +9,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<EditRoomModalProps> = (args) => (
-	<EditRoomModal {...args} />
-);
+const Template: StoryFn<EditRoomModalProps> = (args) => <EditRoomModal {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

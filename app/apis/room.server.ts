@@ -9,14 +9,11 @@ type GetRoomRequest = {
 type Room = {
 	id: string;
 	name: string;
-}
+};
 
 type GetRoomResponse = Room & MutationTimes;
 
-export const getRoom = async ({
-	id,
-	accountId,
-}: GetRoomRequest): Promise<GetRoomResponse> => {
+export const getRoom = async ({ id, accountId }: GetRoomRequest): Promise<GetRoomResponse> => {
 	if (isStageDev()) {
 		return {
 			id: '1',
@@ -42,9 +39,9 @@ type GetRoomListResponse = {
 	rooms: (Room & MutationTimes)[];
 };
 
-export const getRoomList = async ({
-	accountId,
-}: GetRoomListRequest): Promise<GetRoomListResponse> => {
+export const getRoomList = async (
+	{ accountId }: GetRoomListRequest,
+): Promise<GetRoomListResponse> => {
 	if (isStageDev()) {
 		return {
 			rooms: [
@@ -86,9 +83,7 @@ type PostRoomRequest = {
 
 type PostRoomResponse = Room;
 
-export const postRoom = async (
-	body: PostRoomRequest,
-): Promise<PostRoomResponse> => {
+export const postRoom = async (body: PostRoomRequest): Promise<PostRoomResponse> => {
 	if (isStageDev()) {
 		return {
 			id: '1',
@@ -113,9 +108,7 @@ type PatchRoomRequest = {
 
 type PatchRoomResponse = Room;
 
-export const patchRoom = async (
-	body: PatchRoomRequest,
-): Promise<PatchRoomResponse> => {
+export const patchRoom = async (body: PatchRoomRequest): Promise<PatchRoomResponse> => {
 	if (isStageDev()) {
 		return {
 			id: '1',
@@ -137,9 +130,7 @@ type DeleteRoomRequest = {
 
 type DeleteRoomResponse = MessageResponse;
 
-export const deleteRoom = async (
-	body: DeleteRoomRequest,
-): Promise<DeleteRoomResponse> => {
+export const deleteRoom = async (body: DeleteRoomRequest): Promise<DeleteRoomResponse> => {
 	if (isStageDev()) {
 		return {
 			message: 'success',

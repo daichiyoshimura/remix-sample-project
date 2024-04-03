@@ -1,6 +1,6 @@
 export type ModalDescriptionProps = {
 	description: string;
-}
+};
 
 const ModalDescription: React.FC<ModalDescriptionProps> = ({ description }) => {
 	return (

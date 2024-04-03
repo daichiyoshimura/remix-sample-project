@@ -8,22 +8,24 @@ type HttpHandlerArgs = {
 };
 
 export type MessageResponse = {
-	message: string
-}
+	message: string;
+};
 
 export type MutationTimes = {
-	createdAt: string,
-	updatedAt: string,
-}
+	createdAt: string;
+	updatedAt: string;
+};
 
-export const httpHandler = async <T>({
-	method,
-	url,
-	body = undefined,
-	queryParams = undefined,
-	headers = undefined,
-	timeout = undefined,
-}: HttpHandlerArgs): Promise<T> => {
+export const httpHandler = async <T>(
+	{
+		method,
+		url,
+		body = undefined,
+		queryParams = undefined,
+		headers = undefined,
+		timeout = undefined,
+	}: HttpHandlerArgs,
+): Promise<T> => {
 	if (queryParams) {
 		const queryString = buildQueryString(queryParams);
 		url += `?${queryString}`;
@@ -64,9 +66,7 @@ export const httpHandler = async <T>({
 	}
 };
 
-const buildQueryString = (
-	queryParams: Record<string, string | number>,
-): string => {
+const buildQueryString = (queryParams: Record<string, string | number>): string => {
 	const queryString = new URLSearchParams();
 	for (const [key, value] of Object.entries(queryParams)) {
 		queryString.append(key, String(value));

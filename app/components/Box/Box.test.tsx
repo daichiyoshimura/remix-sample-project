@@ -12,7 +12,6 @@ describe('Box', () => {
 	});
 
 	it('applies correct styles', () => {
-		
 		const { container } = render(
 			<Box>
 				<div>Test Child</div>

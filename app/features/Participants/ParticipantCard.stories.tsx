@@ -9,9 +9,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<ParticipantCardProps> = (args) => (
-	<ParticipantCard {...args} />
-);
+const Template: StoryFn<ParticipantCardProps> = (args) => <ParticipantCard {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

@@ -1,7 +1,7 @@
-import ModalTitle from './ModalTitle';
-import ModalDescription from './ModalDescription';
-import Container from '@components/Container/Container';
 import Button from '@components/Button/Button';
+import Container from '@components/Container/Container';
+import ModalDescription from './ModalDescription';
+import ModalTitle from './ModalTitle';
 
 export type ModalMessageProps = {
 	title: string;

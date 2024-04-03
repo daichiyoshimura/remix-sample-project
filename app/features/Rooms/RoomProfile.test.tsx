@@ -10,9 +10,7 @@ describe('RoomProfile', () => {
 			createdAt: '2024-03-31',
 		};
 
-		const { getByText, getByRole } = render(
-			<RoomProfile {...room} onClick={onClick} />,
-		);
+		const { getByText, getByRole } = render(<RoomProfile {...room} onClick={onClick} />);
 
 		expect(getByText('Room 1')).toBeDefined();
 		expect(getByText('ID: 1')).toBeDefined();

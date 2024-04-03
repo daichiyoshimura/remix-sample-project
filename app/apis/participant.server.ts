@@ -14,10 +14,9 @@ type Partisipant = {
 
 type GetParticipantResponse = Partisipant;
 
-export const getParticipant = async ({
-	id,
-	roomId,
-}: GetParticipantRequest): Promise<GetParticipantResponse> => {
+export const getParticipant = async (
+	{ id, roomId }: GetParticipantRequest,
+): Promise<GetParticipantResponse> => {
 	if (isStageDev()) {
 		return {
 			id: '1',
@@ -44,9 +43,9 @@ type GetParticipantListResponse = {
 	prticipants: Partisipant[];
 };
 
-export const getParticipantList = async ({
-	roomId,
-}: GetParticipantListRequest): Promise<GetParticipantListResponse> => {
+export const getParticipantList = async (
+	{ roomId }: GetParticipantListRequest,
+): Promise<GetParticipantListResponse> => {
 	if (isStageDev()) {
 		return {
 			prticipants: [

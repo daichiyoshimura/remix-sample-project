@@ -5,12 +5,7 @@ describe('DeleteRoomModal', () => {
 	it('closes the modal when "do not delete" button is clicked', () => {
 		const handleClose = vi.fn();
 		const { getByText } = render(
-			<DeleteRoomModal
-				isOpen
-				name="Test Room"
-				roomId="123"
-				onClose={handleClose}
-			/>,
+			<DeleteRoomModal isOpen name="Test Room" roomId="123" onClose={handleClose} />,
 		);
 
 		const doNotDeleteButton = getByText('do not delete');
@@ -22,12 +17,7 @@ describe('DeleteRoomModal', () => {
 	it('disables delete button if input value does not match room name', () => {
 		const handleClose = vi.fn();
 		const { getByText } = render(
-			<DeleteRoomModal
-				isOpen
-				name="Test Room"
-				roomId="123"
-				onClose={handleClose}
-			/>,
+			<DeleteRoomModal isOpen name="Test Room" roomId="123" onClose={handleClose} />,
 		);
 
 		const deleteButton = getByText('delete') as HTMLButtonElement;
@@ -37,12 +27,7 @@ describe('DeleteRoomModal', () => {
 	it('enables delete button if input value matches room name', async () => {
 		const handleClose = vi.fn();
 		const { getByText, getByPlaceholderText } = render(
-			<DeleteRoomModal
-				isOpen
-				name="Test Room"
-				roomId="123"
-				onClose={handleClose}
-			/>,
+			<DeleteRoomModal isOpen name="Test Room" roomId="123" onClose={handleClose} />,
 		);
 
 		const input = getByPlaceholderText('Test Room');

@@ -13,9 +13,7 @@ describe('Button', () => {
 	it('calls onClick handler when clicked', () => {
 		const onClickMock = vi.fn();
 
-		const { getByText } = render(
-			<Button onClick={onClickMock}>Click Me</Button>,
-		);
+		const { getByText } = render(<Button onClick={onClickMock}>Click Me</Button>);
 
 		fireEvent.click(getByText('Click Me'));
 

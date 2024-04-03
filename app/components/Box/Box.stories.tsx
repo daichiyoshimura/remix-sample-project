@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from '@storybook/react';
-
 import Box, { BoxProps } from './Box';
 
 const meta = {

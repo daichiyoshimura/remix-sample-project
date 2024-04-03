@@ -13,11 +13,7 @@ describe('TextInput', () => {
 	it('calls onChange handler correctly', () => {
 		const onChangeMock = vi.fn();
 		const { getByPlaceholderText } = render(
-			<TextInput
-				value=""
-				onChange={onChangeMock}
-				placeholder="Enter text"
-			/>,
+			<TextInput value="" onChange={onChangeMock} placeholder="Enter text" />,
 		);
 		const inputElement = getByPlaceholderText('Enter text');
 		fireEvent.change(inputElement, { target: { value: 'test input' } });

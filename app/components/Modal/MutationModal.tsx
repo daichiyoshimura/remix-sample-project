@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
 import { MutationState } from '@hooks/useMutationState';
-
-import Modal from '@components/Modal/Modal';
 import LoadingIcon from '@components/LoadingIcon/LoadingIcon';
+import Modal from '@components/Modal/Modal';
 import ModalMessage from '@components/ModalContent/ModalMessage';
 
 export type MutationModalProps = {
@@ -15,15 +14,17 @@ export type MutationModalProps = {
 	failedMessage: { title: string; description: string };
 };
 
-const MutationModal: React.FC<MutationModalProps> = ({
-	isOpen,
-	mutationState,
-	handleMutation,
-	handleClose,
-	mutationContent,
-	successMessage,
-	failedMessage,
-}) => {
+const MutationModal: React.FC<MutationModalProps> = (
+	{
+		isOpen,
+		mutationState,
+		handleMutation,
+		handleClose,
+		mutationContent,
+		successMessage,
+		failedMessage,
+	},
+) => {
 	const renderContent = () => {
 		switch (mutationState) {
 			case 'init':

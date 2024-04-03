@@ -1,7 +1,7 @@
 export type ContainerProps = {
 	children?: React.ReactNode;
 	alignment?: 'center' | 'right';
-}
+};
 
 const Container: React.FC<ContainerProps> = ({ children, alignment = 'center' }) => {
 	const justify = alignment === 'center' ? 'justify-center' : 'justify-end';

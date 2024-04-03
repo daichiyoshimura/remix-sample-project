@@ -1,5 +1,5 @@
-import { Meta, StoryFn } from '@storybook/react';
 import { createRemixStub } from '@remix-run/testing';
+import { Meta, StoryFn } from '@storybook/react';
 import LinkButton, { LinkButtonProps } from './LinkButton';
 
 const meta: Meta = {

@@ -2,7 +2,7 @@ import ParticipantCard, { ParticipantCardProps } from './ParticipantCard';
 
 export type ParticipantCardListProps = {
 	participants: ParticipantCardProps[];
-}
+};
 
 const ParticipantCardList: React.FC<ParticipantCardListProps> = ({ participants }) => {
 	return (

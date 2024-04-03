@@ -1,5 +1,5 @@
-import { AccountCircle } from '@mui/icons-material';
 import Card from '@components/Card/Card';
+import { AccountCircle } from '@mui/icons-material';
 
 export type ParticipantCardProps = {
 	id: string;

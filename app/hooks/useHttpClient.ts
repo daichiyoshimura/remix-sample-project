@@ -8,7 +8,6 @@
  * The client-side will not receive the response body even if it is set as the return value.
  * Use useActionData to retrieve the return value of the action function.
  */
-
 import { MutationState, useMutationState } from './useMutationState';
 
 export type SendRequestArgs<T> = {
@@ -24,14 +23,16 @@ export type SendRequest = <T>(args: SendRequestArgs<T>) => void;
 export const useHttpClient = (): [MutationState, () => void, SendRequest] => {
 	const [mutationState, setMutationState] = useMutationState('init');
 
-	const sendRequest: SendRequest = async <T>({
-		path,
-		method,
-		body = undefined,
-		queryParams = undefined,
-		headers = undefined,
-		timeout = undefined,
-	}: SendRequestArgs<T>): Promise<void> => {
+	const sendRequest: SendRequest = async <T>(
+		{
+			path,
+			method,
+			body = undefined,
+			queryParams = undefined,
+			headers = undefined,
+			timeout = undefined,
+		}: SendRequestArgs<T>,
+	): Promise<void> => {
 		if (queryParams) {
 			const queryString = buildQueryString(queryParams);
 			path += `?${queryString}`;

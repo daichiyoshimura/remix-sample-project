@@ -1,7 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import ParticipantCardList, {
-	ParticipantCardListProps,
-} from './ParticipantCardList';
+import ParticipantCardList, { ParticipantCardListProps } from './ParticipantCardList';
 
 const meta: Meta = {
 	title: 'ParticipantCardList',
@@ -11,9 +9,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<ParticipantCardListProps> = (args) => (
-	<ParticipantCardList {...args} />
-);
+const Template: StoryFn<ParticipantCardListProps> = (args) => <ParticipantCardList {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

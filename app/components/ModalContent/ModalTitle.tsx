@@ -1,6 +1,6 @@
 export type ModalTitleProps = {
 	title: string;
-}
+};
 
 const ModalTitle: React.FC<ModalTitleProps> = ({ title }) => {
 	return (

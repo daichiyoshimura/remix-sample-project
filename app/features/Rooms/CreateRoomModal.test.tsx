@@ -4,9 +4,7 @@ import CreateRoomModal from './CreateRoomModal';
 describe('CreateRoomModal', () => {
 	it('closes the modal when "do not create" button is clicked', () => {
 		const handleClose = vi.fn();
-		const { getByText } = render(
-			<CreateRoomModal isOpen onClose={handleClose} />,
-		);
+		const { getByText } = render(<CreateRoomModal isOpen onClose={handleClose} />);
 
 		const doNotCreateButton = getByText('do not create');
 		fireEvent.click(doNotCreateButton);
@@ -16,9 +14,7 @@ describe('CreateRoomModal', () => {
 
 	it('disables create button if input value is empty', () => {
 		const handleClose = vi.fn();
-		const { getByText } = render(
-			<CreateRoomModal isOpen onClose={handleClose} />,
-		);
+		const { getByText } = render(<CreateRoomModal isOpen onClose={handleClose} />);
 
 		const createButton = getByText('create') as HTMLButtonElement;
 		expect(createButton.disabled).toBe(true);
@@ -33,7 +29,7 @@ describe('CreateRoomModal', () => {
 		const input = getByPlaceholderText('room name');
 		fireEvent.change(input, { target: { value: 'Test Room' } });
 
-        const createButton = getByText('create') as HTMLButtonElement;
+		const createButton = getByText('create') as HTMLButtonElement;
 		expect(createButton.disabled).toBe(false);
 	});
 });

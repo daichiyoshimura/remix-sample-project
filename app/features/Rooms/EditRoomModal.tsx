@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useHttpClient } from '@hooks/useHttpClient';
-
-import Container from '@components/Container/Container';
-import TextInput from '@components/TextInput/TextInput';
 import Button from '@components/Button/Button';
-import ModalTitle from '@components/ModalContent/ModalTitle';
-import ModalDescription from '@components/ModalContent/ModalDescription';
+import Container from '@components/Container/Container';
 import MutationModal from '@components/Modal/MutationModal';
+import ModalDescription from '@components/ModalContent/ModalDescription';
+import ModalTitle from '@components/ModalContent/ModalTitle';
+import TextInput from '@components/TextInput/TextInput';
 
 export type EditRoomModalProps = {
 	isOpen: boolean;

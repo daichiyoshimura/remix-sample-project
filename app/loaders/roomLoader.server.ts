@@ -15,10 +15,9 @@ export type RoomProfileResponse = {
 	participants: Participant[];
 };
 
-export const roomLoaderMock: LoaderFunction = async ({
-	request,
-	params,
-}: LoaderFunctionArgs): Promise<TypedResponse<RoomProfileResponse>> => {
+export const roomLoaderMock: LoaderFunction = async (
+	{ request, params }: LoaderFunctionArgs,
+): Promise<TypedResponse<RoomProfileResponse>> => {
 	const roomId = params.id as string;
 	const room = await getRoom({ id: roomId, accountId: 'accountId' });
 	const participantList = await getParticipantList({ roomId: roomId });

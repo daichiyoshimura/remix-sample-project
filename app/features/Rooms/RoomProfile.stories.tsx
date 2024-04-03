@@ -9,9 +9,9 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<RoomProfileProps & { onClick: () => void }> = (
-	args,
-) => <RoomProfile {...args} />;
+const Template: StoryFn<RoomProfileProps & { onClick: () => void }> = (args) => (
+	<RoomProfile {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
