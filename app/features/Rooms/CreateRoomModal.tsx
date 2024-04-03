@@ -6,7 +6,6 @@ import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 import ModalTitle from '~/components/ModalContent/ModalTitle';
 import ModalDescription from '~/components/ModalContent/ModalDescription';
-import LoadingIcon from '~/components/LoadingIcon/LoadingIcon';
 import MutationModal from '~/components/Modal/MutationModal';
 import ModalMessage from '~/components/ModalContent/ModalMessage';
 
@@ -71,10 +70,6 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 		);
 	};
 
-	const loading = () => {
-		return <LoadingIcon />;
-	};
-
 	const success = () => {
 		return (
 			<ModalMessage
@@ -103,7 +98,6 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
 			handleMutation={handleMutation}
 			handleClose={handleClose}
 			init={init}
-			loading={loading}
 			success={success}
 			failed={failed}
 		/>

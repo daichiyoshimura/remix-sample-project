@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react';
 
 import Modal from '~/components/Modal/Modal';
 import { MutationState } from '~/hooks/useMutationState';
+import LoadingIcon from '../LoadingIcon/LoadingIcon';
 
 export type MutationModalProps = {
 	isOpen: boolean;
@@ -10,7 +11,6 @@ export type MutationModalProps = {
 	handleMutation: () => void;
 	handleClose: () => void;
 	init: (handleMutation: () => void) => ReactNode;
-	loading: () => ReactNode;
 	success: (handleClose: () => void) => ReactNode;
 	failed: (handleClose: () => void) => ReactNode;
 };
@@ -22,7 +22,6 @@ const MutationModal: FC<MutationModalProps> = ({
 	handleMutation,
 	handleClose,
 	init,
-	loading,
 	success,
 	failed,
 }) => {
@@ -31,7 +30,7 @@ const MutationModal: FC<MutationModalProps> = ({
 			case 'init':
 				return init(handleMutation);
 			case 'loading':
-				return loading();
+				return <LoadingIcon />;
 			case 'success':
 				return success(handleClose);
 			case 'failure':
