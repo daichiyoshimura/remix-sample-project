@@ -1,14 +1,14 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { Message } from '@util';
 import { invalidMethodAction } from '@actions/invalidMethodAction.server';
-import { deleteRoom, patchRoom } from '@apis/room.server';
+import { RoomAttributes, deleteRoom, patchRoom } from '@apis/room.server';
 
 export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
 		case 'DELETE':
 			return await deleteRoomAction(args);
 		case 'PATCH':
-			return await patchRoomActionMock(args);
+			return await patchRoomAction(args);
 		default:
 			return await invalidMethodAction(args);
 	}
@@ -36,25 +36,32 @@ const deleteRoomAction: ActionFunction = async (
 	}
 };
 
-const patchRoomActionMock: ActionFunction = async (
+type PatchRoomActionRequest = RoomAttributes;
+type PatchRoomActionResponse = Message;
+
+const patchRoomAction: ActionFunction = async (
 	{ request, params }: ActionFunctionArgs,
-): Promise<TypedResponse<Message>> => {
-	const roomId = params.id as string;
-	const body = (await request.json()) as {
-		id: string;
-		name: string;
-	};
-	patchRoom({
-		accountId: 'accountId',
-		room: {
-			id: roomId,
-			name: body.name,
-		},
-	});
-	console.log(
-		`/rooms/${roomId} ${request.method} ${JSON.stringify({
-			roomId: roomId,
-		})}`,
-	);
-	return json({ message: 'success on mock' }, 200);
+): Promise<TypedResponse<PatchRoomActionResponse>> => {
+	try {
+		const accountId: string = typeof params.accountId === 'string' ? params.accountId : '';
+		const roomId: string = typeof params.id === 'string' ? params.id : '';
+		const body: PatchRoomActionRequest = await request.json();
+		const room = await patchRoom({
+			accountId: accountId,
+			room: {
+				id: roomId,
+				...body,
+			},
+		});
+		console.log(
+			`path:/rooms/${roomId} method:${
+				request.method
+			} request:${body} response:${JSON.stringify(room)}`,
+		);
+		return json({ message: 'success on mock' }, 200);
+	} catch (error) {
+		const err = error instanceof Error ? error : new Error('unexpected error');
+		console.log(`server error: ${err.message}`);
+		return json({ message: err.message }, 500);
+	}
 };

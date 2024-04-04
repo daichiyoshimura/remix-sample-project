@@ -105,15 +105,15 @@ export const postRoom = async (body: PostRoomRequest): Promise<PostRoomResponse>
 	});
 };
 
-type PatchRoomRequest = {
+type PatchRoomRequest = MappedTypes<{
 	accountId: string;
 	room: {
 		id: string;
 		name: string;
 	};
-};
+}>;
 
-type PatchRoomResponse = Room;
+type PatchRoomResponse = MappedTypes<Room>;
 
 export const patchRoom = async (body: PatchRoomRequest): Promise<PatchRoomResponse> => {
 	if (isStageDev()) {
