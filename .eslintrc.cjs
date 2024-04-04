@@ -58,6 +58,7 @@ module.exports = {
 				project: './tsconfig.json',
 			},
 			settings: {
+				'import/no-cycle': true,
 				'import/internal-regex': '^~/',
 				'import/resolver': {
 					node: {
