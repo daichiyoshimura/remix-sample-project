@@ -1,5 +1,4 @@
-import { Message } from '@util';
-import { MappedTypes } from '@util/mappedTypes';
+import { Message, MappedTypes } from '@util';
 import { isStageDev, httpHandler, MutationTimes } from '@util/server';
 
 export type RoomAttributes = {
@@ -89,7 +88,9 @@ type PostRoomRequest = MappedTypes<{
 
 type PostRoomResponse = MappedTypes<Room>;
 
-export const postRoom = async (body: PostRoomRequest): Promise<PostRoomResponse> => {
+export const postRoom = async (
+	{ accountId, roomAttributes }: PostRoomRequest,
+): Promise<PostRoomResponse> => {
 	if (isStageDev()) {
 		return {
 			id: 'cr1',
@@ -100,7 +101,7 @@ export const postRoom = async (body: PostRoomRequest): Promise<PostRoomResponse>
 	return await httpHandler<PostRoomResponse>({
 		method: 'POST',
 		url: '/rooms',
-		body: body,
+		body: roomAttributes,
 	});
 };
 

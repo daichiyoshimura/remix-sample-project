@@ -45,7 +45,7 @@ type GetParticipantListRequest = {
 };
 
 type GetParticipantListResponse = MappedTypes<{
-	prticipants: Participant[];
+	participants: Participant[];
 }>;
 
 export const getParticipantList = async (
@@ -53,7 +53,7 @@ export const getParticipantList = async (
 ): Promise<GetParticipantListResponse> => {
 	if (isStageDev()) {
 		return {
-			prticipants: [
+			participants: [
 				{ id: '1', name: 'John', part: 'Tp' },
 				{ id: '2', name: 'Emma', part: 'Sax' },
 				{ id: '3', name: 'Kate', part: 'Pf' },

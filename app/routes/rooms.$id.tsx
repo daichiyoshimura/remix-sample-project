@@ -1,18 +1,24 @@
 import { useLoaderData } from '@remix-run/react';
-import { useBinaryState } from '@hooks/useBinaryState';
-import { roomAction } from '@actions/roomAction.server';
-import { RoomProfileResponse, roomLoaderMock } from '@loaders/roomLoader.server';
+import { useBinaryState } from '@hooks';
+import { roomAction } from '@actions';
+import { RoomLoaderResponse, roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
 import { ParticipantCardList, DeleteRoomModal, EditRoomModal, RoomProfile } from '@features';
+import { isDefined } from '@util/typeGuards';
 
-export const loader = roomLoaderMock;
+export const loader = roomLoader;
 
 export const action = roomAction;
 
 const RoomProfilePage = () => {
-	const { participants, id, name, createdAt } = useLoaderData<RoomProfileResponse>();
 	const [isEditRoomModalOpen, toggleEditRoomModalOpen] = useBinaryState(false);
 	const [isDeleteRoomModalOpen, toggleDeleteRoomModalOpen] = useBinaryState(false);
+	const { roomProfile } = useLoaderData<RoomLoaderResponse>();
+	if (!isDefined(roomProfile)) {
+		// TODO Error Page
+		return <></>;
+	}
+	const { id, name, createdAt, participants } = roomProfile;
 
 	return (
 		<>

@@ -1,7 +1,7 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
-import { Message } from '@util';
-import { invalidMethodAction } from '@actions/invalidMethodAction.server';
-import { RoomAttributes, deleteRoom, patchRoom } from '@apis/room.server';
+import { RoomAttributes, deleteRoom, patchRoom } from '@api';
+import { Message, logger } from '@util';
+import { invalidMethodAction } from '@actions';
 
 export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
@@ -23,15 +23,15 @@ const deleteRoomAction: ActionFunction = async (
 		const accountId: string = typeof params.accountId === 'string' ? params.accountId : '';
 		const roomId: string = typeof params.id === 'string' ? params.id : '';
 		const message = await deleteRoom({ id: roomId, accountId: accountId });
-		console.log(
-			`path:/rooms/${roomId} method:${request.method} request: response:${JSON.stringify(
-				message,
-			)}`,
-		);
+		logger({
+			path: `/rooms/${roomId}`,
+			method: request.method,
+			request: '',
+			response: JSON.stringify(message),
+		});
 		return json({ message: 'success on mock' }, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
-		console.log(`server error: ${err.message}`);
 		return json({ message: err.message }, 500);
 	}
 };
@@ -53,11 +53,12 @@ const patchRoomAction: ActionFunction = async (
 				...body,
 			},
 		});
-		console.log(
-			`path:/rooms/${roomId} method:${
-				request.method
-			} request:${body} response:${JSON.stringify(room)}`,
-		);
+		logger({
+			path: `/rooms/${roomId}`,
+			method: request.method,
+			request: JSON.stringify(body),
+			response: JSON.stringify(room),
+		});
 		return json({ message: 'success on mock' }, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
