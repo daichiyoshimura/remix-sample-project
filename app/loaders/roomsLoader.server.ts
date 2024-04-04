@@ -1,6 +1,6 @@
 import { LoaderFunction, LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { Room, getRoomList } from '@api';
-import { MappedTypes, Message, isString, logger } from '@util';
+import { MappedTypes, Message, isString, writeErrorLog, writeRequestLog } from '@util';
 import { MutationTimes } from '@util/server';
 
 export type RoomsLoaderResponse = MappedTypes<
@@ -18,7 +18,7 @@ export const roomsLoader: LoaderFunction = async (
 		const response = {
 			rooms: roomList.rooms,
 		};
-		logger({
+		writeRequestLog({
 			path: `/rooms`,
 			method: request.method,
 			request: await request.text(),
@@ -27,7 +27,7 @@ export const roomsLoader: LoaderFunction = async (
 		return json(response, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
-		console.log(`server error: ${err.message}`);
+		writeErrorLog({ message: err.message });
 		return json({ message: err.message }, 500);
 	}
 };

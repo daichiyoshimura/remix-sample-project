@@ -1,14 +1,30 @@
 import { MappedTypes } from '@util';
 
-type RequestArgs = MappedTypes<{
+type RequestMessage = MappedTypes<{
 	path: string;
 	method: string;
 	request: string;
 	response: string;
 }>;
 
-export const logger = (args: RequestArgs) => {
+export const writeRequestLog = (message: RequestMessage) => {
 	console.log(
-		`path:${args.path} method:${args.method} request:${args.request} response:${args.response}`,
+		JSON.stringify({
+			level: 'info',
+			message: message,
+		}),
+	);
+};
+
+type ErrorResponseMessage = MappedTypes<{
+	message: string;
+}>;
+
+export const writeErrorLog = (message: ErrorResponseMessage) => {
+	console.log(
+		JSON.stringify({
+			level: 'error',
+			message: message,
+		}),
 	);
 };

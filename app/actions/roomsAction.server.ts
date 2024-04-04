@@ -1,6 +1,6 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { Room, RoomAttributes, postRoom } from '@api';
-import { MappedTypes, Message, isString, logger } from '@util';
+import { MappedTypes, Message, isString, writeErrorLog, writeRequestLog } from '@util';
 import { invalidMethodAction } from '@actions';
 
 export const roomsAction: ActionFunction = async (args: ActionFunctionArgs) => {
@@ -27,7 +27,7 @@ const postRoomsAction: ActionFunction = async (
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const body: RoomActionRequest = await request.json();
 		const room = await postRoom({ accountId: accountId, roomAttributes: body });
-		logger({
+		writeRequestLog({
 			path: '/rooms',
 			method: request.method,
 			request: JSON.stringify(body),
@@ -36,7 +36,9 @@ const postRoomsAction: ActionFunction = async (
 		return json({ room }, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
-		console.log(`server error: ${err.message}`);
+		writeErrorLog({
+			message: err.message,
+		});
 		return json({ message: err.message }, 500);
 	}
 };
