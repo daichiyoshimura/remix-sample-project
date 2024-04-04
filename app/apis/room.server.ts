@@ -1,7 +1,6 @@
 import { Message } from '@util';
 import { MappedTypes } from '@util/mappedTypes';
-import { isStageDev } from '../util/server/env.server';
-import { MessageResponse, httpHandler, MutationTimes } from '../util/server/httpHandler.server';
+import { isStageDev, httpHandler, MutationTimes } from '@util/server';
 
 export type RoomAttributes = {
 	name: string;
@@ -42,9 +41,9 @@ type GetRoomListRequest = {
 	accountId: string;
 };
 
-type GetRoomListResponse = {
+type GetRoomListResponse = MappedTypes<{
 	rooms: (Room & MutationTimes)[];
-};
+}>;
 
 export const getRoomList = async (
 	{ accountId }: GetRoomListRequest,

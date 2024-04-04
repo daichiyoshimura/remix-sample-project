@@ -8,7 +8,7 @@
  * The client-side will not receive the response body even if it is set as the return value.
  * Use useActionData to retrieve the return value of the action function.
  */
-import { MutationState, useMutationState } from './useMutationState';
+import { MutationState, useMutationState } from '@hooks/useMutationState';
 
 export type SendRequestArgs<T> = {
 	path: string;

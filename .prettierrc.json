@@ -15,6 +15,7 @@
 		"^@mui/icons-material$",
 		"^@hooks/(.*)$",
 		"^@util$",
+		"^@styles$",
 		"^@actions/(.*)$",
 		"^@loaders/(.*)$",
 		"^@components$",

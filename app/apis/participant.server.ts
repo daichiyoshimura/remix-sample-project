@@ -1,18 +1,23 @@
-import { isStageDev } from '../util/server/env.server';
-import { httpHandler } from '../util/server/httpHandler.server';
+import { MappedTypes } from '@util';
+import { isStageDev, httpHandler } from '@util/server';
+
+export type PartisipantAttribute = {
+	name: string;
+	part: string;
+};
+
+export type Participant = MappedTypes<
+	{
+		id: string;
+	} & PartisipantAttribute
+>;
 
 type GetParticipantRequest = {
 	id: string;
 	roomId: string;
 };
 
-type Partisipant = {
-	id: string;
-	name: string;
-	part: string;
-};
-
-type GetParticipantResponse = Partisipant;
+type GetParticipantResponse = Participant;
 
 export const getParticipant = async (
 	{ id, roomId }: GetParticipantRequest,
@@ -39,9 +44,9 @@ type GetParticipantListRequest = {
 	roomId: string;
 };
 
-type GetParticipantListResponse = {
-	prticipants: Partisipant[];
-};
+type GetParticipantListResponse = MappedTypes<{
+	prticipants: Participant[];
+}>;
 
 export const getParticipantList = async (
 	{ roomId }: GetParticipantListRequest,

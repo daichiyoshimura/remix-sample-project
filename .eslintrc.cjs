@@ -71,6 +71,12 @@ module.exports = {
 			rules: {
 				'react/prop-types': 'off',
 				'@typescript-eslint/strict-boolean-expressions': 'error',
+				'no-restricted-imports': [
+					'error',
+					{
+						patterns: ['./', '../'],
+					},
+				],
 			},
 			extends: [
 				'plugin:@typescript-eslint/recommended',
