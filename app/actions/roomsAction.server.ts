@@ -1,30 +1,38 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { Room, RoomAttributes, postRoom } from '@apis/room.server';
 import { invalidMethodAction } from './invalidMethodAction.server';
 import { Message } from './message.server';
+import { MappedTypes } from '@apis/util/mappedTypes.server';
 
-export const roomsActionMock: ActionFunction = async (args: ActionFunctionArgs) => {
+export const roomsAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
 		case 'POST':
-			return await postRoomsActionMock(args);
+			return await postRoomsAction(args);
 		default:
 			return await invalidMethodAction(args);
 	}
 };
 
-export type Room = {
-	id: string;
-	name: string;
-};
+type RoomActionRequest = RoomAttributes;
 
-export type RoomsActionResponse = {
-	room: Room;
-	message: Message;
-};
+type RoomsActionResponse = MappedTypes<
+	{
+		room?: Room;
+	} & Message
+>;
 
-const postRoomsActionMock: ActionFunction = async (
-	{ request }: ActionFunctionArgs,
-): Promise<TypedResponse<Room>> => {
-	const body = await request.text();
-	console.log(`/rooms ${request.method} ${body}`);
-	return json({ id: '1', name: 'room-1' }, 200);
+const postRoomsAction: ActionFunction = async (
+	{ request, params }: ActionFunctionArgs,
+): Promise<TypedResponse<RoomsActionResponse>> => {
+	try {
+		const accountId: string = typeof params.accountId === 'string' ? params.accountId : '';
+		const body: RoomActionRequest = await request.json();
+		const room = await postRoom({ accountId: accountId, roomAttributes: body });
+		console.log(`path:/rooms method:${request.method} request:${body} response:${room}`);
+		return json({ room: room }, 200);
+	} catch (error) {
+		const err = error instanceof Error ? error : new Error('unexpected error');
+		console.log(`server error: ${err.message}`);
+		return json({ message: err.message }, 500);
+	}
 };

@@ -1,13 +1,13 @@
 import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks/useBinaryState';
-import { roomsActionMock } from '@actions/roomsAction.server';
-import { RoomsResponse, roomsLoaderMock } from '@loaders/roomsLoader.server';
+import { roomsAction } from '@actions/roomsAction.server';
+import { RoomsResponse, roomsLoader } from '@loaders/roomsLoader.server';
 import { Box, Button, Container, ContentArea, Footer, Header } from '@components';
 import { CreateRoomModal, RoomCardList } from '@features';
 
-export const loader = roomsLoaderMock;
+export const loader = roomsLoader;
 
-export const action = roomsActionMock;
+export const action = roomsAction;
 
 const RoomsPage = () => {
 	const { rooms } = useLoaderData<RoomsResponse>();

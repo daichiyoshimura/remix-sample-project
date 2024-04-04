@@ -19,10 +19,10 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
 
 	const handleMutation = async () => {
-		type ReqBody = {
+		type RequestBody = {
 			name: string;
 		};
-		sendRequest<ReqBody>({
+		sendRequest<RequestBody>({
 			path: 'rooms',
 			method: 'POST',
 			body: { name: inputValue },

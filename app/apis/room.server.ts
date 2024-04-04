@@ -1,17 +1,21 @@
 import { isStageDev } from './util/env.server';
 import { MessageResponse, httpHandler, MutationTimes } from './util/httpHandler.server';
+import { MappedTypes } from './util/mappedTypes.server';
+
+export type RoomAttributes = {
+	name: string;
+};
+
+export type Room = {
+	id: string;
+} & RoomAttributes;
 
 type GetRoomRequest = {
 	id: string;
 	accountId: string;
 };
 
-type Room = {
-	id: string;
-	name: string;
-};
-
-type GetRoomResponse = Room & MutationTimes;
+type GetRoomResponse = MappedTypes<Room & MutationTimes>;
 
 export const getRoom = async ({ id, accountId }: GetRoomRequest): Promise<GetRoomResponse> => {
 	if (isStageDev()) {
@@ -76,24 +80,24 @@ export const getRoomList = async (
 	});
 };
 
-type PostRoomRequest = {
+type PostRoomRequest = MappedTypes<{
 	accountId: string;
-	room: Room;
-};
+	roomAttributes: RoomAttributes;
+}>;
 
-type PostRoomResponse = Room;
+type PostRoomResponse = MappedTypes<Room>;
 
 export const postRoom = async (body: PostRoomRequest): Promise<PostRoomResponse> => {
 	if (isStageDev()) {
 		return {
-			id: '1',
-			name: 'Room 1',
+			id: 'cr1',
+			name: 'CreatedRoom',
 		};
 	}
 
 	return await httpHandler<PostRoomResponse>({
 		method: 'POST',
-		url: `/rooms`,
+		url: '/rooms',
 		body: body,
 	});
 };
