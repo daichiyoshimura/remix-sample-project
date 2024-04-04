@@ -14,6 +14,7 @@ export default VitestConfig.defineConfig({
 			'@components': path.resolve(__dirname, 'app/components'),
 			'@features': path.resolve(__dirname, 'app/features'),
 			'@hooks': path.resolve(__dirname, 'app/hooks'),
+			'@util': path.resolve(__dirname, 'app/util'),
 		},
 	},
 });
