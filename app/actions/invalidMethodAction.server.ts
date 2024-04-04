@@ -1,9 +1,14 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
-import { Message } from '@util';
+import { Message, logger } from '@util';
 
 export const invalidMethodAction: ActionFunction = async (
 	{ request }: ActionFunctionArgs,
 ): Promise<TypedResponse<Message>> => {
-	console.log(`/invalid ${request.method}`);
+	logger({
+		path: '/invalid',
+		method: request.method,
+		request: await request.text(),
+		response: JSON.stringify({ message: 'invalid method' }),
+	});
 	return json({ message: 'invalid method' }, 400);
 };

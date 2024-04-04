@@ -3,8 +3,8 @@ import { MappedTypes } from '@util';
 type RequestArgs = MappedTypes<{
 	path: string;
 	method: string;
-	request: object;
-	response: object;
+	request: string;
+	response: string;
 }>;
 
 export const logger = (args: RequestArgs) => {
