@@ -1,3 +1,4 @@
+import { Message } from '@util';
 import { MappedTypes } from '@util/mappedTypes';
 import { isStageDev } from '../util/server/env.server';
 import { MessageResponse, httpHandler, MutationTimes } from '../util/server/httpHandler.server';
@@ -6,9 +7,11 @@ export type RoomAttributes = {
 	name: string;
 };
 
-export type Room = {
-	id: string;
-} & RoomAttributes;
+export type Room = MappedTypes<
+	{
+		id: string;
+	} & RoomAttributes
+>;
 
 type GetRoomRequest = {
 	id: string;
@@ -127,12 +130,12 @@ export const patchRoom = async (body: PatchRoomRequest): Promise<PatchRoomRespon
 	});
 };
 
-type DeleteRoomRequest = {
+type DeleteRoomRequest = MappedTypes<{
 	id: string;
 	accountId: string;
-};
+}>;
 
-type DeleteRoomResponse = MessageResponse;
+type DeleteRoomResponse = Message;
 
 export const deleteRoom = async (body: DeleteRoomRequest): Promise<DeleteRoomResponse> => {
 	if (isStageDev()) {
