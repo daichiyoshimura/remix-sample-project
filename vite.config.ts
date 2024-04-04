@@ -14,9 +14,4 @@ export default defineConfig({
 		}),
 		tsconfigPaths(),
 	],
-	resolve: {
-		alias: {
-			react: 'react',
-		},
-	},
 });
