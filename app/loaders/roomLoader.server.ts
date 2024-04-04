@@ -1,6 +1,6 @@
 import { LoaderFunction, LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { Participant, Room, getParticipantList, getRoom } from '@api';
-import { MappedTypes, Message, logger } from '@util';
+import { MappedTypes, Message, isString, logger } from '@util';
 import { MutationTimes } from '@util/server';
 
 export type RoomLoaderRequest = Participant;
@@ -18,8 +18,8 @@ export const roomLoader: LoaderFunction = async (
 	{ request, params }: LoaderFunctionArgs,
 ): Promise<TypedResponse<RoomLoaderResponse>> => {
 	try {
-		const accountId: string = typeof params.accountId === 'string' ? params.accountId : '';
-		const roomId: string = typeof params.id === 'string' ? params.id : '';
+		const accountId: string = isString(params.accountId) ? params.accountId : '';
+		const roomId: string = isString(params.id) ? params.id : '';
 		const room = await getRoom({ id: roomId, accountId: accountId });
 		const participantList = await getParticipantList({ roomId: roomId });
 		const response = {

@@ -88,9 +88,7 @@ type PostRoomRequest = MappedTypes<{
 
 type PostRoomResponse = MappedTypes<Room>;
 
-export const postRoom = async (
-	{ accountId, roomAttributes }: PostRoomRequest,
-): Promise<PostRoomResponse> => {
+export const postRoom = async ({ roomAttributes }: PostRoomRequest): Promise<PostRoomResponse> => {
 	if (isStageDev()) {
 		return {
 			id: 'cr1',

@@ -1,6 +1,6 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { RoomAttributes, deleteRoom, patchRoom } from '@api';
-import { Message, logger } from '@util';
+import { Message, logger , isString } from '@util';
 import { invalidMethodAction } from '@actions';
 
 export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
@@ -20,8 +20,8 @@ const deleteRoomAction: ActionFunction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<DeleteRoomActionResponse>> => {
 	try {
-		const accountId: string = typeof params.accountId === 'string' ? params.accountId : '';
-		const roomId: string = typeof params.id === 'string' ? params.id : '';
+		const accountId: string = isString(params.accountId) ? params.accountId : '';
+		const roomId: string = isString(params.id) ? params.id : '';
 		const message = await deleteRoom({ id: roomId, accountId: accountId });
 		logger({
 			path: `/rooms/${roomId}`,
@@ -43,8 +43,8 @@ const patchRoomAction: ActionFunction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<PatchRoomActionResponse>> => {
 	try {
-		const accountId: string = typeof params.accountId === 'string' ? params.accountId : '';
-		const roomId: string = typeof params.id === 'string' ? params.id : '';
+		const accountId: string = isString(params.accountId) ? params.accountId : '';
+		const roomId: string = isString(params.id) ? params.id : '';
 		const body: PatchRoomActionRequest = await request.json();
 		const room = await patchRoom({
 			accountId: accountId,
