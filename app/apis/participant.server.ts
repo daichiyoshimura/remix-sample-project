@@ -1,5 +1,5 @@
-import { isStageDev } from '../util/env.server';
-import { httpHandler } from '../util/httpHandler.server';
+import { isStageDev } from '../util/server/env.server';
+import { httpHandler } from '../util/server/httpHandler.server';
 
 type GetParticipantRequest = {
 	id: string;

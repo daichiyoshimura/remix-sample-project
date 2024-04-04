@@ -1,6 +1,6 @@
 import { MappedTypes } from '@util/mappedTypes';
-import { isStageDev } from '../util/env.server';
-import { MessageResponse, httpHandler, MutationTimes } from '../util/httpHandler.server';
+import { isStageDev } from '../util/server/env.server';
+import { MessageResponse, httpHandler, MutationTimes } from '../util/server/httpHandler.server';
 
 export type RoomAttributes = {
 	name: string;

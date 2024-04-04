@@ -1,8 +1,7 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { MappedTypes, Message } from '@util';
+import { invalidMethodAction } from '@actions/invalidMethodAction.server';
 import { Room, RoomAttributes, postRoom } from '@apis/room.server';
-import { MappedTypes } from '@util/mappedTypes';
-import { Message } from '../util/message.server';
-import { invalidMethodAction } from './invalidMethodAction.server';
 
 export const roomsAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {

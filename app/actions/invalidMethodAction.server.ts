@@ -1,5 +1,5 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
-import { Message } from '../util/message.server';
+import { Message } from '@util';
 
 export const invalidMethodAction: ActionFunction = async (
 	{ request }: ActionFunctionArgs,
