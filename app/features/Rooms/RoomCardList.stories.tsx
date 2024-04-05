@@ -2,7 +2,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Meta, StoryFn } from '@storybook/react';
 import { RoomCardList, RoomCardListProps } from '@features';
 
-
 const meta: Meta = {
 	title: 'RoomCardList',
 	component: RoomCardList,
