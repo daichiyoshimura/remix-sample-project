@@ -1,3 +1,3 @@
-export class LoaderError extends Error {};
+export class LoaderError extends Error {}
 
-export class ActionError extends Error {};
+export class ActionError extends Error {}
