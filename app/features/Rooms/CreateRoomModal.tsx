@@ -26,49 +26,39 @@ export type CreateRoomModalProps = {
 };
 
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
-	const [errorMessageList, setErrorMessageList] = useState<string[]>([]);
 	const [inputValue, setInputValue] = useState<string>('');
-	const [isValid, setIsValid] = useState<boolean>(false);
 	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
 
-	const onChange = (inputValue: string) => {
-		setInputValue(inputValue);
-		const body = { name: inputValue };
-		setIsValid(validate(body));
+	const onChange = (value: string) => {
+		setInputValue(value);
 	};
 
-	const validate = (body: CreateRoomSchema): boolean => {
+	const validate = (body: CreateRoomSchema): string[] => {
 		const result = createRoomSchema.safeParse(body);
 		if (result.success) {
-			setErrorMessageList([]);
-			return true;
+			return [];
 		}
-		setErrorMessageList(
-			result.error.issues.map((issue) => {
-				return issue.message;
-			}),
-		);
-		return false;
+		return result.error.issues.map((issue) => issue.message);
 	};
 
 	const handleMutation = async () => {
-		const body = { name: inputValue };
 		sendRequest<CreateRoomSchema>({
 			path: 'rooms',
 			method: 'POST',
-			body: body,
+			body: { name: inputValue },
 		});
 	};
 
 	const handleClose = () => {
 		resetMutationStatus();
 		setInputValue('');
-		setIsValid(false);
-		setErrorMessageList([]);
 		onClose();
 	};
 
 	const init = () => {
+		const errorMessageList = validate({ name: inputValue });
+		const isValid = errorMessageList.length === 0;
+
 		return (
 			<>
 				<ModalTitle title={'Create Room'} />
@@ -86,12 +76,11 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 					placeholder="room name"
 					required
 				/>
-				{errorMessageList.length > 0 &&
-					errorMessageList.map((message, index) => (
-						<div key={index} className="text-sm text-red-500 mb-4">
-							{message}
-						</div>
-					))}
+				{errorMessageList.map((message, index) => (
+					<div key={index} className="text-sm text-red-500 mb-4">
+						{message}
+					</div>
+				))}
 				<Container alignment="right">
 					<Button onClick={handleClose}>do not create</Button>
 					<Button onClick={handleMutation} disabled={!isValid} color="safe">
