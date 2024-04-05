@@ -36,7 +36,7 @@ export const roomLoader: LoaderFunction = async (
 		writeRequestLog({
 			path: `/rooms/${roomId}`,
 			method: request.method,
-			request: undefined,
+			request: { accountId: accountId, roomId: roomId },
 			response: response,
 		});
 		return json(response, 200);

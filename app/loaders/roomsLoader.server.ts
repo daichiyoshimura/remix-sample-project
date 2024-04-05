@@ -16,6 +16,7 @@ export const roomsLoader: LoaderFunction = async (
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const getRoomListRequest = { accountId: accountId };
 		const getRoomListResponse = await getRoomList(getRoomListRequest);
+
 		writeRequestLog({
 			path: `/rooms`,
 			method: request.method,

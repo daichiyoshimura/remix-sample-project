@@ -1,5 +1,27 @@
 import { MappedTypes } from '@util';
 
+type Level = 'info' | 'error';
+type LogFormat<T> = {
+	level: Level;
+	message: T;
+};
+
+const writeLog = <T>(level: Level, message: T) => {
+	const structuredMessage: LogFormat<T> = {
+		level: level,
+		message: message,
+	};
+	console.log(JSON.stringify(structuredMessage));
+};
+
+type ErrorMessage = MappedTypes<{
+	message: string;
+}>;
+
+export const writeErrorLog = (message: ErrorMessage) => {
+	writeLog<ErrorMessage>('error', message);
+};
+
 type RequestMessage = MappedTypes<{
 	path: string;
 	method: string;
@@ -8,23 +30,5 @@ type RequestMessage = MappedTypes<{
 }>;
 
 export const writeRequestLog = (message: RequestMessage) => {
-	console.log(
-		JSON.stringify({
-			level: 'info',
-			message: message,
-		}),
-	);
-};
-
-type ErrorResponseMessage = MappedTypes<{
-	message: string;
-}>;
-
-export const writeErrorLog = (message: ErrorResponseMessage) => {
-	console.log(
-		JSON.stringify({
-			level: 'error',
-			message: message,
-		}),
-	);
+	writeLog<RequestMessage>('info', message);
 };

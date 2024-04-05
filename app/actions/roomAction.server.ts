@@ -3,7 +3,6 @@ import { RoomAttributes, deleteRoom, patchRoom } from '@api';
 import { Message, isString, writeErrorLog, writeRequestLog } from '@util';
 import { invalidMethodAction } from '@actions';
 
-
 export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
 		case 'DELETE':
