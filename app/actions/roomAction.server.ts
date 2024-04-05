@@ -1,7 +1,8 @@
 import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { RoomAttributes, deleteRoom, patchRoom } from '@api';
-import { Message, isString, writeErrorLog, writeRequestLog } from '@util';
+import { Message, isLoaderError, isString, writeErrorLog, writeRequestLog } from '@util';
 import { invalidMethodAction } from '@actions';
+
 
 export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
@@ -25,6 +26,7 @@ const deleteRoomAction: ActionFunction = async (
 
 		const deleteRoomRequest = { id: roomId, accountId: accountId };
 		const deleteRoomResponse = await deleteRoom(deleteRoomRequest);
+
 		writeRequestLog({
 			path: `/rooms/${roomId}`,
 			method: request.method,
@@ -33,9 +35,10 @@ const deleteRoomAction: ActionFunction = async (
 		});
 		return json({ message: 'success on mock' }, 200);
 	} catch (error) {
-		const err = error instanceof Error ? error : new Error('unexpected error');
-		writeErrorLog({ message: err.message });
-		return json({ message: err.message }, 500);
+		const message = isLoaderError(error) ? error.message : 'unexpected error';
+		const response = { message: message };
+		writeErrorLog(response);
+		return json(response, 500);
 	}
 };
 
@@ -65,10 +68,9 @@ const patchRoomAction: ActionFunction = async (
 		});
 		return json({ message: 'success on mock' }, 200);
 	} catch (error) {
-		const err = error instanceof Error ? error : new Error('unexpected error');
-		writeErrorLog({
-			message: err.message,
-		});
-		return json({ message: err.message }, 500);
+		const message = isLoaderError(error) ? error.message : 'unexpected error';
+		const response = { message: message };
+		writeErrorLog(response);
+		return json(response, 500);
 	}
 };

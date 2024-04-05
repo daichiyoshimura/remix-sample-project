@@ -6,8 +6,7 @@ type InvalidMethodActionResponse = Message;
 export const invalidMethodAction: ActionFunction = async (): Promise<
 	TypedResponse<InvalidMethodActionResponse>
 > => {
-	writeErrorLog({
-		message: 'invalid method',
-	});
-	return json({ message: 'invalid method' }, 400);
+	const response = { message: 'invalid method' };
+	writeErrorLog(response);
+	return json(response, 400);
 };
