@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { useState } from 'react';
 import { useHttpClient } from '@hooks/useHttpClient';
 import {
@@ -9,29 +10,61 @@ import {
 	TextInput,
 } from '@components';
 
+const createRoomSchema = z.object({
+	name: z
+		.string()
+		.min(1)
+		.max(64)
+		.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces'),
+});
+
+type CreateRoomSchema = z.infer<typeof createRoomSchema>;
+
 export type CreateRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
 };
 
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
-	const [inputValue, setInputValue] = useState('');
+	const [errorMessageList, setErrorMessageList] = useState<string[]>([]);
+	const [inputValue, setInputValue] = useState<string>('');
+	const [isValid, setIsValid] = useState<boolean>(false);
 	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
 
+	const onChange = (inputValue: string) => {
+		setInputValue(inputValue);
+		const body = { name: inputValue };
+		setIsValid(validate(body));
+	};
+
+	const validate = (body: CreateRoomSchema): boolean => {
+		const result = createRoomSchema.safeParse(body);
+		if (result.success) {
+			setErrorMessageList([]);
+			return true;
+		}
+		setErrorMessageList(
+			result.error.issues.map((issue) => {
+				return issue.message;
+			}),
+		);
+		return false;
+	};
+
 	const handleMutation = async () => {
-		type RequestBody = {
-			name: string;
-		};
-		sendRequest<RequestBody>({
+		const body = { name: inputValue };
+		sendRequest<CreateRoomSchema>({
 			path: 'rooms',
 			method: 'POST',
-			body: { name: inputValue },
+			body: body,
 		});
 	};
 
 	const handleClose = () => {
 		resetMutationStatus();
 		setInputValue('');
+		setIsValid(false);
+		setErrorMessageList([]);
 		onClose();
 	};
 
@@ -49,17 +82,19 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 				/>
 				<TextInput
 					value={inputValue}
-					onChange={setInputValue}
+					onChange={onChange}
 					placeholder="room name"
 					required
 				/>
+				{errorMessageList.length > 0 &&
+					errorMessageList.map((message, index) => (
+						<div key={index} className="text-sm text-red-500 mb-4">
+							{message}
+						</div>
+					))}
 				<Container alignment="right">
 					<Button onClick={handleClose}>do not create</Button>
-					<Button
-						onClick={handleMutation}
-						disabled={inputValue.length === 0}
-						color="safe"
-					>
+					<Button onClick={handleMutation} disabled={!isValid} color="safe">
 						create
 					</Button>
 				</Container>

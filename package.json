@@ -27,7 +27,8 @@
 		"material-icons": "^1.13.12",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-modal": "^3.16.1"
+		"react-modal": "^3.16.1",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^1.2.25",
@@ -76,8 +77,5 @@
 	},
 	"engines": {
 		"node": ">=18.0.0"
-	},
-	"prisma": {
-		"seed": "tsx prisma/seed.ts"
 	}
 }
