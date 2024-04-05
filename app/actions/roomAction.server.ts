@@ -3,6 +3,7 @@ import { RoomAttributes, deleteRoom, patchRoom } from '@api';
 import { Message, isString, writeErrorLog, writeRequestLog } from '@util';
 import { invalidMethodAction } from '@actions';
 
+
 export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
 		case 'DELETE':
@@ -22,19 +23,19 @@ const deleteRoomAction: ActionFunction = async (
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const roomId: string = isString(params.id) ? params.id : '';
-		const message = await deleteRoom({ id: roomId, accountId: accountId });
+
+		const deleteRoomRequest = { id: roomId, accountId: accountId };
+		const deleteRoomResponse = await deleteRoom(deleteRoomRequest);
 		writeRequestLog({
 			path: `/rooms/${roomId}`,
 			method: request.method,
-			request: '',
-			response: JSON.stringify(message),
+			request: deleteRoomRequest,
+			response: deleteRoomResponse,
 		});
 		return json({ message: 'success on mock' }, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
-		writeErrorLog({
-			message: err.message,
-		});
+		writeErrorLog({ message: err.message });
 		return json({ message: err.message }, 500);
 	}
 };
@@ -49,18 +50,19 @@ const patchRoomAction: ActionFunction = async (
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const roomId: string = isString(params.id) ? params.id : '';
 		const body: PatchRoomActionRequest = await request.json();
-		const room = await patchRoom({
+		const patchRoomRequest = {
 			accountId: accountId,
 			room: {
 				id: roomId,
 				...body,
 			},
-		});
+		};
+		const patchRoomResponse = await patchRoom(patchRoomRequest);
 		writeRequestLog({
 			path: `/rooms/${roomId}`,
 			method: request.method,
-			request: JSON.stringify(body),
-			response: JSON.stringify(room),
+			request: patchRoomRequest,
+			response: patchRoomResponse,
 		});
 		return json({ message: 'success on mock' }, 200);
 	} catch (error) {

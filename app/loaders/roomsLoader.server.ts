@@ -14,17 +14,15 @@ export const roomsLoader: LoaderFunction = async (
 ): Promise<TypedResponse<RoomsLoaderResponse>> => {
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
-		const roomList = await getRoomList({ accountId: accountId });
-		const response = {
-			rooms: roomList.rooms,
-		};
+		const getRoomListRequest = { accountId: accountId };
+		const getRoomListResponse = await getRoomList(getRoomListRequest);
 		writeRequestLog({
 			path: `/rooms`,
 			method: request.method,
-			request: await request.text(),
-			response: JSON.stringify(response),
+			request: getRoomListRequest,
+			response: getRoomListResponse,
 		});
-		return json(response, 200);
+		return json(getRoomListResponse, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
 		writeErrorLog({ message: err.message });

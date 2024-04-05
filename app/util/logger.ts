@@ -3,8 +3,8 @@ import { MappedTypes } from '@util';
 type RequestMessage = MappedTypes<{
 	path: string;
 	method: string;
-	request: string;
-	response: string;
+	request: object | undefined;
+	response: object | undefined;
 }>;
 
 export const writeRequestLog = (message: RequestMessage) => {

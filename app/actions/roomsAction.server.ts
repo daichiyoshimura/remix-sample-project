@@ -26,14 +26,15 @@ const postRoomsAction: ActionFunction = async (
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const body: RoomActionRequest = await request.json();
-		const room = await postRoom({ accountId: accountId, roomAttributes: body });
+		const postRoomRequest = { accountId: accountId, roomAttributes: body };
+		const postRoomResponse = await postRoom(postRoomRequest);
 		writeRequestLog({
 			path: '/rooms',
 			method: request.method,
-			request: JSON.stringify(body),
-			response: JSON.stringify(room),
+			request: postRoomRequest,
+			response: postRoomResponse,
 		});
-		return json({ room }, 200);
+		return json({ room: postRoomResponse }, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
 		writeErrorLog({

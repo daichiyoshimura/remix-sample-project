@@ -3,7 +3,6 @@ import { Participant, Room, getParticipantList, getRoom } from '@api';
 import { MappedTypes, Message, isString, writeRequestLog, writeErrorLog } from '@util';
 import { MutationTimes } from '@util/server';
 
-
 export type RoomLoaderRequest = Participant;
 
 export type RoomLoaderResponse = MappedTypes<
@@ -21,27 +20,29 @@ export const roomLoader: LoaderFunction = async (
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const roomId: string = isString(params.id) ? params.id : '';
-		const room = await getRoom({ id: roomId, accountId: accountId });
-		const participantList = await getParticipantList({ roomId: roomId });
+
+		const getRoomReqeuest = { id: roomId, accountId: accountId };
+		const getRoomResponse = await getRoom(getRoomReqeuest);
+
+		const getParticipantListRequest = { roomId: roomId };
+		const getParticipantListResponse = await getParticipantList(getParticipantListRequest);
+
 		const response = {
 			roomProfile: {
-				...room,
-				...participantList,
+				...getRoomResponse,
+				...getParticipantListResponse,
 			},
 		};
 		writeRequestLog({
 			path: `/rooms/${roomId}`,
 			method: request.method,
-			request: await request.text(),
-			response: JSON.stringify(response),
+			request: undefined,
+			response: response,
 		});
 		return json(response, 200);
 	} catch (error) {
 		const err = error instanceof Error ? error : new Error('unexpected error');
-		writeErrorLog({
-			message: err.message,
-		});
-		console.log(`server error: ${err.message}`);
+		writeErrorLog({ message: err.message });
 		return json({ message: err.message }, 500);
 	}
 };

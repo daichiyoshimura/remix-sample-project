@@ -36,9 +36,9 @@ export const getRoom = async ({ id, accountId }: GetRoomRequest): Promise<GetRoo
 	});
 };
 
-type GetRoomListRequest = {
+type GetRoomListRequest = MappedTypes<{
 	accountId: string;
-};
+}>;
 
 type GetRoomListResponse = MappedTypes<{
 	rooms: (Room & MutationTimes)[];
