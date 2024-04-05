@@ -5,9 +5,12 @@ describe('Footer', () => {
 	it('renders with correct class', async () => {
 		const { container } = render(<Footer />);
 		const footer = container.querySelector('footer');
-		expect(footer).not.toBeNull(); 
-		expect(footer?.className).toContain(
+		expect(footer).not.toBeNull();
+		if (!footer || !footer.className) {
+			return;
+		}
+		expect(footer.className).toContain(
 			'fixed bottom-0 left-0 w-full bg-primary text-white py-2 text-center',
-		); 
+		);
 	});
 });

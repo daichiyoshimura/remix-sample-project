@@ -6,7 +6,7 @@ vi.mock('react-modal', () => ({
 	default: vi.fn(({ onRequestClose }: { onRequestClose: () => void }) => {
 		onRequestClose();
 		return null;
-	}), 
+	}),
 }));
 
 describe('Modal', () => {

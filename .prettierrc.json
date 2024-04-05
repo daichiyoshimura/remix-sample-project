@@ -6,7 +6,6 @@
 	"trailingComma": "all",
 	"printWidth": 100,
 	"plugins": ["@trivago/prettier-plugin-sort-imports"],
-	"sortImports": true,
 	"importOrder": [
 		"^(react/(.*)$)|^(react$)",
 		"^@storybook/(.*)$",
