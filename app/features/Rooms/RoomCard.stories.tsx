@@ -1,5 +1,7 @@
+import { BrowserRouter } from 'react-router-dom';
 import { Meta, StoryFn } from '@storybook/react';
 import { RoomCard, RoomCardProps } from '@features';
+
 
 const meta: Meta = {
 	title: 'RoomCard',
@@ -9,7 +11,11 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<RoomCardProps> = (args) => <RoomCard {...args} />;
+const Template: StoryFn<RoomCardProps> = (args) => (
+	<BrowserRouter>
+		<RoomCard {...args} />
+	</BrowserRouter>
+);
 
 export const Default = Template.bind({});
 Default.args = {
