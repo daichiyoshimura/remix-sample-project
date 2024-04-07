@@ -8,6 +8,7 @@ import {
 	ModalDescription,
 	ModalTitle,
 	TextInput,
+	ErrorTextList,
 } from '@components';
 
 const createRoomSchema = z.object({
@@ -76,11 +77,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 					placeholder="room name"
 					required
 				/>
-				{errorMessageList.map((message, index) => (
-					<div key={index} className="text-sm text-red-500 mb-4">
-						{message}
-					</div>
-				))}
+				<ErrorTextList textList={errorMessageList} />
 				<Container alignment="right">
 					<Button onClick={handleClose}>do not create</Button>
 					<Button onClick={handleMutation} disabled={!isValid} color="safe">
