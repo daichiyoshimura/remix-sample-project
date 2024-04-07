@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
-import { ModalTitle } from '@components';
+import { TitleText } from '@components';
 
-describe('ModalTitle', () => {
+describe('TitleText', () => {
 	it('renders title correctly', () => {
 		const title = 'Test Modal Title';
-		const { getByText } = render(<ModalTitle title={title} />);
+		const { getByText } = render(<TitleText title={title} />);
 		const titleElement = getByText(title);
 		expect(titleElement).toBeDefined();
 	});

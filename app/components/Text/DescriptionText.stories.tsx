@@ -1,15 +1,15 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { ModalDescription, ModalDescriptionProps } from '@components';
+import { DescriptionText, DescriptionTextProps } from '@components';
 
 const meta: Meta = {
 	title: 'ModalDescription',
-	component: ModalDescription,
+	component: DescriptionText,
 	tags: ['autodocs'],
 };
 
 export default meta;
 
-const Template: StoryFn<ModalDescriptionProps> = (args) => <ModalDescription {...args} />;
+const Template: StoryFn<DescriptionTextProps> = (args) => <DescriptionText {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

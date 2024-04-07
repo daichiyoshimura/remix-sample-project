@@ -1,15 +1,15 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { ModalTitle, ModalTitleProps } from '@components';
+import { TitleText, TitleTextProps } from '@components';
 
 const meta: Meta = {
 	title: 'ModalTitle',
-	component: ModalTitle,
+	component: TitleText,
 	tags: ['autodocs'],
 };
 
 export default meta;
 
-const Template: StoryFn<ModalTitleProps> = (args) => <ModalTitle {...args} />;
+const Template: StoryFn<TitleTextProps> = (args) => <TitleText {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

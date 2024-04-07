@@ -1,4 +1,4 @@
-import { Button, Container, ModalDescription, ModalTitle } from '@components';
+import { Button, Container, DescriptionText, TitleText } from '@components';
 
 export type ModalMessageProps = {
 	title: string;
@@ -9,8 +9,8 @@ export type ModalMessageProps = {
 export const ModalMessage: React.FC<ModalMessageProps> = ({ title, description, handleClose }) => {
 	return (
 		<>
-			<ModalTitle title={title} />
-			<ModalDescription description={description} />
+			<TitleText title={title} />
+			<DescriptionText description={description} />
 			<Container alignment="right">
 				<Button onClick={handleClose}>close</Button>
 			</Container>
