@@ -4,8 +4,8 @@ import {
 	Button,
 	Container,
 	MutationModal,
-	ModalDescription,
-	ModalTitle,
+	DescriptionText,
+	TitleText,
 	TextInput,
 } from '@components';
 
@@ -38,8 +38,8 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, name, onCl
 	const mutationContent = () => {
 		return (
 			<>
-				<ModalTitle title={'Edit'} />
-				<ModalDescription
+				<TitleText title={'Edit'} />
+				<DescriptionText
 					description={`
 						    Please enter only alphanumeric characters in this field. 
 							It is limited to a maximum length of 64 characters. 

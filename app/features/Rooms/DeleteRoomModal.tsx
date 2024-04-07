@@ -4,8 +4,8 @@ import {
 	Button,
 	Container,
 	MutationModal,
-	ModalDescription,
-	ModalTitle,
+	DescriptionText,
+	TitleText,
 	TextInput,
 } from '@components';
 
@@ -37,8 +37,8 @@ export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
 	const mutationContent = () => {
 		return (
 			<>
-				<ModalTitle title={'Are you sure you want to delete?'} />
-				<ModalDescription
+				<TitleText title={'Are you sure you want to delete?'} />
+				<DescriptionText
 					description={`
 								To delete, please enter the same name in the textbox below and
 								press the delete button.

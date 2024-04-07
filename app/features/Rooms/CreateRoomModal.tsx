@@ -5,8 +5,8 @@ import {
 	Button,
 	Container,
 	MutationModal,
-	ModalDescription,
-	ModalTitle,
+	DescriptionText,
+	TitleText,
 	TextInput,
 	ErrorTextList,
 } from '@components';
@@ -62,8 +62,8 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 
 		return (
 			<>
-				<ModalTitle title={'Create Room'} />
-				<ModalDescription
+				<TitleText title={'Create Room'} />
+				<DescriptionText
 					description={`
 							Please enter only alphanumeric characters in this
 							field. It is limited to a maximum length of 64
