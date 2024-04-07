@@ -3,7 +3,8 @@ import { useBinaryState } from '@hooks';
 import { roomsAction } from '@actions';
 import { RoomsLoaderResponse, roomsLoader } from '@loaders';
 import { Box, Button, Container, ContentArea, Footer, Header } from '@components';
-import { CreateRoomModal, RoomCardList } from '@features';
+import { RoomCardList } from '@features';
+import { CreateRoomModal } from '@features/Rooms/V2/CreateRoomModal';
 import { isDefined } from '@util/typeGuards';
 
 export const loader = roomsLoader;
