@@ -1,13 +1,13 @@
 import { StoryFn, Meta } from '@storybook/react';
-import { TextList } from '@components';
+import { ErrorTextList } from '@components';
 
 export default {
 	title: 'Components/TextList',
-	component: TextList,
+	component: ErrorTextList,
 	tags: ['autodocs'],
-} as Meta<typeof TextList>;
+} as Meta<typeof ErrorTextList>;
 
-const Template: StoryFn<typeof TextList> = (args) => <TextList {...args} />;
+const Template: StoryFn<typeof ErrorTextList> = (args) => <ErrorTextList {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

@@ -1,10 +1,10 @@
 import { ErrorText } from '@components';
 
-export type TextListProps = {
+export type ErrorTextListProps = {
 	textList: string[];
 };
 
-export const TextList: React.FC<TextListProps> = ({ textList }) => {
+export const ErrorTextList: React.FC<ErrorTextListProps> = ({ textList }) => {
 	return (
 		<>
 			{textList.map((text, index) => (

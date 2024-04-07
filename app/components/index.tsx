@@ -16,4 +16,4 @@ export * from '@components/ModalContent/ModalMessage';
 export * from '@components/ModalContent/ModalTitle';
 export * from '@components/TextInput/TextInput';
 export * from '@components/Text/ErrorText';
-export * from '@components/Text/TextList';
+export * from '@components/Text/ErrorTextList';
