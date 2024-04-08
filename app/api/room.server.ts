@@ -91,7 +91,7 @@ type PostRoomResponse = MappedTypes<Room>;
 export const postRoom = async ({ roomAttributes }: PostRoomRequest): Promise<PostRoomResponse> => {
 	if (isStageDev()) {
 		return {
-			id: 'cr1',
+			id: '1',
 			name: 'CreatedRoom',
 		};
 	}

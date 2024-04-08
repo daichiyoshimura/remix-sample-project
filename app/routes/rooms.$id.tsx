@@ -1,9 +1,11 @@
-import { useLoaderData } from '@remix-run/react';
+import { useEffect, useState } from 'react';
+import { useLoaderData, useLocation } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
 import { roomAction } from '@actions';
 import { RoomLoaderResponse, roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
 import { ParticipantCardList, DeleteRoomModal, EditRoomModal, RoomProfile } from '@features';
+import { MessageModal } from '@features/Rooms/V2/MessageModal';
 import { isDefined } from '@util/typeGuards';
 
 export const loader = roomLoader;
@@ -11,8 +13,21 @@ export const loader = roomLoader;
 export const action = roomAction;
 
 const RoomProfilePage = () => {
+	const [isCreateRoomModalOpen, setCreateRoomModalOpen] = useState<boolean>(false);
 	const [isEditRoomModalOpen, toggleEditRoomModalOpen] = useBinaryState(false);
 	const [isDeleteRoomModalOpen, toggleDeleteRoomModalOpen] = useBinaryState(false);
+
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+	const isCreated = searchParams.get('created');
+	useEffect(() => {
+		if (isCreated == null) {
+			setCreateRoomModalOpen(false);
+			return;
+		}
+		setCreateRoomModalOpen(true);
+	}, [isCreated]);
+
 	const { roomProfile } = useLoaderData<RoomLoaderResponse>();
 	if (!isDefined(roomProfile)) {
 		// TODO Error Page
@@ -52,6 +67,14 @@ const RoomProfilePage = () => {
 					onClose={toggleDeleteRoomModalOpen}
 					name={name}
 					roomId={id}
+				/>
+				<MessageModal
+					title="Success"
+					description="The Room is created"
+					isOpen={isCreateRoomModalOpen}
+					onClose={() => {
+						setCreateRoomModalOpen(false);
+					}}
 				/>
 			</ContentArea>
 			<Footer />

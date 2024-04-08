@@ -1,4 +1,4 @@
-import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { ActionFunction, ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
 import { Room, RoomAttributes, postRoom } from '@api';
 import {
 	MappedTypes,
@@ -14,7 +14,6 @@ import { invalidMethodAction } from '@actions';
 export const roomsAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
 		case 'POST':
-			console.log(args.request.headers.get('Content-Type'));
 			if (
 				args.request.headers.get('Content-Type') ===
 				'application/x-www-form-urlencoded;charset=UTF-8'
@@ -29,7 +28,7 @@ export const roomsAction: ActionFunction = async (args: ActionFunctionArgs) => {
 
 type RoomActionRequest = RoomAttributes;
 
-type RoomsActionResponse = MappedTypes<
+export type RoomsActionResponse = MappedTypes<
 	{
 		room?: Room;
 	} & Message
@@ -77,7 +76,7 @@ const postRoomsFormAction: ActionFunction = async (
 			request: postRoomRequest,
 			response: postRoomResponse,
 		});
-		return json({ room: postRoomResponse }, 200);
+		return redirect(`/rooms/${postRoomResponse.id}?created=true`);
 	} catch (error) {
 		const message = isActionError(error) ? error.message : 'unexpected error';
 		const response = { message: message };

@@ -1,4 +1,5 @@
-import { useLoaderData } from '@remix-run/react';
+import { useEffect } from 'react';
+import { useLoaderData, useNavigation } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
 import { roomsAction } from '@actions';
 import { RoomsLoaderResponse, roomsLoader } from '@loaders';
@@ -13,6 +14,18 @@ export const action = roomsAction;
 
 const RoomsPage = () => {
 	const [isCreateRoomModalOpen, toggleCreateRoomModalOpen] = useBinaryState(false);
+
+	const state = useNavigation().state;
+	useEffect(() => {
+		switch (state) {
+			case 'idle':
+			case 'loading':
+			case 'submitting':
+			default:
+				return;
+		}
+	}, [state]);
+
 	const { rooms } = useLoaderData<RoomsLoaderResponse>();
 	if (!isDefined(rooms)) {
 		return <></>;

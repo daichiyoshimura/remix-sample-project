@@ -30,7 +30,6 @@ export type CreateRoomModalProps = {
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
-
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
@@ -77,9 +76,9 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 					<ErrorTextList textList={errorMessageList} />
 					<Container alignment="right">
 						<Button onClick={handleClose}>do not create</Button>
-						<button type="submit" disabled={!isValid}>
+						<Button type="submit" disabled={!isValid}>
 							create
-						</button>
+						</Button>
 					</Container>
 				</Form>
 			</>
