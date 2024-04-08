@@ -3,17 +3,9 @@ import { useLoaderData, useLocation } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
 import { roomAction } from '@actions';
 import { RoomLoaderResponse, roomLoader } from '@loaders';
-import {
-	Box,
-	Button,
-	LinkButton,
-	Container,
-	ContentArea,
-	Footer,
-	Header,
-	MessageModal,
-} from '@components';
+import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
 import { ParticipantCardList, EditRoomModal, RoomProfile } from '@features';
+import { CreateRoomModal } from '@features/Rooms/V2/CreateRoomModal';
 import { DeleteRoomModal } from '@features/Rooms/V2/DeleteRoomModal';
 import { isDefined } from '@util/typeGuards';
 
@@ -76,13 +68,10 @@ const RoomProfilePage = () => {
 					onClose={toggleDeleteRoomModalOpen}
 					roomId={id}
 				/>
-				<MessageModal
-					title="Success"
-					description="The Room is created"
+				<CreateRoomModal
 					isOpen={isCreateRoomModalOpen}
-					onClose={() => {
-						setCreateRoomModalOpen(false);
-					}}
+					onClose={() => setCreateRoomModalOpen(false)}
+					state={isCreated !== undefined ? 'success' : 'init'}
 				/>
 			</ContentArea>
 			<Footer />

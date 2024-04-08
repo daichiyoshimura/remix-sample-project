@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useEffect, useState } from 'react';
 import { Form, useNavigation } from '@remix-run/react';
-import { useMutationState, useMutationSwitcher } from '@hooks';
+import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
 import {
 	Button,
 	Container,
@@ -27,11 +27,14 @@ type CreateRoomSchema = z.infer<typeof createRoomSchema>;
 export type CreateRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
+	state?: MutationState;
 };
 
-export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
+export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
+	{ isOpen, onClose, state = 'init' },
+) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [modalState, setModalState] = useMutationState('init');
+	const [modalState, setModalState] = useMutationState(state);
 	const navigation = useNavigation();
 
 	const onChange = (value: string) => {
@@ -76,7 +79,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 					<ErrorTextList textList={errorMessageList} />
 					<Container alignment="right">
 						<Button onClick={handleClose}>do not create</Button>
-						<Button type="submit" disabled={!isValid}>
+						<Button type="submit" color="safe" disabled={!isValid}>
 							create
 						</Button>
 					</Container>
