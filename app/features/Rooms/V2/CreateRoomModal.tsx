@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useEffect, useState } from 'react';
 import { Form, useNavigation } from '@remix-run/react';
-import { useMutationState } from '@hooks';
+import { useMutationState, useMutationSwitcher } from '@hooks';
 import {
 	Button,
 	Container,
@@ -61,7 +61,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 		const isValid = errorMessageList.length === 0;
 
 		return (
-			<>
+			<Modal isOpen={isOpen} onClose={handleClose}>
 				<TitleText title={'Create Room'} />
 				<DescriptionText
 					description={`
@@ -81,12 +81,16 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 						</Button>
 					</Container>
 				</Form>
-			</>
+			</Modal>
 		);
 	};
 
 	const loading = () => {
-		return <LoadingIcon />;
+		return (
+			<Modal isOpen={isOpen} onClose={handleClose}>
+				<LoadingIcon />
+			</Modal>
+		);
 	};
 
 	const success = () => {
@@ -111,32 +115,5 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 		);
 	};
 
-	switch (modalState) {
-		case 'init':
-			return (
-				<Modal isOpen={isOpen} onClose={handleClose}>
-					{init()}
-				</Modal>
-			);
-		case 'loading':
-			return (
-				<Modal isOpen={isOpen} onClose={handleClose}>
-					{loading()}
-				</Modal>
-			);
-		case 'success':
-			return (
-				<Modal isOpen={isOpen} onClose={handleClose}>
-					{success()}
-				</Modal>
-			);
-		case 'failure':
-			return (
-				<Modal isOpen={isOpen} onClose={handleClose}>
-					{failure()}
-				</Modal>
-			);
-		default:
-			return <></>;
-	}
+	return useMutationSwitcher(modalState, init, loading, success, failure);
 };
