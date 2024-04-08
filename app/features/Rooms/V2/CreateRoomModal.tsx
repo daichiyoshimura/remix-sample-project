@@ -1,16 +1,17 @@
 import { z } from 'zod';
-import { useState } from 'react';
-import { Form } from '@remix-run/react';
-import { useHttpClient } from '@hooks/useHttpClient';
+import { useEffect, useState } from 'react';
+import { Form, useNavigation } from '@remix-run/react';
+import { useMutationState } from '@hooks';
 import {
 	Button,
 	Container,
-	MutationModal,
 	DescriptionText,
 	TitleText,
 	TextInput,
 	ErrorTextList,
-} from '@components';
+	LoadingIcon,
+	Modal,
+ MessageModal } from '@components';
 
 const createRoomSchema = z.object({
 	name: z
@@ -29,10 +30,16 @@ export type CreateRoomModalProps = {
 
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
+	const [modalState, setModalState] = useMutationState('init');
+	const navigation = useNavigation();
+
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
+
+	useEffect(() => {
+		console.log(JSON.stringify(navigation));
+	}, [navigation]);
 
 	const validate = (body: CreateRoomSchema): string[] => {
 		const result = createRoomSchema.safeParse(body);
@@ -42,16 +49,8 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 		return result.error.issues.map((issue) => issue.message);
 	};
 
-	const handleMutation = async () => {
-		sendRequest<CreateRoomSchema>({
-			path: 'rooms',
-			method: 'POST',
-			body: { name: inputValue },
-		});
-	};
-
 	const handleClose = () => {
-		resetMutationStatus();
+		setModalState('init');
 		setInputValue('');
 		onClose();
 	};
@@ -85,25 +84,58 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 		);
 	};
 
-	const successMessage = {
-		title: 'Success',
-		description: 'The Room is created',
+	const loading = () => {
+		return <LoadingIcon />;
 	};
 
-	const failedMesssage = {
-		title: 'Failed',
-		description: 'Please try again later, or contact support if the issue persists',
+	const success = () => {
+		return (
+			<MessageModal
+				title={'Success'}
+				description={'The Room is created'}
+				isOpen={isOpen}
+				onClose={handleClose}
+			/>
+		);
 	};
 
-	return (
-		<MutationModal
-			isOpen={isOpen}
-			mutationState={mutationState}
-			handleMutation={handleMutation}
-			handleClose={handleClose}
-			mutationContent={init}
-			successMessage={successMessage}
-			failedMessage={failedMesssage}
-		/>
-	);
+	const failure = () => {
+		return (
+			<MessageModal
+				title={'Failed'}
+				description={'Please try again later, or contact support if the issue persists'}
+				isOpen={isOpen}
+				onClose={handleClose}
+			/>
+		);
+	};
+
+	switch (modalState) {
+		case 'init':
+			return (
+				<Modal isOpen={isOpen} onClose={handleClose}>
+					{init()}
+				</Modal>
+			);
+		case 'loading':
+			return (
+				<Modal isOpen={isOpen} onClose={handleClose}>
+					{loading()}
+				</Modal>
+			);
+		case 'success':
+			return (
+				<Modal isOpen={isOpen} onClose={handleClose}>
+					{success()}
+				</Modal>
+			);
+		case 'failure':
+			return (
+				<Modal isOpen={isOpen} onClose={handleClose}>
+					{failure()}
+				</Modal>
+			);
+		default:
+			return <></>;
+	}
 };

@@ -11,6 +11,7 @@ export * from '@components/Header/Header';
 export * from '@components/LoadingIcon/LoadingIcon';
 export * from '@components/Modal/Modal';
 export * from '@components/Modal/MutationModal';
+export * from '@components/Modal/MessageModal';
 export * from '@components/ModalContent/ModalMessage';
 export * from '@components/Input/TextInput';
 export * from '@components/Text/DescriptionText';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, Container, DescriptionText, Modal, TitleText } from '@components';
 
 export type MessageModalProps = {
