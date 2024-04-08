@@ -22,11 +22,7 @@ const RoomProfilePage = () => {
 	const searchParams = new URLSearchParams(location.search);
 	const isCreated = searchParams.get('created');
 	useEffect(() => {
-		if (isCreated == null) {
-			setCreateRoomModalOpen(false);
-			return;
-		}
-		setCreateRoomModalOpen(true);
+		setCreateRoomModalOpen(isCreated !== null);
 	}, [isCreated]);
 
 	const { roomProfile } = useLoaderData<RoomLoaderResponse>();

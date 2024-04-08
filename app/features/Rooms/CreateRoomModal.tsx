@@ -72,6 +72,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 						`}
 				/>
 				<TextInput
+					name="name"
 					value={inputValue}
 					onChange={onChange}
 					placeholder="room name"

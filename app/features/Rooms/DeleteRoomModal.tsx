@@ -45,6 +45,7 @@ export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
 							`}
 				/>
 				<TextInput
+					name="name"
 					value={inputValue}
 					onChange={setInputValue}
 					placeholder={name}

@@ -47,6 +47,7 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, name, onCl
 						`}
 				/>
 				<TextInput
+					name="name"
 					value={inputValue}
 					onChange={setInputValue}
 					placeholder={name}

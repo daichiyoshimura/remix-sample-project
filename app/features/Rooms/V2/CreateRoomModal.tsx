@@ -75,7 +75,13 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
 						`}
 				/>
 				<Form action="/rooms" method="POST">
-					<TextInput value={inputValue} onChange={onChange} placeholder="name" required />
+					<TextInput
+						name="name"
+						value={inputValue}
+						onChange={onChange}
+						placeholder="name"
+						required
+					/>
 					<ErrorTextList textList={errorMessageList} />
 					<Container alignment="right">
 						<Button onClick={handleClose}>do not create</Button>

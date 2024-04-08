@@ -20,11 +20,7 @@ const RoomsPage = () => {
 	const searchParams = new URLSearchParams(location.search);
 	const isDeleted = searchParams.get('deleted');
 	useEffect(() => {
-		if (isDeleted == null) {
-			setDeleteRoomModalOpen(false);
-			return;
-		}
-		setDeleteRoomModalOpen(true);
+		setDeleteRoomModalOpen(isDeleted !== null);
 	}, [isDeleted]);
 
 	const { rooms } = useLoaderData<RoomsLoaderResponse>();
