@@ -3,9 +3,17 @@ import { useLoaderData, useLocation } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
 import { roomAction } from '@actions';
 import { RoomLoaderResponse, roomLoader } from '@loaders';
-import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
+import {
+	Box,
+	Button,
+	LinkButton,
+	Container,
+	ContentArea,
+	Footer,
+	Header,
+	MessageModal,
+} from '@components';
 import { ParticipantCardList, DeleteRoomModal, EditRoomModal, RoomProfile } from '@features';
-import { MessageModal } from '@features/Rooms/V2/MessageModal';
 import { isDefined } from '@util/typeGuards';
 
 export const loader = roomLoader;
