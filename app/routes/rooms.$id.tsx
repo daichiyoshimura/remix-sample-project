@@ -13,7 +13,8 @@ import {
 	Header,
 	MessageModal,
 } from '@components';
-import { ParticipantCardList, DeleteRoomModal, EditRoomModal, RoomProfile } from '@features';
+import { ParticipantCardList, EditRoomModal, RoomProfile } from '@features';
+import { DeleteRoomModal } from '@features/Rooms/V2/DeleteRoomModal';
 import { isDefined } from '@util/typeGuards';
 
 export const loader = roomLoader;
@@ -73,7 +74,6 @@ const RoomProfilePage = () => {
 				<DeleteRoomModal
 					isOpen={isDeleteRoomModalOpen}
 					onClose={toggleDeleteRoomModalOpen}
-					name={name}
 					roomId={id}
 				/>
 				<MessageModal

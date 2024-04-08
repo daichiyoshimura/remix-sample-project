@@ -1,4 +1,4 @@
-import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { ActionFunction, ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
 import { RoomAttributes, deleteRoom, patchRoom } from '@api';
 import { Message, isLoaderError, isString, writeErrorLog, writeRequestLog } from '@util';
 import { invalidMethodAction } from '@actions';
@@ -6,6 +6,12 @@ import { invalidMethodAction } from '@actions';
 export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 	switch (args.request.method) {
 		case 'DELETE':
+			if (
+				args.request.headers.get('Content-Type') ===
+				'application/x-www-form-urlencoded;charset=UTF-8'
+			) {
+				return await deleteRoomFormAction(args);
+			}
 			return await deleteRoomAction(args);
 		case 'PATCH':
 			return await patchRoomAction(args);
@@ -33,6 +39,31 @@ const deleteRoomAction: ActionFunction = async (
 			response: deleteRoomResponse,
 		});
 		return json({ message: 'success on mock' }, 200);
+	} catch (error) {
+		const message = isLoaderError(error) ? error.message : 'unexpected error';
+		const response = { message: message };
+		writeErrorLog(response);
+		return json(response, 500);
+	}
+};
+
+const deleteRoomFormAction: ActionFunction = async (
+	{ request, params }: ActionFunctionArgs,
+): Promise<TypedResponse<DeleteRoomActionResponse>> => {
+	try {
+		const accountId: string = isString(params.accountId) ? params.accountId : '';
+		const roomId: string = isString(params.id) ? params.id : '';
+
+		const deleteRoomRequest = { id: roomId, accountId: accountId };
+		const deleteRoomResponse = await deleteRoom(deleteRoomRequest);
+
+		writeRequestLog({
+			path: `/rooms/${roomId}`,
+			method: request.method,
+			request: deleteRoomRequest,
+			response: deleteRoomResponse,
+		});
+		return redirect(`/rooms?deleted=true`);
 	} catch (error) {
 		const message = isLoaderError(error) ? error.message : 'unexpected error';
 		const response = { message: message };
