@@ -3,11 +3,19 @@ export type ButtonProps = {
 	disabled?: boolean;
 	color?: 'default' | 'safe' | 'caution';
 	size?: 'icon' | 'text';
+	type?: 'submit' | 'reset' | 'button';
 	children: React.ReactNode;
 };
 
 export const Button: React.FC<ButtonProps> = (
-	{ onClick = () => {}, disabled = false, color = 'default', size = 'text', children },
+	{
+		onClick = () => {},
+		disabled = false,
+		color = 'default',
+		size = 'text',
+		type = 'button',
+		children,
+	},
 ) => {
 	const [bgColor, hoverBgColor] = ((color: string, disabled: boolean): string[] => {
 		if (disabled) {
@@ -31,6 +39,7 @@ export const Button: React.FC<ButtonProps> = (
 			className={`${bgColor} ${hoverBgColor} ${padding} text-white font-bold rounded`}
 			onClick={onClick}
 			disabled={disabled}
+			type={type}
 		>
 			{children}
 		</button>
