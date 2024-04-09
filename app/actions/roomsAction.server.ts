@@ -2,7 +2,6 @@ import { ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/no
 import { Room, RoomAttributes, postRoom } from '@api';
 import {
 	MappedTypes,
-	Message,
 	isActionError,
 	isLoaderError,
 	isString,
@@ -24,17 +23,15 @@ export const roomsAction = async (
 			}
 			return await postRoomsAction(args);
 		default:
-			return await invalidMethodAction();
+			throw await invalidMethodAction();
 	}
 };
 
 type RoomActionRequest = RoomAttributes;
 
-export type RoomsActionResponse = MappedTypes<
-	{
-		room?: Room;
-	} & Message
->;
+export type RoomsActionResponse = MappedTypes<{
+	room: Room;
+}>;
 
 const postRoomsAction = async (
 	{ request, params }: ActionFunctionArgs,
@@ -55,7 +52,7 @@ const postRoomsAction = async (
 		const message = isLoaderError(error) ? error.message : 'unexpected error';
 		const response = { message: message };
 		writeErrorLog(response);
-		return json(response, 500);
+		throw json(response, 500);
 	}
 };
 
@@ -83,6 +80,6 @@ const postRoomsFormAction = async (
 		const message = isActionError(error) ? error.message : 'unexpected error';
 		const response = { message: message };
 		writeErrorLog(response);
-		return json(response, 500);
+		throw json(response, 500);
 	}
 };

@@ -33,7 +33,7 @@ export const roomAction = async (
 			}
 			return await patchRoomAction(args);
 		default:
-			return await invalidMethodAction();
+			throw await invalidMethodAction();
 	}
 };
 
@@ -60,7 +60,7 @@ const deleteRoomAction = async (
 		const message = isLoaderError(error) ? error.message : 'unexpected error';
 		const response = { message: message };
 		writeErrorLog(response);
-		return json(response, 500);
+		throw json(response, 500);
 	}
 };
 
@@ -85,7 +85,7 @@ const deleteRoomFormAction = async (
 		const message = isLoaderError(error) ? error.message : 'unexpected error';
 		const response = { message: message };
 		writeErrorLog(response);
-		return json(response, 500);
+		throw json(response, 500);
 	}
 };
 

@@ -1,6 +1,5 @@
 import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { isDefined } from '@util';
 import { roomsAction } from '@actions';
 import { roomsLoader } from '@loaders';
 import { Box, Button, Container, ContentArea, Footer, Header } from '@components';
@@ -11,8 +10,7 @@ export const loader = roomsLoader;
 export const action = roomsAction;
 
 const RoomsPage = () => {
-	const loaderData = useLoaderData<typeof loader>();
-
+	const { rooms } = useLoaderData<typeof loader>();
 	const {
 		state: isCreateRoomModalOpen,
 		on: openCreateRoomModal,
@@ -24,13 +22,7 @@ const RoomsPage = () => {
 			<Header currentPageTitle="Rooms" />
 			<ContentArea>
 				<Box>
-					<RoomCardList
-						rooms={
-							isDefined(loaderData) && isDefined(loaderData.rooms)
-								? loaderData.rooms
-								: []
-						}
-					/>
+					<RoomCardList rooms={rooms} />
 				</Box>
 				<Container>
 					<Button onClick={openCreateRoomModal}>Create Room</Button>
