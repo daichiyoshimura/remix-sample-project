@@ -1,9 +1,20 @@
-import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { RoomAttributes, deleteRoom, patchRoom } from '@api';
-import { Message, isLoaderError, isString, writeErrorLog, writeRequestLog } from '@util';
-import { invalidMethodAction } from '@actions';
+import {
+	MappedTypes,
+	Message,
+	isLoaderError,
+	isString,
+	writeErrorLog,
+	writeRequestLog,
+} from '@util';
+import { InvalidMethodActionResponse, invalidMethodAction } from '@actions';
 
-export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
+export const roomAction = async (
+	args: ActionFunctionArgs,
+): Promise<
+	TypedResponse<DeleteRoomActionResponse | PatchRoomActionResponse | InvalidMethodActionResponse>
+> => {
 	switch (args.request.method) {
 		case 'DELETE':
 			if (
@@ -22,13 +33,13 @@ export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 			}
 			return await patchRoomAction(args);
 		default:
-			return await invalidMethodAction(args);
+			return await invalidMethodAction();
 	}
 };
 
-type DeleteRoomActionResponse = Message;
+type DeleteRoomActionResponse = MappedTypes<Message>;
 
-const deleteRoomAction: ActionFunction = async (
+const deleteRoomAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<DeleteRoomActionResponse>> => {
 	try {
@@ -53,7 +64,7 @@ const deleteRoomAction: ActionFunction = async (
 	}
 };
 
-const deleteRoomFormAction: ActionFunction = async (
+const deleteRoomFormAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<DeleteRoomActionResponse>> => {
 	try {
@@ -79,9 +90,9 @@ const deleteRoomFormAction: ActionFunction = async (
 };
 
 type PatchRoomActionRequest = RoomAttributes;
-type PatchRoomActionResponse = Message;
+type PatchRoomActionResponse = MappedTypes<Message>;
 
-const patchRoomAction: ActionFunction = async (
+const patchRoomAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<PatchRoomActionResponse>> => {
 	try {
@@ -111,7 +122,7 @@ const patchRoomAction: ActionFunction = async (
 	}
 };
 
-const patchRoomFormAction: ActionFunction = async (
+const patchRoomFormAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<PatchRoomActionResponse>> => {
 	try {

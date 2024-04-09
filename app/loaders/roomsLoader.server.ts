@@ -1,4 +1,4 @@
-import { LoaderFunction, LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { Room, getRoomList } from '@api';
 import {
 	MappedTypes,
@@ -16,7 +16,7 @@ export type RoomsLoaderResponse = MappedTypes<
 	} & Message
 >;
 
-export const roomsLoader: LoaderFunction = async (
+export const roomsLoader = async (
 	{ request, params }: LoaderFunctionArgs,
 ): Promise<TypedResponse<RoomsLoaderResponse>> => {
 	try {

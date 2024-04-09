@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useActionData, useLoaderData, useLocation, useNavigate } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
 import { isDefined, isBoolean } from '@util';
-import { RoomsActionResponse, roomsAction } from '@actions';
-import { RoomsLoaderResponse, roomsLoader } from '@loaders';
+import { roomsAction } from '@actions';
+import { roomsLoader } from '@loaders';
 import { Box, Button, Container, ContentArea, Footer, Header } from '@components';
 import { RoomCardList, CreateRoomModal, DeleteRoomModal } from '@features';
 
@@ -12,8 +12,8 @@ export const loader = roomsLoader;
 export const action = roomsAction;
 
 const RoomsPage = () => {
-	const loaderData = useLoaderData<RoomsLoaderResponse>();
-	const actionData = useActionData<RoomsActionResponse>();
+	const loaderData = useLoaderData<typeof loader>();
+	const actionData = useActionData<typeof action>();
 
 	const [isCreateRoomModalOpen, toggleCreateRoomModalOpen] = useBinaryState(false);
 	const [isDeleteRoomModalOpen, setDeleteRoomModalOpen] = useState<boolean>(false);

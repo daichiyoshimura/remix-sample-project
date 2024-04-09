@@ -3,7 +3,7 @@ import { useActionData, useLoaderData, useLocation, useNavigate } from '@remix-r
 import { useBinaryState } from '@hooks';
 import { isBoolean, isDefined } from '@util';
 import { roomAction } from '@actions';
-import { RoomLoaderResponse, roomLoader } from '@loaders';
+import { roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
 import {
 	ParticipantCardList,
@@ -18,7 +18,7 @@ export const loader = roomLoader;
 export const action = roomAction;
 
 const RoomProfilePage = () => {
-	const { roomProfile } = useLoaderData<RoomLoaderResponse>();
+	const { roomProfile } = useLoaderData<typeof loader>();
 	const actionData = useActionData<typeof action>();
 
 	const [isCreateRoomModalOpen, setCreateRoomModalOpen] = useState<boolean>(false);

@@ -1,4 +1,4 @@
-import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
+import { ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { Room, RoomAttributes, postRoom } from '@api';
 import {
 	MappedTypes,
@@ -11,7 +11,9 @@ import {
 } from '@util';
 import { invalidMethodAction } from '@actions';
 
-export const roomsAction: ActionFunction = async (args: ActionFunctionArgs) => {
+export const roomsAction = async (
+	args: ActionFunctionArgs,
+): Promise<TypedResponse<RoomsActionResponse>> => {
 	switch (args.request.method) {
 		case 'POST':
 			if (
@@ -22,7 +24,7 @@ export const roomsAction: ActionFunction = async (args: ActionFunctionArgs) => {
 			}
 			return await postRoomsAction(args);
 		default:
-			return await invalidMethodAction(args);
+			return await invalidMethodAction();
 	}
 };
 
@@ -34,7 +36,7 @@ export type RoomsActionResponse = MappedTypes<
 	} & Message
 >;
 
-const postRoomsAction: ActionFunction = async (
+const postRoomsAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<RoomsActionResponse>> => {
 	try {
@@ -57,7 +59,7 @@ const postRoomsAction: ActionFunction = async (
 	}
 };
 
-const postRoomsFormAction: ActionFunction = async (
+const postRoomsFormAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<RoomsActionResponse>> => {
 	try {

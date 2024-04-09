@@ -1,9 +1,9 @@
-import { ActionFunction, TypedResponse, json } from '@remix-run/node';
-import { Message, writeErrorLog } from '@util';
+import { TypedResponse, json } from '@remix-run/node';
+import { MappedTypes, Message, writeErrorLog } from '@util';
 
-type InvalidMethodActionResponse = Message;
+export type InvalidMethodActionResponse = MappedTypes<Message>;
 
-export const invalidMethodAction: ActionFunction = async (): Promise<
+export const invalidMethodAction = async (): Promise<
 	TypedResponse<InvalidMethodActionResponse>
 > => {
 	const response = { message: 'invalid method' };
