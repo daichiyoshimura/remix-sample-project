@@ -14,6 +14,12 @@ export const roomAction: ActionFunction = async (args: ActionFunctionArgs) => {
 			}
 			return await deleteRoomAction(args);
 		case 'PATCH':
+			if (
+				args.request.headers.get('Content-Type') ===
+				'application/x-www-form-urlencoded;charset=UTF-8'
+			) {
+				return await patchRoomFormAction(args);
+			}
 			return await patchRoomAction(args);
 		default:
 			return await invalidMethodAction(args);
@@ -87,6 +93,38 @@ const patchRoomAction: ActionFunction = async (
 			room: {
 				id: roomId,
 				...body,
+			},
+		};
+		const patchRoomResponse = await patchRoom(patchRoomRequest);
+		writeRequestLog({
+			path: `/rooms/${roomId}`,
+			method: request.method,
+			request: patchRoomRequest,
+			response: patchRoomResponse,
+		});
+		return json({ message: 'success on mock' }, 200);
+	} catch (error) {
+		const message = isLoaderError(error) ? error.message : 'unexpected error';
+		const response = { message: message };
+		writeErrorLog(response);
+		return json(response, 500);
+	}
+};
+
+const patchRoomFormAction: ActionFunction = async (
+	{ request, params }: ActionFunctionArgs,
+): Promise<TypedResponse<PatchRoomActionResponse>> => {
+	try {
+		const accountId: string = isString(params.accountId) ? params.accountId : '';
+		const roomId: string = isString(params.id) ? params.id : '';
+		const formData = await request.formData();
+		const _name = formData.get('name');
+		const name = _name !== null ? (_name as string) : '';
+		const patchRoomRequest = {
+			accountId: accountId,
+			room: {
+				id: roomId,
+				name: name,
 			},
 		};
 		const patchRoomResponse = await patchRoom(patchRoomRequest);
