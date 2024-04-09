@@ -1,6 +1,5 @@
 import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { isDefined } from '@util';
 import { roomAction } from '@actions';
 import { roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
@@ -11,7 +10,7 @@ export const loader = roomLoader;
 export const action = roomAction;
 
 const RoomProfilePage = () => {
-	const { roomProfile } = useLoaderData<typeof loader>();
+	const { id, name, createdAt, participants } = useLoaderData<typeof loader>();
 
 	const {
 		state: isEditRoomModalOpen,
@@ -23,12 +22,6 @@ const RoomProfilePage = () => {
 		on: openDeleteRoomModal,
 		off: closeDeleteRoomModal,
 	} = useBinaryState(false);
-
-	if (!isDefined(roomProfile)) {
-		// TODO Error Page
-		return <></>;
-	}
-	const { id, name, createdAt, participants } = roomProfile;
 
 	return (
 		<>

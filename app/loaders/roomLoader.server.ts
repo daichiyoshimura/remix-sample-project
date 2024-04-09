@@ -5,12 +5,12 @@ import { MutationTimes } from '@util/server';
 
 export type RoomLoaderRequest = Participant;
 
-export type RoomLoaderResponse = MappedTypes<{
-	roomProfile?: {
+export type RoomLoaderResponse = MappedTypes<
+	{
 		participants: Participant[];
 	} & Room &
-		MutationTimes;
-}>;
+		MutationTimes
+>;
 
 export const roomLoader = async (
 	{ request, params }: LoaderFunctionArgs,
@@ -26,10 +26,8 @@ export const roomLoader = async (
 		const getParticipantListResponse = await getParticipantList(getParticipantListRequest);
 
 		const response = {
-			roomProfile: {
-				...getRoomResponse,
-				...getParticipantListResponse,
-			},
+			...getRoomResponse,
+			...getParticipantListResponse,
 		};
 		writeRequestLog({
 			path: `/rooms/${roomId}`,
