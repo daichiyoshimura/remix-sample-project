@@ -1,4 +1,4 @@
-import { ActionFunction, ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
+import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { RoomAttributes, deleteRoom, patchRoom } from '@api';
 import { Message, isLoaderError, isString, writeErrorLog, writeRequestLog } from '@util';
 import { invalidMethodAction } from '@actions';
@@ -69,7 +69,7 @@ const deleteRoomFormAction: ActionFunction = async (
 			request: deleteRoomRequest,
 			response: deleteRoomResponse,
 		});
-		return redirect(`/rooms?deleted=true`);
+		return json(deleteRoomResponse, 200);
 	} catch (error) {
 		const message = isLoaderError(error) ? error.message : 'unexpected error';
 		const response = { message: message };

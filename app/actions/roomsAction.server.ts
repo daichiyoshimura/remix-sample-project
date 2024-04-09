@@ -1,4 +1,4 @@
-import { ActionFunction, ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
+import { ActionFunction, ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { Room, RoomAttributes, postRoom } from '@api';
 import {
 	MappedTypes,
@@ -76,7 +76,7 @@ const postRoomsFormAction: ActionFunction = async (
 			request: postRoomRequest,
 			response: postRoomResponse,
 		});
-		return redirect(`/rooms/${postRoomResponse.id}?created=true`);
+		return json({ room: postRoomResponse }, 200);
 	} catch (error) {
 		const message = isActionError(error) ? error.message : 'unexpected error';
 		const response = { message: message };

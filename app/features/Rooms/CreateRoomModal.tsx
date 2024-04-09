@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form } from '@remix-run/react';
+import { Form, useNavigate } from '@remix-run/react';
 import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
 import {
 	Button,
@@ -35,6 +35,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
 ) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const [modalState, setModalState] = useMutationState(state);
+	const navigate = useNavigate();
 
 	const onChange = (value: string) => {
 		setInputValue(value);
@@ -51,6 +52,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
 	const handleClose = () => {
 		setModalState('init');
 		setInputValue('');
+		navigate('.', { replace: true });
 		onClose();
 	};
 

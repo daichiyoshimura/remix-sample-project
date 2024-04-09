@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData, useLocation } from '@remix-run/react';
+import { useActionData, useLoaderData, useLocation, useNavigate } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
+import { isBoolean, isDefined } from '@util';
 import { roomAction } from '@actions';
 import { RoomLoaderResponse, roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
@@ -11,25 +12,35 @@ import {
 	CreateRoomModal,
 	DeleteRoomModal,
 } from '@features';
-import { isDefined } from '@util/typeGuards';
 
 export const loader = roomLoader;
 
 export const action = roomAction;
 
 const RoomProfilePage = () => {
+	const { roomProfile } = useLoaderData<RoomLoaderResponse>();
+	const actionData = useActionData<typeof action>();
+
 	const [isCreateRoomModalOpen, setCreateRoomModalOpen] = useState<boolean>(false);
 	const [isEditRoomModalOpen, toggleEditRoomModalOpen] = useBinaryState(false);
 	const [isDeleteRoomModalOpen, toggleDeleteRoomModalOpen] = useBinaryState(false);
+	const { state } = useLocation();
+	const navigate = useNavigate();
 
-	const location = useLocation();
-	const searchParams = new URLSearchParams(location.search);
-	const isCreated = searchParams.get('created');
+	// delete room modal effect
 	useEffect(() => {
-		setCreateRoomModalOpen(isCreated !== null);
-	}, [isCreated]);
+		if (!isDefined(actionData)) return;
+		navigate('../', { state: { isDeleted: true } });
+		// eslint-disable-next-line
+	}, [actionData]);
 
-	const { roomProfile } = useLoaderData<RoomLoaderResponse>();
+	// create room modal effect
+	useEffect(() => {
+		if (!isDefined(state) || !isBoolean(state.isCreated)) return;
+		const isCreated = state.isCreated as boolean;
+		setCreateRoomModalOpen(isCreated);
+	}, [state]);
+
 	if (!isDefined(roomProfile)) {
 		// TODO Error Page
 		return <></>;
@@ -65,7 +76,7 @@ const RoomProfilePage = () => {
 				<CreateRoomModal
 					isOpen={isCreateRoomModalOpen}
 					onClose={() => setCreateRoomModalOpen(false)}
-					state={isCreated !== undefined ? 'success' : 'init'}
+					state={'success'}
 				/>
 				<EditRoomModal
 					isOpen={isEditRoomModalOpen}

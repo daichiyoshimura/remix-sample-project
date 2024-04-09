@@ -1,37 +1,51 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData, useLocation } from '@remix-run/react';
+import { useActionData, useLoaderData, useLocation, useNavigate } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { roomsAction } from '@actions';
+import { isDefined, isBoolean } from '@util';
+import { RoomsActionResponse, roomsAction } from '@actions';
 import { RoomsLoaderResponse, roomsLoader } from '@loaders';
 import { Box, Button, Container, ContentArea, Footer, Header } from '@components';
 import { RoomCardList, CreateRoomModal, DeleteRoomModal } from '@features';
-import { isDefined } from '@util/typeGuards';
 
 export const loader = roomsLoader;
 
 export const action = roomsAction;
 
 const RoomsPage = () => {
+	const loaderData = useLoaderData<RoomsLoaderResponse>();
+	const actionData = useActionData<RoomsActionResponse>();
+
 	const [isCreateRoomModalOpen, toggleCreateRoomModalOpen] = useBinaryState(false);
 	const [isDeleteRoomModalOpen, setDeleteRoomModalOpen] = useState<boolean>(false);
-	const location = useLocation();
-	const searchParams = new URLSearchParams(location.search);
-	const isDeleted = searchParams.get('deleted');
-	useEffect(() => {
-		setDeleteRoomModalOpen(isDeleted !== null);
-	}, [isDeleted]);
+	const { state } = useLocation();
+	const navigate = useNavigate();
 
-	const { rooms } = useLoaderData<RoomsLoaderResponse>();
-	if (!isDefined(rooms)) {
-		return <></>;
-	}
+	// create room modal effect
+	useEffect(() => {
+		if (!isDefined(actionData) || !isDefined(actionData.room)) return;
+		navigate(`${actionData.room.id}`, { state: { isCreated: true } });
+		// eslint-disable-next-line
+	}, [actionData]);
+
+	// delete room modal effect
+	useEffect(() => {
+		if (!isDefined(state) || !isBoolean(state.isDeleted)) return;
+		const isDeleted = state.isDeleted as boolean;
+		setDeleteRoomModalOpen(isDeleted);
+	}, [state]);
 
 	return (
 		<>
 			<Header currentPageTitle="Rooms" />
 			<ContentArea>
 				<Box>
-					<RoomCardList rooms={isDefined(rooms) ? rooms : []} />
+					<RoomCardList
+						rooms={
+							isDefined(loaderData) && isDefined(loaderData.rooms)
+								? loaderData.rooms
+								: []
+						}
+					/>
 				</Box>
 				<Container>
 					<Button onClick={toggleCreateRoomModalOpen}>Create Room</Button>
@@ -43,7 +57,7 @@ const RoomsPage = () => {
 				<DeleteRoomModal
 					isOpen={isDeleteRoomModalOpen}
 					onClose={() => setDeleteRoomModalOpen(false)}
-					state={isDeleted !== undefined ? 'success' : 'init'}
+					state={'success'}
 				/>
 			</ContentArea>
 			<Footer />
