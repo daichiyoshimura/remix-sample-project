@@ -1,42 +1,71 @@
-import { useState } from 'react';
-import { useHttpClient } from '@hooks/useHttpClient';
+import { z } from 'zod';
+import { useEffect, useState } from 'react';
+import { Form, useNavigation } from '@remix-run/react';
+import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
 import {
 	Button,
 	Container,
-	MutationModal,
 	DescriptionText,
 	TitleText,
 	TextInput,
+	ErrorTextList,
+	LoadingIcon,
+	Modal,
+	MessageModal,
 } from '@components';
+
+const deleteRoomSchema = z.object({
+	name: z
+		.string()
+		.min(1)
+		.max(64)
+		.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces'),
+});
+
+type DeleteRoomSchema = z.infer<typeof deleteRoomSchema>;
 
 export type DeleteRoomModalProps = {
 	isOpen: boolean;
-	name: string;
 	onClose: () => void;
-	roomId: string;
+	roomId?: string;
+	state?: MutationState;
 };
 
 export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
-	{ isOpen, name, onClose, roomId },
+	{ isOpen, onClose, roomId = '', state = 'init' },
 ) => {
-	const [inputValue, setInputValue] = useState('');
-	const [mutationState, resetMutationState, sendRequest] = useHttpClient();
+	const [inputValue, setInputValue] = useState<string>('');
+	const [modalState, setModalState] = useMutationState(state);
+	const navigation = useNavigation();
 
-	const handleMutation = async () =>
-		sendRequest<Record<string, never>>({
-			path: roomId,
-			method: 'DELETE',
-		});
+	const onChange = (value: string) => {
+		setInputValue(value);
+	};
+
+	useEffect(() => {
+		console.log(JSON.stringify(navigation));
+	}, [navigation]);
+
+	const validate = (body: DeleteRoomSchema): string[] => {
+		const result = deleteRoomSchema.safeParse(body);
+		if (result.success) {
+			return [];
+		}
+		return result.error.issues.map((issue) => issue.message);
+	};
 
 	const handleClose = () => {
-		resetMutationState();
+		setModalState('init');
 		setInputValue('');
 		onClose();
 	};
 
-	const mutationContent = () => {
+	const init = () => {
+		const errorMessageList = validate({ name: inputValue });
+		const isValid = errorMessageList.length === 0;
+
 		return (
-			<>
+			<Modal isOpen={isOpen} onClose={handleClose}>
 				<TitleText title={'Are you sure you want to delete?'} />
 				<DescriptionText
 					description={`
@@ -44,42 +73,55 @@ export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
 								press the delete button.
 							`}
 				/>
-				<TextInput
-					name="name"
-					value={inputValue}
-					onChange={setInputValue}
-					placeholder={name}
-					required
-				/>
-				<Container alignment="right">
-					<Button onClick={handleClose}>do not delete</Button>
-					<Button onClick={handleMutation} color="caution" disabled={inputValue !== name}>
-						delete
-					</Button>
-				</Container>
-			</>
+				<Form action={`/rooms/${roomId}`} method="DELETE">
+					<TextInput
+						name="name"
+						value={inputValue}
+						onChange={onChange}
+						placeholder="name"
+						required
+					/>
+					<ErrorTextList textList={errorMessageList} />
+					<Container alignment="right">
+						<Button onClick={handleClose}>do not delete</Button>
+						<Button type="submit" color="caution" disabled={!isValid}>
+							delete
+						</Button>
+					</Container>
+				</Form>
+			</Modal>
 		);
 	};
 
-	const successMessage = {
-		title: 'Success',
-		description: 'The room is deleted',
+	const loading = () => {
+		return (
+			<Modal isOpen={isOpen} onClose={handleClose}>
+				<LoadingIcon />
+			</Modal>
+		);
 	};
 
-	const failedMesssage = {
-		title: 'Failed',
-		description: 'Please try again later, or contact support if the issue persists',
+	const success = () => {
+		return (
+			<MessageModal
+				title={'Success'}
+				description={'The Room is deleted'}
+				isOpen={isOpen}
+				onClose={handleClose}
+			/>
+		);
 	};
 
-	return (
-		<MutationModal
-			isOpen={isOpen}
-			mutationState={mutationState}
-			handleMutation={handleMutation}
-			handleClose={handleClose}
-			mutationContent={mutationContent}
-			successMessage={successMessage}
-			failedMessage={failedMesssage}
-		/>
-	);
+	const failure = () => {
+		return (
+			<MessageModal
+				title={'Failed'}
+				description={'Please try again later, or contact support if the issue persists'}
+				isOpen={isOpen}
+				onClose={handleClose}
+			/>
+		);
+	};
+
+	return useMutationSwitcher(modalState, init, loading, success, failure);
 };

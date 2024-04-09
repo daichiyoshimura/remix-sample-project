@@ -4,9 +4,13 @@ import { useBinaryState } from '@hooks';
 import { roomAction } from '@actions';
 import { RoomLoaderResponse, roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
-import { ParticipantCardList, EditRoomModal, RoomProfile } from '@features';
-import { CreateRoomModal } from '@features/Rooms/V2/CreateRoomModal';
-import { DeleteRoomModal } from '@features/Rooms/V2/DeleteRoomModal';
+import {
+	ParticipantCardList,
+	EditRoomModal,
+	RoomProfile,
+	CreateRoomModal,
+	DeleteRoomModal,
+} from '@features';
 import { isDefined } from '@util/typeGuards';
 
 export const loader = roomLoader;
@@ -43,12 +47,6 @@ const RoomProfilePage = () => {
 						createdAt={createdAt}
 						onClick={toggleEditRoomModalOpen}
 					/>
-					<EditRoomModal
-						isOpen={isEditRoomModalOpen}
-						onClose={toggleEditRoomModalOpen}
-						name={name}
-						roomId={id}
-					/>
 				</Box>
 				<Box>
 					<ParticipantCardList participants={participants} />
@@ -68,6 +66,11 @@ const RoomProfilePage = () => {
 					isOpen={isCreateRoomModalOpen}
 					onClose={() => setCreateRoomModalOpen(false)}
 					state={isCreated !== undefined ? 'success' : 'init'}
+				/>
+				<EditRoomModal
+					isOpen={isEditRoomModalOpen}
+					onClose={toggleEditRoomModalOpen}
+					roomId={id}
 				/>
 			</ContentArea>
 			<Footer />

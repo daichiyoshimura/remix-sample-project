@@ -1,14 +1,17 @@
 import { z } from 'zod';
-import { useState } from 'react';
-import { useHttpClient } from '@hooks/useHttpClient';
+import { useEffect, useState } from 'react';
+import { Form, useNavigation } from '@remix-run/react';
+import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
 import {
 	Button,
 	Container,
-	MutationModal,
 	DescriptionText,
 	TitleText,
 	TextInput,
 	ErrorTextList,
+	LoadingIcon,
+	Modal,
+	MessageModal,
 } from '@components';
 
 const createRoomSchema = z.object({
@@ -24,15 +27,23 @@ type CreateRoomSchema = z.infer<typeof createRoomSchema>;
 export type CreateRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
+	state?: MutationState;
 };
 
-export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
+export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
+	{ isOpen, onClose, state = 'init' },
+) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [mutationState, resetMutationStatus, sendRequest] = useHttpClient();
+	const [modalState, setModalState] = useMutationState(state);
+	const navigation = useNavigation();
 
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
+
+	useEffect(() => {
+		console.log(JSON.stringify(navigation));
+	}, [navigation]);
 
 	const validate = (body: CreateRoomSchema): string[] => {
 		const result = createRoomSchema.safeParse(body);
@@ -42,16 +53,8 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 		return result.error.issues.map((issue) => issue.message);
 	};
 
-	const handleMutation = async () => {
-		sendRequest<CreateRoomSchema>({
-			path: 'rooms',
-			method: 'POST',
-			body: { name: inputValue },
-		});
-	};
-
 	const handleClose = () => {
-		resetMutationStatus();
+		setModalState('init');
 		setInputValue('');
 		onClose();
 	};
@@ -61,7 +64,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 		const isValid = errorMessageList.length === 0;
 
 		return (
-			<>
+			<Modal isOpen={isOpen} onClose={handleClose}>
 				<TitleText title={'Create Room'} />
 				<DescriptionText
 					description={`
@@ -71,43 +74,55 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 							hyphens, and spaces is not permitted.
 						`}
 				/>
-				<TextInput
-					name="name"
-					value={inputValue}
-					onChange={onChange}
-					placeholder="room name"
-					required
-				/>
-				<ErrorTextList textList={errorMessageList} />
-				<Container alignment="right">
-					<Button onClick={handleClose}>do not create</Button>
-					<Button onClick={handleMutation} disabled={!isValid} color="safe">
-						create
-					</Button>
-				</Container>
-			</>
+				<Form action="/rooms" method="POST">
+					<TextInput
+						name="name"
+						value={inputValue}
+						onChange={onChange}
+						placeholder="name"
+						required
+					/>
+					<ErrorTextList textList={errorMessageList} />
+					<Container alignment="right">
+						<Button onClick={handleClose}>do not create</Button>
+						<Button type="submit" color="safe" disabled={!isValid}>
+							create
+						</Button>
+					</Container>
+				</Form>
+			</Modal>
 		);
 	};
 
-	const successMessage = {
-		title: 'Success',
-		description: 'The Room is created',
+	const loading = () => {
+		return (
+			<Modal isOpen={isOpen} onClose={handleClose}>
+				<LoadingIcon />
+			</Modal>
+		);
 	};
 
-	const failedMesssage = {
-		title: 'Failed',
-		description: 'Please try again later, or contact support if the issue persists',
+	const success = () => {
+		return (
+			<MessageModal
+				title={'Success'}
+				description={'The Room is created'}
+				isOpen={isOpen}
+				onClose={handleClose}
+			/>
+		);
 	};
 
-	return (
-		<MutationModal
-			isOpen={isOpen}
-			mutationState={mutationState}
-			handleMutation={handleMutation}
-			handleClose={handleClose}
-			mutationContent={init}
-			successMessage={successMessage}
-			failedMessage={failedMesssage}
-		/>
-	);
+	const failure = () => {
+		return (
+			<MessageModal
+				title={'Failed'}
+				description={'Please try again later, or contact support if the issue persists'}
+				isOpen={isOpen}
+				onClose={handleClose}
+			/>
+		);
+	};
+
+	return useMutationSwitcher(modalState, init, loading, success, failure);
 };
