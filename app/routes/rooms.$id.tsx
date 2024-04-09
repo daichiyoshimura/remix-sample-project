@@ -1,5 +1,7 @@
-import { useLoaderData } from '@remix-run/react';
+import { useEffect } from 'react';
+import { useActionData, useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
+import { isDefined } from '@util';
 import { roomAction } from '@actions';
 import { roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
@@ -11,6 +13,13 @@ export const action = roomAction;
 
 const RoomProfilePage = () => {
 	const { id, name, createdAt, participants } = useLoaderData<typeof loader>();
+
+	// TODO: refactoring
+	const actionData = useActionData<typeof action>();
+	useEffect(() => {
+		if (!isDefined(actionData)) return;
+		closeEditRoomModal();
+	}, [actionData]);
 
 	const {
 		state: isEditRoomModalOpen,
