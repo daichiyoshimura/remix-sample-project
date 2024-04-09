@@ -13,7 +13,11 @@ export const action = roomsAction;
 const RoomsPage = () => {
 	const loaderData = useLoaderData<typeof loader>();
 
-	const [isCreateRoomModalOpen, toggleCreateRoomModalOpen] = useBinaryState(false);
+	const {
+		state: isCreateRoomModalOpen,
+		on: openCreateRoomModal,
+		off: closeCreateRoomModal,
+	} = useBinaryState(false);
 
 	return (
 		<>
@@ -29,12 +33,9 @@ const RoomsPage = () => {
 					/>
 				</Box>
 				<Container>
-					<Button onClick={toggleCreateRoomModalOpen}>Create Room</Button>
+					<Button onClick={openCreateRoomModal}>Create Room</Button>
 				</Container>
-				<CreateRoomModal
-					isOpen={isCreateRoomModalOpen}
-					onClose={toggleCreateRoomModalOpen}
-				/>
+				<CreateRoomModal isOpen={isCreateRoomModalOpen} onClose={closeCreateRoomModal} />
 			</ContentArea>
 			<Footer />
 		</>

@@ -13,8 +13,16 @@ export const action = roomAction;
 const RoomProfilePage = () => {
 	const { roomProfile } = useLoaderData<typeof loader>();
 
-	const [isEditRoomModalOpen, toggleEditRoomModalOpen] = useBinaryState(false);
-	const [isDeleteRoomModalOpen, toggleDeleteRoomModalOpen] = useBinaryState(false);
+	const {
+		state: isEditRoomModalOpen,
+		on: openEditRoomModal,
+		off: closeEditRoomModal,
+	} = useBinaryState(false);
+	const {
+		state: isDeleteRoomModalOpen,
+		on: openDeleteRoomModal,
+		off: closeDeleteRoomModal,
+	} = useBinaryState(false);
 
 	if (!isDefined(roomProfile)) {
 		// TODO Error Page
@@ -31,7 +39,7 @@ const RoomProfilePage = () => {
 						id={id}
 						name={name}
 						createdAt={createdAt}
-						onClick={toggleEditRoomModalOpen}
+						onClick={openEditRoomModal}
 					/>
 				</Box>
 				<Box>
@@ -39,18 +47,18 @@ const RoomProfilePage = () => {
 				</Box>
 				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
-					<Button color={'caution'} onClick={toggleDeleteRoomModalOpen}>
+					<Button color="caution" onClick={openDeleteRoomModal}>
 						Delete This Room
 					</Button>
 				</Container>
 				<DeleteRoomModal
 					isOpen={isDeleteRoomModalOpen}
-					onClose={toggleDeleteRoomModalOpen}
+					onClose={closeDeleteRoomModal}
 					roomId={id}
 				/>
 				<EditRoomModal
 					isOpen={isEditRoomModalOpen}
-					onClose={toggleEditRoomModalOpen}
+					onClose={closeEditRoomModal}
 					roomId={id}
 				/>
 			</ContentArea>

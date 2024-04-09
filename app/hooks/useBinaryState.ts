@@ -1,9 +1,14 @@
 import { useState } from 'react';
 
-export const useBinaryState = (init: boolean): [boolean, () => void] => {
-	const [flag, setFlag] = useState(init);
-	const toggle = () => {
-		setFlag(!flag);
+export const useBinaryState = (
+	init: boolean,
+): { state: boolean; on: () => void; off: () => void } => {
+	const [state, setState] = useState<boolean>(init);
+	const on = () => {
+		setState(true);
 	};
-	return [flag, toggle];
+	const off = () => {
+		setState(false);
+	};
+	return { state: state, on: on, off: off };
 };
