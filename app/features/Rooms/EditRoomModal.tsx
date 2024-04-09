@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { useEffect, useState } from 'react';
-import { Form, useNavigation } from '@remix-run/react';
+import { useState } from 'react';
+import { Form } from '@remix-run/react';
 import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
 import {
 	Button,
@@ -36,15 +36,10 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = (
 ) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const [modalState, setModalState] = useMutationState(state);
-	const navigation = useNavigation();
 
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
-
-	useEffect(() => {
-		console.log(JSON.stringify(navigation));
-	}, [navigation]);
 
 	const validate = (body: EditRoomSchema): string[] => {
 		const result = editRoomSchema.safeParse(body);
@@ -84,9 +79,9 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = (
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<Container alignment="right">
-						<Button onClick={handleClose}>do not create</Button>
+						<Button onClick={handleClose}>Do not save</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
-							create
+							Save
 						</Button>
 					</Container>
 				</Form>

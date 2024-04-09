@@ -2,11 +2,23 @@ import { render, fireEvent } from '@testing-library/react';
 import { CreateRoomModal } from '@features';
 
 describe('CreateRoomModal', () => {
+	vi.mock('@remix-run/react', () => {
+		const useNavigate = vi.fn();
+		const form = vi
+			.fn()
+			.mockImplementation(({ children }: { children: React.ReactElement }) => {
+				return children;
+			});
+		return {
+			useNavigate,
+			Form: form,
+		};
+	});
 	it('closes the modal when "do not create" button is clicked', () => {
 		const handleClose = vi.fn();
 		const { getByText } = render(<CreateRoomModal isOpen onClose={handleClose} />);
 
-		const doNotCreateButton = getByText('do not create');
+		const doNotCreateButton = getByText('Do not create');
 		fireEvent.click(doNotCreateButton);
 
 		expect(handleClose).toHaveBeenCalled();
@@ -16,7 +28,7 @@ describe('CreateRoomModal', () => {
 		const handleClose = vi.fn();
 		const { getByText } = render(<CreateRoomModal isOpen onClose={handleClose} />);
 
-		const createButton = getByText('create') as HTMLButtonElement;
+		const createButton = getByText('Create') as HTMLButtonElement;
 		expect(createButton.disabled).toBe(true);
 	});
 
@@ -26,10 +38,10 @@ describe('CreateRoomModal', () => {
 			<CreateRoomModal isOpen onClose={handleClose} />,
 		);
 
-		const input = getByPlaceholderText('room name');
-		fireEvent.change(input, { target: { value: 'Test Room' } });
+		const input = getByPlaceholderText('name');
+		fireEvent.change(input, { target: { value: 'name' } });
 
-		const createButton = getByText('create') as HTMLButtonElement;
+		const createButton = getByText('Create') as HTMLButtonElement;
 		expect(createButton.disabled).toBe(false);
 	});
 });

@@ -4,7 +4,7 @@ import { TextInput } from '@components';
 describe('TextInput', () => {
 	it('renders correctly', () => {
 		const { getByPlaceholderText } = render(
-			<TextInput value="" onChange={() => {}} placeholder="Enter text" />,
+			<TextInput value="" onChange={() => {}} placeholder="Enter text" name={'name'} />,
 		);
 		const inputElement = getByPlaceholderText('Enter text');
 		expect(inputElement).toBeDefined();
@@ -13,7 +13,7 @@ describe('TextInput', () => {
 	it('calls onChange handler correctly', () => {
 		const onChangeMock = vi.fn();
 		const { getByPlaceholderText } = render(
-			<TextInput value="" onChange={onChangeMock} placeholder="Enter text" />,
+			<TextInput value="" onChange={onChangeMock} placeholder="Enter text" name={'name'} />,
 		);
 		const inputElement = getByPlaceholderText('Enter text');
 		fireEvent.change(inputElement, { target: { value: 'test input' } });

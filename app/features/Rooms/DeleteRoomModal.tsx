@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { useEffect, useState } from 'react';
-import { Form, useNavigation } from '@remix-run/react';
+import { useState } from 'react';
+import { Form } from '@remix-run/react';
 import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
 import {
 	Button,
@@ -36,15 +36,10 @@ export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
 ) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const [modalState, setModalState] = useMutationState(state);
-	const navigation = useNavigation();
 
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
-
-	useEffect(() => {
-		console.log(JSON.stringify(navigation));
-	}, [navigation]);
 
 	const validate = (body: DeleteRoomSchema): string[] => {
 		const result = deleteRoomSchema.safeParse(body);
@@ -83,9 +78,9 @@ export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<Container alignment="right">
-						<Button onClick={handleClose}>do not delete</Button>
+						<Button onClick={handleClose}>Do not delete</Button>
 						<Button type="submit" color="caution" disabled={!isValid}>
-							delete
+							Delete
 						</Button>
 					</Container>
 				</Form>
