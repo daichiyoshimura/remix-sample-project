@@ -1,17 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useActionData, useLoaderData, useLocation, useNavigate } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { isBoolean, isDefined } from '@util';
+import { isDefined } from '@util';
 import { roomAction } from '@actions';
 import { roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
-import {
-	ParticipantCardList,
-	EditRoomModal,
-	RoomProfile,
-	CreateRoomModal,
-	DeleteRoomModal,
-} from '@features';
+import { ParticipantCardList, EditRoomModal, RoomProfile, DeleteRoomModal } from '@features';
 
 export const loader = roomLoader;
 
@@ -19,27 +12,9 @@ export const action = roomAction;
 
 const RoomProfilePage = () => {
 	const { roomProfile } = useLoaderData<typeof loader>();
-	const actionData = useActionData<typeof action>();
 
-	const [isCreateRoomModalOpen, setCreateRoomModalOpen] = useState<boolean>(false);
 	const [isEditRoomModalOpen, toggleEditRoomModalOpen] = useBinaryState(false);
 	const [isDeleteRoomModalOpen, toggleDeleteRoomModalOpen] = useBinaryState(false);
-	const { state } = useLocation();
-	const navigate = useNavigate();
-
-	// delete room modal effect
-	useEffect(() => {
-		if (!isDefined(actionData)) return;
-		navigate('../', { state: { isDeleted: true } });
-		// eslint-disable-next-line
-	}, [actionData]);
-
-	// create room modal effect
-	useEffect(() => {
-		if (!isDefined(state) || !isBoolean(state.isCreated)) return;
-		const isCreated = state.isCreated as boolean;
-		setCreateRoomModalOpen(isCreated);
-	}, [state]);
 
 	if (!isDefined(roomProfile)) {
 		// TODO Error Page
@@ -72,11 +47,6 @@ const RoomProfilePage = () => {
 					isOpen={isDeleteRoomModalOpen}
 					onClose={toggleDeleteRoomModalOpen}
 					roomId={id}
-				/>
-				<CreateRoomModal
-					isOpen={isCreateRoomModalOpen}
-					onClose={() => setCreateRoomModalOpen(false)}
-					state={'success'}
 				/>
 				<EditRoomModal
 					isOpen={isEditRoomModalOpen}
