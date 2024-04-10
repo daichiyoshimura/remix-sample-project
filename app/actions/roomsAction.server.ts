@@ -2,6 +2,7 @@ import { ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/no
 import { Room, RoomAttributes, postRoom } from '@api';
 import {
 	MappedTypes,
+	Message,
 	isActionError,
 	isLoaderError,
 	isString,
@@ -12,7 +13,7 @@ import { invalidMethodAction } from '@actions';
 
 export const roomsAction = async (
 	args: ActionFunctionArgs,
-): Promise<TypedResponse<RoomsActionResponse>> => {
+): Promise<TypedResponse<RoomsActionResponse | Message>> => {
 	switch (args.request.method) {
 		case 'POST':
 			if (
@@ -23,7 +24,7 @@ export const roomsAction = async (
 			}
 			return await postRoomsAction(args);
 		default:
-			throw await invalidMethodAction();
+			return await invalidMethodAction();
 	}
 };
 
@@ -35,7 +36,7 @@ export type RoomsActionResponse = MappedTypes<{
 
 const postRoomsAction = async (
 	{ request, params }: ActionFunctionArgs,
-): Promise<TypedResponse<RoomsActionResponse>> => {
+): Promise<TypedResponse<RoomsActionResponse | Message>> => {
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const body: RoomActionRequest = await request.json();
@@ -52,13 +53,13 @@ const postRoomsAction = async (
 		const message = isLoaderError(error) ? error.message : 'unexpected error';
 		const response = { message: message };
 		writeErrorLog(response);
-		throw json(response, 500);
+		return json(response, 500);
 	}
 };
 
 const postRoomsFormAction = async (
 	{ request, params }: ActionFunctionArgs,
-): Promise<TypedResponse<RoomsActionResponse>> => {
+): Promise<TypedResponse<RoomsActionResponse | Message>> => {
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const formData = await request.formData();
@@ -80,6 +81,6 @@ const postRoomsFormAction = async (
 		const message = isActionError(error) ? error.message : 'unexpected error';
 		const response = { message: message };
 		writeErrorLog(response);
-		throw json(response, 500);
+		return json(response, 500);
 	}
 };

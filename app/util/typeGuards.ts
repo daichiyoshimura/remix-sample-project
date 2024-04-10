@@ -1,7 +1,8 @@
 import { ActionError, LoaderError } from '@util';
 
-export const isDefined = <T>(value: T | undefined | null): value is T => {
-	return value !== undefined && value !== null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isDefined = <T>(value: any): value is T => {
+	return (value as T) !== undefined && value !== null;
 };
 
 export const isString = isDefined<string>;

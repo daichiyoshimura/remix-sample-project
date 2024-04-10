@@ -28,10 +28,11 @@ export type CreateRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
 	state?: MutationState;
+	serverErrorMessageList?: string[];
 };
 
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
-	{ isOpen, onClose, state = 'init' },
+	{ isOpen, onClose, state = 'init', serverErrorMessageList = [] },
 ) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const [modalState, setModalState] = useMutationState(state);
@@ -80,6 +81,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
 						required
 					/>
 					<ErrorTextList textList={errorMessageList} />
+					<ErrorTextList textList={serverErrorMessageList} />
 					<Container alignment="right">
 						<Button onClick={handleClose}>Do not create</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
