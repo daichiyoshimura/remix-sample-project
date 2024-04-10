@@ -1,7 +1,8 @@
 import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
 import { Room, RoomAttributes, postRoom } from '@api';
-import { MappedTypes, Message, isString, writeRequestLog } from '@util';
-import { internalServerErrorAction, invalidMethodAction } from '@actions';
+import { MappedTypes, Message, isNull, isString, writeRequestLog } from '@util';
+import { internalServerErrorAction, invalidMethodAction, validationErrorAction } from '@actions';
+import { getFormDataValue } from '@util/server';
 
 export const roomsAction = async (
 	args: ActionFunctionArgs,
@@ -26,8 +27,10 @@ const postRoomsAction = async (
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const formData = await request.formData();
-		const _name = formData.get('name');
-		const name = _name !== null ? _name : '';
+		const name = getFormDataValue(formData, 'name');
+		if (isNull(name)) {
+			return validationErrorAction('name is required');
+		}
 		const body: RoomActionRequest = {
 			name: name.toString(),
 		};
