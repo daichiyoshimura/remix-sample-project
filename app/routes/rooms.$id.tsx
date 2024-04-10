@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useActionData, useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { isDefined } from '@util';
+import { Message, isDefined } from '@util';
 import { roomAction } from '@actions';
 import { roomLoader } from '@loaders';
 import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
@@ -12,7 +12,11 @@ export const loader = roomLoader;
 export const action = roomAction;
 
 const RoomProfilePage = () => {
-	const { id, name, createdAt, participants } = useLoaderData<typeof loader>();
+	const loaderData = useLoaderData<typeof loader>();
+	if (isDefined<Message>(loaderData)) {
+		throw Error(loaderData.message);
+	}
+	const { id, name, createdAt, participants } = loaderData;
 
 	// TODO: refactoring
 	const actionData = useActionData<typeof action>();

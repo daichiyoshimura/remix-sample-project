@@ -11,7 +11,11 @@ export const loader = roomsLoader;
 export const action = roomsAction;
 
 const RoomsPage = () => {
-	const { rooms } = useLoaderData<typeof loader>();
+	const loaderData = useLoaderData<typeof loader>();
+	if (isDefined<Message>(loaderData)) {
+		throw Error(loaderData.message);
+	}
+	const { rooms } = loaderData;
 	const actionData = useActionData<typeof action>();
 	const serverErrorMessageList = isDefined<Message>(actionData) ? [actionData.message] : [];
 	const {
