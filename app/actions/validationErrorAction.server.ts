@@ -8,5 +8,5 @@ export const validationErrorAction = async (
 ): Promise<TypedResponse<ValidationErrorActionActionResponse>> => {
 	const response = { message: message };
 	writeErrorLog(response);
-	return json(response, 404);
+	return json(response, 400);
 };
