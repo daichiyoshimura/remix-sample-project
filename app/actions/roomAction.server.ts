@@ -1,20 +1,19 @@
-import { ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
+import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
 import { deleteRoom, patchRoom } from '@api';
+import { Message, isNull, isString, writeRequestLog } from '@util';
 import {
-	MappedTypes,
-	Message,
-	isLoaderError,
-	isString,
-	writeErrorLog,
-	writeRequestLog,
-} from '@util';
-import { InvalidMethodActionResponse, invalidMethodAction } from '@actions';
+	InvalidMethodActionResponse,
+	InternalSeverErrorActionResponse,
+	internalServerErrorAction,
+	invalidMethodAction,
+	ValidationErrorActionActionResponse,
+	validationErrorAction,
+} from '@actions';
+import { getFormDataValue } from '@util/server';
 
-export const roomAction = async (
-	args: ActionFunctionArgs,
-): Promise<
-	TypedResponse<DeleteRoomActionResponse | PatchRoomActionResponse | InvalidMethodActionResponse>
-> => {
+type Responses = DeleteRoomActionResponse | PatchRoomActionResponse;
+
+export const roomAction = async (args: ActionFunctionArgs): Promise<TypedResponse<Responses>> => {
 	switch (args.request.method) {
 		case 'DELETE':
 			return await deleteRoomAction(args);
@@ -25,7 +24,10 @@ export const roomAction = async (
 	}
 };
 
-type DeleteRoomActionResponse = MappedTypes<Message>;
+type DeleteRoomActionResponse =
+	| Message
+	| InvalidMethodActionResponse
+	| InternalSeverErrorActionResponse;
 
 const deleteRoomAction = async (
 	{ request, params }: ActionFunctionArgs,
@@ -45,14 +47,15 @@ const deleteRoomAction = async (
 		});
 		return redirect(`/rooms`);
 	} catch (error) {
-		const message = isLoaderError(error) ? error.message : 'unexpected error';
-		const response = { message: message };
-		writeErrorLog(response);
-		return json(response, 500);
+		return internalServerErrorAction(error);
 	}
 };
 
-type PatchRoomActionResponse = Message;
+type PatchRoomActionResponse =
+	| never
+	| InvalidMethodActionResponse
+	| ValidationErrorActionActionResponse
+	| InternalSeverErrorActionResponse;
 
 const patchRoomAction = async (
 	{ request, params }: ActionFunctionArgs,
@@ -61,8 +64,10 @@ const patchRoomAction = async (
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const roomId: string = isString(params.id) ? params.id : '';
 		const formData = await request.formData();
-		const _name = formData.get('name');
-		const name = _name !== null ? (_name as string) : '';
+		const name = getFormDataValue(formData, 'name');
+		if (isNull(name)) {
+			return validationErrorAction('name is required');
+		}
 		const patchRoomRequest = {
 			accountId: accountId,
 			room: {
@@ -77,11 +82,11 @@ const patchRoomAction = async (
 			request: patchRoomRequest,
 			response: patchRoomResponse,
 		});
-		return json({ message: 'success on mock' }, 200);
+		return new Response(null, {
+			status: 204,
+			statusText: 'No Content',
+		});
 	} catch (error) {
-		const message = isLoaderError(error) ? error.message : 'unexpected error';
-		const response = { message: message };
-		writeErrorLog(response);
-		return json(response, 500);
+		return internalServerErrorAction(error);
 	}
 };

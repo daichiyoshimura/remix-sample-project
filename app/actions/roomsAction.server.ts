@@ -1,14 +1,7 @@
-import { ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
+import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
 import { Room, RoomAttributes, postRoom } from '@api';
-import {
-	MappedTypes,
-	Message,
-	isActionError,
-	isString,
-	writeErrorLog,
-	writeRequestLog,
-} from '@util';
-import { invalidMethodAction } from '@actions';
+import { MappedTypes, Message, isString, writeRequestLog } from '@util';
+import { internalServerErrorAction, invalidMethodAction } from '@actions';
 
 export const roomsAction = async (
 	args: ActionFunctionArgs,
@@ -48,11 +41,6 @@ const postRoomsAction = async (
 		});
 		return redirect(`/rooms/${postRoomResponse.id}`);
 	} catch (error) {
-		const message = isActionError(error)
-			? error.message
-			: 'Please try again later, or contact support if the issue persists';
-		const response = { message: message };
-		writeErrorLog(response);
-		return json(response, 500);
+		return internalServerErrorAction(error);
 	}
 };
