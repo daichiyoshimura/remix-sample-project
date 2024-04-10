@@ -12,7 +12,7 @@ export const action = roomsAction;
 
 const RoomsPage = () => {
 	const loaderData = useLoaderData<typeof loader>();
-	if (isDefined<Message>(loaderData)) {
+	if ('message' in loaderData) {
 		throw Error(loaderData.message);
 	}
 	const { rooms } = loaderData;

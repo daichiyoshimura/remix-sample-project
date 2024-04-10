@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form, useNavigation } from '@remix-run/react';
+import { Form, useActionData, useNavigation } from '@remix-run/react';
+import { RoomActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -31,6 +32,10 @@ export type EditRoomModalProps = {
 export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const navigation = useNavigation();
+
+	const actionData = useActionData<RoomActionResponses>();
+	const serverErrorMessageList = actionData != null ? [actionData.message] : [];
+
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
@@ -48,43 +53,60 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 		onClose();
 	};
 
-	if (navigation.state === ('loading' || 'submitting')) {
+	const render = () => {
+		if (navigation.state === ('loading' || 'submitting')) {
+			return <LoadingIcon />;
+		}
+
+		if (navigation.state === 'idle' && actionData != null) {
+			return (
+				<>
+					<TitleText title={'Success'} />
+					<DescriptionText description={'The Room is edited'} />
+					<Container alignment="right">
+						<Button onClick={onClose}>close</Button>
+					</Container>
+				</>
+			);
+		}
+
 		return (
-			<Modal isOpen={isOpen} onClose={handleClose}>
-				<LoadingIcon />
-			</Modal>
+			<>
+				<TitleText title={'Edit Room'} />
+				<DescriptionText
+					description={`
+							Please enter only alphanumeric characters in this field. 
+							It is limited to a maximum length of 64 characters. 
+							The use of symbols such as underscores, hyphens, and spaces is not permitted.
+						`}
+				/>
+				<Form action={`/rooms/${roomId}`} method="PATCH">
+					<TextInput
+						name="name"
+						value={inputValue}
+						onChange={onChange}
+						placeholder="name"
+						required
+					/>
+					<ErrorTextList textList={errorMessageList} />
+					<ErrorTextList textList={serverErrorMessageList} />
+					<Container alignment="right">
+						<Button onClick={handleClose}>Do not save</Button>
+						<Button type="submit" color="safe" disabled={!isValid}>
+							Save
+						</Button>
+					</Container>
+				</Form>
+			</>
 		);
-	}
+	};
 
 	const errorMessageList = validate({ name: inputValue });
 	const isValid = errorMessageList.length === 0;
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleClose}>
-			<TitleText title={'Edit Room'} />
-			<DescriptionText
-				description={`
-							Please enter only alphanumeric characters in this field. 
-							It is limited to a maximum length of 64 characters. 
-							The use of symbols such as underscores, hyphens, and spaces is not permitted.
-						`}
-			/>
-			<Form action={`/rooms/${roomId}`} method="PATCH">
-				<TextInput
-					name="name"
-					value={inputValue}
-					onChange={onChange}
-					placeholder="name"
-					required
-				/>
-				<ErrorTextList textList={errorMessageList} />
-				<Container alignment="right">
-					<Button onClick={handleClose}>Do not save</Button>
-					<Button type="submit" color="safe" disabled={!isValid}>
-						Save
-					</Button>
-				</Container>
-			</Form>
+			{render()}
 		</Modal>
 	);
 };
