@@ -31,7 +31,6 @@ export type EditRoomModalProps = {
 export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const navigation = useNavigation();
-
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
