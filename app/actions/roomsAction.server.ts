@@ -4,7 +4,6 @@ import {
 	MappedTypes,
 	Message,
 	isActionError,
-	isLoaderError,
 	isString,
 	writeErrorLog,
 	writeRequestLog,
@@ -16,12 +15,6 @@ export const roomsAction = async (
 ): Promise<TypedResponse<RoomsActionResponse | Message>> => {
 	switch (args.request.method) {
 		case 'POST':
-			if (
-				args.request.headers.get('Content-Type') ===
-				'application/x-www-form-urlencoded;charset=UTF-8'
-			) {
-				return await postRoomsFormAction(args);
-			}
 			return await postRoomsAction(args);
 		default:
 			return await invalidMethodAction();
@@ -35,29 +28,6 @@ export type RoomsActionResponse = MappedTypes<{
 }>;
 
 const postRoomsAction = async (
-	{ request, params }: ActionFunctionArgs,
-): Promise<TypedResponse<RoomsActionResponse | Message>> => {
-	try {
-		const accountId: string = isString(params.accountId) ? params.accountId : '';
-		const body: RoomActionRequest = await request.json();
-		const postRoomRequest = { accountId: accountId, roomAttributes: body };
-		const postRoomResponse = await postRoom(postRoomRequest);
-		writeRequestLog({
-			path: '/rooms',
-			method: request.method,
-			request: postRoomRequest,
-			response: postRoomResponse,
-		});
-		return json({ room: postRoomResponse }, 200);
-	} catch (error) {
-		const message = isLoaderError(error) ? error.message : 'unexpected error';
-		const response = { message: message };
-		writeErrorLog(response);
-		return json(response, 500);
-	}
-};
-
-const postRoomsFormAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<RoomsActionResponse | Message>> => {
 	try {
@@ -78,7 +48,9 @@ const postRoomsFormAction = async (
 		});
 		return redirect(`/rooms/${postRoomResponse.id}`);
 	} catch (error) {
-		const message = isActionError(error) ? error.message : 'unexpected error';
+		const message = isActionError(error)
+			? error.message
+			: 'Please try again later, or contact support if the issue persists';
 		const response = { message: message };
 		writeErrorLog(response);
 		return json(response, 500);
