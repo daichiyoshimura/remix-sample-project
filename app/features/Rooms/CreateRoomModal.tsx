@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form, useNavigate } from '@remix-run/react';
-import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
+import { Form, useActionData, useNavigation } from '@remix-run/react';
+import { isDefined, validateZodObject } from '@util';
+import { RoomsPageActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -11,7 +12,6 @@ import {
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
-	MessageModal,
 } from '@components';
 
 const createRoomSchema = z.object({
@@ -22,47 +22,35 @@ const createRoomSchema = z.object({
 		.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces'),
 });
 
-type CreateRoomSchema = z.infer<typeof createRoomSchema>;
-
 export type CreateRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
-	state?: MutationState;
-	serverErrorMessageList?: string[];
 };
 
-export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
-	{ isOpen, onClose, state = 'init', serverErrorMessageList = [] },
-) => {
+export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [modalState, setModalState] = useMutationState(state);
-	const navigate = useNavigate();
+	const { state } = useNavigation();
+	const actionData = useActionData<RoomsPageActionResponses>();
+	const isDefinedActionData = isDefined<RoomsPageActionResponses>(actionData);
+	const serverErrorMessageList = isDefinedActionData ? [actionData.message] : [];
+	const [isValid, errorMessageList] = validateZodObject(createRoomSchema, { name: inputValue });
 
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
 
-	const validate = (body: CreateRoomSchema): string[] => {
-		const result = createRoomSchema.safeParse(body);
-		if (result.success) {
-			return [];
-		}
-		return result.error.issues.map((issue) => issue.message);
-	};
-
 	const handleClose = () => {
-		setModalState('init');
 		setInputValue('');
-		navigate('.', { replace: true });
 		onClose();
 	};
 
-	const init = () => {
-		const errorMessageList = validate({ name: inputValue });
-		const isValid = errorMessageList.length === 0;
+	const render = () => {
+		if (state === ('loading' || 'submitting')) {
+			return <LoadingIcon />;
+		}
 
 		return (
-			<Modal isOpen={isOpen} onClose={handleClose}>
+			<>
 				<TitleText title={'Create Room'} />
 				<DescriptionText
 					description={`
@@ -89,39 +77,13 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = (
 						</Button>
 					</Container>
 				</Form>
-			</Modal>
+			</>
 		);
 	};
 
-	const loading = () => {
-		return (
-			<Modal isOpen={isOpen} onClose={handleClose}>
-				<LoadingIcon />
-			</Modal>
-		);
-	};
-
-	const success = () => {
-		return (
-			<MessageModal
-				title={'Success'}
-				description={'The Room is created'}
-				isOpen={isOpen}
-				onClose={handleClose}
-			/>
-		);
-	};
-
-	const failure = () => {
-		return (
-			<MessageModal
-				title={'Failed'}
-				description={'Please try again later, or contact support if the issue persists'}
-				isOpen={isOpen}
-				onClose={handleClose}
-			/>
-		);
-	};
-
-	return useMutationSwitcher(modalState, init, loading, success, failure);
+	return (
+		<Modal isOpen={isOpen} onClose={handleClose}>
+			{render()}
+		</Modal>
+	);
 };
