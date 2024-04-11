@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
-import { Room, RoomAttributes, postRoom } from '@api';
-import { MappedTypes, isString, writeRequestLog } from '@util';
+import { RoomAttributes, postRoom } from '@api';
+import { isString, writeRequestLog } from '@util';
 import {
 	InternalSeverErrorActionResponse,
 	InvalidMethodErrorActionResponse,
@@ -25,13 +25,7 @@ export const roomsPageAction = async (
 
 type PostRoomActionRequest = RoomAttributes;
 
-type PostRoomActionSuccessResponse = MappedTypes<{
-	room: Room;
-}>;
-
-export type PostRoomActionResponse =
-	| PostRoomActionSuccessResponse
-	| InternalSeverErrorActionResponse;
+export type PostRoomActionResponse = never | InternalSeverErrorActionResponse;
 
 const postRoomsAction = async (
 	{ request, params }: ActionFunctionArgs,

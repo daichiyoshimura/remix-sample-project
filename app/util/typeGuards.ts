@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isDefined = <T>(value: unknown): value is T => {
+export const isDefined = <T>(value: T | null | undefined): value is NonNullable<T> => {
 	return value != null;
 };
 
@@ -9,7 +8,6 @@ export const isNumber = isDefined<number>;
 
 export const isBoolean = isDefined<boolean>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isError = (error: unknown): error is Error => {
 	return error instanceof Error;
 };
