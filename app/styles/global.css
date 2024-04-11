@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-
-/* ページ全体の背景色を設定 */
-body {
-	background-color: 'bg-background';
-}
-
-@tailwind utilities;
