@@ -2,16 +2,19 @@ import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
 import { deleteRoom, patchRoom } from '@api';
 import { isString, writeRequestLog } from '@util';
 import {
-	InvalidMethodActionResponse,
+	InvalidMethodErrorActionResponse,
 	InternalSeverErrorActionResponse,
 	internalServerErrorAction,
-	invalidMethodAction,
+	invalidMethodErrorAction,
 	ValidationErrorActionActionResponse,
 	validationErrorAction,
 } from '@actions';
 import { getFormDataValue } from '@util/server';
 
-export type RoomPageActionResponses = DeleteRoomActionResponse | PatchRoomActionResponse;
+export type RoomPageActionResponses =
+	| DeleteRoomActionResponse
+	| PatchRoomActionResponse
+	| InvalidMethodErrorActionResponse;
 
 export const roomPageAction = async (
 	args: ActionFunctionArgs,
@@ -22,14 +25,11 @@ export const roomPageAction = async (
 		case 'PATCH':
 			return await patchRoomAction(args);
 		default:
-			return await invalidMethodAction();
+			return await invalidMethodErrorAction();
 	}
 };
 
-type DeleteRoomActionResponse =
-	| never
-	| InvalidMethodActionResponse
-	| InternalSeverErrorActionResponse;
+type DeleteRoomActionResponse = never | InternalSeverErrorActionResponse;
 
 const deleteRoomAction = async (
 	{ request, params }: ActionFunctionArgs,

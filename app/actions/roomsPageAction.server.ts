@@ -1,29 +1,41 @@
 import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
 import { Room, RoomAttributes, postRoom } from '@api';
-import { MappedTypes, Message, isString, writeRequestLog } from '@util';
-import { internalServerErrorAction, invalidMethodAction, validationErrorAction } from '@actions';
+import { MappedTypes, isString, writeRequestLog } from '@util';
+import {
+	InternalSeverErrorActionResponse,
+	InvalidMethodErrorActionResponse,
+	internalServerErrorAction,
+	invalidMethodErrorAction,
+	validationErrorAction,
+} from '@actions';
 import { getFormDataValue } from '@util/server';
 
-export const roomsAction = async (
+export type RoomsPageActionResponses = PostRoomActionResponse | InvalidMethodErrorActionResponse;
+
+export const roomsPageAction = async (
 	args: ActionFunctionArgs,
-): Promise<TypedResponse<RoomsActionResponse | Message>> => {
+): Promise<TypedResponse<RoomsPageActionResponses>> => {
 	switch (args.request.method) {
 		case 'POST':
 			return await postRoomsAction(args);
 		default:
-			return await invalidMethodAction();
+			return await invalidMethodErrorAction();
 	}
 };
 
-type RoomActionRequest = RoomAttributes;
+type PostRoomActionRequest = RoomAttributes;
 
-export type RoomsActionResponse = MappedTypes<{
+type PostRoomActionSuccessResponse = MappedTypes<{
 	room: Room;
 }>;
 
+export type PostRoomActionResponse =
+	| PostRoomActionSuccessResponse
+	| InternalSeverErrorActionResponse;
+
 const postRoomsAction = async (
 	{ request, params }: ActionFunctionArgs,
-): Promise<TypedResponse<RoomsActionResponse | Message>> => {
+): Promise<TypedResponse<PostRoomActionResponse>> => {
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const formData = await request.formData();
@@ -31,7 +43,7 @@ const postRoomsAction = async (
 		if (!isString(name)) {
 			return validationErrorAction('name is required');
 		}
-		const body: RoomActionRequest = {
+		const body: PostRoomActionRequest = {
 			name: name.toString(),
 		};
 		const postRoomRequest = { accountId: accountId, roomAttributes: body };
