@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { useState } from 'react';
 import { Form, useActionData, useNavigation, useRevalidator } from '@remix-run/react';
+import { isDefined } from '@util';
 import { RoomPageActionResponses } from '@actions';
 import {
 	Button,
@@ -12,6 +13,7 @@ import {
 	LoadingIcon,
 	Modal,
 } from '@components';
+import { validateZodObject } from '@util/validator';
 
 const editRoomSchema = z.object({
 	name: z
@@ -21,8 +23,6 @@ const editRoomSchema = z.object({
 		.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces'),
 });
 
-type EditRoomSchema = z.infer<typeof editRoomSchema>;
-
 export type EditRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
@@ -31,21 +31,15 @@ export type EditRoomModalProps = {
 
 export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const navigation = useNavigation();
+	const { state } = useNavigation();
 	const { revalidate } = useRevalidator();
 	const actionData = useActionData<RoomPageActionResponses>();
-	const serverErrorMessageList = actionData != null ? [actionData.message] : [];
+	const isDefinedActionData = isDefined<RoomPageActionResponses>(actionData);
+	const serverErrorMessageList = isDefinedActionData ? [actionData.message] : [];
+	const [isValid, errorMessageList] = validateZodObject(editRoomSchema, { name: inputValue });
 
 	const onChange = (value: string) => {
 		setInputValue(value);
-	};
-
-	const validate = (body: EditRoomSchema): string[] => {
-		const result = editRoomSchema.safeParse(body);
-		if (result.success) {
-			return [];
-		}
-		return result.error.issues.map((issue) => issue.message);
 	};
 
 	const handleClose = () => {
@@ -55,11 +49,11 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 	};
 
 	const render = () => {
-		if (navigation.state === ('loading' || 'submitting')) {
+		if (state === ('loading' || 'submitting')) {
 			return <LoadingIcon />;
 		}
 
-		if (navigation.state === 'idle' && actionData != null) {
+		if (state === 'idle' && isDefinedActionData) {
 			return (
 				<>
 					<TitleText title={'Success'} />
@@ -101,9 +95,6 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 			</>
 		);
 	};
-
-	const errorMessageList = validate({ name: inputValue });
-	const isValid = errorMessageList.length === 0;
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleClose}>
