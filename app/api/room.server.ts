@@ -22,7 +22,7 @@ export const getRoom = async ({ id, accountId }: GetRoomRequest): Promise<GetRoo
 	if (isStageDev()) {
 		return {
 			id: '1',
-			name: 'Room 1',
+			name: 'Room1',
 			createdAt: '2024-03-24 00:51:00',
 			updatedAt: '2024-03-24 00:51:00',
 		};
@@ -52,19 +52,19 @@ export const getRoomList = async (
 			rooms: [
 				{
 					id: '1',
-					name: 'Room 1',
+					name: 'Room1',
 					createdAt: '2024-03-24 00:51:00',
 					updatedAt: '2024-03-24 00:51:00',
 				},
 				{
 					id: '2',
-					name: 'Room 2',
+					name: 'Room2',
 					createdAt: '2024-03-24 00:51:00',
 					updatedAt: '2024-03-24 00:51:00',
 				},
 				{
 					id: '3',
-					name: 'Room 3',
+					name: 'Room3',
 					createdAt: '2024-03-24 00:51:00',
 					updatedAt: '2024-03-24 00:51:00',
 				},
@@ -117,7 +117,7 @@ export const patchRoom = async (body: PatchRoomRequest): Promise<PatchRoomRespon
 	if (isStageDev()) {
 		return {
 			id: '1',
-			name: 'Room 1',
+			name: 'Room1',
 		};
 	}
 

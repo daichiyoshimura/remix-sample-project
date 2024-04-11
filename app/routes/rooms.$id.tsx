@@ -52,6 +52,7 @@ const RoomProfilePage = () => {
 					isOpen={isDeleteRoomModalOpen}
 					onClose={closeDeleteRoomModal}
 					roomId={id}
+					name={name}
 				/>
 				<EditRoomModal
 					isOpen={isEditRoomModalOpen}

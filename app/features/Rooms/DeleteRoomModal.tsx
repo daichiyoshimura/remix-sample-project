@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form } from '@remix-run/react';
-import { MutationState, useMutationState, useMutationSwitcher } from '@hooks';
+import { Form, useActionData, useNavigation } from '@remix-run/react';
+import { isDefined } from '@util';
+import { RoomPageActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -11,8 +12,8 @@ import {
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
-	MessageModal,
 } from '@components';
+import { validateZodObject } from '@util/validator';
 
 const deleteRoomSchema = z.object({
 	name: z
@@ -22,45 +23,39 @@ const deleteRoomSchema = z.object({
 		.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces'),
 });
 
-type DeleteRoomSchema = z.infer<typeof deleteRoomSchema>;
-
 export type DeleteRoomModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
-	roomId?: string;
-	state?: MutationState;
+	roomId: string;
+	name: string;
 };
 
 export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
-	{ isOpen, onClose, roomId = '', state = 'init' },
+	{ isOpen, onClose, roomId, name },
 ) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const [modalState, setModalState] = useMutationState(state);
+	const { state } = useNavigation();
+	const actionData = useActionData<RoomPageActionResponses>();
+	const isDefinedActionData = isDefined<RoomPageActionResponses>(actionData);
+	const serverErrorMessageList = isDefinedActionData ? [actionData.message] : [];
+	const [isValid, errorMessageList] = validateZodObject(deleteRoomSchema, { name: inputValue });
 
 	const onChange = (value: string) => {
 		setInputValue(value);
 	};
 
-	const validate = (body: DeleteRoomSchema): string[] => {
-		const result = deleteRoomSchema.safeParse(body);
-		if (result.success) {
-			return [];
-		}
-		return result.error.issues.map((issue) => issue.message);
-	};
-
 	const handleClose = () => {
-		setModalState('init');
 		setInputValue('');
 		onClose();
 	};
 
-	const init = () => {
-		const errorMessageList = validate({ name: inputValue });
-		const isValid = errorMessageList.length === 0;
+	const render = () => {
+		if (state === ('loading' || 'submitting')) {
+			return <LoadingIcon />;
+		}
 
 		return (
-			<Modal isOpen={isOpen} onClose={handleClose}>
+			<>
 				<TitleText title={'Are you sure you want to delete?'} />
 				<DescriptionText
 					description={`
@@ -73,50 +68,29 @@ export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
 						name="name"
 						value={inputValue}
 						onChange={onChange}
-						placeholder="name"
+						placeholder={name}
 						required
 					/>
 					<ErrorTextList textList={errorMessageList} />
+					<ErrorTextList textList={serverErrorMessageList} />
 					<Container alignment="right">
 						<Button onClick={handleClose}>Do not delete</Button>
-						<Button type="submit" color="caution" disabled={!isValid}>
+						<Button
+							type="submit"
+							color="caution"
+							disabled={!(isValid && inputValue === name)}
+						>
 							Delete
 						</Button>
 					</Container>
 				</Form>
-			</Modal>
+			</>
 		);
 	};
 
-	const loading = () => {
-		return (
-			<Modal isOpen={isOpen} onClose={handleClose}>
-				<LoadingIcon />
-			</Modal>
-		);
-	};
-
-	const success = () => {
-		return (
-			<MessageModal
-				title={'Success'}
-				description={'The Room is deleted'}
-				isOpen={isOpen}
-				onClose={handleClose}
-			/>
-		);
-	};
-
-	const failure = () => {
-		return (
-			<MessageModal
-				title={'Failed'}
-				description={'Please try again later, or contact support if the issue persists'}
-				isOpen={isOpen}
-				onClose={handleClose}
-			/>
-		);
-	};
-
-	return useMutationSwitcher(modalState, init, loading, success, failure);
+	return (
+		<Modal isOpen={isOpen} onClose={handleClose}>
+			{render()}
+		</Modal>
+	);
 };
