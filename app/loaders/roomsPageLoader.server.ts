@@ -10,7 +10,7 @@ type Rooms = MappedTypes<{
 
 export type RoomsLoaderResponse = Rooms | InternalSeverErrorActionResponse;
 
-export const roomsLoader = async (
+export const roomsPageLoader = async (
 	{ request, params }: LoaderFunctionArgs,
 ): Promise<TypedResponse<RoomsLoaderResponse>> => {
 	try {

@@ -1,2 +1,2 @@
-export * from '@loaders/roomLoader.server';
-export * from '@loaders/roomsLoader.server';
+export * from '@loaders/roomPageLoader.server';
+export * from '@loaders/roomsPageLoader.server';

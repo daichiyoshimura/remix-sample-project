@@ -1,12 +1,11 @@
 import { useActionData, useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { Message, isDefined } from '@util';
 import { roomsPageAction } from '@actions';
-import { roomsLoader } from '@loaders';
+import { roomsPageLoader } from '@loaders';
 import { Box, Button, Container, ContentArea, Footer, Header } from '@components';
 import { RoomCardList, CreateRoomModal } from '@features';
 
-export const loader = roomsLoader;
+export const loader = roomsPageLoader;
 
 export const action = roomsPageAction;
 
@@ -17,7 +16,8 @@ const RoomsPage = () => {
 	}
 	const { rooms } = loaderData;
 	const actionData = useActionData<typeof action>();
-	const serverErrorMessageList = isDefined<Message>(actionData) ? [actionData.message] : [];
+	const serverErrorMessageList =
+		actionData != null && 'message' in actionData ? [actionData.message] : [];
 	const {
 		state: isCreateRoomModalOpen,
 		on: openCreateRoomModal,
