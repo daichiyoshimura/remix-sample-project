@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
 import { deleteRoom, patchRoom } from '@api';
-import { Message, isString, writeRequestLog } from '@util';
+import { isString, writeRequestLog } from '@util';
 import {
 	InvalidMethodActionResponse,
 	InternalSeverErrorActionResponse,
@@ -11,11 +11,11 @@ import {
 } from '@actions';
 import { getFormDataValue } from '@util/server';
 
-export type RoomActionResponses = DeleteRoomActionResponse | PatchRoomActionResponse;
+export type RoomPageActionResponses = DeleteRoomActionResponse | PatchRoomActionResponse;
 
-export const roomAction = async (
+export const roomPageAction = async (
 	args: ActionFunctionArgs,
-): Promise<TypedResponse<RoomActionResponses>> => {
+): Promise<TypedResponse<RoomPageActionResponses>> => {
 	switch (args.request.method) {
 		case 'DELETE':
 			return await deleteRoomAction(args);
@@ -27,7 +27,7 @@ export const roomAction = async (
 };
 
 type DeleteRoomActionResponse =
-	| Message
+	| never
 	| InvalidMethodActionResponse
 	| InternalSeverErrorActionResponse;
 
@@ -55,7 +55,6 @@ const deleteRoomAction = async (
 
 type PatchRoomActionResponse =
 	| never
-	| InvalidMethodActionResponse
 	| ValidationErrorActionActionResponse
 	| InternalSeverErrorActionResponse;
 

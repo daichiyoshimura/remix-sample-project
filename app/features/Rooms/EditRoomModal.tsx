@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useState } from 'react';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { RoomActionResponses } from '@actions';
+import { RoomPageActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -33,7 +33,7 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 	const [inputValue, setInputValue] = useState<string>('');
 	const navigation = useNavigation();
 
-	const actionData = useActionData<RoomActionResponses>();
+	const actionData = useActionData<RoomPageActionResponses>();
 	const serverErrorMessageList = actionData != null ? [actionData.message] : [];
 
 	const onChange = (value: string) => {
