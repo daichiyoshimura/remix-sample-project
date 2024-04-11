@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form, useActionData, useNavigation } from '@remix-run/react';
+import { Form, useActionData, useNavigation, useRevalidator } from '@remix-run/react';
 import { RoomPageActionResponses } from '@actions';
 import {
 	Button,
@@ -32,7 +32,7 @@ export type EditRoomModalProps = {
 export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const navigation = useNavigation();
-
+	const { revalidate } = useRevalidator();
 	const actionData = useActionData<RoomPageActionResponses>();
 	const serverErrorMessageList = actionData != null ? [actionData.message] : [];
 
@@ -49,6 +49,7 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 	};
 
 	const handleClose = () => {
+		revalidate();
 		setInputValue('');
 		onClose();
 	};
@@ -64,7 +65,7 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 					<TitleText title={'Success'} />
 					<DescriptionText description={'The Room is edited'} />
 					<Container alignment="right">
-						<Button onClick={onClose}>close</Button>
+						<Button onClick={handleClose}>close</Button>
 					</Container>
 				</>
 			);
