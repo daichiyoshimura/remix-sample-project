@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, useActionData, useNavigation, useRevalidator } from '@remix-run/react';
 import { isDefined } from '@util';
 import { RoomProfilePageActionResponses } from '@actions';
@@ -31,11 +31,23 @@ export type EditRoomModalProps = {
 
 export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, roomId }) => {
 	const [inputValue, setInputValue] = useState<string>('');
+	const [mutationState, setMutationState] = useState<'init' | 'success' | 'failed'>('init');
 	const { state } = useNavigation();
 	const { revalidate } = useRevalidator();
 	const actionData = useActionData<RoomProfilePageActionResponses>();
-	const isDefinedActionData = isDefined<RoomProfilePageActionResponses>(actionData);
-	const serverErrorMessageList = isDefinedActionData ? [actionData.message] : [];
+
+	useEffect(() => {
+		const hasActionData = isDefined<RoomProfilePageActionResponses>(actionData);
+		if (!hasActionData) return;
+		if (actionData.success) {
+			setMutationState('success');
+			return;
+		}
+		setMutationState('failed');
+	}, [actionData]);
+
+	const hasActionData = isDefined<RoomProfilePageActionResponses>(actionData);
+	const serverErrorMessageList = hasActionData ? [actionData.message] : [];
 	const [isValid, errorMessageList] = validateZodObject(editRoomSchema, { name: inputValue });
 
 	const onChange = (value: string) => {
@@ -44,6 +56,7 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 
 	const handleClose = () => {
 		revalidate();
+		setMutationState('init');
 		setInputValue('');
 		onClose();
 	};
@@ -53,7 +66,7 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 			return <LoadingIcon />;
 		}
 
-		if (state === 'idle' && isDefinedActionData) {
+		if (state === 'idle' && mutationState === 'success') {
 			return (
 				<>
 					<TitleText title={'Success'} />

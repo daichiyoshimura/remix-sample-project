@@ -1,6 +1,6 @@
-import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
+import { ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
 import { deleteRoom, patchRoom } from '@api';
-import { isString, writeRequestLog } from '@util';
+import { MessageWithSuccess, isString, writeRequestLog } from '@util';
 import {
 	InvalidMethodErrorActionResponse,
 	InternalSeverErrorActionResponse,
@@ -54,7 +54,7 @@ const deleteRoomAction = async (
 };
 
 type PatchRoomActionResponse =
-	| never
+	| MessageWithSuccess
 	| ValidationErrorActionActionResponse
 	| InternalSeverErrorActionResponse;
 
@@ -83,10 +83,7 @@ const patchRoomAction = async (
 			request: patchRoomRequest,
 			response: patchRoomResponse,
 		});
-		return new Response(null, {
-			status: 204,
-			statusText: 'No Content',
-		});
+		return json({ success: true, message: 'ok' }, 200);
 	} catch (error) {
 		return internalServerErrorAction(error);
 	}

@@ -1,12 +1,11 @@
 import { TypedResponse, json } from '@remix-run/node';
-import { Message, writeErrorLog } from '@util';
+import { MessageWithSuccess, writeErrorLog } from '@util';
 
-export type InvalidMethodErrorActionResponse = Message;
+export type InvalidMethodErrorActionResponse = MessageWithSuccess;
 
 export const invalidMethodErrorAction = async (): Promise<
 	TypedResponse<InvalidMethodErrorActionResponse>
 > => {
-	const response = { message: 'invalid method' };
-	writeErrorLog(response);
-	return json(response, 400);
+	writeErrorLog({ message: 'method not allowed' });
+	return json({ success: false, message: 'method not allowed' }, 405);
 };

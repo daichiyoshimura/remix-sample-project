@@ -1,7 +1,7 @@
 import { TypedResponse, json } from '@remix-run/node';
-import { Message, isError, writeErrorLog } from '@util';
+import { MessageWithSuccess, isError, writeErrorLog } from '@util';
 
-export type InternalSeverErrorActionResponse = Message;
+export type InternalSeverErrorActionResponse = MessageWithSuccess;
 
 export const internalServerErrorAction = async (
 	error: unknown,
@@ -10,6 +10,7 @@ export const internalServerErrorAction = async (
 	writeErrorLog({ message: logMessage });
 	return json(
 		{
+			success: false,
 			message: 'Please try again later, or contact support if the issue persists',
 		},
 		500,

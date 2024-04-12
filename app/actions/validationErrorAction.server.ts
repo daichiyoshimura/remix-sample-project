@@ -1,12 +1,11 @@
 import { TypedResponse, json } from '@remix-run/node';
-import { Message, writeErrorLog } from '@util';
+import { MessageWithSuccess, writeErrorLog } from '@util';
 
-export type ValidationErrorActionActionResponse = Message;
+export type ValidationErrorActionActionResponse = MessageWithSuccess;
 
 export const validationErrorAction = async (
 	message: string,
 ): Promise<TypedResponse<ValidationErrorActionActionResponse>> => {
-	const response = { message: message };
-	writeErrorLog(response);
-	return json(response, 400);
+	writeErrorLog({ message: message });
+	return json({ success: false, message: message }, 400);
 };
