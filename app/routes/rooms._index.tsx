@@ -9,7 +9,7 @@ export const loader = roomListPageLoader;
 
 export const action = roomListPageAction;
 
-const RoomsPage = () => {
+const RoomListPage = () => {
 	const loaderData = useLoaderData<typeof loader>();
 	if ('message' in loaderData) {
 		throw Error(loaderData.message);
@@ -35,4 +35,4 @@ const RoomsPage = () => {
 	);
 };
 
-export default RoomsPage;
+export default RoomListPage;
