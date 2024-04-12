@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { isDefined, validateZodObject } from '@util';
-import { RoomsPageActionResponses } from '@actions';
+import { RoomListPageActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -30,8 +30,8 @@ export type CreateRoomModalProps = {
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const { state } = useNavigation();
-	const actionData = useActionData<RoomsPageActionResponses>();
-	const isDefinedActionData = isDefined<RoomsPageActionResponses>(actionData);
+	const actionData = useActionData<RoomListPageActionResponses>();
+	const isDefinedActionData = isDefined<RoomListPageActionResponses>(actionData);
 	const serverErrorMessageList = isDefinedActionData ? [actionData.message] : [];
 	const [isValid, errorMessageList] = validateZodObject(createRoomSchema, { name: inputValue });
 
