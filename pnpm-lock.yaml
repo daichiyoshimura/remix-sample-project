@@ -11,6 +11,9 @@ dependencies:
     '@emotion/styled':
         specifier: ^11.11.5
         version: 11.11.5(@emotion/react@11.11.4)(@types/react@18.2.65)(react@18.2.0)
+    '@mui/base':
+        specifier: 5.0.0-beta.40
+        version: 5.0.0-beta.40(@types/react@18.2.65)(react-dom@18.2.0)(react@18.2.0)
     '@mui/icons-material':
         specifier: ^5.15.15
         version: 5.15.15(@mui/material@5.15.15)(@types/react@18.2.65)(react@18.2.0)
@@ -29,6 +32,9 @@ dependencies:
     '@types/react-modal':
         specifier: ^3.16.3
         version: 3.16.3
+    NoSsr:
+        specifier: link:@mui/material/NoSsr
+        version: link:@mui/material/NoSsr
     isbot:
         specifier: ^4.1.0
         version: 4.4.0
@@ -1923,7 +1929,6 @@ packages:
         engines: { node: '>=6.9.0' }
         dependencies:
             regenerator-runtime: 0.14.1
-        dev: false
 
     /@babel/template@7.24.0:
         resolution:
@@ -3698,7 +3703,7 @@ packages:
             '@types/react':
                 optional: true
         dependencies:
-            '@babel/runtime': 7.24.0
+            '@babel/runtime': 7.24.4
             '@types/react': 18.2.65
             react: 18.2.0
         dev: true
@@ -3715,7 +3720,7 @@ packages:
             '@types/react':
                 optional: true
         dependencies:
-            '@babel/runtime': 7.24.0
+            '@babel/runtime': 7.24.4
             '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.65)(react@18.2.0)
             '@types/react': 18.2.65
             react: 18.2.0
@@ -6667,7 +6672,7 @@ packages:
             }
         engines: { node: '>=10', npm: '>=6' }
         dependencies:
-            '@babel/runtime': 7.24.0
+            '@babel/runtime': 7.24.4
             cosmiconfig: 7.1.0
             resolve: 1.22.8
         dev: false
@@ -11187,7 +11192,7 @@ packages:
                 integrity: sha512-1N4qp+jE0pL5Xv4uEcwVUhIkwdUO3S/9gML90nqKA7v7FcOS5vUtatfzok9S9U1EJU8dHWlcv95WLnKmmxZI9w==,
             }
         dependencies:
-            '@babel/runtime': 7.24.0
+            '@babel/runtime': 7.24.4
         dev: true
 
     /media-typer@0.3.0:
@@ -13394,7 +13399,7 @@ packages:
                 integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==,
             }
         dependencies:
-            '@babel/runtime': 7.24.0
+            '@babel/runtime': 7.24.4
         dev: true
 
     /regexp.prototype.flags@1.5.2:

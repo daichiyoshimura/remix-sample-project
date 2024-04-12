@@ -1,5 +1,6 @@
 import { MeetingRoom } from '@mui/icons-material';
 import { EditButton } from '@components';
+import { NoSsr } from '@mui/base';
 
 export type RoomProfileProps = {
 	id: string;
@@ -13,7 +14,13 @@ export const RoomProfile: React.FC<RoomProfileProps & { onClick: () => void }> =
 	return (
 		<>
 			<div className="flex items-center">
-				<MeetingRoom className="mr-4 flex-shrink-0" fontSize="large" fill="currentColor" />
+				<NoSsr>
+					<MeetingRoom
+						className="mr-4 flex-shrink-0"
+						fontSize="large"
+						fill="currentColor"
+					/>
+				</NoSsr>
 				<div className="flex flex-col">
 					<div className="flex items-center space-x-2">
 						<h2 className="text-lg font-semibold">{name}</h2>

@@ -1,5 +1,6 @@
 import { Edit } from '@mui/icons-material';
 import { Button } from '@components';
+import { NoSsr } from '@mui/base';
 
 export type EditButtonProps = {
 	onClick?: () => void;
@@ -9,7 +10,9 @@ export type EditButtonProps = {
 export const EditButton: React.FC<EditButtonProps> = ({ onClick = () => {}, disabled = false }) => {
 	return (
 		<Button onClick={onClick} disabled={disabled} size="icon">
-			<Edit />
+			<NoSsr>
+				<Edit />
+			</NoSsr>
 		</Button>
 	);
 };

@@ -1,5 +1,6 @@
 import { AccountCircle } from '@mui/icons-material';
 import { Card } from '@components';
+import { NoSsr } from '@mui/base';
 
 export type ParticipantCardProps = {
 	id: string;
@@ -10,7 +11,9 @@ export type ParticipantCardProps = {
 export const ParticipantCard: React.FC<ParticipantCardProps> = ({ id, name, part }) => {
 	return (
 		<Card>
-			<AccountCircle fontSize="large" fill="currentColor" />
+			<NoSsr>
+				<AccountCircle fontSize="large" fill="currentColor" />
+			</NoSsr>
 			<div className="hidden">{id}</div>
 			<div className="text-sm mt-1">{name}</div>
 			<div className="text-xs">&lt;{part}&gt;</div>
