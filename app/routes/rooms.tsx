@@ -1,42 +1,16 @@
-import { useLoaderData } from '@remix-run/react';
-import { useBinaryState } from '@hooks';
-import { roomsPageAction } from '@actions';
-import { roomsPageLoader } from '@loaders';
-import { Box, Button, Container, ContentArea, Footer, Header } from '@components';
-import { RoomCardList, CreateRoomModal } from '@features';
+import { Outlet } from '@remix-run/react';
+import { ContentArea, Footer, Header } from '@components';
 
-export const loader = roomsPageLoader;
-
-export const action = roomsPageAction;
-
-const RoomsPage = () => {
-	const loaderData = useLoaderData<typeof loader>();
-	if ('message' in loaderData) {
-		throw Error(loaderData.message);
-	}
-	const { rooms } = loaderData;
-
-	const {
-		state: isCreateRoomModalOpen,
-		on: openCreateRoomModal,
-		off: closeCreateRoomModal,
-	} = useBinaryState(false);
-
+const RoomsPageLayout = () => {
 	return (
 		<>
 			<Header currentPageTitle="Rooms" />
 			<ContentArea>
-				<Box>
-					<RoomCardList rooms={rooms} />
-				</Box>
-				<Container>
-					<Button onClick={openCreateRoomModal}>Create Room</Button>
-				</Container>
-				<CreateRoomModal isOpen={isCreateRoomModalOpen} onClose={closeCreateRoomModal} />
+				<Outlet />
 			</ContentArea>
 			<Footer />
 		</>
 	);
 };
 
-export default RoomsPage;
+export default RoomsPageLayout;

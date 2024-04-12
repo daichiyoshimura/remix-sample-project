@@ -2,7 +2,7 @@ import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
 import { roomPageAction } from '@actions';
 import { roomPageLoader } from '@loaders';
-import { Box, Button, LinkButton, Container, ContentArea, Footer, Header } from '@components';
+import { Box, Button, LinkButton, Container } from '@components';
 import { ParticipantCardList, EditRoomModal, RoomProfile, DeleteRoomModal } from '@features';
 
 export const loader = roomPageLoader;
@@ -21,6 +21,7 @@ const RoomProfilePage = () => {
 		on: openEditRoomModal,
 		off: closeEditRoomModal,
 	} = useBinaryState(false);
+
 	const {
 		state: isDeleteRoomModalOpen,
 		on: openDeleteRoomModal,
@@ -29,38 +30,30 @@ const RoomProfilePage = () => {
 
 	return (
 		<>
-			<Header currentPageTitle="Room Profile" />
-			<ContentArea>
-				<Box>
-					<RoomProfile
-						id={id}
-						name={name}
-						createdAt={createdAt}
-						onClick={openEditRoomModal}
-					/>
-				</Box>
-				<Box>
-					<ParticipantCardList participants={participants} />
-				</Box>
-				<Container>
-					<LinkButton to="/rooms">Back</LinkButton>
-					<Button color="caution" onClick={openDeleteRoomModal}>
-						Delete This Room
-					</Button>
-				</Container>
-				<DeleteRoomModal
-					isOpen={isDeleteRoomModalOpen}
-					onClose={closeDeleteRoomModal}
-					roomId={id}
+			<Box>
+				<RoomProfile
+					id={id}
 					name={name}
+					createdAt={createdAt}
+					onClick={openEditRoomModal}
 				/>
-				<EditRoomModal
-					isOpen={isEditRoomModalOpen}
-					onClose={closeEditRoomModal}
-					roomId={id}
-				/>
-			</ContentArea>
-			<Footer />
+			</Box>
+			<Box>
+				<ParticipantCardList participants={participants} />
+			</Box>
+			<Container>
+				<LinkButton to="/rooms">Back</LinkButton>
+				<Button color="caution" onClick={openDeleteRoomModal}>
+					Delete This Room
+				</Button>
+			</Container>
+			<DeleteRoomModal
+				isOpen={isDeleteRoomModalOpen}
+				onClose={closeDeleteRoomModal}
+				roomId={id}
+				name={name}
+			/>
+			<EditRoomModal isOpen={isEditRoomModalOpen} onClose={closeEditRoomModal} roomId={id} />
 		</>
 	);
 };
