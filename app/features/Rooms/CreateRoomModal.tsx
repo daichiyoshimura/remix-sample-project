@@ -31,8 +31,8 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 	const [inputValue, setInputValue] = useState<string>('');
 	const { state } = useNavigation();
 	const actionData = useActionData<RoomListPageActionResponses>();
-	const isDefinedActionData = isDefined<RoomListPageActionResponses>(actionData);
-	const serverErrorMessageList = isDefinedActionData ? [actionData.message] : [];
+	const hasActionData = isDefined<RoomListPageActionResponses>(actionData);
+	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];
 	const [isValid, errorMessageList] = validateZodObject(createRoomSchema, { name: inputValue });
 
 	const onChange = (value: string) => {
