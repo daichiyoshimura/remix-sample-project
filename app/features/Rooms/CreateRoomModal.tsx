@@ -60,7 +60,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClos
 							hyphens, and spaces is not permitted.
 						`}
 				/>
-				<Form action="/rooms" method="POST">
+				<Form action="/rooms?index" method="POST">
 					<TextInput
 						name="name"
 						value={inputValue}
