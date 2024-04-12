@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { Form, useActionData, useNavigation, useRevalidator } from '@remix-run/react';
 import { isDefined } from '@util';
-import { RoomPageActionResponses } from '@actions';
+import { RoomProfilePageActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -33,8 +33,8 @@ export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, r
 	const [inputValue, setInputValue] = useState<string>('');
 	const { state } = useNavigation();
 	const { revalidate } = useRevalidator();
-	const actionData = useActionData<RoomPageActionResponses>();
-	const isDefinedActionData = isDefined<RoomPageActionResponses>(actionData);
+	const actionData = useActionData<RoomProfilePageActionResponses>();
+	const isDefinedActionData = isDefined<RoomProfilePageActionResponses>(actionData);
 	const serverErrorMessageList = isDefinedActionData ? [actionData.message] : [];
 	const [isValid, errorMessageList] = validateZodObject(editRoomSchema, { name: inputValue });
 
