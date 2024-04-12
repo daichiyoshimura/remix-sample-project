@@ -16,3 +16,7 @@ export * from '@components/Text/DescriptionText';
 export * from '@components/Text/TitleText';
 export * from '@components/Text/ErrorText';
 export * from '@components/Text/ErrorTextList';
+export * from '@components/Icon/AccountIcon';
+export * from '@components/Icon/EditIcon';
+export * from '@components/Icon/RoomIcon';
+export * from '@components/Icon/SaveIcon';
