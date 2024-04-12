@@ -11,14 +11,14 @@ import {
 } from '@actions';
 import { getFormDataValue } from '@util/server';
 
-export type RoomPageActionResponses =
+export type RoomProfilePageActionResponses =
 	| DeleteRoomActionResponse
 	| PatchRoomActionResponse
 	| InvalidMethodErrorActionResponse;
 
-export const roomPageAction = async (
+export const roomProfilePageAction = async (
 	args: ActionFunctionArgs,
-): Promise<TypedResponse<RoomPageActionResponses>> => {
+): Promise<TypedResponse<RoomProfilePageActionResponses>> => {
 	switch (args.request.method) {
 		case 'DELETE':
 			return await deleteRoomAction(args);

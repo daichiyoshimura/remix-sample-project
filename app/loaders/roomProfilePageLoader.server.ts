@@ -4,19 +4,19 @@ import { MappedTypes, isString, writeRequestLog } from '@util';
 import { InternalSeverErrorActionResponse, internalServerErrorAction } from '@actions';
 import { MutationTimes } from '@util/server';
 
-export type RoomPageLoaderRequest = Participant;
+export type RoomProfilePageLoaderRequest = Participant;
 
 type Participants = {
 	participants: Participant[];
 };
 
-export type RoomPageLoaderResponse =
+export type RoomProfilePageLoaderResponse =
 	| MappedTypes<Participants & Room & MutationTimes>
 	| InternalSeverErrorActionResponse;
 
-export const roomPageLoader = async (
+export const roomProfilePageLoader = async (
 	{ request, params }: LoaderFunctionArgs,
-): Promise<TypedResponse<RoomPageLoaderResponse>> => {
+): Promise<TypedResponse<RoomProfilePageLoaderResponse>> => {
 	try {
 		const accountId: string = isString(params.accountId) ? params.accountId : '';
 		const roomId: string = isString(params.id) ? params.id : '';

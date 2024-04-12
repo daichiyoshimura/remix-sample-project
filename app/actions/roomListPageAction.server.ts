@@ -10,14 +10,14 @@ import {
 } from '@actions';
 import { getFormDataValue } from '@util/server';
 
-export type RoomsPageActionResponses = PostRoomActionResponse | InvalidMethodErrorActionResponse;
+export type RoomListPageActionResponses = PostRoomActionResponse | InvalidMethodErrorActionResponse;
 
-export const roomsPageAction = async (
+export const roomListPageAction = async (
 	args: ActionFunctionArgs,
-): Promise<TypedResponse<RoomsPageActionResponses>> => {
+): Promise<TypedResponse<RoomListPageActionResponses>> => {
 	switch (args.request.method) {
 		case 'POST':
-			return await postRoomsAction(args);
+			return await postRoomListAction(args);
 		default:
 			return await invalidMethodErrorAction();
 	}
@@ -27,7 +27,7 @@ type PostRoomActionRequest = RoomAttributes;
 
 export type PostRoomActionResponse = never | InternalSeverErrorActionResponse;
 
-const postRoomsAction = async (
+const postRoomListAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<PostRoomActionResponse>> => {
 	try {

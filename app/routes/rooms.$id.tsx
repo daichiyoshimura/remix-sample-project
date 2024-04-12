@@ -1,13 +1,13 @@
 import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { roomPageAction } from '@actions';
-import { roomPageLoader } from '@loaders';
+import { roomProfilePageAction } from '@actions';
+import { roomProfilePageLoader } from '@loaders';
 import { Box, Button, LinkButton, Container } from '@components';
 import { ParticipantCardList, EditRoomModal, RoomProfile, DeleteRoomModal } from '@features';
 
-export const loader = roomPageLoader;
+export const loader = roomProfilePageLoader;
 
-export const action = roomPageAction;
+export const action = roomProfilePageAction;
 
 const RoomProfilePage = () => {
 	const loaderData = useLoaderData<typeof loader>();
