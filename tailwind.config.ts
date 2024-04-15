@@ -17,27 +17,23 @@ const config: Config = {
 				large: '1.25rem',
 			},
 			animation: {
-				'fade-in': 'fade-in 0.3s ease-out   both',
-				'fade-out': 'fade-out 0.3s ease-in   both',
+				'fade-in': 'fade-in 0.3s ease-in',
+				'fade-out': 'fade-out 0.3s ease-out',
 			},
 			keyframes: {
 				'fade-in': {
-					'0%': {
-						transform: 'translateY(50px)',
+					from: {
 						opacity: '0',
 					},
 					to: {
-						transform: 'translateY(0)',
 						opacity: '1',
 					},
 				},
 				'fade-out': {
-					'100%': {
-						transform: 'translateY(0)',
+					from: {
 						opacity: '1',
 					},
 					to: {
-						transform: 'translateY(50px)',
 						opacity: '0',
 					},
 				},
