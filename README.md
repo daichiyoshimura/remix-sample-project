@@ -2,7 +2,7 @@
 
 ## Technical Stack
 
-| content           | description |
+| Content           | Description |
 | ----------------- | ----------- |
 | language          | typescript  |
 | framework         | remix       |
@@ -16,10 +16,15 @@
 
 ## Roles of Each Directory
 
-| directory    | description                                                                                 |
-| ------------ | ------------------------------------------------------------------------------------------- |
-| /components/ | Directory for placing generic components                                                    |
-| /features/   | Directory for placing components mixed with domain knowledge                                |
-| /loaders/    | Directory for placing loader functions that are loaded at the time of server-side rendering |
-| /routes/     | Directory for determining page structure based on Remix framework features                  |
-| /styles/     | Directory for placing global styling CSS                                                    |
+| Directory   | Description                                                                                                    |
+| ----------- | -------------------------------------------------------------------------------------------------------------- |
+| actions/    | The directory where Remix action functions are placed.                                                         |
+| api/        | The directory containing functions responsible for communication from the Remix server-side to other backends. |
+| components/ | The directory containing generic React components.                                                             |
+| features/   | The directory containing React components with domain-specific knowledge mixed in.　                           |
+| loaders/    | The directory where Remix loader functions are placed.　                                                       |
+| routes/     | The directory for organizing pages based on the Remix framework.                                               |
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
