@@ -39,7 +39,7 @@ const RoomProfilePage = () => {
 		if (navState === 'loading' && fadeClass !== 'animate-fade-out') {
 			setFadeClass('animate-fade-out');
 		}
-	}, [navState]);
+	}, [navState, fadeClass]);
 
 	return (
 		<>
