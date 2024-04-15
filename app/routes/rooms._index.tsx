@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useLoaderData, useNavigation } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
+import { useFadeEffect } from '@hooks/useFadeEffect';
 import { roomListPageAction } from '@actions';
 import { roomListPageLoader } from '@loaders';
 import { Box, Button, Container } from '@components';
@@ -23,20 +23,9 @@ const RoomListPage = () => {
 		off: closeCreateRoomModal,
 	} = useBinaryState(false);
 
-	const { state: navState } = useNavigation();
-	const [fadeClass, setFadeClass] = useState<string>('');
-	useEffect(() => {
-		if (navState === 'idle' && fadeClass !== 'animate-fade-in') {
-			setFadeClass('animate-fade-in');
-		}
-		if (navState === 'loading' && fadeClass !== 'animate-fade-out') {
-			setFadeClass('animate-fade-out');
-		}
-	}, [navState, fadeClass]);
-
 	return (
 		<>
-			<div className={fadeClass}>
+			<div className={useFadeEffect()}>
 				<Box>
 					<RoomCardList rooms={rooms} />
 				</Box>

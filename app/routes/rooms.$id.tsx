@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useLoaderData, useNavigation } from '@remix-run/react';
-import { useBinaryState } from '@hooks';
+import { useLoaderData } from '@remix-run/react';
+import { useBinaryState, useFadeEffect } from '@hooks';
 import { roomProfilePageAction } from '@actions';
 import { roomProfilePageLoader } from '@loaders';
 import { Box, Button, LinkButton, Container } from '@components';
@@ -29,21 +28,9 @@ const RoomProfilePage = () => {
 		off: closeDeleteRoomModal,
 	} = useBinaryState(false);
 
-	const { state: navState } = useNavigation();
-	const [fadeClass, setFadeClass] = useState<string>('');
-	console.log(navState);
-	useEffect(() => {
-		if (navState === 'idle' && fadeClass !== 'animate-fade-in') {
-			setFadeClass('animate-fade-in');
-		}
-		if (navState === 'loading' && fadeClass !== 'animate-fade-out') {
-			setFadeClass('animate-fade-out');
-		}
-	}, [navState, fadeClass]);
-
 	return (
 		<>
-			<div className={fadeClass}>
+			<div className={useFadeEffect()}>
 				<Box>
 					<RoomProfile
 						id={id}
