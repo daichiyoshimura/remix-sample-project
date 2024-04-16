@@ -1,6 +1,6 @@
 import { useLoaderData } from '@remix-run/react';
 import { useBinaryState } from '@hooks';
-import { useFadeEffect } from '@hooks/useFadeEffect';
+import { useFadeAnimation } from '@hooks/useFadeEffect';
 import { roomListPageAction } from '@actions';
 import { roomListPageLoader } from '@loaders';
 import { Box, Button, Container } from '@components';
@@ -21,7 +21,7 @@ const RoomListPage = () => {
 
 	return (
 		<>
-			<div className={useFadeEffect()}>
+			<div className={useFadeAnimation()}>
 				<Box>
 					<RoomCardList rooms={rooms} />
 				</Box>

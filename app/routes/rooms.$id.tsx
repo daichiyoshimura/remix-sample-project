@@ -1,5 +1,5 @@
 import { useLoaderData } from '@remix-run/react';
-import { useBinaryState, useFadeEffect } from '@hooks';
+import { useBinaryState, useFadeAnimation } from '@hooks';
 import { roomProfilePageAction } from '@actions';
 import { roomProfilePageLoader } from '@loaders';
 import { Box, Button, LinkButton, Container } from '@components';
@@ -21,7 +21,7 @@ const RoomProfilePage = () => {
 
 	return (
 		<>
-			<div className={useFadeEffect()}>
+			<div className={useFadeAnimation()}>
 				<Box>
 					<RoomProfile
 						id={id}
