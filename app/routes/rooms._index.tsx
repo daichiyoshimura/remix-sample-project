@@ -1,6 +1,5 @@
 import { useLoaderData } from '@remix-run/react';
-import { useBinaryState } from '@hooks';
-import { useFadeAnimation } from '@hooks/useFadeEffect';
+import { useBinaryState, useFadeAnimation } from '@hooks';
 import { roomListPageAction } from '@actions';
 import { roomListPageLoader } from '@loaders';
 import { Box, Button, Container } from '@components';
