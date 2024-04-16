@@ -1,6 +1,4 @@
-import { Edit } from '@mui/icons-material';
-import { Button } from '@components';
-import { NoSsr } from '@mui/base';
+import { EditIcon, Button } from '@components';
 
 export type EditButtonProps = {
 	onClick?: () => void;
@@ -10,9 +8,7 @@ export type EditButtonProps = {
 export const EditButton = ({ onClick = () => {}, disabled = false }: EditButtonProps) => {
 	return (
 		<Button onClick={onClick} disabled={disabled} size="icon">
-			<NoSsr>
-				<Edit />
-			</NoSsr>
+			<EditIcon />
 		</Button>
 	);
 };

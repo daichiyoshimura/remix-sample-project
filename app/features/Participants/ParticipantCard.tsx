@@ -1,6 +1,4 @@
-import { AccountCircle } from '@mui/icons-material';
-import { Card } from '@components';
-import { NoSsr } from '@mui/base';
+import { AccountIcon, Card } from '@components';
 
 export type ParticipantCardProps = {
 	id: string;
@@ -11,9 +9,7 @@ export type ParticipantCardProps = {
 export const ParticipantCard = ({ id, name, part }: ParticipantCardProps) => {
 	return (
 		<Card>
-			<NoSsr>
-				<AccountCircle fontSize="large" fill="currentColor" />
-			</NoSsr>
+			<AccountIcon />
 			<div className="hidden">{id}</div>
 			<div className="text-sm mt-1">{name}</div>
 			<div className="text-xs">&lt;{part}&gt;</div>

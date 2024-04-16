@@ -1,6 +1,4 @@
-import { MeetingRoom } from '@mui/icons-material';
-import { EditButton } from '@components';
-import { NoSsr } from '@mui/base';
+import { RoomIcon, EditButton } from '@components';
 
 export type RoomProfileProps = {
 	id: string;
@@ -14,13 +12,7 @@ export const RoomProfile = (
 	return (
 		<>
 			<div className="flex items-center">
-				<NoSsr>
-					<MeetingRoom
-						className="mr-4 flex-shrink-0"
-						fontSize="large"
-						fill="currentColor"
-					/>
-				</NoSsr>
+				<RoomIcon className="mr-4 flex-shrink-0" />
 				<div className="flex flex-col">
 					<div className="flex items-center space-x-2">
 						<h2 className="text-lg font-semibold">{name}</h2>
