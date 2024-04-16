@@ -1,4 +1,4 @@
-export const LoadingIcon: React.FC = () => {
+export const LoadingIcon = () => {
 	return (
 		<div className="flex justify-center my-20">
 			<div

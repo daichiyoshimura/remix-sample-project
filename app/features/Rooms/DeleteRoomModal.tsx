@@ -30,9 +30,7 @@ export type DeleteRoomModalProps = {
 	name: string;
 };
 
-export const DeleteRoomModal: React.FC<DeleteRoomModalProps> = (
-	{ isOpen, onClose, roomId, name },
-) => {
+export const DeleteRoomModal = ({ isOpen, onClose, roomId, name }: DeleteRoomModalProps) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const { state } = useNavigation();
 	const actionData = useActionData<RoomProfilePageActionResponses>();

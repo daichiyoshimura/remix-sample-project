@@ -7,7 +7,7 @@ export type EditButtonProps = {
 	disabled?: boolean;
 };
 
-export const EditButton: React.FC<EditButtonProps> = ({ onClick = () => {}, disabled = false }) => {
+export const EditButton = ({ onClick = () => {}, disabled = false }: EditButtonProps) => {
 	return (
 		<Button onClick={onClick} disabled={disabled} size="icon">
 			<NoSsr>

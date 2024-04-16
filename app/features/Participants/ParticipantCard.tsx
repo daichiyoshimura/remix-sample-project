@@ -8,7 +8,7 @@ export type ParticipantCardProps = {
 	part: string;
 };
 
-export const ParticipantCard: React.FC<ParticipantCardProps> = ({ id, name, part }) => {
+export const ParticipantCard = ({ id, name, part }: ParticipantCardProps) => {
 	return (
 		<Card>
 			<NoSsr>

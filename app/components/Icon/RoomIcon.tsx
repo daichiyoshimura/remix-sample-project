@@ -5,7 +5,7 @@ export type RoomIconProps = {
 	className?: string;
 };
 
-export const RoomIcon = ({ className = '' }) => {
+export const RoomIcon = ({ className = '' }: RoomIconProps) => {
 	return (
 		<>
 			<NoSsr>

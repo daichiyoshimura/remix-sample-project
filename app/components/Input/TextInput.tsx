@@ -6,8 +6,8 @@ export type TextInputProps = {
 	required?: boolean;
 };
 
-export const TextInput: React.FC<TextInputProps> = (
-	{ name = '', value = '', onChange, placeholder = '', required = false },
+export const TextInput = (
+	{ name = '', value = '', onChange, placeholder = '', required = false }: TextInputProps,
 ) => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		onChange(event.target.value);

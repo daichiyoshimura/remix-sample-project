@@ -6,7 +6,7 @@ export type LinkButtonProps = {
 	children: React.ReactNode;
 };
 
-export const LinkButton: React.FC<LinkButtonProps> = ({ to, children }) => {
+export const LinkButton = ({ to, children }: LinkButtonProps) => {
 	return (
 		<Link to={to}>
 			<Button>{children}</Button>

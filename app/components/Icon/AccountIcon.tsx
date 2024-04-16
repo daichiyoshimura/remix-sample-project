@@ -5,7 +5,7 @@ export type AccountIconProps = {
 	className?: string;
 };
 
-export const AccountIcon = ({ className = '' }) => {
+export const AccountIcon = ({ className = '' }: AccountIconProps) => {
 	return (
 		<>
 			<NoSsr>

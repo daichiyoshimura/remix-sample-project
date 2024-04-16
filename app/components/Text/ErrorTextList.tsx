@@ -4,7 +4,7 @@ export type ErrorTextListProps = {
 	textList: string[];
 };
 
-export const ErrorTextList: React.FC<ErrorTextListProps> = ({ textList }) => {
+export const ErrorTextList = ({ textList }: ErrorTextListProps) => {
 	return (
 		<>
 			{textList.map((text, index) => (

@@ -27,7 +27,7 @@ export type CreateRoomModalProps = {
 	onClose: () => void;
 };
 
-export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose }) => {
+export const CreateRoomModal = ({ isOpen, onClose }: CreateRoomModalProps) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const { state } = useNavigation();
 	const actionData = useActionData<RoomListPageActionResponses>();

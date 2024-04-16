@@ -4,7 +4,7 @@ export type RoomCardListProps = {
 	rooms: RoomCardProps[];
 };
 
-export const RoomCardList: React.FC<RoomCardListProps> = ({ rooms }) => {
+export const RoomCardList = ({ rooms }: RoomCardListProps) => {
 	return (
 		<div className="space-y-4">
 			{rooms.map((room) => (

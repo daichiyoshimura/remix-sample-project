@@ -2,6 +2,6 @@ export type ContentAreaProps = {
 	children?: React.ReactNode;
 };
 
-export const ContentArea: React.FC<ContentAreaProps> = ({ children }) => {
+export const ContentArea = ({ children }: ContentAreaProps) => {
 	return <div className="relative top-16 bottom-16 h-full overflow-y-auto">{children}</div>;
 };

@@ -8,8 +8,8 @@ export type RoomProfileProps = {
 	createdAt: string;
 };
 
-export const RoomProfile: React.FC<RoomProfileProps & { onClick: () => void }> = (
-	{ id, name, createdAt, onClick },
+export const RoomProfile = (
+	{ id, name, createdAt, onClick }: RoomProfileProps & { onClick: () => void },
 ) => {
 	return (
 		<>

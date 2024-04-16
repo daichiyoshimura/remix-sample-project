@@ -5,7 +5,7 @@ export type EditIconProps = {
 	className?: string;
 };
 
-export const EditIcon = ({ className = '' }) => {
+export const EditIcon = ({ className = '' }: EditIconProps) => {
 	return (
 		<>
 			<NoSsr>

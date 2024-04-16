@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Container, DescriptionText, Modal, TitleText } from '@components';
 
 export type MessageModalProps = {
@@ -8,9 +7,7 @@ export type MessageModalProps = {
 	onClose: () => void;
 };
 
-export const MessageModal: React.FC<MessageModalProps> = (
-	{ title, description, isOpen, onClose },
-) => {
+export const MessageModal = ({ title, description, isOpen, onClose }: MessageModalProps) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<TitleText title={title} />

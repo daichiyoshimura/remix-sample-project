@@ -29,7 +29,7 @@ export type EditRoomModalProps = {
 	roomId: string;
 };
 
-export const EditRoomModal: React.FC<EditRoomModalProps> = ({ isOpen, onClose, roomId }) => {
+export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) => {
 	const [inputValue, setInputValue] = useState<string>('');
 	const { state } = useNavigation();
 	const { revalidate } = useRevalidator();

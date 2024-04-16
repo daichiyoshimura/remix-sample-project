@@ -2,7 +2,7 @@ export type CardProps = {
 	children: React.ReactNode;
 };
 
-export const Card: React.FC<CardProps> = ({ children }) => {
+export const Card = ({ children }: CardProps) => {
 	return (
 		<div className="flex flex-col rounded items-center bg-primary text-white p-4">
 			{children}

@@ -6,7 +6,7 @@ export type SaveButtonProps = {
 	disabled?: boolean;
 };
 
-export const SaveButton: React.FC<SaveButtonProps> = ({ onClick = () => {}, disabled = false }) => {
+export const SaveButton = ({ onClick = () => {}, disabled = false }: SaveButtonProps) => {
 	return (
 		<Button onClick={onClick} disabled={disabled} size="icon">
 			<CheckCircle />

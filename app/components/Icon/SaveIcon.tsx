@@ -5,7 +5,7 @@ export type SaveIconProps = {
 	className?: string;
 };
 
-export const SaveIcon = ({ className = '' }) => {
+export const SaveIcon = ({ className = '' }: SaveIconProps) => {
 	return (
 		<>
 			<NoSsr>

@@ -7,7 +7,7 @@ export type ButtonProps = {
 	children: React.ReactNode;
 };
 
-export const Button: React.FC<ButtonProps> = (
+export const Button = (
 	{
 		onClick = () => {},
 		disabled = false,
@@ -15,7 +15,7 @@ export const Button: React.FC<ButtonProps> = (
 		size = 'text',
 		type = 'button',
 		children,
-	},
+	}: ButtonProps,
 ) => {
 	const [bgColor, hoverBgColor] = ((color: string, disabled: boolean): string[] => {
 		if (disabled) {

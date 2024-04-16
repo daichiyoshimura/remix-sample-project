@@ -4,7 +4,7 @@ export type ParticipantCardListProps = {
 	participants: ParticipantCardProps[];
 };
 
-export const ParticipantCardList: React.FC<ParticipantCardListProps> = ({ participants }) => {
+export const ParticipantCardList = ({ participants }: ParticipantCardListProps) => {
 	return (
 		<div className="max-w-screen-lg mx-auto">
 			<div className="grid grid-cols-3 gap-4">
