@@ -2,8 +2,9 @@ import { Meta, StoryFn } from '@storybook/react';
 import { EditIcon } from '@components';
 
 const meta: Meta = {
-	title: 'Components/EditIcon',
+	title: 'EditIcon',
 	component: EditIcon,
+	tags: ['autodocs'],
 	argTypes: {
 		className: { control: 'text' },
 	},

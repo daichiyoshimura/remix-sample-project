@@ -2,7 +2,7 @@ import { StoryFn, Meta } from '@storybook/react';
 import { ErrorTextList } from '@components';
 
 export default {
-	title: 'Components/TextList',
+	title: 'ErrorTextList',
 	component: ErrorTextList,
 	tags: ['autodocs'],
 } as Meta<typeof ErrorTextList>;

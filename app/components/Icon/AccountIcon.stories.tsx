@@ -2,8 +2,9 @@ import { Meta, StoryFn } from '@storybook/react';
 import { AccountIcon } from '@components';
 
 const meta: Meta = {
-	title: 'Components/AccountIcon',
+	title: 'AccountIcon',
 	component: AccountIcon,
+	tags: ['autodocs'],
 	argTypes: {
 		className: { control: 'text' },
 	},

@@ -2,8 +2,9 @@ import { Meta, StoryFn } from '@storybook/react';
 import { RoomIcon } from '@components';
 
 const meta: Meta = {
-	title: 'Components/RoomIcon',
+	title: 'RoomIcon',
 	component: RoomIcon,
+	tags: ['autodocs'],
 	argTypes: {
 		className: { control: 'text' },
 	},
