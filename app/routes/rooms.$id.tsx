@@ -16,17 +16,8 @@ const RoomProfilePage = () => {
 	}
 	const { id, name, createdAt, participants } = loaderData;
 
-	const {
-		state: isEditRoomModalOpen,
-		on: openEditRoomModal,
-		off: closeEditRoomModal,
-	} = useBinaryState(false);
-
-	const {
-		state: isDeleteRoomModalOpen,
-		on: openDeleteRoomModal,
-		off: closeDeleteRoomModal,
-	} = useBinaryState(false);
+	const [isEditRoomModalOpen, toggleEditRoomModal] = useBinaryState(false);
+	const [isDeleteRoomModalOpen, toggleDeleteRoomModal] = useBinaryState(false);
 
 	return (
 		<>
@@ -36,7 +27,7 @@ const RoomProfilePage = () => {
 						id={id}
 						name={name}
 						createdAt={createdAt}
-						onClick={openEditRoomModal}
+						onClick={toggleEditRoomModal}
 					/>
 				</Box>
 				<Box>
@@ -44,19 +35,19 @@ const RoomProfilePage = () => {
 				</Box>
 				<Container>
 					<LinkButton to="/rooms">Back</LinkButton>
-					<Button color="caution" onClick={openDeleteRoomModal}>
+					<Button color="caution" onClick={toggleDeleteRoomModal}>
 						Delete This Room
 					</Button>
 				</Container>
 				<DeleteRoomModal
 					isOpen={isDeleteRoomModalOpen}
-					onClose={closeDeleteRoomModal}
+					onClose={toggleDeleteRoomModal}
 					roomId={id}
 					name={name}
 				/>
 				<EditRoomModal
 					isOpen={isEditRoomModalOpen}
-					onClose={closeEditRoomModal}
+					onClose={toggleEditRoomModal}
 					roomId={id}
 				/>
 			</div>

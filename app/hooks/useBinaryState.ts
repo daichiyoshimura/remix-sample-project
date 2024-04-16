@@ -1,14 +1,7 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 
-export const useBinaryState = (
-	init: boolean,
-): { state: boolean; on: () => void; off: () => void } => {
-	const [state, setState] = useState<boolean>(init);
-	const on = () => {
-		setState(true);
-	};
-	const off = () => {
-		setState(false);
-	};
-	return { state: state, on: on, off: off };
+export const useBinaryState = (init: boolean): [boolean, React.DispatchWithoutAction] => {
+	return useReducer((state: boolean) => {
+		return !state;
+	}, init);
 };

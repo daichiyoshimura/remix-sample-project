@@ -17,11 +17,7 @@ const RoomListPage = () => {
 	}
 	const { rooms } = loaderData;
 
-	const {
-		state: isCreateRoomModalOpen,
-		on: openCreateRoomModal,
-		off: closeCreateRoomModal,
-	} = useBinaryState(false);
+	const [isCreateRoomModalOpen, toggleCreateRoomModal] = useBinaryState(false);
 
 	return (
 		<>
@@ -30,9 +26,9 @@ const RoomListPage = () => {
 					<RoomCardList rooms={rooms} />
 				</Box>
 				<Container>
-					<Button onClick={openCreateRoomModal}>Create Room</Button>
+					<Button onClick={toggleCreateRoomModal}>Create Room</Button>
 				</Container>
-				<CreateRoomModal isOpen={isCreateRoomModalOpen} onClose={closeCreateRoomModal} />
+				<CreateRoomModal isOpen={isCreateRoomModalOpen} onClose={toggleCreateRoomModal} />
 			</div>
 		</>
 	);
