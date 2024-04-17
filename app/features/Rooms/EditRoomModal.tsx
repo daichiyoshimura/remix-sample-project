@@ -1,6 +1,12 @@
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form, useActionData, useNavigation, useRevalidator } from '@remix-run/react';
+import {
+	Form,
+	Navigation,
+	useActionData,
+	useOutletContext,
+	useRevalidator,
+} from '@remix-run/react';
 import { isDefined } from '@util';
 import { RoomProfilePageActionResponses } from '@actions';
 import {
@@ -31,7 +37,7 @@ export type EditRoomModalProps = {
 
 export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const { state } = useNavigation();
+	const { state } = useOutletContext<Navigation>();
 	const { revalidate } = useRevalidator();
 
 	const actionData = useActionData<RoomProfilePageActionResponses>();

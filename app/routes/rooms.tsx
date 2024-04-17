@@ -1,4 +1,4 @@
-import { Outlet } from '@remix-run/react';
+import { Navigation, Outlet, useOutletContext } from '@remix-run/react';
 import { ContentArea, Footer, Header } from '@components';
 
 const RoomsPageLayout = () => {
@@ -6,7 +6,7 @@ const RoomsPageLayout = () => {
 		<>
 			<Header currentPageTitle="Rooms" />
 			<ContentArea>
-				<Outlet />
+				<Outlet context={useOutletContext<Navigation>()} />
 			</ContentArea>
 			<Footer />
 		</>

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form, useActionData, useNavigation } from '@remix-run/react';
+import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/react';
 import { isDefined } from '@util';
 import { RoomProfilePageActionResponses } from '@actions';
 import {
@@ -32,7 +32,7 @@ export type DeleteRoomModalProps = {
 
 export const DeleteRoomModal = ({ isOpen, onClose, roomId, name }: DeleteRoomModalProps) => {
 	const [inputValue, setInputValue] = useState<string>('');
-	const { state } = useNavigation();
+	const { state } = useOutletContext<Navigation>();
 	const actionData = useActionData<RoomProfilePageActionResponses>();
 	const hasActionData = isDefined<RoomProfilePageActionResponses>(actionData);
 	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];

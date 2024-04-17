@@ -1,5 +1,5 @@
 import '@tailwind.css';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useNavigation } from '@remix-run/react';
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (
@@ -18,5 +18,5 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />;
+	return <Outlet context={useNavigation()} />;
 }
