@@ -1,5 +1,3 @@
-import { mergeConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
@@ -19,8 +17,10 @@ const config: StorybookConfig = {
 		},
 	},
 	async viteFinal(config) {
+		const { mergeConfig } = await import('vite');
+		const tsconfigPaths = await import('vite-tsconfig-paths');
 		return mergeConfig(config, {
-			plugins: [tsconfigPaths()],
+			plugins: [tsconfigPaths],
 		});
 	},
 	docs: {
