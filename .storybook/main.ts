@@ -1,3 +1,5 @@
+import { mergeConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
@@ -7,7 +9,6 @@ const config: StorybookConfig = {
 		'@storybook/addon-essentials',
 		'@chromatic-com/storybook',
 		'@storybook/addon-interactions',
-		'storybook-addon-remix-react-router',
 	],
 	framework: {
 		name: '@storybook/react-vite',
@@ -16,6 +17,11 @@ const config: StorybookConfig = {
 				viteConfigPath: 'vite-sb.config.ts',
 			},
 		},
+	},
+	async viteFinal(config) {
+		return mergeConfig(config, {
+			plugins: [tsconfigPaths()],
+		});
 	},
 	docs: {
 		autodocs: 'tag',
