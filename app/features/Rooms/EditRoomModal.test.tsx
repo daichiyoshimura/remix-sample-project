@@ -3,15 +3,26 @@ import { EditRoomModal } from '@features';
 
 describe('EditRoomModal', () => {
 	vi.mock('@remix-run/react', () => {
-		const useNavigate = vi.fn();
-		const form = vi
+		const useOutletContext = vi.fn().mockImplementation(() => {
+			return { state: 'idle' };
+		});
+		const useActionData = vi.fn().mockImplementation(() => {
+			return undefined;
+		});
+		const useRevalidator = vi.fn().mockImplementation(() => {
+			const revalidate = vi.fn();
+			return { revalidate };
+		});
+		const Form = vi
 			.fn()
 			.mockImplementation(({ children }: { children: React.ReactElement }) => {
 				return children;
 			});
 		return {
-			useNavigate,
-			Form: form,
+			useActionData,
+			useOutletContext,
+			useRevalidator,
+			Form,
 		};
 	});
 	it('closes the modal when "Do not save" button is clicked', () => {

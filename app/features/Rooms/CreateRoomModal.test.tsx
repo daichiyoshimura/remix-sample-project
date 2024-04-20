@@ -3,15 +3,21 @@ import { CreateRoomModal } from '@features';
 
 describe('CreateRoomModal', () => {
 	vi.mock('@remix-run/react', () => {
-		const useNavigate = vi.fn();
-		const form = vi
+		const useOutletContext = vi.fn().mockImplementation(() => {
+			return { state: 'idle' };
+		});
+		const useActionData = vi.fn().mockImplementation(() => {
+			return undefined;
+		});
+		const Form = vi
 			.fn()
 			.mockImplementation(({ children }: { children: React.ReactElement }) => {
 				return children;
 			});
 		return {
-			useNavigate,
-			Form: form,
+			useActionData,
+			useOutletContext,
+			Form,
 		};
 	});
 	it('closes the modal when "do not create" button is clicked', () => {
