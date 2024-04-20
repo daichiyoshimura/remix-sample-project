@@ -7,7 +7,7 @@ export const useFadeAnimation = (): string => {
 		if (navState === 'idle') {
 			return 'animate-fade-in';
 		}
-		if (navState === 'loading') {
+		if (navState === 'submitting') {
 			return 'animate-fade-out';
 		}
 		return '';
