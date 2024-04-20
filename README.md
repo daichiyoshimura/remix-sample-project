@@ -11,7 +11,7 @@
 | build tool        | vite        |
 | unit test         | vitest      |
 | component catalog | storybook   |
-| liinter           | eslint      |
+| linter            | eslint      |
 | formatter         | prettier    |
 
 ## Roles of Each Directory
