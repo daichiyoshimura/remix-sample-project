@@ -1,18 +1,10 @@
 import { render } from '@testing-library/react';
 import { MessageModal } from '@components';
 
-vi.mock('react-modal', () => ({
-	__esModule: true,
-	default: vi.fn(({ onRequestClose }: { onRequestClose: () => void }) => {
-		onRequestClose();
-		return null;
-	}),
-}));
-
 describe('MessageModal', () => {
 	it('renders title and description when isOpen is true', () => {
-		const title = 'Test Title';
-		const description = 'Test Description';
+		const title = 'TestTitle';
+		const description = 'TestDescription';
 		const onCloseMock = vi.fn();
 
 		const { getByText } = render(
