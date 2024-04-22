@@ -1,5 +1,5 @@
 import { MappedTypes } from '@util';
-import { isStageDev, httpHandler } from '@util/server';
+import { isStageDev, httpHandler } from '@server/util';
 
 export type PartisipantAttribute = {
 	name: string;

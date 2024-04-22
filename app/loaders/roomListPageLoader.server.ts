@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
-import { Room, getRoomList } from '@api';
 import { MappedTypes, isString, writeRequestLog } from '@util';
 import { InternalSeverErrorLoaderResponse, internalServerErrorLoader } from '@loaders';
-import { MutationTimes } from '@util/server';
+import { Room, getRoomList } from '@server/api';
+import { MutationTimes } from '@server/util';
 
 type RoomList = MappedTypes<{
 	rooms: (Room & MutationTimes)[];

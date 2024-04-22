@@ -1,5 +1,4 @@
 import { ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
-import { deleteRoom, patchRoom } from '@api';
 import { MessageWithSuccess, isString, writeRequestLog } from '@util';
 import {
 	InvalidMethodErrorActionResponse,
@@ -9,7 +8,8 @@ import {
 	ValidationErrorActionActionResponse,
 	validationErrorAction,
 } from '@actions';
-import { getFormDataValue } from '@util/server';
+import { deleteRoom, patchRoom } from '@server/api';
+import { getFormDataValue } from '@server/util';
 
 export type RoomProfilePageActionResponses =
 	| DeleteRoomActionResponse
