@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { MappedTypes, isString, writeRequestLog } from '@util';
-import { InternalSeverErrorLoaderResponse, internalServerErrorLoader } from '@loaders';
 import { Participant, Room, getParticipantList, getRoom } from '@server/api';
+import { InternalSeverErrorLoaderResponse, internalServerErrorLoader } from '@server/loaders';
 import { MutationTimes } from '@server/util';
 
 export type RoomProfilePageLoaderRequest = Participant;

@@ -7,7 +7,7 @@ import {
 	invalidMethodErrorAction,
 	ValidationErrorActionActionResponse,
 	validationErrorAction,
-} from '@actions';
+} from '@server/actions';
 import { deleteRoom, patchRoom } from '@server/api';
 import { getFormDataValue } from '@server/util';
 

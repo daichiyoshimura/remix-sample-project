@@ -6,7 +6,7 @@ import {
 	internalServerErrorAction,
 	invalidMethodErrorAction,
 	validationErrorAction,
-} from '@actions';
+} from '@server/actions';
 import { RoomAttributes, postRoom } from '@server/api';
 import { getFormDataValue } from '@server/util';
 
