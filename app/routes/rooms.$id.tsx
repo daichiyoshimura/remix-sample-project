@@ -19,9 +19,11 @@ const RoomProfilePage = () => {
 	const [isEditRoomModalOpen, toggleEditRoomModal] = useBinaryState(false);
 	const [isDeleteRoomModalOpen, toggleDeleteRoomModal] = useBinaryState(false);
 
+	const fadeClassName = useFadeAnimation();
+
 	return (
 		<>
-			<div className={useFadeAnimation()}>
+			<div className={fadeClassName()}>
 				<Box>
 					<RoomProfile
 						id={id}

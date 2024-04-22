@@ -1,17 +1,22 @@
+import { useEffect, useState } from 'react';
 import { useNavigation } from '@remix-run/react';
 
-export const useFadeAnimation = (): string => {
-	const { state: navState } = useNavigation();
+export const useFadeAnimation = (): (() => string) => {
+	const [navigationState, setNavigationState] = useState<string>('idle');
+	const { state } = useNavigation();
+	useEffect(() => {
+		setNavigationState(state);
+	}, [state]);
 
 	const calculateFadeClass = () => {
-		if (navState === 'idle') {
+		if (navigationState === 'idle') {
 			return 'animate-fade-in';
 		}
-		if (navState === 'submitting') {
+		if (navigationState === 'submitting') {
 			return 'animate-fade-out';
 		}
 		return '';
 	};
 
-	return calculateFadeClass();
+	return calculateFadeClass;
 };

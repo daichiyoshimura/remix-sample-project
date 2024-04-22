@@ -18,9 +18,11 @@ const RoomListPage = () => {
 
 	const [isCreateRoomModalOpen, toggleCreateRoomModal] = useBinaryState(false);
 
+	const fadeClassName = useFadeAnimation();
+
 	return (
 		<>
-			<div className={useFadeAnimation()}>
+			<div className={fadeClassName()}>
 				<Box>
 					<RoomCardList rooms={rooms} />
 				</Box>
