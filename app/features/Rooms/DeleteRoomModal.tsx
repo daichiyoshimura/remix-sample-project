@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/react';
 import { isDefined } from '@util';
-import { RoomProfilePageActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -13,6 +12,7 @@ import {
 	LoadingIcon,
 	Modal,
 } from '@components';
+import { RoomProfilePageActionResponses } from '@server/actions';
 import { validateZodObject } from '@util/validator';
 
 const deleteRoomSchema = z.object({

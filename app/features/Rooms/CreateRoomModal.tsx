@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/react';
 import { isDefined, validateZodObject } from '@util';
-import { RoomListPageActionResponses } from '@actions';
 import {
 	Button,
 	Container,
@@ -13,6 +12,7 @@ import {
 	LoadingIcon,
 	Modal,
 } from '@components';
+import { RoomListPageActionResponses } from '@server/actions';
 
 const createRoomSchema = z.object({
 	name: z
