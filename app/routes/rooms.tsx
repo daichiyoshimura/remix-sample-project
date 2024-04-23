@@ -1,7 +1,6 @@
-import { useLoaderData } from '@remix-run/react';
-import { useBinaryState } from '@hooks';
-import { Box, Button, Container } from '@components';
-import { RoomCardList, CreateRoomModal } from '@features';
+import { Navigation, Outlet, useLoaderData, useOutletContext } from '@remix-run/react';
+import { Box, Container, LinkButton } from '@components';
+import { RoomCardList } from '@features';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
 
@@ -16,17 +15,15 @@ const RoomListPage = () => {
 	}
 	const { rooms } = loaderData;
 
-	const [isCreateRoomModalOpen, toggleCreateRoomModal] = useBinaryState(false);
-
 	return (
 		<>
 			<Box>
 				<RoomCardList rooms={rooms} />
 			</Box>
 			<Container>
-				<Button onClick={toggleCreateRoomModal}>Create Room</Button>
+				<LinkButton to={'./new'}>Create Room</LinkButton>
 			</Container>
-			<CreateRoomModal isOpen={isCreateRoomModalOpen} onClose={toggleCreateRoomModal} />
+			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);
 };
