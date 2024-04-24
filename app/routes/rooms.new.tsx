@@ -1,18 +1,19 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from '@remix-run/react';
-import { CreateRoomModal } from '@features';
-import { roomListPageAction } from '@server/actions';
-import { roomListPageLoader } from '@server/loaders';
+import { CreateRoomModal as CreateRoomModalComponent } from '@features';
 
-export const loader = roomListPageLoader;
+const CreateRoomModal = () => {
+	const [isOpen, setIsOpen] = useState(false);
+	//To avoid warning due to StrictMode and React-Modal
+	useEffect(() => setIsOpen(true), []);
 
-export const action = roomListPageAction;
-
-const RoomListPage = () => {
 	const navigate = useNavigate();
 	const handleClose = () => {
+		setIsOpen(false);
 		navigate('../');
 	};
-	return <CreateRoomModal isOpen={true} onClose={handleClose} />;
+
+	return <CreateRoomModalComponent isOpen={isOpen} onClose={handleClose} />;
 };
 
-export default RoomListPage;
+export default CreateRoomModal;
