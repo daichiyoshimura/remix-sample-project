@@ -1,18 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from '@remix-run/react';
+import { useModalState } from '@hooks';
 import { CreateRoomModal as CreateRoomModalComponent } from '@features';
 
 const CreateRoomModal = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	//To avoid warning due to StrictMode and React-Modal
-	useEffect(() => setIsOpen(true), []);
-
-	const navigate = useNavigate();
-	const handleClose = () => {
-		setIsOpen(false);
-		navigate('../');
-	};
-
+	const [isOpen, handleClose] = useModalState('../');
 	return <CreateRoomModalComponent isOpen={isOpen} onClose={handleClose} />;
 };
 

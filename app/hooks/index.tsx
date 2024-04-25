@@ -1,2 +1,2 @@
-export * from '@hooks/useBinaryState';
+export * from '@hooks/useModalState';
 export * from '@hooks/useFadeAnimation';

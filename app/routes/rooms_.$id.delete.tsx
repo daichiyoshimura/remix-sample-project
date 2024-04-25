@@ -1,18 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useModalState } from '@hooks';
 import { DeleteRoomModal as DeleteRoomModalComponent } from '@features';
 
 const DeleteRoomModal = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	//To avoid warning due to StrictMode and React-Modal
-	useEffect(() => setIsOpen(true), []);
-
-	const navigate = useNavigate();
-	const handleClose = () => {
-		setIsOpen(false);
-		navigate('../');
-	};
-
+	const [isOpen, handleClose] = useModalState('../');
 	return (
 		<DeleteRoomModalComponent isOpen={isOpen} onClose={handleClose} roomId={'a'} name={'b'} />
 	);
