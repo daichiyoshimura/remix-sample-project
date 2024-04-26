@@ -11,6 +11,10 @@ export default VitestConfig.defineConfig({
 	resolve: {
 		alias: {
 			'@*': path.resolve(__dirname, 'app/*'),
+			'@components': path.resolve(__dirname, 'app/components'),
+			'@features': path.resolve(__dirname, 'app/features'),
+			'@hooks': path.resolve(__dirname, 'app/hooks'),
+			'@util': path.resolve(__dirname, 'app/util'),
 			'@server/*': path.resolve(__dirname, 'app/.server/*'),
 		},
 	},

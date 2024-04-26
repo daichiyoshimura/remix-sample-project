@@ -9,6 +9,7 @@ export * from '@components/ContentArea/ContentArea';
 export * from '@components/ErrorBoundary/ModalErrorBoundary';
 export * from '@components/Footer/Footer';
 export * from '@components/Header/Header';
+export * from '@components/Menu/Menu';
 export * from '@components/Modal/Modal';
 export * from '@components/Modal/MessageModal';
 export * from '@components/Input/TextInput';

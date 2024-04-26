@@ -1,16 +1,5 @@
 {
-	"include": [
-		"**/*.ts",
-		"**/*.tsx",
-		"postcss.config.cts",
-		"app/.server/util/env.ts",
-		"app/.server/util/form.ts",
-		"app/.server/util/httpHandler.ts",
-		"app/.server/util/index.tsx",
-		"app/.server/api/participant.ts",
-		"app/.server/api/room.ts",
-		"app/.server/api/index.tsx"
-	],
+	"include": ["**/*.ts", "**/*.tsx", "postcss.config.cts"],
 	"compilerOptions": {
 		"lib": ["DOM", "DOM.Iterable", "ES2022"],
 		"types": ["@remix-run/node", "vite/client", "vitest/globals"],
