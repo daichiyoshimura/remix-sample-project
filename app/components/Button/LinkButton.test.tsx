@@ -11,9 +11,6 @@ describe('LinkButton', () => {
 		);
 		const linkButton = getByRole('link');
 		fireEvent.click(linkButton);
-
-		await new Promise((resolve) => setTimeout(resolve, 500));
-
 		expect(window.location.pathname).toBe('/');
 	});
 });
