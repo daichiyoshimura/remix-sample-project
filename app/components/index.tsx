@@ -2,6 +2,7 @@ export * from '@components/Button/Button';
 export * from '@components/Button/LinkButton';
 export * from '@components/Button/EditButton';
 export * from '@components/Button/SaveButton';
+export * from '@components/Button/CautionTextLinkButton';
 export * from '@components/Card/Card';
 export * from '@components/Container/Container';
 export * from '@components/Container/BetweenContainer';

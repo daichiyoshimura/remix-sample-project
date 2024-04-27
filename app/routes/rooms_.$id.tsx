@@ -1,5 +1,5 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { LinkButton, Container, LocationBar, EditIcon } from '@components';
+import { LinkButton, Container, LocationBar, EditIcon, CautionTextLinkButton } from '@components';
 import { ParticipantCardList, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
 import { roomProfilePageLoader } from '@server/loaders';
@@ -39,9 +39,9 @@ const RoomProfilePage = () => {
 			</Container>
 			<Container>
 				<LinkButton to={'/rooms'}>Back</LinkButton>
-				<LinkButton to={`/rooms/${id}/delete`} color="caution">
+				<CautionTextLinkButton to={`/rooms/${id}/delete`}>
 					Delete This Room
-				</LinkButton>
+				</CautionTextLinkButton>
 			</Container>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
