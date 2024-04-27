@@ -13,7 +13,7 @@ const Template: StoryFn<ContainerProps> = (args) => <Container {...args} />;
 
 export const Center = Template.bind({});
 Center.args = {
-	alignment: 'center',
+	justify: 'justify-center',
 	children: (
 		<>
 			<div>Item 1</div>
@@ -25,7 +25,7 @@ Center.args = {
 
 export const Right = Template.bind({});
 Right.args = {
-	alignment: 'right',
+	justify: 'justify-end',
 	children: (
 		<>
 			<div>Item 1</div>

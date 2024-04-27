@@ -22,7 +22,7 @@ const RoomListPage = () => {
 			<Container>
 				<LocationBar pathname={pathname} title={'Rooms'} />
 			</Container>
-			<Container alignment="right">
+			<Container justify="justify-end">
 				<LinkButton to={'./new'}>Create Room</LinkButton>
 			</Container>
 			<Container>

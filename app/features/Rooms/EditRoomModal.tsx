@@ -58,7 +58,7 @@ export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) =
 				<>
 					<TitleText title={'Success'} />
 					<DescriptionText description={'The Room is edited'} />
-					<Container alignment="right">
+					<Container justify="justify-end">
 						<Button onClick={handleClose}>close</Button>
 					</Container>
 				</>
@@ -85,7 +85,7 @@ export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) =
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<Container alignment="right">
+					<Container justify="justify-end">
 						<Button onClick={handleClose}>Do not save</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
 							Save

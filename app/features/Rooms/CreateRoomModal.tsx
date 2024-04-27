@@ -70,7 +70,7 @@ export const CreateRoomModal = ({ isOpen, onClose }: CreateRoomModalProps) => {
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<Container alignment="right">
+					<Container justify="justify-end">
 						<Button onClick={handleClose}>Do not create</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
 							Create

@@ -12,7 +12,7 @@ export const MessageModal = ({ title, description, isOpen, onClose }: MessageMod
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<TitleText title={title} />
 			<DescriptionText description={description} />
-			<Container alignment="right">
+			<Container>
 				<Button onClick={onClose}>close</Button>
 			</Container>
 		</Modal>

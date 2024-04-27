@@ -71,7 +71,7 @@ export const DeleteRoomModal = ({ isOpen, onClose, roomId, name }: DeleteRoomMod
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<Container alignment="right">
+					<Container justify="justify-end">
 						<Button onClick={handleClose}>Do not delete</Button>
 						<Button
 							type="submit"

@@ -1,15 +1,11 @@
 import { MeetingRoom } from '@mui/icons-material';
 import { NoSsr } from '@mui/base';
 
-export type RoomIconProps = {
-	className?: string;
-};
-
-export const RoomIcon = ({ className = '' }: RoomIconProps) => {
+export const RoomIcon = () => {
 	return (
 		<>
 			<NoSsr>
-				<MeetingRoom className={className} />
+				<MeetingRoom style={{ fontSize: 80 }} />
 			</NoSsr>
 		</>
 	);
