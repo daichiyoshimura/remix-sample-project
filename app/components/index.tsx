@@ -15,6 +15,7 @@ export * from '@components/Modal/Modal';
 export * from '@components/Modal/MessageModal';
 export * from '@components/Input/TextInput';
 export * from '@components/List/List';
+export * from '@components/List/VerticalList';
 export * from '@components/LocationBar/LocationBar';
 export * from '@components/Text/DescriptionText';
 export * from '@components/Text/TitleText';

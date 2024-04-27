@@ -4,5 +4,4 @@ export * from '@features/Rooms/CreateRoomModal';
 export * from '@features/Rooms/EditRoomModal';
 export * from '@features/Rooms/DeleteRoomModal';
 export * from '@features/Rooms/RoomCard';
-export * from '@features/Rooms/RoomCardList';
 export * from '@features/Rooms/RoomProfile';

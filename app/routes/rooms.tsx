@@ -1,6 +1,6 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { Container, LinkButton, LocationBar, EndContainer } from '@components';
-import { RoomCardList } from '@features';
+import { Container, LinkButton, LocationBar, EndContainer, VerticalList } from '@components';
+import { RoomCard, RoomCardProps } from '@features';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
 
@@ -26,7 +26,18 @@ const RoomListPage = () => {
 				<LinkButton to={'/rooms/new'}>Create Room</LinkButton>
 			</EndContainer>
 			<Container>
-				<RoomCardList rooms={rooms} />
+				<VerticalList<RoomCardProps>
+					items={rooms}
+					render={(room) => (
+						<RoomCard
+							key={room.id}
+							id={room.id}
+							name={room.name}
+							createdAt={room.createdAt}
+							LinkButton={<LinkButton to={`/rooms/${room.id}`}>Enter</LinkButton>}
+						/>
+					)}
+				/>
 			</Container>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
