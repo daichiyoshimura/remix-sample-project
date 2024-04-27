@@ -1,5 +1,5 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { Container, LinkButton, LocationBar } from '@components';
+import { Container, LinkButton, LocationBar, EndContainer } from '@components';
 import { RoomCardList } from '@features';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
@@ -22,9 +22,9 @@ const RoomListPage = () => {
 			<Container>
 				<LocationBar pathname={pathname} title={'Rooms'} />
 			</Container>
-			<Container justify="justify-end">
+			<EndContainer>
 				<LinkButton to={'./new'}>Create Room</LinkButton>
-			</Container>
+			</EndContainer>
 			<Container>
 				<RoomCardList rooms={rooms} />
 			</Container>

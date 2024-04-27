@@ -4,13 +4,13 @@ import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/re
 import { isDefined } from '@util';
 import {
 	Button,
-	Container,
 	DescriptionText,
 	TitleText,
 	TextInput,
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
+	EndContainer,
 } from '@components';
 import { RoomProfilePageActionResponses } from '@server/actions';
 import { validateZodObject } from '@util/validator';
@@ -71,7 +71,7 @@ export const DeleteRoomModal = ({ isOpen, onClose, roomId, name }: DeleteRoomMod
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<Container justify="justify-end">
+					<EndContainer>
 						<Button onClick={handleClose}>Do not delete</Button>
 						<Button
 							type="submit"
@@ -80,7 +80,7 @@ export const DeleteRoomModal = ({ isOpen, onClose, roomId, name }: DeleteRoomMod
 						>
 							Delete
 						</Button>
-					</Container>
+					</EndContainer>
 				</Form>
 			</>
 		);

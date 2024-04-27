@@ -4,13 +4,13 @@ import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/re
 import { isDefined } from '@util';
 import {
 	Button,
-	Container,
 	DescriptionText,
 	TitleText,
 	TextInput,
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
+	EndContainer,
 } from '@components';
 import { RoomProfilePageActionResponses } from '@server/actions';
 import { validateZodObject } from '@util/validator';
@@ -58,9 +58,9 @@ export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) =
 				<>
 					<TitleText title={'Success'} />
 					<DescriptionText description={'The Room is edited'} />
-					<Container justify="justify-end">
+					<EndContainer>
 						<Button onClick={handleClose}>close</Button>
-					</Container>
+					</EndContainer>
 				</>
 			);
 		}
@@ -85,12 +85,12 @@ export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) =
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<Container justify="justify-end">
+					<EndContainer>
 						<Button onClick={handleClose}>Do not save</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
 							Save
 						</Button>
-					</Container>
+					</EndContainer>
 				</Form>
 			</>
 		);

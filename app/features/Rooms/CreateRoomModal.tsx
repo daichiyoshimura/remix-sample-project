@@ -4,13 +4,13 @@ import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/re
 import { isDefined, validateZodObject } from '@util';
 import {
 	Button,
-	Container,
 	DescriptionText,
 	TitleText,
 	TextInput,
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
+	EndContainer,
 } from '@components';
 import { RoomListPageActionResponses } from '@server/actions';
 
@@ -70,12 +70,12 @@ export const CreateRoomModal = ({ isOpen, onClose }: CreateRoomModalProps) => {
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<Container justify="justify-end">
+					<EndContainer>
 						<Button onClick={handleClose}>Do not create</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
 							Create
 						</Button>
-					</Container>
+					</EndContainer>
 				</Form>
 			</>
 		);
