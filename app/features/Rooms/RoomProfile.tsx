@@ -11,7 +11,7 @@ export const RoomProfile = ({ id, name, createdAt }: RoomProfileProps) => {
 		<>
 			<Container>
 				<div className="w-20">
-					<RoomIcon className="w-full h-full" />
+					<RoomIcon />
 				</div>
 				<div className="flex flex-col">
 					<div>
