@@ -3,8 +3,8 @@ import { Header } from '@components';
 
 describe('Header', () => {
 	it('renders title correctly', async () => {
-		const { getByText } = render(<Header currentPageTitle={'Hello'} />);
-		const cardContent = getByText('Hello');
+		const { getByText } = render(<Header />);
+		const cardContent = getByText('Awsome App');
 		expect(cardContent).toBeDefined();
 	});
 });

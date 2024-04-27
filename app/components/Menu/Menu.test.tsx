@@ -1,20 +1,33 @@
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import { Menu, MenuProps } from '@components';
+import { Menu } from '@components';
 
 describe('Menu component', () => {
-	const menuItems: MenuProps['items'] = [
-		{ title: 'Home', to: '/' },
-		{ title: 'About', to: '/about' },
-		{ title: 'Contact', to: '/contact' },
-	];
-
 	test('renders menu items', () => {
 		const { getByRole } = render(
 			<MemoryRouter>
-				<Menu items={menuItems} />
+				<Menu />
 			</MemoryRouter>,
 		);
+
+		const menuItems = [
+			{
+				title: 'Rooms',
+				to: '/rooms',
+			},
+			{
+				title: 'Participants',
+				to: '/',
+			},
+			{
+				title: 'Account',
+				to: '/',
+			},
+			{
+				title: 'Sign Out',
+				to: '/',
+			},
+		];
 
 		menuItems.forEach((item) => {
 			const linkElement = getByRole('link', { name: item.title });

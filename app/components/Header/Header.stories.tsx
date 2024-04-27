@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { Header, HeaderProps } from '@components';
+import { Header } from '@components';
 
 const meta: Meta = {
 	title: 'Header',
@@ -9,9 +9,6 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<HeaderProps> = (args) => <Header {...args} />;
+const Template: StoryFn = () => <Header />;
 
 export const Default = Template.bind({});
-Default.args = {
-	currentPageTitle: 'Sample Page',
-};

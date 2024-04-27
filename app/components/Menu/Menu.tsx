@@ -5,13 +5,28 @@ type MenuItem = {
 	to: string;
 };
 
-export type MenuProps = {
-	items: MenuItem[];
-};
+export const Menu = () => {
+	const items: MenuItem[] = [
+		{
+			title: 'Rooms',
+			to: '/rooms',
+		},
+		{
+			title: 'Participants',
+			to: '/',
+		},
+		{
+			title: 'Account',
+			to: '/',
+		},
+		{
+			title: 'Sign Out',
+			to: '/',
+		},
+	];
 
-export const Menu = ({ items }: MenuProps) => {
 	return (
-		<div className="fixed left-0 top-0 h-full bg-gray-800 text-white p-4">
+		<div className="fixed top-12 bottom-10 w-32 bg-gray-800 text-white p-2 overflow-y-auto z-10">
 			<ul>
 				{items.map((item, index) => (
 					<li key={index} className="mb-4">

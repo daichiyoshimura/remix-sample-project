@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Meta, StoryFn } from '@storybook/react';
-import { Menu, MenuProps } from '@components';
+import { Menu } from '@components';
 
 const meta: Meta = {
 	title: 'Menu',
@@ -10,22 +10,10 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn<MenuProps> = (args) => (
+const Template: StoryFn = () => (
 	<MemoryRouter>
-		<Menu {...args} />
+		<Menu />
 	</MemoryRouter>
 );
 
 export const Default = Template.bind({});
-Default.args = {
-	items: [
-		{
-			title: 'A',
-			to: '/to/a',
-		},
-		{
-			title: 'B',
-			to: '/to/b',
-		},
-	],
-};

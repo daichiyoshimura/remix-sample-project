@@ -1,11 +1,7 @@
-export type HeaderProps = {
-	currentPageTitle: string;
-};
-
-export const Header = ({ currentPageTitle }: HeaderProps) => {
+export const Header = () => {
 	return (
-		<header className="fixed top-0 left-0 w-full bg-primary text-white py-2 text-center">
-			<h1 className="text-3xl font-bold">{currentPageTitle}</h1>
+		<header className="fixed top-0 left-0 w-full h-12 bg-primary text-white p-4 flex items-center">
+			<h1 className="text-2xl font-bold">Awsome App</h1>
 		</header>
 	);
 };
