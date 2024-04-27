@@ -14,7 +14,7 @@ export const Menu = () => {
 		},
 		{
 			title: 'Participants',
-			to: '/',
+			to: '/participants',
 		},
 		{
 			title: 'Account',
