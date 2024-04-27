@@ -11,11 +11,13 @@ export type MenuProps = {
 
 export const Menu = ({ items }: MenuProps) => {
 	return (
-		<div className="menu">
+		<div className="fixed left-0 top-0 h-full bg-gray-800 text-white p-4">
 			<ul>
 				{items.map((item, index) => (
-					<li key={index}>
-						<Link to={item.to}>{item.title}</Link>
+					<li key={index} className="mb-4">
+						<Link to={item.to} className="block px-3 py-2 rounded hover:bg-gray-700">
+							{item.title}
+						</Link>
 					</li>
 				))}
 			</ul>
