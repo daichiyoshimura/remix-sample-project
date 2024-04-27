@@ -1,4 +1,3 @@
-export * from '@components/Box/Box';
 export * from '@components/Button/Button';
 export * from '@components/Button/LinkButton';
 export * from '@components/Button/EditButton';
