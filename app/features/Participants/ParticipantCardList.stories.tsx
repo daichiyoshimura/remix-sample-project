@@ -14,7 +14,7 @@ const Template: StoryFn<ParticipantCardListProps> = (args) => <ParticipantCardLi
 export const Default = Template.bind({});
 Default.args = {
 	participants: [
-		{ id: '1', name: 'John Doe', part: 'Guest' },
-		{ id: '2', name: 'Jane Smith', part: 'Admin' },
+		{ id: '1', name: 'John Doe' },
+		{ id: '2', name: 'Jane Smith' },
 	],
 };

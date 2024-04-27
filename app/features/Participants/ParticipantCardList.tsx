@@ -13,7 +13,6 @@ export const ParticipantCardList = ({ participants }: ParticipantCardListProps) 
 						key={participant.id}
 						id={participant.id}
 						name={participant.name}
-						part={participant.part}
 					/>
 				))}
 			</div>

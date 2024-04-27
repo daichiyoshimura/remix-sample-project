@@ -6,10 +6,8 @@ describe('ParticipantCard', () => {
 		const props = {
 			id: '1',
 			name: 'John Doe',
-			part: 'Guest',
 		};
 		const { getByText } = render(<ParticipantCard {...props} />);
 		expect(getByText(props.name)).toBeDefined();
-		expect(getByText(`<${props.part}>`)).toBeDefined();
 	});
 });

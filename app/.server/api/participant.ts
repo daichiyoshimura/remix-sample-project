@@ -3,7 +3,6 @@ import { isStageDev, httpHandler } from '@server/util';
 
 export type PartisipantAttribute = {
 	name: string;
-	part: string;
 };
 
 export type Participant = MappedTypes<
@@ -26,7 +25,6 @@ export const getParticipant = async (
 		return {
 			id: '1',
 			name: 'John',
-			part: 'Tp',
 		};
 	}
 
@@ -54,9 +52,9 @@ export const getParticipantList = async (
 	if (isStageDev()) {
 		return {
 			participants: [
-				{ id: '1', name: 'John', part: 'Tp' },
-				{ id: '2', name: 'Emma', part: 'Sax' },
-				{ id: '3', name: 'Kate', part: 'Pf' },
+				{ id: '1', name: 'John' },
+				{ id: '2', name: 'Emma' },
+				{ id: '3', name: 'Kate' },
 			],
 		};
 	}
