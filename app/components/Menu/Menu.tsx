@@ -18,7 +18,7 @@ export const Menu = () => {
 		},
 		{
 			title: 'Account',
-			to: '/',
+			to: '/account',
 		},
 		{
 			title: 'Sign Out',
@@ -27,7 +27,7 @@ export const Menu = () => {
 	];
 
 	return (
-		<div className="fixed top-12 bottom-10 w-32 bg-gray-800 text-white p-2 overflow-y-auto">
+		<div className="fixed top-12 bottom-10 w-32 bg-gray-800 text-white p-2 z-10 overflow-y-auto">
 			<ul>
 				{items.map((item, index) => (
 					<React.Fragment key={index}>
