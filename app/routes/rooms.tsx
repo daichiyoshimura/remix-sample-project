@@ -1,5 +1,5 @@
-import { Navigation, Outlet, useLoaderData, useOutletContext } from '@remix-run/react';
-import { Container, LinkButton } from '@components';
+import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
+import { Container, LinkButton, LocationBar } from '@components';
 import { RoomCardList } from '@features';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
@@ -15,13 +15,18 @@ const RoomListPage = () => {
 	}
 	const { rooms } = loaderData;
 
+	const { pathname } = useLocation();
+
 	return (
 		<>
 			<Container>
-				<RoomCardList rooms={rooms} />
+				<LocationBar pathname={pathname} title={'Rooms'} />
+			</Container>
+			<Container alignment="right">
+				<LinkButton to={'./new'}>Create Room</LinkButton>
 			</Container>
 			<Container>
-				<LinkButton to={'./new'}>Create Room</LinkButton>
+				<RoomCardList rooms={rooms} />
 			</Container>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>

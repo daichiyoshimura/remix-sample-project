@@ -3,5 +3,5 @@ export type ContentAreaProps = {
 };
 
 export const ContentArea = ({ children }: ContentAreaProps) => {
-	return <div className="relative top-16 bottom-16 pl-32 h-full overflow-y-auto">{children}</div>;
+	return <div className="relative top-12 bottom-12 pl-32 h-full overflow-y-auto">{children}</div>;
 };

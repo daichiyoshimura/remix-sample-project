@@ -6,7 +6,7 @@ export type RoomCardListProps = {
 
 export const RoomCardList = ({ rooms }: RoomCardListProps) => {
 	return (
-		<div className="space-y-4 w-full px-4">
+		<div className="space-y-4 w-full">
 			{rooms.map((room) => (
 				<RoomCard key={room.id} id={room.id} name={room.name} createdAt={room.createdAt} />
 			))}

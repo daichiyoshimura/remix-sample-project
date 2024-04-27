@@ -13,6 +13,7 @@ export * from '@components/Menu/Menu';
 export * from '@components/Modal/Modal';
 export * from '@components/Modal/MessageModal';
 export * from '@components/Input/TextInput';
+export * from '@components/LocationBar/LocationBar';
 export * from '@components/Text/DescriptionText';
 export * from '@components/Text/TitleText';
 export * from '@components/Text/ErrorText';
