@@ -13,8 +13,6 @@ describe('RoomCard', () => {
 		const enterButton = getByRole('link');
 		fireEvent.click(enterButton);
 
-		await new Promise((resolve) => setTimeout(resolve, 500));
-
 		expect(window.location.pathname).toBe('/');
 	});
 });
