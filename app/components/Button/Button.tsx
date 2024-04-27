@@ -1,7 +1,9 @@
+export type ButtonColors = 'default' | 'safe' | 'caution';
+
 export type ButtonProps = {
 	onClick?: () => void;
 	disabled?: boolean;
-	color?: 'default' | 'safe' | 'caution';
+	color?: ButtonColors;
 	size?: 'icon' | 'text';
 	type?: 'submit' | 'reset' | 'button';
 	children: React.ReactNode;

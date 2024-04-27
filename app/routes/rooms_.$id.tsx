@@ -30,7 +30,9 @@ const RoomProfilePage = () => {
 			</Container>
 			<Container>
 				<LinkButton to="/rooms">Back</LinkButton>
-				<LinkButton to="./delete">Delete This Room</LinkButton>
+				<LinkButton to="./delete" color="caution">
+					Delete This Room
+				</LinkButton>
 			</Container>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
