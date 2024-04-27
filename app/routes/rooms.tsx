@@ -23,7 +23,7 @@ const RoomListPage = () => {
 				<LocationBar pathname={pathname} title={'Rooms'} />
 			</Container>
 			<EndContainer>
-				<LinkButton to={'./new'}>Create Room</LinkButton>
+				<LinkButton to={'/rooms/new'}>Create Room</LinkButton>
 			</EndContainer>
 			<Container>
 				<RoomCardList rooms={rooms} />

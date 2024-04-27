@@ -5,9 +5,9 @@ import { DeleteRoomModal as DeleteRoomModalComponent } from '@features';
 export const ErrorBoundary = ModalErrorBoundary;
 
 const DeleteRoomModal = () => {
-	const [isOpen, handleClose] = useModalState('../');
+	const [isOpen, handleClose] = useModalState(`/rooms/${'1'}`);
 	return (
-		<DeleteRoomModalComponent isOpen={isOpen} onClose={handleClose} roomId={'a'} name={'b'} />
+		<DeleteRoomModalComponent isOpen={isOpen} onClose={handleClose} roomId={'1'} name={'b'} />
 	);
 };
 

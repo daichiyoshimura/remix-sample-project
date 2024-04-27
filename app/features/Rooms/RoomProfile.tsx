@@ -1,13 +1,14 @@
-import { RoomIcon, LinkButton, EditIcon } from '@components';
+import { RoomIcon } from '@components';
 import { BetweenContainer } from '@components/Container/BetweenContainer';
 
 export type RoomProfileProps = {
 	id: string;
 	name: string;
 	createdAt: string;
+	LinkButton: JSX.Element;
 };
 
-export const RoomProfile = ({ id, name, createdAt }: RoomProfileProps) => {
+export const RoomProfile = ({ id, name, createdAt, LinkButton }: RoomProfileProps) => {
 	return (
 		<>
 			<BetweenContainer>
@@ -17,11 +18,7 @@ export const RoomProfile = ({ id, name, createdAt }: RoomProfileProps) => {
 					<p>ID: {id}</p>
 					<p>Created At: {createdAt}</p>
 				</div>
-				<div className="flex items-center">
-					<LinkButton to={'./edit'}>
-						<EditIcon />
-					</LinkButton>
-				</div>
+				<div className="flex items-center">{LinkButton}</div>
 			</BetweenContainer>
 		</>
 	);

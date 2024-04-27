@@ -1,5 +1,5 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { LinkButton, Container, LocationBar } from '@components';
+import { LinkButton, Container, LocationBar, EditIcon } from '@components';
 import { ParticipantCardList, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
 import { roomProfilePageLoader } from '@server/loaders';
@@ -23,14 +23,23 @@ const RoomProfilePage = () => {
 				<LocationBar pathname={pathname} title={'Room Profile'} />
 			</Container>
 			<Container>
-				<RoomProfile id={id} name={name} createdAt={createdAt} />
+				<RoomProfile
+					id={id}
+					name={name}
+					createdAt={createdAt}
+					LinkButton={
+						<LinkButton to={`/rooms/${id}/edit`}>
+							<EditIcon />
+						</LinkButton>
+					}
+				/>
 			</Container>
 			<Container>
 				<ParticipantCardList participants={participants} />
 			</Container>
 			<Container>
-				<LinkButton to="/rooms">Back</LinkButton>
-				<LinkButton to="./delete" color="caution">
+				<LinkButton to={'/rooms'}>Back</LinkButton>
+				<LinkButton to={`/rooms/${id}/delete`} color="caution">
 					Delete This Room
 				</LinkButton>
 			</Container>

@@ -5,8 +5,8 @@ import { EditRoomModal as EditRoomModalComponent } from '@features';
 export const ErrorBoundary = ModalErrorBoundary;
 
 const EditRoomModal = () => {
-	const [isOpen, handleClose] = useModalState('../');
-	return <EditRoomModalComponent isOpen={isOpen} onClose={handleClose} roomId={'a'} />;
+	const [isOpen, handleClose] = useModalState(`/rooms/${'1'}`);
+	return <EditRoomModalComponent isOpen={isOpen} onClose={handleClose} roomId={'1'} />;
 };
 
 export default EditRoomModal;

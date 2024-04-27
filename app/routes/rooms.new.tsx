@@ -5,7 +5,7 @@ import { CreateRoomModal as CreateRoomModalComponent } from '@features';
 export const ErrorBoundary = ModalErrorBoundary;
 
 const CreateRoomModal = () => {
-	const [isOpen, handleClose] = useModalState('../');
+	const [isOpen, handleClose] = useModalState('/rooms');
 	return <CreateRoomModalComponent isOpen={isOpen} onClose={handleClose} />;
 };
 
