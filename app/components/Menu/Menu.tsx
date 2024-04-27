@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from '@remix-run/react';
 
 type MenuItem = {
@@ -29,11 +30,17 @@ export const Menu = () => {
 		<div className="fixed top-12 bottom-10 w-32 bg-gray-800 text-white p-2 overflow-y-auto z-10">
 			<ul>
 				{items.map((item, index) => (
-					<li key={index} className="mb-4">
-						<Link to={item.to} className="block px-3 py-2 rounded hover:bg-gray-700">
-							{item.title}
-						</Link>
-					</li>
+					<React.Fragment key={index}>
+						<li>
+							<Link
+								to={item.to}
+								className="block px-3 py-4 rounded hover:bg-gray-700"
+							>
+								{item.title}
+							</Link>
+						</li>
+						{index !== items.length - 1 && <li className="border-b border-gray-700" />}
+					</React.Fragment>
 				))}
 			</ul>
 		</div>
