@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { ParticipantCard } from '@features';
+import { ParticipantGridItem } from '@features';
 
 describe('ParticipantCard', () => {
 	it('renders correctly', () => {
@@ -7,7 +7,7 @@ describe('ParticipantCard', () => {
 			id: '1',
 			name: 'John Doe',
 		};
-		const { getByText } = render(<ParticipantCard {...props} />);
+		const { getByText } = render(<ParticipantGridItem {...props} />);
 		expect(getByText(props.name)).toBeDefined();
 	});
 });

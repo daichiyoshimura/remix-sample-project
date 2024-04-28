@@ -3,7 +3,7 @@ export * from '@components/Button/LinkButton';
 export * from '@components/Button/EditButton';
 export * from '@components/Button/SaveButton';
 export * from '@components/Button/CautionTextLinkButton';
-export * from '@components/Container/Grid';
+export * from '@components/Grid/Grid';
 export * from '@components/Container/FlexCenter';
 export * from '@components/Container/FlexBetween';
 export * from '@components/Container/FlexStart';

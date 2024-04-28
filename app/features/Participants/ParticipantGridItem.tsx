@@ -1,11 +1,11 @@
 import { AccountIcon, FlexCenter, VerticalFlexCenter } from '@components';
 
-export type ParticipantCardProps = {
+export type ParticipantGridItemProps = {
 	id: string;
 	name: string;
 };
 
-export const ParticipantCard = ({ id, name }: ParticipantCardProps) => {
+export const ParticipantGridItem = ({ id, name }: ParticipantGridItemProps) => {
 	return (
 		<div className="col-span-1 rounded bg-primary text-white">
 			<VerticalFlexCenter>

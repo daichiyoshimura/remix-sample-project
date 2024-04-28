@@ -1,15 +1,15 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { ParticipantCard, ParticipantCardProps } from '@features';
+import { ParticipantGridItem, ParticipantGridItemProps } from '@features';
 
 const meta: Meta = {
 	title: 'ParticipantCard',
-	component: ParticipantCard,
+	component: ParticipantGridItem,
 	tags: ['autodocs'],
 };
 
 export default meta;
 
-const Template: StoryFn<ParticipantCardProps> = (args) => <ParticipantCard {...args} />;
+const Template: StoryFn<ParticipantGridItemProps> = (args) => <ParticipantGridItem {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

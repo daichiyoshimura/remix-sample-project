@@ -8,8 +8,9 @@ import {
 	ContentsTopLayout,
 	ContentsBottomLayout,
 	FlexBetween,
+	Grid,
 } from '@components';
-import { ParticipantCardList, RoomProfile } from '@features';
+import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
 import { roomProfilePageLoader } from '@server/loaders';
 
@@ -39,7 +40,10 @@ const RoomProfilePage = () => {
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
 				<RoomProfile id={id} name={name} createdAt={createdAt} />
-				<ParticipantCardList participants={participants} />
+				<Grid<ParticipantGridItemProps>
+					items={participants}
+					render={(item) => <ParticipantGridItem id={item.id} name={item.name} />}
+				/>
 				<FlexCenter>
 					<CautionTextLinkButton to={`/rooms/${id}/delete`}>
 						Delete This Room
