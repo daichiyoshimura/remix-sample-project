@@ -1,6 +1,5 @@
 import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	FlexCenter,
 	LinkButton,
 	LocationBar,
 	FlexEnd,
@@ -15,20 +14,16 @@ const ParticipantsPage = () => {
 	return (
 		<>
 			<ContentsTopLayout>
-				<FlexCenter>
-					<LocationBar pathname={pathname} title={'Participants'} />
-				</FlexCenter>
+				<LocationBar pathname={pathname} title={'Participants'} />
 				<FlexEnd>
 					<LinkButton to={'/participant/new'}>New Participant</LinkButton>
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
-				<FlexCenter>
-					<VerticalList<string>
-						items={['a', 'b', 'c', 'd', 'e', 'f', 'g']}
-						render={(item) => <p>{item}</p>}
-					/>
-				</FlexCenter>
+				<VerticalList<string>
+					items={['a', 'b', 'c', 'd', 'e', 'f', 'g']}
+					render={(item) => <p>{item}</p>}
+				/>
 			</ContentsBottomLayout>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
