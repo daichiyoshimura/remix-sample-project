@@ -6,6 +6,9 @@ import {
 	VerticalList,
 	ContentsTopLayout,
 	ContentsBottomLayout,
+	SideBarLayout,
+	ContentsLayout,
+	FlexBetween,
 } from '@components';
 import { ParticipantName, ParticipantNameProps } from '@features';
 import { participantListPageLoader } from '@server/loaders';
@@ -30,12 +33,18 @@ const ParticipantListPage = () => {
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
-				<VerticalList<ParticipantNameProps>
-					items={participants}
-					render={(item) => <ParticipantName id={item.id} name={item.name} />}
-				/>
+				<FlexBetween>
+					<SideBarLayout>
+						<VerticalList<ParticipantNameProps>
+							items={participants}
+							render={(item) => <ParticipantName id={item.id} name={item.name} />}
+						/>
+					</SideBarLayout>
+					<ContentsLayout fadeClass={''}>
+						<Outlet context={useOutletContext<Navigation>()} />
+					</ContentsLayout>
+				</FlexBetween>
 			</ContentsBottomLayout>
-			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);
 };

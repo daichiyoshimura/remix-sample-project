@@ -10,7 +10,7 @@ export * from '@components/Container/FlexStart';
 export * from '@components/Container/FlexEnd';
 export * from '@components/Container/VerticalFlexCenter';
 export * from '@components/Container/RootLayout';
-export * from '@components/Container/MenuLayout';
+export * from '@components/Container/SideBarLayout';
 export * from '@components/Container/ContentsLayout';
 export * from '@components/Container/DangerZone';
 export * from '@components/Container/ContentsTopLayout';
