@@ -1,4 +1,4 @@
-import { AccountIcon, Card } from '@components';
+import { AccountIcon, FlexCenter, VerticalFlexCenter } from '@components';
 
 export type ParticipantCardProps = {
 	id: string;
@@ -7,10 +7,18 @@ export type ParticipantCardProps = {
 
 export const ParticipantCard = ({ id, name }: ParticipantCardProps) => {
 	return (
-		<Card>
-			<AccountIcon />
-			<div className="hidden">{id}</div>
-			<div className="text-sm mt-1">{name}</div>
-		</Card>
+		<div className="col-span-1 rounded bg-primary text-white">
+			<VerticalFlexCenter>
+				<FlexCenter>
+					<AccountIcon />
+				</FlexCenter>
+				<FlexCenter>
+					<div>{id}</div>
+				</FlexCenter>
+				<FlexCenter>
+					<div className="text-sm mt-1">{name}</div>
+				</FlexCenter>
+			</VerticalFlexCenter>
+		</div>
 	);
 };

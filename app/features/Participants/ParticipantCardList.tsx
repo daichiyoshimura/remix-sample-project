@@ -1,3 +1,4 @@
+import { Grid } from '@components';
 import { ParticipantCard, ParticipantCardProps } from '@features';
 
 export type ParticipantCardListProps = {
@@ -6,16 +7,10 @@ export type ParticipantCardListProps = {
 
 export const ParticipantCardList = ({ participants }: ParticipantCardListProps) => {
 	return (
-		<div className="max-w-screen-lg mx-auto">
-			<div className="grid grid-cols-3 gap-4">
-				{participants.map((participant) => (
-					<ParticipantCard
-						key={participant.id}
-						id={participant.id}
-						name={participant.name}
-					/>
-				))}
-			</div>
-		</div>
+		<Grid>
+			{participants.map((participant) => (
+				<ParticipantCard key={participant.id} id={participant.id} name={participant.name} />
+			))}
+		</Grid>
 	);
 };
