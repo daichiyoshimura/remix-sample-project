@@ -6,6 +6,10 @@ import {
 	EndContainer,
 	ContentsTopContainer,
 	ContentsBottomContainer,
+	DangerZoneContainer,
+	BetweenContainer,
+	DescriptionText,
+	CautionTextLinkButton,
 } from '@components';
 import { AccountProfile } from '@features';
 
@@ -29,6 +33,18 @@ const AccountPage = () => {
 						name={'account-name'}
 						email={'account@email.com'}
 					/>
+				</Container>
+				<Container>
+					<DangerZoneContainer>
+						<BetweenContainer>
+							<DescriptionText
+								description={`Please be careful not to make any mistakes when operating the features within this area.`}
+							/>
+							<CautionTextLinkButton to={'/account'}>
+								Delete Account (before implement)
+							</CautionTextLinkButton>
+						</BetweenContainer>
+					</DangerZoneContainer>
 				</Container>
 			</ContentsBottomContainer>
 			<Outlet context={useOutletContext<Navigation>()} />

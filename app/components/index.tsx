@@ -10,6 +10,7 @@ export * from '@components/Container/StartContainer';
 export * from '@components/Container/EndContainer';
 export * from '@components/Container/RootContainer';
 export * from '@components/Container/MenuContainer';
+export * from '@components/Container/DangerZoneContainer';
 export * from '@components/Container/ContentsContainer';
 export * from '@components/Container/ContentsTopContainer';
 export * from '@components/Container/ContentsBottomContainer';
