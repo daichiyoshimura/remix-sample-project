@@ -20,10 +20,6 @@ export const Menu = () => {
 			title: 'Account',
 			to: '/account',
 		},
-		{
-			title: 'Sign Out',
-			to: '/',
-		},
 	];
 
 	return (
