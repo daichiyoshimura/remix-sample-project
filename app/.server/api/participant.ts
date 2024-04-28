@@ -75,3 +75,41 @@ export const getParticipantList = async (
 		},
 	});
 };
+
+type GetParticipantListOfAccountRequest = {
+	accountId: string;
+};
+
+type GetParticipantListOfAccountResponse = MappedTypes<{
+	participants: Participant[];
+}>;
+
+export const getParticipantListOfAccount = async (
+	{ accountId }: GetParticipantListOfAccountRequest,
+): Promise<GetParticipantListOfAccountResponse> => {
+	if (isStageDev()) {
+		return {
+			participants: [
+				{ id: '1', name: 'John' },
+				{ id: '2', name: 'Emma' },
+				{ id: '3', name: 'Kate' },
+				{ id: '4', name: 'John' },
+				{ id: '5', name: 'Emma' },
+				{ id: '6', name: 'Kate' },
+				{ id: '7', name: 'John' },
+				{ id: '8', name: 'Emma' },
+				{ id: '9', name: 'Kate' },
+				{ id: '10', name: 'John' },
+				{ id: '11', name: 'Emma' },
+				{ id: '12', name: 'Kate' },
+			],
+		};
+	}
+	return await httpHandler<GetParticipantListOfAccountResponse>({
+		method: 'GET',
+		url: '/participants',
+		queryParams: {
+			accountId: accountId,
+		},
+	});
+};

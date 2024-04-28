@@ -1,4 +1,4 @@
-import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
+import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
 	LinkButton,
 	LocationBar,
@@ -7,8 +7,18 @@ import {
 	ContentsTopLayout,
 	ContentsBottomLayout,
 } from '@components';
+import { ParticipantName, ParticipantNameProps } from '@features';
+import { participantListPageLoader } from '@server/loaders';
 
-const ParticipantsPage = () => {
+export const loader = participantListPageLoader;
+
+const ParticipantListPage = () => {
+	const loaderData = useLoaderData<typeof loader>();
+	if ('message' in loaderData) {
+		throw Error(loaderData.message);
+	}
+	const { participants } = loaderData;
+
 	const { pathname } = useLocation();
 
 	return (
@@ -20,9 +30,9 @@ const ParticipantsPage = () => {
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
-				<VerticalList<string>
-					items={['a', 'b', 'c', 'd', 'e', 'f', 'g']}
-					render={(item) => <p>{item}</p>}
+				<VerticalList<ParticipantNameProps>
+					items={participants}
+					render={(item) => <ParticipantName id={item.id} name={item.name} />}
 				/>
 			</ContentsBottomLayout>
 			<Outlet context={useOutletContext<Navigation>()} />
@@ -30,4 +40,4 @@ const ParticipantsPage = () => {
 	);
 };
 
-export default ParticipantsPage;
+export default ParticipantListPage;
