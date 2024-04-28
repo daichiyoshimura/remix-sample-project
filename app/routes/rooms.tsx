@@ -1,12 +1,12 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	Container,
+	FlexCenter,
 	LinkButton,
 	LocationBar,
-	EndContainer,
+	FlexEnd,
 	VerticalList,
-	ContentsTopContainer,
-	ContentsBottomContainer,
+	ContentsTopLayout,
+	ContentsBottomLayout,
 } from '@components';
 import { RoomCard, RoomCardProps } from '@features';
 import { roomListPageAction } from '@server/actions';
@@ -27,16 +27,16 @@ const RoomListPage = () => {
 
 	return (
 		<>
-			<ContentsTopContainer>
-				<Container>
+			<ContentsTopLayout>
+				<FlexCenter>
 					<LocationBar pathname={pathname} title={'Rooms'} />
-				</Container>
-				<EndContainer>
+				</FlexCenter>
+				<FlexEnd>
 					<LinkButton to={'/rooms/new'}>Create Room</LinkButton>
-				</EndContainer>
-			</ContentsTopContainer>
-			<ContentsBottomContainer>
-				<Container>
+				</FlexEnd>
+			</ContentsTopLayout>
+			<ContentsBottomLayout>
+				<FlexCenter>
 					<VerticalList<RoomCardProps>
 						items={rooms}
 						render={(room) => (
@@ -49,8 +49,8 @@ const RoomListPage = () => {
 							/>
 						)}
 					/>
-				</Container>
-			</ContentsBottomContainer>
+				</FlexCenter>
+			</ContentsBottomLayout>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);

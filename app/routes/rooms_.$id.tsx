@@ -1,13 +1,13 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
 	LinkButton,
-	Container,
+	FlexCenter,
 	LocationBar,
 	EditIcon,
 	CautionTextLinkButton,
-	ContentsTopContainer,
-	ContentsBottomContainer,
-	StartContainer,
+	ContentsTopLayout,
+	ContentsBottomLayout,
+	FlexStart,
 } from '@components';
 import { ParticipantCardList, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
@@ -28,16 +28,16 @@ const RoomProfilePage = () => {
 
 	return (
 		<>
-			<ContentsTopContainer>
-				<Container>
+			<ContentsTopLayout>
+				<FlexCenter>
 					<LocationBar pathname={pathname} title={'Room Profile'} />
-				</Container>
-				<StartContainer>
+				</FlexCenter>
+				<FlexStart>
 					<LinkButton to={'/rooms'}>Back</LinkButton>
-				</StartContainer>
-			</ContentsTopContainer>
-			<ContentsBottomContainer>
-				<Container>
+				</FlexStart>
+			</ContentsTopLayout>
+			<ContentsBottomLayout>
+				<FlexCenter>
 					<RoomProfile
 						id={id}
 						name={name}
@@ -48,16 +48,16 @@ const RoomProfilePage = () => {
 							</LinkButton>
 						}
 					/>
-				</Container>
-				<Container>
+				</FlexCenter>
+				<FlexCenter>
 					<ParticipantCardList participants={participants} />
-				</Container>
-				<Container>
+				</FlexCenter>
+				<FlexCenter>
 					<CautionTextLinkButton to={`/rooms/${id}/delete`}>
 						Delete This Room
 					</CautionTextLinkButton>
-				</Container>
-			</ContentsBottomContainer>
+				</FlexCenter>
+			</ContentsBottomLayout>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);

@@ -10,7 +10,7 @@ import {
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
-	EndContainer,
+	FlexEnd,
 } from '@components';
 import { RoomProfilePageActionResponses } from '@server/actions';
 import { validateZodObject } from '@util/validator';
@@ -71,7 +71,7 @@ export const DeleteRoomModal = ({ isOpen, onClose, roomId, name }: DeleteRoomMod
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<EndContainer>
+					<FlexEnd>
 						<Button onClick={handleClose}>Do not delete</Button>
 						<Button
 							type="submit"
@@ -80,7 +80,7 @@ export const DeleteRoomModal = ({ isOpen, onClose, roomId, name }: DeleteRoomMod
 						>
 							Delete
 						</Button>
-					</EndContainer>
+					</FlexEnd>
 				</Form>
 			</>
 		);

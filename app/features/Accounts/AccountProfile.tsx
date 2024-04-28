@@ -6,7 +6,7 @@ export type AccountProfileProps = {
 
 export const AccountProfile = ({ id, name, email }: AccountProfileProps) => {
 	return (
-		<div className="rounded-lg overflow-hidden w-full">
+		<div className="rounded-lg overflow-hidden w-full pb-4">
 			<table className="min-w-full divide-y divide-gray-200">
 				<tbody className="bg-white divide-y divide-gray-200">
 					<tr>

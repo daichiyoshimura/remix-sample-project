@@ -1,13 +1,12 @@
 import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	Container,
 	LinkButton,
 	LocationBar,
-	EndContainer,
-	ContentsTopContainer,
-	ContentsBottomContainer,
-	DangerZoneContainer,
-	BetweenContainer,
+	FlexEnd,
+	ContentsTopLayout,
+	ContentsBottomLayout,
+	DangerZone,
+	FlexBetween,
 	DescriptionText,
 	CautionTextLinkButton,
 } from '@components';
@@ -18,35 +17,29 @@ const AccountPage = () => {
 
 	return (
 		<>
-			<ContentsTopContainer>
-				<Container>
-					<LocationBar pathname={pathname} title={'Account'} />
-				</Container>
-				<EndContainer>
-					<LinkButton to={'/account'}>Edit Account (before implement)</LinkButton>
-				</EndContainer>
-			</ContentsTopContainer>
-			<ContentsBottomContainer>
-				<Container>
-					<AccountProfile
-						id={'account-id'}
-						name={'account-name'}
-						email={'account@email.com'}
-					/>
-				</Container>
-				<Container>
-					<DangerZoneContainer>
-						<BetweenContainer>
-							<DescriptionText
-								description={`Please be careful not to make any mistakes when operating the features within this area.`}
-							/>
-							<CautionTextLinkButton to={'/account'}>
-								Delete Account (before implement)
-							</CautionTextLinkButton>
-						</BetweenContainer>
-					</DangerZoneContainer>
-				</Container>
-			</ContentsBottomContainer>
+			<ContentsTopLayout>
+				<LocationBar pathname={pathname} title={'Account'} />
+				<FlexEnd>
+					<LinkButton to={'/account'}>Edit Account</LinkButton>
+				</FlexEnd>
+			</ContentsTopLayout>
+			<ContentsBottomLayout>
+				<AccountProfile
+					id={'account-id'}
+					name={'account-name'}
+					email={'account@email.com'}
+				/>
+				<DangerZone>
+					<FlexBetween>
+						<DescriptionText
+							description={`Please be careful not to make any mistakes when operating the features within this area.`}
+						/>
+						<CautionTextLinkButton to={'/account'}>
+							Delete Account
+						</CautionTextLinkButton>
+					</FlexBetween>
+				</DangerZone>
+			</ContentsBottomLayout>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);

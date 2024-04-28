@@ -10,7 +10,7 @@ import {
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
-	EndContainer,
+	FlexEnd,
 } from '@components';
 import { RoomProfilePageActionResponses } from '@server/actions';
 import { validateZodObject } from '@util/validator';
@@ -58,9 +58,9 @@ export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) =
 				<>
 					<TitleText title={'Success'} />
 					<DescriptionText description={'The Room is edited'} />
-					<EndContainer>
+					<FlexEnd>
 						<Button onClick={handleClose}>close</Button>
-					</EndContainer>
+					</FlexEnd>
 				</>
 			);
 		}
@@ -85,12 +85,12 @@ export const EditRoomModal = ({ isOpen, onClose, roomId }: EditRoomModalProps) =
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<EndContainer>
+					<FlexEnd>
 						<Button onClick={handleClose}>Do not save</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
 							Save
 						</Button>
-					</EndContainer>
+					</FlexEnd>
 				</Form>
 			</>
 		);

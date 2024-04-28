@@ -1,4 +1,4 @@
-import { Button, Container, DescriptionText, Modal, TitleText } from '@components';
+import { Button, DescriptionText, Modal, TitleText } from '@components';
 
 export type MessageModalProps = {
 	title: string;
@@ -12,9 +12,7 @@ export const MessageModal = ({ title, description, isOpen, onClose }: MessageMod
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<TitleText title={title} />
 			<DescriptionText description={description} />
-			<Container>
-				<Button onClick={onClose}>close</Button>
-			</Container>
+			<Button onClick={onClose}>close</Button>
 		</Modal>
 	);
 };

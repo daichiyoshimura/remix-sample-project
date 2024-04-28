@@ -1,12 +1,12 @@
 import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	Container,
+	FlexCenter,
 	LinkButton,
 	LocationBar,
-	EndContainer,
+	FlexEnd,
 	VerticalList,
-	ContentsTopContainer,
-	ContentsBottomContainer,
+	ContentsTopLayout,
+	ContentsBottomLayout,
 } from '@components';
 
 const ParticipantsPage = () => {
@@ -14,22 +14,22 @@ const ParticipantsPage = () => {
 
 	return (
 		<>
-			<ContentsTopContainer>
-				<Container>
+			<ContentsTopLayout>
+				<FlexCenter>
 					<LocationBar pathname={pathname} title={'Participants'} />
-				</Container>
-				<EndContainer>
+				</FlexCenter>
+				<FlexEnd>
 					<LinkButton to={'/participant/new'}>New Participant</LinkButton>
-				</EndContainer>
-			</ContentsTopContainer>
-			<ContentsBottomContainer>
-				<Container>
+				</FlexEnd>
+			</ContentsTopLayout>
+			<ContentsBottomLayout>
+				<FlexCenter>
 					<VerticalList<string>
 						items={['a', 'b', 'c', 'd', 'e', 'f', 'g']}
 						render={(item) => <p>{item}</p>}
 					/>
-				</Container>
-			</ContentsBottomContainer>
+				</FlexCenter>
+			</ContentsBottomLayout>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);

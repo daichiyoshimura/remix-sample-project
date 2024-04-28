@@ -10,7 +10,7 @@ import {
 	ErrorTextList,
 	LoadingIcon,
 	Modal,
-	EndContainer,
+	FlexEnd,
 } from '@components';
 import { RoomListPageActionResponses } from '@server/actions';
 
@@ -70,12 +70,12 @@ export const CreateRoomModal = ({ isOpen, onClose }: CreateRoomModalProps) => {
 					/>
 					<ErrorTextList textList={errorMessageList} />
 					<ErrorTextList textList={serverErrorMessageList} />
-					<EndContainer>
+					<FlexEnd>
 						<Button onClick={handleClose}>Do not create</Button>
 						<Button type="submit" color="safe" disabled={!isValid}>
 							Create
 						</Button>
-					</EndContainer>
+					</FlexEnd>
 				</Form>
 			</>
 		);
