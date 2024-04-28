@@ -4,10 +4,9 @@ export type RoomProfileProps = {
 	id: string;
 	name: string;
 	createdAt: string;
-	LinkButton: JSX.Element;
 };
 
-export const RoomProfile = ({ id, name, createdAt, LinkButton }: RoomProfileProps) => {
+export const RoomProfile = ({ id, name, createdAt }: RoomProfileProps) => {
 	return (
 		<>
 			<FlexBetween>
@@ -17,7 +16,6 @@ export const RoomProfile = ({ id, name, createdAt, LinkButton }: RoomProfileProp
 					<p>ID: {id}</p>
 					<p>Created At: {createdAt}</p>
 				</div>
-				<div className="flex items-center">{LinkButton}</div>
 			</FlexBetween>
 		</>
 	);

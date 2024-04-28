@@ -1,3 +1,3 @@
 export const FlexBetween = ({ children }: { children?: React.ReactNode }) => {
-	return <div className={`w-full flex justify-between`}>{children}</div>;
+	return <div className={`w-full flex justify-between gap-x-4`}>{children}</div>;
 };

@@ -7,7 +7,7 @@ import {
 	CautionTextLinkButton,
 	ContentsTopLayout,
 	ContentsBottomLayout,
-	FlexStart,
+	FlexBetween,
 } from '@components';
 import { ParticipantCardList, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
@@ -30,21 +30,15 @@ const RoomProfilePage = () => {
 		<>
 			<ContentsTopLayout>
 				<LocationBar pathname={pathname} title={'Room Profile'} />
-				<FlexStart>
+				<FlexBetween>
 					<LinkButton to={'/rooms'}>Back</LinkButton>
-				</FlexStart>
+					<LinkButton to={`/rooms/${id}/edit`}>
+						<EditIcon />
+					</LinkButton>
+				</FlexBetween>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
-				<RoomProfile
-					id={id}
-					name={name}
-					createdAt={createdAt}
-					LinkButton={
-						<LinkButton to={`/rooms/${id}/edit`}>
-							<EditIcon />
-						</LinkButton>
-					}
-				/>
+				<RoomProfile id={id} name={name} createdAt={createdAt} />
 				<ParticipantCardList participants={participants} />
 				<FlexCenter>
 					<CautionTextLinkButton to={`/rooms/${id}/delete`}>
