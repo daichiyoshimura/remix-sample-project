@@ -1,9 +1,5 @@
 import { Container } from '@components';
 
-export type BetweenContainerProps = {
-	children?: React.ReactNode;
-};
-
-export const BetweenContainer = ({ children }: BetweenContainerProps) => {
+export const BetweenContainer = ({ children }: { children?: React.ReactNode }) => {
 	return <Container justify="justify-between">{children}</Container>;
 };

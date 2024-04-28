@@ -1,7 +1,7 @@
 import '@tailwind.css';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useNavigation } from '@remix-run/react';
 import { useFadeAnimation } from '@hooks';
-import { ContentArea, Footer, Header, Menu } from '@components';
+import { ContentsContainer, Footer, Header, Menu, MenuContainer, RootContainer } from '@components';
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	const fadeClass = useFadeAnimation();
@@ -11,10 +11,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body className="bg-gray-300">
+			<body>
 				<Header />
-				<Menu />
-				<ContentArea fadeClass={fadeClass()}>{children}</ContentArea>
+				<RootContainer>
+					<MenuContainer>
+						<Menu />
+					</MenuContainer>
+					<ContentsContainer fadeClass={fadeClass()}>{children}</ContentsContainer>
+				</RootContainer>
 				<Footer />
 				<ScrollRestoration />
 				<Scripts />

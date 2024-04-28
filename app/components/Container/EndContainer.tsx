@@ -1,9 +1,5 @@
 import { Container } from '@components';
 
-export type EndContainerProps = {
-	children?: React.ReactNode;
-};
-
-export const EndContainer = ({ children }: EndContainerProps) => {
+export const EndContainer = ({ children }: { children?: React.ReactNode }) => {
 	return <Container justify="justify-end">{children}</Container>;
 };
