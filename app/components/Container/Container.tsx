@@ -1,6 +1,6 @@
 export type ContainerProps = {
 	children?: React.ReactNode;
-	justify?: 'justify-center' | 'justify-between' | 'justify-end';
+	justify?: 'justify-center' | 'justify-between' | 'justify-end' | 'justify-start';
 };
 
 export const Container = ({ children, justify = 'justify-center' }: ContainerProps) => {

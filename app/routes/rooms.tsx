@@ -1,5 +1,13 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { Container, LinkButton, LocationBar, EndContainer, VerticalList } from '@components';
+import {
+	Container,
+	LinkButton,
+	LocationBar,
+	EndContainer,
+	VerticalList,
+	ContentsTopContainer,
+	ContentsBottomContainer,
+} from '@components';
 import { RoomCard, RoomCardProps } from '@features';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
@@ -19,26 +27,30 @@ const RoomListPage = () => {
 
 	return (
 		<>
-			<Container>
-				<LocationBar pathname={pathname} title={'Rooms'} />
-			</Container>
-			<EndContainer>
-				<LinkButton to={'/rooms/new'}>Create Room</LinkButton>
-			</EndContainer>
-			<Container>
-				<VerticalList<RoomCardProps>
-					items={rooms}
-					render={(room) => (
-						<RoomCard
-							key={room.id}
-							id={room.id}
-							name={room.name}
-							createdAt={room.createdAt}
-							LinkButton={<LinkButton to={`/rooms/${room.id}`}>Enter</LinkButton>}
-						/>
-					)}
-				/>
-			</Container>
+			<ContentsTopContainer>
+				<Container>
+					<LocationBar pathname={pathname} title={'Rooms'} />
+				</Container>
+				<EndContainer>
+					<LinkButton to={'/rooms/new'}>Create Room</LinkButton>
+				</EndContainer>
+			</ContentsTopContainer>
+			<ContentsBottomContainer>
+				<Container>
+					<VerticalList<RoomCardProps>
+						items={rooms}
+						render={(room) => (
+							<RoomCard
+								key={room.id}
+								id={room.id}
+								name={room.name}
+								createdAt={room.createdAt}
+								LinkButton={<LinkButton to={`/rooms/${room.id}`}>Enter</LinkButton>}
+							/>
+						)}
+					/>
+				</Container>
+			</ContentsBottomContainer>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);

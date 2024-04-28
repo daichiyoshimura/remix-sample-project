@@ -6,6 +6,7 @@ export * from '@components/Button/CautionTextLinkButton';
 export * from '@components/Card/Card';
 export * from '@components/Container/Container';
 export * from '@components/Container/BetweenContainer';
+export * from '@components/Container/StartContainer';
 export * from '@components/Container/EndContainer';
 export * from '@components/Container/RootContainer';
 export * from '@components/Container/MenuContainer';

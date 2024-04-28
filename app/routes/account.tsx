@@ -1,5 +1,12 @@
 import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
-import { Container, LinkButton, LocationBar, EndContainer } from '@components';
+import {
+	Container,
+	LinkButton,
+	LocationBar,
+	EndContainer,
+	ContentsTopContainer,
+	ContentsBottomContainer,
+} from '@components';
 import { AccountProfile } from '@features';
 
 const AccountPage = () => {
@@ -7,19 +14,23 @@ const AccountPage = () => {
 
 	return (
 		<>
-			<Container>
-				<LocationBar pathname={pathname} title={'Account'} />
-			</Container>
-			<EndContainer>
-				<LinkButton to={'/account'}>Edit Account (before implement)</LinkButton>
-			</EndContainer>
-			<Container>
-				<AccountProfile
-					id={'account-id'}
-					name={'account-name'}
-					email={'account@email.com'}
-				/>
-			</Container>
+			<ContentsTopContainer>
+				<Container>
+					<LocationBar pathname={pathname} title={'Account'} />
+				</Container>
+				<EndContainer>
+					<LinkButton to={'/account'}>Edit Account (before implement)</LinkButton>
+				</EndContainer>
+			</ContentsTopContainer>
+			<ContentsBottomContainer>
+				<Container>
+					<AccountProfile
+						id={'account-id'}
+						name={'account-name'}
+						email={'account@email.com'}
+					/>
+				</Container>
+			</ContentsBottomContainer>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);
