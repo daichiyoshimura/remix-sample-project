@@ -5,10 +5,9 @@ import {
 	LocationBar,
 	EditIcon,
 	CautionTextLinkButton,
-	ContentsTopLayout,
-	ContentsBottomLayout,
 	FlexBetween,
 	Grid,
+	SplitPaneLayout,
 } from '@components';
 import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
@@ -29,27 +28,33 @@ const RoomProfilePage = () => {
 
 	return (
 		<>
-			<ContentsTopLayout>
-				<LocationBar pathname={pathname} title={'Room Profile'} />
-				<FlexBetween>
-					<LinkButton to={'/rooms'}>Back</LinkButton>
-					<LinkButton to={`/rooms/${id}/edit`}>
-						<EditIcon />
-					</LinkButton>
-				</FlexBetween>
-			</ContentsTopLayout>
-			<ContentsBottomLayout>
-				<RoomProfile id={id} name={name} createdAt={createdAt} />
-				<Grid<ParticipantGridItemProps>
-					items={participants}
-					render={(item) => <ParticipantGridItem id={item.id} name={item.name} />}
-				/>
-				<FlexCenter>
-					<CautionTextLinkButton to={`/rooms/${id}/delete`}>
-						Delete This Room
-					</CautionTextLinkButton>
-				</FlexCenter>
-			</ContentsBottomLayout>
+			<SplitPaneLayout
+				top={
+					<>
+						<LocationBar pathname={pathname} title={'Room Profile'} />
+						<FlexBetween>
+							<LinkButton to={'/rooms'}>Back</LinkButton>
+							<LinkButton to={`/rooms/${id}/edit`}>
+								<EditIcon />
+							</LinkButton>
+						</FlexBetween>
+					</>
+				}
+				bottom={
+					<>
+						<RoomProfile id={id} name={name} createdAt={createdAt} />
+						<Grid<ParticipantGridItemProps>
+							items={participants}
+							render={(item) => <ParticipantGridItem id={item.id} name={item.name} />}
+						/>
+						<FlexCenter>
+							<CautionTextLinkButton to={`/rooms/${id}/delete`}>
+								Delete This Room
+							</CautionTextLinkButton>
+						</FlexCenter>
+					</>
+				}
+			/>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);

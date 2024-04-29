@@ -1,12 +1,7 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import {
-	LinkButton,
-	LocationBar,
-	FlexEnd,
-	ContentsTopLayout,
-	ContentsBottomLayout,
-} from '@components';
+import { LinkButton, LocationBar, FlexEnd } from '@components';
 import { RoomCard, RoomCardList } from '@features';
+import { SplitPaneLayout } from '@components/Layouts/SplitPaneLayout';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
 
@@ -25,26 +20,32 @@ const RoomListPage = () => {
 
 	return (
 		<>
-			<ContentsTopLayout>
-				<LocationBar pathname={pathname} title={'Rooms'} />
-				<FlexEnd>
-					<LinkButton to={'/rooms/new'}>New Room</LinkButton>
-				</FlexEnd>
-			</ContentsTopLayout>
-			<ContentsBottomLayout>
-				<RoomCardList
-					items={rooms}
-					render={({ id, name, createdAt }) => (
-						<RoomCard
-							key={id}
-							id={id}
-							name={name}
-							createdAt={createdAt}
-							LinkButton={<LinkButton to={`/rooms/${id}`}>Enter</LinkButton>}
+			<SplitPaneLayout
+				top={
+					<>
+						<LocationBar pathname={pathname} title={'Rooms'} />
+						<FlexEnd>
+							<LinkButton to={'/rooms/new'}>New Room</LinkButton>
+						</FlexEnd>
+					</>
+				}
+				bottom={
+					<>
+						<RoomCardList
+							items={rooms}
+							render={({ id, name, createdAt }) => (
+								<RoomCard
+									key={id}
+									id={id}
+									name={name}
+									createdAt={createdAt}
+									LinkButton={<LinkButton to={`/rooms/${id}`}>Enter</LinkButton>}
+								/>
+							)}
 						/>
-					)}
-				/>
-			</ContentsBottomLayout>
+					</>
+				}
+			/>
 			<Outlet context={useOutletContext<Navigation>()} />
 		</>
 	);
