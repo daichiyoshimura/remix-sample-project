@@ -20,7 +20,7 @@ const AccountPage = () => {
 			<ContentsTopLayout>
 				<LocationBar pathname={pathname} title={'Account'} />
 				<FlexEnd>
-					<LinkButton to={'/account'}>Edit Account</LinkButton>
+					<LinkButton to={`/accounts/${'1'}/edit`}>Edit Account</LinkButton>
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
@@ -34,7 +34,7 @@ const AccountPage = () => {
 						<DescriptionText
 							description={`Please be careful not to make any mistakes when operating the features within this area.`}
 						/>
-						<CautionTextLinkButton to={'/account'}>
+						<CautionTextLinkButton to={`/accounts/${'1'}/delete`}>
 							Delete Account
 						</CautionTextLinkButton>
 					</FlexBetween>

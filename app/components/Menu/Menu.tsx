@@ -18,7 +18,7 @@ export const Menu = () => {
 		},
 		{
 			title: 'Account',
-			to: '/account',
+			to: `/accounts/${'1'}`,
 		},
 	];
 
