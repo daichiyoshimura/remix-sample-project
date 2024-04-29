@@ -28,7 +28,7 @@ const ParticipantListPage = () => {
 			<ContentsTopLayout>
 				<LocationBar pathname={pathname} title={'Participants'} />
 				<FlexEnd>
-					<LinkButton to={'/participants'}>New Participant</LinkButton>
+					<LinkButton to={'/participants/new'}>New Participant</LinkButton>
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
