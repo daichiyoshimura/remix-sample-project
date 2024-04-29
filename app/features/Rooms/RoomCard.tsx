@@ -5,7 +5,7 @@ export type RoomCardProps = {
 };
 
 export const RoomCard = (
-	{ name, createdAt, LinkButton }: RoomCardProps & { LinkButton: JSX.Element },
+	{ name, createdAt, linkButton }: RoomCardProps & { linkButton: JSX.Element },
 ) => {
 	return (
 		<div className="w-full bg-darkslategray rounded overflow-hidden shadow-md flex room-container p-4">
@@ -13,7 +13,7 @@ export const RoomCard = (
 				<div className="font-bold text-xl mb-2 room-name">{name}</div>
 				<div className="text-sm mb-2 room-info">Created at: {createdAt}</div>
 			</div>
-			<div className="flex items-center room-actions pr-2 pl-2">{LinkButton}</div>
+			<div className="flex items-center room-actions pr-2 pl-2">{linkButton}</div>
 		</div>
 	);
 };

@@ -1,18 +1,16 @@
 import { Link } from '@remix-run/react';
 import { Button } from '@components';
 
-export type CautionTextLinkButtonProps = {
+export type TextLinkButtonProps = {
 	to: string;
 	caption: string;
 	disabled?: boolean;
 };
 
-export const CautionTextLinkButton = (
-	{ to, caption, disabled = false }: CautionTextLinkButtonProps,
-) => {
+export const TextLinkButton = ({ to, caption, disabled = false }: TextLinkButtonProps) => {
 	return (
 		<Link to={to}>
-			<Button color="caution" disabled={disabled}>
+			<Button disabled={disabled}>
 				<p>{caption}</p>
 			</Button>
 		</Link>

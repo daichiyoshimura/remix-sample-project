@@ -8,6 +8,7 @@ import {
 	FlexBetween,
 	Grid,
 	SplitPaneLayout,
+	BackIcon,
 } from '@components';
 import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
@@ -33,7 +34,9 @@ const RoomProfilePage = () => {
 					<>
 						<LocationBar pathname={pathname} title={'Room Profile'} />
 						<FlexBetween>
-							<LinkButton to={'/rooms'}>Back</LinkButton>
+							<LinkButton to={'/rooms'}>
+								<BackIcon />
+							</LinkButton>
 							<LinkButton to={`/rooms/${id}/edit`}>
 								<EditIcon />
 							</LinkButton>
@@ -45,12 +48,13 @@ const RoomProfilePage = () => {
 						<RoomProfile id={id} name={name} createdAt={createdAt} />
 						<Grid<ParticipantGridItemProps>
 							items={participants}
-							render={(item) => <ParticipantGridItem id={item.id} name={item.name} />}
+							render={({ id, name }) => <ParticipantGridItem id={id} name={name} />}
 						/>
 						<FlexCenter>
-							<CautionTextLinkButton to={`/rooms/${id}/delete`}>
-								Delete This Room
-							</CautionTextLinkButton>
+							<CautionTextLinkButton
+								to={`/rooms/${id}/delete`}
+								caption={'Delete This Room'}
+							/>
 						</FlexCenter>
 					</>
 				}

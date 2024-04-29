@@ -1,7 +1,13 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { LinkButton, LocationBar, FlexEnd } from '@components';
+import {
+	LocationBar,
+	FlexEnd,
+	SplitPaneLayout,
+	TextLinkButton,
+	LinkButton,
+	AddIcon,
+} from '@components';
 import { RoomCard, RoomCardList } from '@features';
-import { SplitPaneLayout } from '@components/Layouts/SplitPaneLayout';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
 
@@ -25,7 +31,9 @@ const RoomListPage = () => {
 					<>
 						<LocationBar pathname={pathname} title={'Rooms'} />
 						<FlexEnd>
-							<LinkButton to={'/rooms/new'}>New Room</LinkButton>
+							<LinkButton to={'/rooms/new'}>
+								<AddIcon />
+							</LinkButton>
 						</FlexEnd>
 					</>
 				}
@@ -39,7 +47,9 @@ const RoomListPage = () => {
 									id={id}
 									name={name}
 									createdAt={createdAt}
-									LinkButton={<LinkButton to={`/rooms/${id}`}>Enter</LinkButton>}
+									linkButton={
+										<TextLinkButton to={`/rooms/${id}`} caption={'Enter'} />
+									}
 								/>
 							)}
 						/>

@@ -40,9 +40,10 @@ const AccountPage = () => {
 								<DescriptionText
 									description={`Please be careful not to make any mistakes when operating the features within this area.`}
 								/>
-								<CautionTextLinkButton to={`/accounts/${'1'}/delete`}>
-									Delete Account
-								</CautionTextLinkButton>
+								<CautionTextLinkButton
+									to={`/accounts/${'1'}/delete`}
+									caption={'Delete This Account'}
+								/>
 							</FlexBetween>
 						</DangerZone>
 					</>

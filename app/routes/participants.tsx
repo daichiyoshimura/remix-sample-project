@@ -1,11 +1,11 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	LinkButton,
 	LocationBar,
 	FlexEnd,
 	SideBarLayout,
 	FlexBetween,
 	SplitPaneLayout,
+	TextLinkButton,
 } from '@components';
 import { ParticipantName, ParticipantNameList } from '@features';
 import { participantListPageLoader } from '@server/loaders';
@@ -28,7 +28,7 @@ const ParticipantListPage = () => {
 					<>
 						<LocationBar pathname={pathname} title={'Participants'} />
 						<FlexEnd>
-							<LinkButton to={'/participants/new'}>New Participant</LinkButton>
+							<TextLinkButton to={'/participants/new'} caption={'New Participant'} />
 						</FlexEnd>
 					</>
 				}
