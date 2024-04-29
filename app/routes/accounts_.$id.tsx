@@ -9,6 +9,7 @@ import {
 	FlexBetween,
 	DescriptionText,
 	CautionTextLinkButton,
+	EditIcon,
 } from '@components';
 import { AccountProfile } from '@features';
 
@@ -20,7 +21,9 @@ const AccountPage = () => {
 			<ContentsTopLayout>
 				<LocationBar pathname={pathname} title={'Account'} />
 				<FlexEnd>
-					<LinkButton to={`/accounts/${'1'}/edit`}>Edit Account</LinkButton>
+					<LinkButton to={`/accounts/${'1'}/edit`}>
+						<EditIcon />
+					</LinkButton>
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
