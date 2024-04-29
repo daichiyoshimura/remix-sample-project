@@ -17,7 +17,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					<SideBarLayout>
 						<Menu />
 					</SideBarLayout>
-					<ContentsLayout fadeClass={fadeClass()}>{children}</ContentsLayout>
+					<ContentsLayout className={fadeClass()}>{children}</ContentsLayout>
 				</RootLayout>
 				<Footer />
 				<ScrollRestoration />

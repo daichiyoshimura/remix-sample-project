@@ -39,7 +39,7 @@ const ParticipantListPage = () => {
 							render={({ id, name }) => <ParticipantName id={id} name={name} />}
 						/>
 					</SideBarLayout>
-					<ContentsLayout fadeClass={''}>
+					<ContentsLayout>
 						<Outlet context={useOutletContext<Navigation>()} />
 					</ContentsLayout>
 				</FlexBetween>
