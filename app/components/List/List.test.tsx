@@ -6,7 +6,7 @@ describe('List component', () => {
 	const renderItem = (item: string) => <span>{item}</span>;
 
 	test('renders items correctly', () => {
-		const { getByText } = render(<List items={items} render={renderItem} />);
+		const { getByText } = render(<List items={items} render={renderItem} className={''} />);
 		items.forEach((item) => {
 			expect(getByText(item)).toBeInTheDocument();
 		});

@@ -1,5 +1,6 @@
 export * from '@features/Participants/ParticipantGridItem';
 export * from '@features/Participants/ParticipantName';
+export * from '@features/Participants/ParticipantNameList';
 export * from '@features/Rooms/CreateRoomModal';
 export * from '@features/Rooms/EditRoomModal';
 export * from '@features/Rooms/DeleteRoomModal';

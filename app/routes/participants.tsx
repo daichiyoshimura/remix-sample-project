@@ -3,14 +3,13 @@ import {
 	LinkButton,
 	LocationBar,
 	FlexEnd,
-	VerticalList,
 	ContentsTopLayout,
 	ContentsBottomLayout,
 	SideBarLayout,
 	ContentsLayout,
 	FlexBetween,
 } from '@components';
-import { ParticipantName, ParticipantNameProps } from '@features';
+import { ParticipantName, ParticipantNameList } from '@features';
 import { participantListPageLoader } from '@server/loaders';
 
 export const loader = participantListPageLoader;
@@ -35,9 +34,9 @@ const ParticipantListPage = () => {
 			<ContentsBottomLayout>
 				<FlexBetween>
 					<SideBarLayout>
-						<VerticalList<ParticipantNameProps>
+						<ParticipantNameList
 							items={participants}
-							render={(item) => <ParticipantName id={item.id} name={item.name} />}
+							render={({ id, name }) => <ParticipantName id={id} name={name} />}
 						/>
 					</SideBarLayout>
 					<ContentsLayout fadeClass={''}>

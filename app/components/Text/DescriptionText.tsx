@@ -3,5 +3,5 @@ export type DescriptionTextProps = {
 };
 
 export const DescriptionText = ({ description }: DescriptionTextProps) => {
-	return <p className="text-sm text-gray-600 mb-4">{description}</p>;
+	return <p className="text-sm text-gray-600 align-middle">{description}</p>;
 };
