@@ -28,7 +28,7 @@ const ParticipantListPage = () => {
 			<ContentsTopLayout>
 				<LocationBar pathname={pathname} title={'Participants'} />
 				<FlexEnd>
-					<LinkButton to={'/participant/new'}>New Participant</LinkButton>
+					<LinkButton to={'/participants'}>New Participant</LinkButton>
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
@@ -36,7 +36,9 @@ const ParticipantListPage = () => {
 					<SideBarLayout>
 						<ParticipantNameList
 							items={participants}
-							render={({ id, name }) => <ParticipantName id={id} name={name} />}
+							render={({ id, name }) => (
+								<ParticipantName id={id} name={name} to={`/participants/${id}`} />
+							)}
 						/>
 					</SideBarLayout>
 					<ContentsLayout>

@@ -10,6 +10,7 @@ export * from '@components/Container/FlexBetween';
 export * from '@components/Container/FlexStart';
 export * from '@components/Container/FlexEnd';
 export * from '@components/Container/VerticalFlexCenter';
+export * from '@components/Container/VerticalFlexStart';
 export * from '@components/Container/RootLayout';
 export * from '@components/Container/SideBarLayout';
 export * from '@components/Container/ContentsLayout';

@@ -1,10 +1,11 @@
-import { FlexStart, ImageBox } from '@components';
+import { VerticalFlexStart } from '@components';
+import { ParticipantProfile } from '@features/Participants/ParticipantProfile';
 
 const ParticipantProfilePage = () => {
 	return (
-		<FlexStart className={'fixed'}>
-			<ImageBox url={''} />
-		</FlexStart>
+		<VerticalFlexStart className={'fixed'}>
+			<ParticipantProfile id={'qwerty'} name={'Jimmy'} createdAt={'2024-04-29 16:44'} />
+		</VerticalFlexStart>
 	);
 };
 
