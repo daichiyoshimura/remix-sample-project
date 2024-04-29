@@ -3,11 +3,10 @@ import {
 	LinkButton,
 	LocationBar,
 	FlexEnd,
-	VerticalList,
 	ContentsTopLayout,
 	ContentsBottomLayout,
 } from '@components';
-import { RoomCard, RoomCardProps } from '@features';
+import { RoomCard, RoomCardList } from '@features';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
 
@@ -33,15 +32,15 @@ const RoomListPage = () => {
 				</FlexEnd>
 			</ContentsTopLayout>
 			<ContentsBottomLayout>
-				<VerticalList<RoomCardProps>
+				<RoomCardList
 					items={rooms}
-					render={(room) => (
+					render={({ id, name, createdAt }) => (
 						<RoomCard
-							key={room.id}
-							id={room.id}
-							name={room.name}
-							createdAt={room.createdAt}
-							LinkButton={<LinkButton to={`/rooms/${room.id}`}>Enter</LinkButton>}
+							key={id}
+							id={id}
+							name={name}
+							createdAt={createdAt}
+							LinkButton={<LinkButton to={`/rooms/${id}`}>Enter</LinkButton>}
 						/>
 					)}
 				/>

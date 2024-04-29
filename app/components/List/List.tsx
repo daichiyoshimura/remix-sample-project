@@ -7,7 +7,7 @@ export type ListProps<T> = {
 	className: string;
 };
 
-export const List = <T,>({ items, render, divider, className }: ListProps<T>) => {
+export const List = <T,>({ items, render, divider = undefined, className }: ListProps<T>) => {
 	return (
 		<ul className={className}>
 			{items.map((item, index) => (
