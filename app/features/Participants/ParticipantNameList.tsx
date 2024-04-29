@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Divider, VerticalList } from '@components';
+import { Divider, List } from '@components';
 import { ParticipantNameProps } from '@features';
 
 export type ParticipantNameListProps = {
@@ -9,10 +9,11 @@ export type ParticipantNameListProps = {
 
 export const ParticipantNameList = ({ items, render }: ParticipantNameListProps) => {
 	return (
-		<VerticalList<ParticipantNameProps>
+		<List<ParticipantNameProps>
 			items={items}
 			render={render}
 			divider={<Divider className={'border-b border-gray-300'} />}
+			className={`w-full`}
 		/>
 	);
 };

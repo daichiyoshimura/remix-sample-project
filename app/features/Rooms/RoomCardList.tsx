@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { VerticalList } from '@components';
+import { List } from '@components';
 import { RoomCardProps } from '@features';
 
 export type RoomCardListProps = {
@@ -9,10 +9,10 @@ export type RoomCardListProps = {
 
 export const RoomCardList = ({ items, render }: RoomCardListProps) => {
 	return (
-		<VerticalList<RoomCardProps>
+		<List<RoomCardProps>
 			items={items}
 			render={render}
-			className={`space-y-4`}
+			className={`space-y-4 w-full`}
 			divider={undefined}
 		/>
 	);

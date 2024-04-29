@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from '@remix-run/react';
+import { Divider, List } from '@components';
 
 type MenuItem = {
 	title: string;
@@ -23,22 +23,15 @@ export const Menu = () => {
 	];
 
 	return (
-		<div className="h-full bg-gray-800 text-white p-2">
-			<ul>
-				{items.map((item, index) => (
-					<React.Fragment key={index}>
-						<li>
-							<Link
-								to={item.to}
-								className="block px-3 py-4 rounded hover:bg-gray-700"
-							>
-								{item.title}
-							</Link>
-						</li>
-						{index !== items.length - 1 && <li className="border-b border-gray-700" />}
-					</React.Fragment>
-				))}
-			</ul>
-		</div>
+		<List
+			items={items}
+			render={({ to, title }) => (
+				<Link to={to} className="block px-3 py-4 rounded hover:bg-gray-700">
+					{title}
+				</Link>
+			)}
+			divider={<Divider className={'border-b border-gray-700'} />}
+			className={'w-full h-full bg-gray-800 text-white p-2'}
+		/>
 	);
 };
