@@ -1,12 +1,10 @@
-import { VerticalFlexCenter, FlexCenter } from '@components';
+import { FlexStart, ImageBox } from '@components';
 
 const ParticipantProfilePage = () => {
 	return (
-		<VerticalFlexCenter>
-			<FlexCenter>
-				<p>next implement</p>
-			</FlexCenter>
-		</VerticalFlexCenter>
+		<FlexStart className={'fixed'}>
+			<ImageBox url={''} />
+		</FlexStart>
 	);
 };
 
