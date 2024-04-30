@@ -3,5 +3,5 @@ export type TitleTextProps = {
 };
 
 export const TitleText = ({ title }: TitleTextProps) => {
-	return <h2 className="text-lg font-bold">{title}</h2>;
+	return <h2 className="text-2xl font-bold">{title}</h2>;
 };

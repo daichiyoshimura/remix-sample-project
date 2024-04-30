@@ -1,11 +1,12 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	LocationBar,
-	FlexEnd,
 	SplitPaneLayout,
 	TextLinkButton,
 	LinkButton,
 	AddIcon,
+	NavigationBarLayout,
+	DescriptionText,
+	TitleText,
 } from '@components';
 import { RoomCard, RoomCardList } from '@features';
 import { roomListPageAction } from '@server/actions';
@@ -28,32 +29,31 @@ const RoomListPage = () => {
 		<>
 			<SplitPaneLayout
 				top={
-					<>
-						<LocationBar pathname={pathname} title={'Rooms'} />
-						<FlexEnd>
+					<NavigationBarLayout
+						location={<DescriptionText description={pathname} />}
+						title={<TitleText title={'Rooms'} />}
+						right={
 							<LinkButton to={'/rooms/new'}>
 								<AddIcon />
 							</LinkButton>
-						</FlexEnd>
-					</>
+						}
+					/>
 				}
 				bottom={
-					<>
-						<RoomCardList
-							items={rooms}
-							render={({ id, name, createdAt }) => (
-								<RoomCard
-									key={id}
-									id={id}
-									name={name}
-									createdAt={createdAt}
-									linkButton={
-										<TextLinkButton to={`/rooms/${id}`} caption={'Enter'} />
-									}
-								/>
-							)}
-						/>
-					</>
+					<RoomCardList
+						items={rooms}
+						render={({ id, name, createdAt }) => (
+							<RoomCard
+								key={id}
+								id={id}
+								name={name}
+								createdAt={createdAt}
+								linkButton={
+									<TextLinkButton to={`/rooms/${id}`} caption={'Enter'} />
+								}
+							/>
+						)}
+					/>
 				}
 			/>
 			<Outlet context={useOutletContext<Navigation>()} />

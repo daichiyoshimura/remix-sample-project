@@ -2,13 +2,14 @@ import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from
 import {
 	LinkButton,
 	FlexCenter,
-	LocationBar,
 	EditIcon,
 	CautionTextLinkButton,
-	FlexBetween,
 	Grid,
 	SplitPaneLayout,
 	BackIcon,
+	NavigationBarLayout,
+	DescriptionText,
+	TitleText,
 } from '@components';
 import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
@@ -31,17 +32,20 @@ const RoomProfilePage = () => {
 		<>
 			<SplitPaneLayout
 				top={
-					<>
-						<LocationBar pathname={pathname} title={'Room Profile'} />
-						<FlexBetween>
-							<LinkButton to={'/rooms'}>
-								<BackIcon />
-							</LinkButton>
+					<NavigationBarLayout
+						location={<DescriptionText description={pathname} />}
+						title={<TitleText title={'Room Profile'} />}
+						right={
 							<LinkButton to={`/rooms/${id}/edit`}>
 								<EditIcon />
 							</LinkButton>
-						</FlexBetween>
-					</>
+						}
+						left={
+							<LinkButton to={'/rooms'}>
+								<BackIcon />
+							</LinkButton>
+						}
+					/>
 				}
 				bottom={
 					<>

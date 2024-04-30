@@ -1,14 +1,14 @@
 import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
 import {
 	LinkButton,
-	LocationBar,
-	FlexEnd,
 	DangerZone,
 	FlexBetween,
 	DescriptionText,
 	CautionTextLinkButton,
 	EditIcon,
 	SplitPaneLayout,
+	NavigationBarLayout,
+	TitleText,
 } from '@components';
 import { AccountProfile } from '@features';
 
@@ -19,14 +19,16 @@ const AccountPage = () => {
 		<>
 			<SplitPaneLayout
 				top={
-					<>
-						<LocationBar pathname={pathname} title={'Account'} />
-						<FlexEnd>
+					<NavigationBarLayout
+						location={<DescriptionText description={pathname} />}
+						title={<TitleText title={'Account'} />}
+						right={
 							<LinkButton to={`/accounts/${'1'}/edit`}>
 								<EditIcon />
 							</LinkButton>
-						</FlexEnd>
-					</>
+						}
+						left={undefined}
+					/>
 				}
 				bottom={
 					<>

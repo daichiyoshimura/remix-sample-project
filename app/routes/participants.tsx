@@ -1,12 +1,12 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	LocationBar,
-	FlexEnd,
 	SideBarLayout,
-	FlexBetween,
 	SplitPaneLayout,
 	LinkButton,
 	AddIcon,
+	NavigationBarLayout,
+	DescriptionText,
+	TitleText,
 } from '@components';
 import { ParticipantName, ParticipantNameList } from '@features';
 import { participantListPageLoader } from '@server/loaders';
@@ -23,47 +23,32 @@ const ParticipantListPage = () => {
 	const { pathname } = useLocation();
 
 	return (
-		<>
-			<SplitPaneLayout
-				top={
-					<>
-						<LocationBar pathname={pathname} title={'Participants'} />
-						<FlexEnd>
-							<LinkButton to={'/participants/new'}>
-								<AddIcon />
-							</LinkButton>
-						</FlexEnd>
-					</>
-				}
-				bottom={
-					<>
-						<FlexBetween>
-							<SideBarLayout
-								left={
-									<>
-										<ParticipantNameList
-											items={participants}
-											render={({ id, name }) => (
-												<ParticipantName
-													id={id}
-													name={name}
-													to={`/participants/${id}`}
-												/>
-											)}
-										/>
-									</>
-								}
-								right={
-									<>
-										<Outlet context={useOutletContext<Navigation>()} />
-									</>
-								}
-							/>
-						</FlexBetween>
-					</>
-				}
-			/>
-		</>
+		<SplitPaneLayout
+			top={
+				<NavigationBarLayout
+					location={<DescriptionText description={pathname} />}
+					title={<TitleText title={'Participants'} />}
+					right={
+						<LinkButton to={'/participants/new'}>
+							<AddIcon />
+						</LinkButton>
+					}
+				/>
+			}
+			bottom={
+				<SideBarLayout
+					left={
+						<ParticipantNameList
+							items={participants}
+							render={({ id, name }) => (
+								<ParticipantName id={id} name={name} to={`/participants/${id}`} />
+							)}
+						/>
+					}
+					right={<Outlet context={useOutletContext<Navigation>()} />}
+				/>
+			}
+		/>
 	);
 };
 
