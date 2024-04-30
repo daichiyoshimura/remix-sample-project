@@ -13,6 +13,7 @@ import {
 	MutationModal,
 	TextInput,
 	TitleText,
+	VerticalFlexStart,
 } from '@components';
 import { RoomListPageActionResponses } from '@server/actions';
 
@@ -33,11 +34,14 @@ export type CreateRoomModalProps = {
 
 const CreateRoomModal = () => {
 	const [isOpen, onClose] = useModalState('/rooms');
+
 	const [inputValue, setInputValue] = useState<string>('');
+
 	const { state } = useOutletContext<Navigation>();
 	const actionData = useActionData<RoomListPageActionResponses>();
 	const hasActionData = isDefined<RoomListPageActionResponses>(actionData);
 	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];
+
 	const [isValid, errorMessageList] = validateZodObject(createRoomSchema, { name: inputValue });
 
 	const onChange = (value: string) => {
@@ -56,32 +60,36 @@ const CreateRoomModal = () => {
 			state={state}
 			inLoading={<LoadingIcon />}
 		>
-			<TitleText title={'Create Room'} />
-			<DescriptionText
-				description={`
+			<VerticalFlexStart>
+				<TitleText title={'Create Room'} />
+				<DescriptionText
+					description={`
 							Please enter only alphanumeric characters in this
 							field. It is limited to a maximum length of 64
 							characters. The use of symbols such as underscores,
 							hyphens, and spaces is not permitted.
 						`}
-			/>
-			<Form action="/rooms?index" method="POST">
-				<TextInput
-					name="name"
-					value={inputValue}
-					onChange={onChange}
-					placeholder="name"
-					required
 				/>
-				<ErrorTextList textList={errorMessageList} />
-				<ErrorTextList textList={serverErrorMessageList} />
-				<FlexEnd>
-					<Button onClick={handleClose}>Do not create</Button>
-					<Button type="submit" color="safe" disabled={!isValid}>
-						Create
-					</Button>
-				</FlexEnd>
-			</Form>
+				<Form action="/rooms?index" method="POST">
+					<VerticalFlexStart>
+						<TextInput
+							name="name"
+							value={inputValue}
+							onChange={onChange}
+							placeholder="name"
+							required
+						/>
+						<ErrorTextList textList={errorMessageList} />
+						<ErrorTextList textList={serverErrorMessageList} />
+						<FlexEnd>
+							<Button onClick={handleClose}>Do not create</Button>
+							<Button type="submit" color="safe" disabled={!isValid}>
+								Create
+							</Button>
+						</FlexEnd>
+					</VerticalFlexStart>
+				</Form>
+			</VerticalFlexStart>
 		</MutationModal>
 	);
 };
