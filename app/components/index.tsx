@@ -6,6 +6,7 @@ export * from '@components/Button/LinkButton';
 export * from '@components/Button/EditButton';
 export * from '@components/Button/SaveButton';
 export * from '@components/Button/CautionTextLinkButton';
+export * from '@components/Button/CautionTextButton';
 export * from '@components/Button/TextLinkButton';
 export * from '@components/Grid/Grid';
 export * from '@components/Container/FlexCenter';
