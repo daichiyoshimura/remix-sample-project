@@ -5,7 +5,8 @@ import {
 	SideBarLayout,
 	FlexBetween,
 	SplitPaneLayout,
-	TextLinkButton,
+	LinkButton,
+	AddIcon,
 } from '@components';
 import { ParticipantName, ParticipantNameList } from '@features';
 import { participantListPageLoader } from '@server/loaders';
@@ -28,7 +29,9 @@ const ParticipantListPage = () => {
 					<>
 						<LocationBar pathname={pathname} title={'Participants'} />
 						<FlexEnd>
-							<TextLinkButton to={'/participants/new'} caption={'New Participant'} />
+							<LinkButton to={'/participants/new'}>
+								<AddIcon />
+							</LinkButton>
 						</FlexEnd>
 					</>
 				}
