@@ -4,13 +4,14 @@ import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/re
 import { useModalState } from '@hooks';
 import { isDefined, validate } from '@util';
 import {
-	Button,
 	DescriptionText,
 	ErrorTextList,
 	FlexEnd,
 	LoadingIcon,
 	ModalErrorBoundary,
 	MutationModal,
+	SafeTextButton,
+	TextButton,
 	TextInput,
 	TitleText,
 	VerticalFlexStart,
@@ -71,10 +72,12 @@ const CreateRoomModal = () => {
 						<ErrorTextList textList={nameErrorMessageList} />
 						<ErrorTextList textList={serverErrorMessageList} />
 						<FlexEnd>
-							<Button onClick={handleClose}>Do not create</Button>
-							<Button type="submit" color="safe" disabled={!isNameValid}>
-								Create
-							</Button>
+							<TextButton onClick={handleClose} caption={'Do not create'} />
+							<SafeTextButton
+								type={'submit'}
+								disabled={!isNameValid}
+								caption={'Create'}
+							/>
 						</FlexEnd>
 					</VerticalFlexStart>
 				</Form>

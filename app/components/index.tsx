@@ -1,5 +1,7 @@
 export * from '@components/Box/ImageBox';
 export * from '@components/Button/Button';
+export * from '@components/Button/TextButton';
+export * from '@components/Button/SafeTextButton';
 export * from '@components/Button/LinkButton';
 export * from '@components/Button/EditButton';
 export * from '@components/Button/SaveButton';
