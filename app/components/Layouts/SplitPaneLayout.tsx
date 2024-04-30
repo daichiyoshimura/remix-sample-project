@@ -5,7 +5,7 @@ export type SplitPaneLayoutProps = {
 	bottom?: ReactNode;
 };
 
-export const SplitPaneLayout = ({ top = <></>, bottom = <></> }: SplitPaneLayoutProps) => {
+export const SplitPaneLayout = ({ top, bottom }: SplitPaneLayoutProps) => {
 	return (
 		<div className={`h-full grow flex flex-col`}>
 			<div className={`h-38 pb-4 pt-2 px-4 shrink-0 flex flex-col gap-y-2`}>{top}</div>

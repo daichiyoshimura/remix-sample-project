@@ -6,14 +6,14 @@ import {
 	CautionTextButton,
 	DescriptionText,
 	ErrorTextList,
-	FlexEnd,
 	LoadingIcon,
 	ModalErrorBoundary,
+	ModalFormLayout,
+	ModalLayout,
 	MutationModal,
 	TextButton,
 	TextInput,
 	TitleText,
-	VerticalFlexStart,
 } from '@components';
 import { RoomProfilePageActionResponses } from '@server/actions';
 
@@ -42,7 +42,7 @@ const DeleteRoomModal = () => {
 			state={state}
 			inLoading={<LoadingIcon />}
 		>
-			<VerticalFlexStart>
+			<ModalLayout>
 				<TitleText title={'Are you sure you want to delete?'} />
 				<DescriptionText
 					description={`
@@ -51,26 +51,32 @@ const DeleteRoomModal = () => {
 							`}
 				/>
 				<Form action={`/rooms/${'1'}`} method="DELETE">
-					<VerticalFlexStart>
-						<TextInput
-							name="name"
-							value={inputName}
-							onChange={setInputName}
-							placeholder={'RoomName'}
-							required
-						/>
-						<ErrorTextList textList={serverErrorMessageList} />
-						<FlexEnd>
-							<TextButton onClick={handleClose} caption={'Do not delete'} />
-							<CautionTextButton
-								type={'submit'}
-								disabled={!(inputName === 'RoomName')}
-								caption={'Delete'}
-							/>
-						</FlexEnd>
-					</VerticalFlexStart>
+					<ModalFormLayout
+						inputs={
+							<>
+								<TextInput
+									name="name"
+									value={inputName}
+									onChange={setInputName}
+									placeholder={'RoomName'}
+									required
+								/>
+								<ErrorTextList textList={serverErrorMessageList} />
+							</>
+						}
+						buttons={
+							<>
+								<TextButton onClick={handleClose} caption={'Do not delete'} />
+								<CautionTextButton
+									type={'submit'}
+									disabled={!(inputName === 'RoomName')}
+									caption={'Delete'}
+								/>
+							</>
+						}
+					/>
 				</Form>
-			</VerticalFlexStart>
+			</ModalLayout>
 		</MutationModal>
 	);
 };

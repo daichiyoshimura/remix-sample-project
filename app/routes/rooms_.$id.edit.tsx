@@ -9,11 +9,12 @@ import {
 	LoadingIcon,
 	Modal,
 	ModalErrorBoundary,
+	ModalFormLayout,
+	ModalLayout,
 	SafeTextButton,
 	TextButton,
 	TextInput,
 	TitleText,
-	VerticalFlexStart,
 } from '@components';
 import { RoomProfilePageActionResponses } from '@server/actions';
 
@@ -55,7 +56,7 @@ const EditRoomModal = () => {
 
 		return (
 			<>
-				<VerticalFlexStart>
+				<ModalLayout>
 					<TitleText title={'Edit Room'} />
 					<DescriptionText
 						description={`
@@ -65,27 +66,33 @@ const EditRoomModal = () => {
 						`}
 					/>
 					<Form action={`/rooms/${'1'}`} method="PATCH">
-						<VerticalFlexStart>
-							<TextInput
-								name="name"
-								value={inputName}
-								onChange={setInputName}
-								placeholder="RoomName"
-								required
-							/>
-							<ErrorTextList textList={nameErrorMessageList} />
-							<ErrorTextList textList={serverErrorMessageList} />
-							<FlexEnd>
-								<TextButton onClick={handleClose} caption={'Do not save'} />
-								<SafeTextButton
-									type={'submit'}
-									disabled={!isNameValid}
-									caption={'Save'}
-								/>
-							</FlexEnd>
-						</VerticalFlexStart>
+						<ModalFormLayout
+							inputs={
+								<>
+									<TextInput
+										name="name"
+										value={inputName}
+										onChange={setInputName}
+										placeholder="RoomName"
+										required
+									/>
+									<ErrorTextList textList={nameErrorMessageList} />
+									<ErrorTextList textList={serverErrorMessageList} />
+								</>
+							}
+							buttons={
+								<>
+									<TextButton onClick={handleClose} caption={'Do not save'} />
+									<SafeTextButton
+										type={'submit'}
+										disabled={!isNameValid}
+										caption={'Save'}
+									/>
+								</>
+							}
+						/>
 					</Form>
-				</VerticalFlexStart>
+				</ModalLayout>
 			</>
 		);
 	};
