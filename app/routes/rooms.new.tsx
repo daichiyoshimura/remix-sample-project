@@ -5,15 +5,15 @@ import { isDefined, validateRoomName } from '@util';
 import {
 	DescriptionText,
 	ErrorTextList,
-	FlexEnd,
 	LoadingIcon,
 	ModalErrorBoundary,
+	ModalFormLayout,
+	ModalLayout,
 	MutationModal,
 	SafeTextButton,
 	TextButton,
 	TextInput,
 	TitleText,
-	VerticalFlexStart,
 } from '@components';
 import { RoomListPageActionResponses } from '@server/actions';
 
@@ -43,7 +43,7 @@ const CreateRoomModal = () => {
 			state={state}
 			inLoading={<LoadingIcon />}
 		>
-			<VerticalFlexStart>
+			<ModalLayout>
 				<TitleText title={'Create Room'} />
 				<DescriptionText
 					description={`
@@ -54,27 +54,33 @@ const CreateRoomModal = () => {
 						`}
 				/>
 				<Form action="/rooms?index" method="POST">
-					<VerticalFlexStart>
-						<TextInput
-							name="name"
-							value={inputName}
-							onChange={setInputName}
-							placeholder="RoomName"
-							required
-						/>
-						<ErrorTextList textList={nameErrorMessageList} />
-						<ErrorTextList textList={serverErrorMessageList} />
-						<FlexEnd>
-							<TextButton onClick={handleClose} caption={'Do not create'} />
-							<SafeTextButton
-								type={'submit'}
-								disabled={!isNameValid}
-								caption={'Create'}
-							/>
-						</FlexEnd>
-					</VerticalFlexStart>
+					<ModalFormLayout
+						inputs={
+							<>
+								<TextInput
+									name="name"
+									value={inputName}
+									onChange={setInputName}
+									placeholder="RoomName"
+									required
+								/>
+								<ErrorTextList textList={nameErrorMessageList} />
+								<ErrorTextList textList={serverErrorMessageList} />
+							</>
+						}
+						buttons={
+							<>
+								<TextButton onClick={handleClose} caption={'Do not create'} />
+								<SafeTextButton
+									type={'submit'}
+									disabled={!isNameValid}
+									caption={'Create'}
+								/>
+							</>
+						}
+					/>
 				</Form>
-			</VerticalFlexStart>
+			</ModalLayout>
 		</MutationModal>
 	);
 };

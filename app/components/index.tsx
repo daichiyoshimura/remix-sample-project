@@ -27,6 +27,8 @@ export * from '@components/Input/TextInput';
 export * from '@components/Layouts/RootLayout';
 export * from '@components/Layouts/SideBarLayout';
 export * from '@components/Layouts/SplitPaneLayout';
+export * from '@components/Layouts/ModalLayout';
+export * from '@components/Layouts/ModalFormLayout';
 export * from '@components/List/Divider';
 export * from '@components/List/List';
 export * from '@components/LocationBar/LocationBar';
