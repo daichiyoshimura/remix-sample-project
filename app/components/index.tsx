@@ -19,6 +19,7 @@ export * from '@components/Header/Header';
 export * from '@components/Menu/Menu';
 export * from '@components/Modal/Modal';
 export * from '@components/Modal/MessageModal';
+export * from '@components/Modal/MutationModal';
 export * from '@components/Input/TextInput';
 export * from '@components/Layouts/RootLayout';
 export * from '@components/Layouts/SideBarLayout';

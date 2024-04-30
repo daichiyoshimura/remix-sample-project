@@ -9,8 +9,8 @@ import {
 	ErrorTextList,
 	FlexEnd,
 	LoadingIcon,
-	Modal,
 	ModalErrorBoundary,
+	MutationModal,
 	TextInput,
 	TitleText,
 } from '@components';
@@ -49,46 +49,40 @@ const CreateRoomModal = () => {
 		onClose();
 	};
 
-	const render = () => {
-		if (state === ('loading' || 'submitting')) {
-			return <LoadingIcon />;
-		}
-
-		return (
-			<>
-				<TitleText title={'Create Room'} />
-				<DescriptionText
-					description={`
+	return (
+		<MutationModal
+			isOpen={isOpen}
+			onClose={handleClose}
+			state={state}
+			inLoading={<LoadingIcon />}
+		>
+			<TitleText title={'Create Room'} />
+			<DescriptionText
+				description={`
 							Please enter only alphanumeric characters in this
 							field. It is limited to a maximum length of 64
 							characters. The use of symbols such as underscores,
 							hyphens, and spaces is not permitted.
 						`}
+			/>
+			<Form action="/rooms?index" method="POST">
+				<TextInput
+					name="name"
+					value={inputValue}
+					onChange={onChange}
+					placeholder="name"
+					required
 				/>
-				<Form action="/rooms?index" method="POST">
-					<TextInput
-						name="name"
-						value={inputValue}
-						onChange={onChange}
-						placeholder="name"
-						required
-					/>
-					<ErrorTextList textList={errorMessageList} />
-					<ErrorTextList textList={serverErrorMessageList} />
-					<FlexEnd>
-						<Button onClick={handleClose}>Do not create</Button>
-						<Button type="submit" color="safe" disabled={!isValid}>
-							Create
-						</Button>
-					</FlexEnd>
-				</Form>
-			</>
-		);
-	};
-	return (
-		<Modal isOpen={isOpen} onClose={handleClose}>
-			{render()}
-		</Modal>
+				<ErrorTextList textList={errorMessageList} />
+				<ErrorTextList textList={serverErrorMessageList} />
+				<FlexEnd>
+					<Button onClick={handleClose}>Do not create</Button>
+					<Button type="submit" color="safe" disabled={!isValid}>
+						Create
+					</Button>
+				</FlexEnd>
+			</Form>
+		</MutationModal>
 	);
 };
 
