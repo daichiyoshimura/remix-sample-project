@@ -1,8 +1,7 @@
-import { z } from 'zod';
 import { useState } from 'react';
 import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/react';
 import { useModalState } from '@hooks';
-import { isDefined, validate } from '@util';
+import { isDefined, validateRoomName } from '@util';
 import {
 	DescriptionText,
 	ErrorTextList,
@@ -20,13 +19,6 @@ import { RoomProfilePageActionResponses } from '@server/actions';
 
 export const ErrorBoundary = ModalErrorBoundary;
 
-// TODO: duplicates
-const nameRule = z
-	.string()
-	.min(1)
-	.max(64)
-	.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces');
-
 const EditRoomModal = () => {
 	const [isOpen, onClose] = useModalState(`/rooms/${'1'}`);
 
@@ -37,7 +29,7 @@ const EditRoomModal = () => {
 	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];
 
 	const [inputName, setInputName] = useState('');
-	const [isNameValid, nameErrorMessageList] = validate(nameRule, inputName);
+	const [isNameValid, nameErrorMessageList] = validateRoomName(inputName);
 
 	const handleClose = () => {
 		setInputName('');
