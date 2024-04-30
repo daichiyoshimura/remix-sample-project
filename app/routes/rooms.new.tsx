@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/react';
 import { useModalState } from '@hooks';
-import { isDefined, validateZodObject } from '@util';
+import { isDefined, validate } from '@util';
 import {
 	Button,
 	DescriptionText,
@@ -19,37 +19,26 @@ import { RoomListPageActionResponses } from '@server/actions';
 
 export const ErrorBoundary = ModalErrorBoundary;
 
-const createRoomSchema = z.object({
-	name: z
-		.string()
-		.min(1)
-		.max(64)
-		.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces'),
-});
-
-export type CreateRoomModalProps = {
-	isOpen: boolean;
-	onClose: () => void;
-};
+const nameRule = z
+	.string()
+	.min(1)
+	.max(64)
+	.regex(/^[^\W_]*$/, 'alphanumeric characters only, excluding symbols and spaces');
 
 const CreateRoomModal = () => {
 	const [isOpen, onClose] = useModalState('/rooms');
 
-	const [inputValue, setInputValue] = useState<string>('');
-
 	const { state } = useOutletContext<Navigation>();
+
 	const actionData = useActionData<RoomListPageActionResponses>();
 	const hasActionData = isDefined<RoomListPageActionResponses>(actionData);
 	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];
 
-	const [isValid, errorMessageList] = validateZodObject(createRoomSchema, { name: inputValue });
-
-	const onChange = (value: string) => {
-		setInputValue(value);
-	};
+	const [inputName, setInputName] = useState('');
+	const [isNameValid, nameErrorMessageList] = validate(nameRule, inputName);
 
 	const handleClose = () => {
-		setInputValue('');
+		setInputName('');
 		onClose();
 	};
 
@@ -74,16 +63,16 @@ const CreateRoomModal = () => {
 					<VerticalFlexStart>
 						<TextInput
 							name="name"
-							value={inputValue}
-							onChange={onChange}
-							placeholder="name"
+							value={inputName}
+							onChange={setInputName}
+							placeholder="RoomName"
 							required
 						/>
-						<ErrorTextList textList={errorMessageList} />
+						<ErrorTextList textList={nameErrorMessageList} />
 						<ErrorTextList textList={serverErrorMessageList} />
 						<FlexEnd>
 							<Button onClick={handleClose}>Do not create</Button>
-							<Button type="submit" color="safe" disabled={!isValid}>
+							<Button type="submit" color="safe" disabled={!isNameValid}>
 								Create
 							</Button>
 						</FlexEnd>
