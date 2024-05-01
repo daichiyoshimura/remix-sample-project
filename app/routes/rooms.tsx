@@ -2,11 +2,10 @@ import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from
 import {
 	SplitPaneLayout,
 	TextLinkButton,
-	LinkButton,
-	AddIcon,
 	NavigationBarLayout,
 	DescriptionText,
 	TitleText,
+	AddLinkButton,
 } from '@components';
 import { RoomCard, RoomCardList } from '@features';
 import { roomListPageAction } from '@server/actions';
@@ -32,11 +31,7 @@ const RoomListPage = () => {
 					<NavigationBarLayout
 						location={<DescriptionText description={pathname} />}
 						title={<TitleText title={'Rooms'} />}
-						right={
-							<LinkButton to={'/rooms/new'}>
-								<AddIcon />
-							</LinkButton>
-						}
+						right={<AddLinkButton to={'/rooms/new'} />}
 					/>
 				}
 				bottom={

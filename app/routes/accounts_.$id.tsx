@@ -1,14 +1,13 @@
 import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	LinkButton,
 	DangerZone,
 	FlexBetween,
 	DescriptionText,
 	CautionTextLinkButton,
-	EditIcon,
 	SplitPaneLayout,
 	NavigationBarLayout,
 	TitleText,
+	EditLinkButton,
 } from '@components';
 import { AccountProfile } from '@features';
 
@@ -22,12 +21,7 @@ const AccountPage = () => {
 					<NavigationBarLayout
 						location={<DescriptionText description={pathname} />}
 						title={<TitleText title={'Account'} />}
-						right={
-							<LinkButton to={`/accounts/${'1'}/edit`}>
-								<EditIcon />
-							</LinkButton>
-						}
-						left={undefined}
+						right={<EditLinkButton to={`/accounts/${'1'}/edit`} />}
 					/>
 				}
 				bottom={

@@ -2,11 +2,10 @@ import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from
 import {
 	SideBarLayout,
 	SplitPaneLayout,
-	LinkButton,
-	AddIcon,
 	NavigationBarLayout,
 	DescriptionText,
 	TitleText,
+	AddLinkButton,
 } from '@components';
 import { ParticipantName, ParticipantNameList } from '@features';
 import { participantListPageLoader } from '@server/loaders';
@@ -28,11 +27,7 @@ const ParticipantListPage = () => {
 				<NavigationBarLayout
 					location={<DescriptionText description={pathname} />}
 					title={<TitleText title={'Participants'} />}
-					right={
-						<LinkButton to={'/participants/new'}>
-							<AddIcon />
-						</LinkButton>
-					}
+					right={<AddLinkButton to={'/participants/new'} />}
 				/>
 			}
 			bottom={

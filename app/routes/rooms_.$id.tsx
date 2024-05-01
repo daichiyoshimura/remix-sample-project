@@ -1,15 +1,14 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	LinkButton,
 	FlexCenter,
-	EditIcon,
 	CautionTextLinkButton,
 	Grid,
 	SplitPaneLayout,
-	BackIcon,
 	NavigationBarLayout,
 	DescriptionText,
 	TitleText,
+	EditLinkButton,
+	BackLinkButton,
 } from '@components';
 import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
 import { roomProfilePageAction } from '@server/actions';
@@ -35,16 +34,8 @@ const RoomProfilePage = () => {
 					<NavigationBarLayout
 						location={<DescriptionText description={pathname} />}
 						title={<TitleText title={'Room Profile'} />}
-						right={
-							<LinkButton to={`/rooms/${id}/edit`}>
-								<EditIcon />
-							</LinkButton>
-						}
-						left={
-							<LinkButton to={'/rooms'}>
-								<BackIcon />
-							</LinkButton>
-						}
+						right={<EditLinkButton to={`/rooms/${id}/edit`} />}
+						left={<BackLinkButton to={'/rooms'} />}
 					/>
 				}
 				bottom={
