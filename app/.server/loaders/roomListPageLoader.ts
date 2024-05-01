@@ -1,14 +1,11 @@
 import { LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { MappedTypes, isString, writeRequestLog } from '@util';
 import { Room, getRoomList } from '@server/api';
-import { InternalSeverErrorLoaderResponse, internalServerErrorLoader } from '@server/loaders';
-import { MutationTimes } from '@server/util';
+import { MutationTimes, handleServerError } from '@server/util';
 
-type RoomList = MappedTypes<{
+export type RoomListLoaderResponse = MappedTypes<{
 	rooms: (Room & MutationTimes)[];
 }>;
-
-export type RoomListLoaderResponse = RoomList | InternalSeverErrorLoaderResponse;
 
 export const roomListPageLoader = async (
 	{ request, params }: LoaderFunctionArgs,
@@ -26,6 +23,6 @@ export const roomListPageLoader = async (
 		});
 		return json(getRoomListResponse, 200);
 	} catch (error) {
-		return internalServerErrorLoader(error);
+		return handleServerError(error);
 	}
 };

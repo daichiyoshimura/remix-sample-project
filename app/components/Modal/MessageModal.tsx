@@ -1,4 +1,5 @@
-import { Button, DescriptionText, Modal, TitleText } from '@components';
+import { DescriptionText, Modal, TextButton, TitleText } from '@components';
+import { MessageModalLayout } from '@layouts';
 
 export type MessageModalProps = {
 	title: string;
@@ -10,9 +11,11 @@ export type MessageModalProps = {
 export const MessageModal = ({ title, description, isOpen, onClose }: MessageModalProps) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<TitleText title={title} />
-			<DescriptionText description={description} />
-			<Button onClick={onClose}>close</Button>
+			<MessageModalLayout
+				title={<TitleText title={title} />}
+				description={<DescriptionText description={description} />}
+				buttons={<TextButton onClick={onClose} caption={'close'} />}
+			/>
 		</Modal>
 	);
 };

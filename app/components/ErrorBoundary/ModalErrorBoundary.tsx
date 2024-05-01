@@ -1,19 +1,21 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 import { useModalState } from '@hooks';
 import { MessageModal } from '@components';
+import { ServerErrorResponseBody } from '@server/util';
 
 export const ModalErrorBoundary = () => {
-	const error = useRouteError();
 	const [isOpen, handleClose] = useModalState('../');
 
+	const error = useRouteError();
 	const description = (error: unknown): string => {
 		const [message, code] = ((): [string, string] => {
 			if (isRouteErrorResponse(error)) {
-				return [error.statusText, 'A'];
+				const { code, message } = error.data as ServerErrorResponseBody;
+				return [message, code];
 			} else if (error instanceof Error) {
-				return [error.message, 'B'];
+				return [error.message, 'Client-General'];
 			}
-			return ['Unexpected Error', 'C'];
+			return ['Unexpected Error', 'Client-Fatal'];
 		})();
 		return `${message} (Code: ${code})`;
 	};

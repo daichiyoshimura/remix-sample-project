@@ -1,5 +1,11 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { TextLinkButton, DescriptionText, TitleText, AddLinkButton } from '@components';
+import {
+	TextLinkButton,
+	DescriptionText,
+	TitleText,
+	AddLinkButton,
+	ModalErrorBoundary,
+} from '@components';
 import { RoomCard, RoomCardList } from '@features';
 import { NavigationBarLayout, SplitPaneLayout } from '@layouts';
 import { roomListPageAction } from '@server/actions';
@@ -9,13 +15,10 @@ export const loader = roomListPageLoader;
 
 export const action = roomListPageAction;
 
-const RoomListPage = () => {
-	const loaderData = useLoaderData<typeof loader>();
-	if ('message' in loaderData) {
-		throw Error(loaderData.message);
-	}
-	const { rooms } = loaderData;
+export const ErrorBoundary = ModalErrorBoundary;
 
+const RoomListPage = () => {
+	const { rooms } = useLoaderData<typeof loader>();
 	const { pathname } = useLocation();
 
 	return (

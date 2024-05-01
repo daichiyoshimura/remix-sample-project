@@ -15,6 +15,7 @@ const writeLog = <T>(level: Level, message: T) => {
 };
 
 type ErrorMessage = MappedTypes<{
+	code: string;
 	message: string;
 }>;
 
