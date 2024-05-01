@@ -50,7 +50,7 @@ const CreateRoomModal = () => {
 							hyphens, and spaces is not permitted.
 						`}
 				/>
-				<Form action="/rooms?index" method="POST">
+				<Form action="/rooms/new" method="POST">
 					<ModalFormLayout
 						inputs={
 							<>

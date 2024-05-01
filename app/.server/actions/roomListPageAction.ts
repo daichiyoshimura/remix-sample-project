@@ -29,9 +29,11 @@ const postRoomListAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<PostRoomActionResponse>> => {
 	try {
+		/*
 		if (!isString(params.accountId)) {
 			return handleServerError(new ValidationError('account-id is required'));
 		}
+		*/
 
 		const formData = await request.formData();
 		const name = getFormDataValue(formData, 'name');
@@ -42,7 +44,7 @@ const postRoomListAction = async (
 		const body: PostRoomActionRequest = {
 			name: name,
 		};
-		const postRoomRequest = { accountId: params.accountId, roomAttributes: body };
+		const postRoomRequest = { accountId: '', roomAttributes: body };
 		const postRoomResponse = await postRoom(postRoomRequest);
 
 		writeRequestLog({

@@ -11,10 +11,12 @@ export const roomListPageLoader = async (
 	{ request, params }: LoaderFunctionArgs,
 ): Promise<TypedResponse<RoomListLoaderResponse>> => {
 	try {
+		/*
 		if (!isString(params.accountId)) {
 			return handleServerError(new ValidationError('account-id is required'));
 		}
-		const getRoomListRequest = { accountId: params.accountId };
+		*/
+		const getRoomListRequest = { accountId: '' };
 		const getRoomListResponse = await getRoomList(getRoomListRequest);
 
 		writeRequestLog({
