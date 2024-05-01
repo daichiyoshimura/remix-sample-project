@@ -2,15 +2,13 @@ import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from
 import {
 	CautionTextLinkButton,
 	Grid,
-	SplitPaneLayout,
-	NavigationBarLayout,
 	DescriptionText,
 	TitleText,
 	EditLinkButton,
 	BackLinkButton,
 } from '@components';
 import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
-import { RoomProfilePageLayout } from '@components/Layouts/RoomProfilePageLayout';
+import { NavigationBarLayout, RoomProfilePageLayout, SplitPaneLayout } from '@layouts';
 import { roomProfilePageAction } from '@server/actions';
 import { roomProfilePageLoader } from '@server/loaders';
 

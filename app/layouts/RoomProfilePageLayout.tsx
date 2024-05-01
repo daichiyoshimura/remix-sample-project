@@ -6,7 +6,6 @@ export type RoomProfilePageLayoutProps = {
 	deleteRoomButton: ReactNode;
 };
 
-// So... Layout File is not component dir , will move Layout Dir , will be created by page.
 export const RoomProfilePageLayout = (
 	{ roomProfile, participantGrid, deleteRoomButton }: RoomProfilePageLayoutProps,
 ) => {

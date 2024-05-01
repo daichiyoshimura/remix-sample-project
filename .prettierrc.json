@@ -23,6 +23,7 @@
 		"^@loaders/(.*)$",
 		"^@components$",
 		"^@features$",
+		"^@layouts$",
 		"^@(.*)/(.*)$",
 		"^[./]"
 	]

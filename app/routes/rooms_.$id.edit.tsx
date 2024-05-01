@@ -6,16 +6,14 @@ import {
 	DescriptionText,
 	ErrorTextList,
 	LoadingIcon,
-	MessageModalLayout,
 	Modal,
 	ModalErrorBoundary,
-	ModalFormLayout,
-	ModalLayout,
 	SafeTextButton,
 	TextButton,
 	TextInput,
 	TitleText,
 } from '@components';
+import { MessageModalLayout, ModalFormLayout, ModalLayout } from '@layouts';
 import { RoomProfilePageActionResponses } from '@server/actions';
 
 export const ErrorBoundary = ModalErrorBoundary;

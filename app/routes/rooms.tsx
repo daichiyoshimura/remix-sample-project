@@ -1,13 +1,7 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import {
-	SplitPaneLayout,
-	TextLinkButton,
-	NavigationBarLayout,
-	DescriptionText,
-	TitleText,
-	AddLinkButton,
-} from '@components';
+import { TextLinkButton, DescriptionText, TitleText, AddLinkButton } from '@components';
 import { RoomCard, RoomCardList } from '@features';
+import { NavigationBarLayout, SplitPaneLayout } from '@layouts';
 import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
 

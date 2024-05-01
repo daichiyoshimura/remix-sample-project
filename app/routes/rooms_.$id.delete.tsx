@@ -8,13 +8,12 @@ import {
 	ErrorTextList,
 	LoadingIcon,
 	ModalErrorBoundary,
-	ModalFormLayout,
-	ModalLayout,
 	MutationModal,
 	TextButton,
 	TextInput,
 	TitleText,
 } from '@components';
+import { ModalFormLayout, ModalLayout } from '@layouts';
 import { RoomProfilePageActionResponses } from '@server/actions';
 
 export const ErrorBoundary = ModalErrorBoundary;

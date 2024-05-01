@@ -7,14 +7,13 @@ import {
 	ErrorTextList,
 	LoadingIcon,
 	ModalErrorBoundary,
-	ModalFormLayout,
-	ModalLayout,
 	MutationModal,
 	SafeTextButton,
 	TextButton,
 	TextInput,
 	TitleText,
 } from '@components';
+import { ModalFormLayout, ModalLayout } from '@layouts';
 import { RoomListPageActionResponses } from '@server/actions';
 
 export const ErrorBoundary = ModalErrorBoundary;

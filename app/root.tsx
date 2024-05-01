@@ -1,7 +1,7 @@
 import '@tailwind.css';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useNavigation } from '@remix-run/react';
 import { Footer, Header, SideBar } from '@components';
-import { RootLayout } from '@components/Layouts/RootLayout';
+import { RootLayout } from '@layouts/RootLayout';
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (

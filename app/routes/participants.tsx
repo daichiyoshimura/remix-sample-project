@@ -1,13 +1,7 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import {
-	SideBarLayout,
-	SplitPaneLayout,
-	NavigationBarLayout,
-	DescriptionText,
-	TitleText,
-	AddLinkButton,
-} from '@components';
+import { DescriptionText, TitleText, AddLinkButton } from '@components';
 import { ParticipantName, ParticipantNameList } from '@features';
+import { NavigationBarLayout, SideBarLayout, SplitPaneLayout } from '@layouts';
 import { participantListPageLoader } from '@server/loaders';
 
 export const loader = participantListPageLoader;

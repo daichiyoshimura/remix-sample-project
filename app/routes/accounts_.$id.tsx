@@ -3,12 +3,11 @@ import {
 	DangerZone,
 	DescriptionText,
 	CautionTextLinkButton,
-	SplitPaneLayout,
-	NavigationBarLayout,
 	TitleText,
 	EditLinkButton,
 } from '@components';
 import { AccountProfile } from '@features';
+import { NavigationBarLayout, SplitPaneLayout } from '@layouts';
 
 const AccountPage = () => {
 	const { pathname } = useLocation();

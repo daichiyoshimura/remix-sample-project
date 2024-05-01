@@ -15,6 +15,7 @@ export default VitestConfig.defineConfig({
 			'@features': path.resolve(__dirname, 'app/features'),
 			'@hooks': path.resolve(__dirname, 'app/hooks'),
 			'@util': path.resolve(__dirname, 'app/util'),
+			'@layouts': path.resolve(__dirname, 'app/layouts'),
 			'@server/*': path.resolve(__dirname, 'app/.server/*'),
 		},
 	},
