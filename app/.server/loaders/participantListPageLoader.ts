@@ -1,15 +1,13 @@
 import { LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { MappedTypes, isString, writeRequestLog } from '@util';
+import { handleServerError } from '@.server/util';
 import { Participant, getParticipantListOfAccount } from '@server/api';
-import { InternalSeverErrorLoaderResponse, internalServerErrorLoader } from '@server/loaders';
 
 type ParticipantListOfAccount = MappedTypes<{
 	participants: Participant[];
 }>;
 
-export type ParticipantListOfAccountLoaderResponse =
-	| ParticipantListOfAccount
-	| InternalSeverErrorLoaderResponse;
+export type ParticipantListOfAccountLoaderResponse = ParticipantListOfAccount;
 
 export const participantListPageLoader = async (
 	{ request, params }: LoaderFunctionArgs,
@@ -29,6 +27,6 @@ export const participantListPageLoader = async (
 		});
 		return json(getParticipantListOfAccountResponse, 200);
 	} catch (error) {
-		return internalServerErrorLoader(error);
+		return handleServerError(error);
 	}
 };

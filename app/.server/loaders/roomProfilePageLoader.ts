@@ -1,8 +1,7 @@
 import { LoaderFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { MappedTypes, isString, writeRequestLog } from '@util';
 import { Participant, Room, getParticipantList, getRoom } from '@server/api';
-import { InternalSeverErrorLoaderResponse, internalServerErrorLoader } from '@server/loaders';
-import { MutationTimes } from '@server/util';
+import { MutationTimes, handleServerError } from '@server/util';
 
 export type RoomProfilePageLoaderRequest = Participant;
 
@@ -10,9 +9,7 @@ type Participants = {
 	participants: Participant[];
 };
 
-export type RoomProfilePageLoaderResponse =
-	| MappedTypes<Participants & Room & MutationTimes>
-	| InternalSeverErrorLoaderResponse;
+export type RoomProfilePageLoaderResponse = MappedTypes<Participants & Room & MutationTimes>;
 
 export const roomProfilePageLoader = async (
 	{ request, params }: LoaderFunctionArgs,
@@ -39,6 +36,6 @@ export const roomProfilePageLoader = async (
 		});
 		return json(response, 200);
 	} catch (error) {
-		return internalServerErrorLoader(error);
+		return handleServerError(error);
 	}
 };

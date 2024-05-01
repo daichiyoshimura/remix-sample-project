@@ -1,20 +1,14 @@
 import { ActionFunctionArgs, TypedResponse, json, redirect } from '@remix-run/node';
 import { MessageWithSuccess, isString, writeRequestLog } from '@util';
-import {
-	InvalidMethodErrorActionResponse,
-	InternalSeverErrorActionResponse,
-	internalServerErrorAction,
-	invalidMethodErrorAction,
-	ValidationErrorActionActionResponse,
-	validationErrorAction,
-} from '@server/actions';
 import { deleteRoom, patchRoom } from '@server/api';
-import { getFormDataValue } from '@server/util';
+import {
+	MethodNotAllowedError,
+	ValidationError,
+	getFormDataValue,
+	handleServerError,
+} from '@server/util';
 
-export type RoomProfilePageActionResponses =
-	| DeleteRoomActionResponse
-	| PatchRoomActionResponse
-	| InvalidMethodErrorActionResponse;
+export type RoomProfilePageActionResponses = DeleteRoomActionResponse | PatchRoomActionResponse;
 
 export const roomProfilePageAction = async (
 	args: ActionFunctionArgs,
@@ -25,11 +19,11 @@ export const roomProfilePageAction = async (
 		case 'PATCH':
 			return await patchRoomAction(args);
 		default:
-			return await invalidMethodErrorAction();
+			return handleServerError(new MethodNotAllowedError());
 	}
 };
 
-type DeleteRoomActionResponse = never | InternalSeverErrorActionResponse;
+type DeleteRoomActionResponse = never;
 
 const deleteRoomAction = async (
 	{ request, params }: ActionFunctionArgs,
@@ -49,14 +43,11 @@ const deleteRoomAction = async (
 		});
 		return redirect(`/rooms`);
 	} catch (error) {
-		return internalServerErrorAction(error);
+		return handleServerError(error);
 	}
 };
 
-type PatchRoomActionResponse =
-	| MessageWithSuccess
-	| ValidationErrorActionActionResponse
-	| InternalSeverErrorActionResponse;
+type PatchRoomActionResponse = MessageWithSuccess;
 
 const patchRoomAction = async (
 	{ request, params }: ActionFunctionArgs,
@@ -67,7 +58,7 @@ const patchRoomAction = async (
 		const formData = await request.formData();
 		const name = getFormDataValue(formData, 'name');
 		if (!isString(name)) {
-			return validationErrorAction('name is required');
+			return handleServerError(new ValidationError('name is required'));
 		}
 		const patchRoomRequest = {
 			accountId: accountId,
@@ -85,6 +76,6 @@ const patchRoomAction = async (
 		});
 		return json({ success: true, message: 'ok' }, 200);
 	} catch (error) {
-		return internalServerErrorAction(error);
+		return handleServerError(error);
 	}
 };
