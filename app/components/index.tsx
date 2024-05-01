@@ -12,7 +12,6 @@ export * from '@components/Button/CautionTextLinkButton';
 export * from '@components/Button/CautionTextButton';
 export * from '@components/Button/TextLinkButton';
 export * from '@components/Grid/Grid';
-export * from '@components/Container/FlexCenter';
 export * from '@components/Container/DangerZone';
 export * from '@components/ErrorBoundary/ModalErrorBoundary';
 export * from '@components/Footer/Footer';

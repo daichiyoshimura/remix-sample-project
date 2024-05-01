@@ -1,6 +1,5 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
 import {
-	FlexCenter,
 	CautionTextLinkButton,
 	Grid,
 	SplitPaneLayout,
@@ -11,6 +10,7 @@ import {
 	BackLinkButton,
 } from '@components';
 import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
+import { RoomProfilePageLayout } from '@components/Layouts/RoomProfilePageLayout';
 import { roomProfilePageAction } from '@server/actions';
 import { roomProfilePageLoader } from '@server/loaders';
 
@@ -39,19 +39,23 @@ const RoomProfilePage = () => {
 					/>
 				}
 				bottom={
-					<>
-						<RoomProfile id={id} name={name} createdAt={createdAt} />
-						<Grid<ParticipantGridItemProps>
-							items={participants}
-							render={({ id, name }) => <ParticipantGridItem id={id} name={name} />}
-						/>
-						<FlexCenter>
+					<RoomProfilePageLayout
+						roomProfile={<RoomProfile id={id} name={name} createdAt={createdAt} />}
+						participantGrid={
+							<Grid<ParticipantGridItemProps>
+								items={participants}
+								render={({ id, name }) => (
+									<ParticipantGridItem id={id} name={name} />
+								)}
+							/>
+						}
+						deleteRoomButton={
 							<CautionTextLinkButton
 								to={`/rooms/${id}/delete`}
 								caption={'Delete This Room'}
 							/>
-						</FlexCenter>
-					</>
+						}
+					/>
 				}
 			/>
 			<Outlet context={useOutletContext<Navigation>()} />
