@@ -33,6 +33,7 @@ export * from '@components/Layouts/NavigationBarLayout';
 export * from '@components/List/Divider';
 export * from '@components/List/List';
 export * from '@components/LocationBar/LocationBar';
+export * from '@components/SideBar/SideBar';
 export * from '@components/Text/DescriptionText';
 export * from '@components/Text/TitleText';
 export * from '@components/Text/ErrorText';

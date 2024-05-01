@@ -37,7 +37,7 @@ const ParticipantListPage = () => {
 			}
 			bottom={
 				<SideBarLayout
-					left={
+					sideBar={
 						<ParticipantNameList
 							items={participants}
 							render={({ id, name }) => (
@@ -45,8 +45,9 @@ const ParticipantListPage = () => {
 							)}
 						/>
 					}
-					right={<Outlet context={useOutletContext<Navigation>()} />}
-				/>
+				>
+					<Outlet context={useOutletContext<Navigation>()} />
+				</SideBarLayout>
 			}
 		/>
 	);

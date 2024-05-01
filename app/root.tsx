@@ -1,6 +1,6 @@
 import '@tailwind.css';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useNavigation } from '@remix-run/react';
-import { Footer, Header, Menu } from '@components';
+import { Footer, Header, SideBar } from '@components';
 import { RootLayout } from '@components/Layouts/RootLayout';
 import { SideBarLayout } from '@components/Layouts/SideBarLayout';
 
@@ -13,7 +13,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			</head>
 			<body>
 				<RootLayout header={<Header />} footer={<Footer />}>
-					<SideBarLayout left={<Menu />} right={children}></SideBarLayout>
+					<SideBarLayout sideBar={<SideBar />}>{children}</SideBarLayout>
 				</RootLayout>
 				<ScrollRestoration />
 				<Scripts />

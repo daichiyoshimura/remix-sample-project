@@ -31,7 +31,7 @@ export const Menu = () => {
 				</Link>
 			)}
 			divider={<Divider className={'border-b border-gray-700'} />}
-			className={'w-full h-full bg-gray-800 text-white p-2'}
+			className={'grow'}
 		/>
 	);
 };
