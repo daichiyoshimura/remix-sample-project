@@ -5,9 +5,12 @@ export type ParticipantGridItemProps = {
 	name: string;
 };
 
-export const ParticipantGridItem = ({ id, name }: ParticipantGridItemProps) => {
+export const ParticipantGridItem = ({ id, name }: ParticipantGridItemProps, key: string) => {
 	return (
-		<div className="col-span-1 rounded bg-primary text-white w-full flex flex-col justify-center">
+		<div
+			className="col-span-1 rounded bg-primary text-white w-full flex flex-col justify-center"
+			key={key}
+		>
 			<div className={`w-full flex justify-center align-middle gap-x-4`}>
 				<AccountIcon />
 			</div>

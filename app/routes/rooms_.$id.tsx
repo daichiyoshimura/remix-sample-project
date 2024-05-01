@@ -17,11 +17,7 @@ export const loader = roomProfilePageLoader;
 export const action = roomProfilePageAction;
 
 const RoomProfilePage = () => {
-	const loaderData = useLoaderData<typeof loader>();
-	if ('message' in loaderData) {
-		throw Error(loaderData.message);
-	}
-	const { id, name, createdAt, participants } = loaderData;
+	const { id, name, createdAt, participants } = useLoaderData<typeof loader>();
 
 	const { pathname } = useLocation();
 
@@ -43,7 +39,7 @@ const RoomProfilePage = () => {
 							<Grid<ParticipantGridItemProps>
 								items={participants}
 								render={({ id, name }) => (
-									<ParticipantGridItem id={id} name={name} />
+									<ParticipantGridItem id={id} name={name} key={id} />
 								)}
 							/>
 						}
