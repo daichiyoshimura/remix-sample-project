@@ -1,7 +1,6 @@
 import { Navigation, Outlet, useLocation, useOutletContext } from '@remix-run/react';
 import {
 	DangerZone,
-	FlexBetween,
 	DescriptionText,
 	CautionTextLinkButton,
 	SplitPaneLayout,
@@ -32,15 +31,13 @@ const AccountPage = () => {
 							email={'account@email.com'}
 						/>
 						<DangerZone>
-							<FlexBetween>
-								<DescriptionText
-									description={`Please be careful not to make any mistakes when operating the features within this area.`}
-								/>
-								<CautionTextLinkButton
-									to={`/accounts/${'1'}/delete`}
-									caption={'Delete This Account'}
-								/>
-							</FlexBetween>
+							<DescriptionText
+								description={`Please be careful not to make any mistakes when operating the features within this area.`}
+							/>
+							<CautionTextLinkButton
+								to={`/accounts/${'1'}/delete`}
+								caption={'Delete This Account'}
+							/>
 						</DangerZone>
 					</>
 				}
