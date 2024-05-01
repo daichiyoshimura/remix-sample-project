@@ -5,8 +5,8 @@ import { isDefined, validateRoomName } from '@util';
 import {
 	DescriptionText,
 	ErrorTextList,
-	FlexEnd,
 	LoadingIcon,
+	MessageModalLayout,
 	Modal,
 	ModalErrorBoundary,
 	ModalFormLayout,
@@ -44,13 +44,11 @@ const EditRoomModal = () => {
 
 		if (state === 'idle' && hasActionData && actionData.success) {
 			return (
-				<>
-					<TitleText title={'Success'} />
-					<DescriptionText description={'The Room is edited'} />
-					<FlexEnd>
-						<TextButton onClick={handleClose} caption={'Close'} />
-					</FlexEnd>
-				</>
+				<MessageModalLayout
+					title={<TitleText title={'Success'} />}
+					description={<DescriptionText description={'The Room is edited'} />}
+					buttons={<TextButton onClick={handleClose} caption={'Close'} />}
+				/>
 			);
 		}
 
