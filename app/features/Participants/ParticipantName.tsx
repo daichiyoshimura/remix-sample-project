@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import { DescriptionText, FlexStart } from '@components';
+import { DescriptionText } from '@components';
 
 export type ParticipantNameProps = {
 	id: string;
@@ -9,10 +9,10 @@ export type ParticipantNameProps = {
 export const ParticipantName = ({ id, name, to }: ParticipantNameProps & { to: string }) => {
 	return (
 		<Link to={to}>
-			<FlexStart className={'p-4'}>
+			<div className={`w-full flex justify-start align-middle gap-x-4 p-4`}>
 				<div className="hidden">{id}</div>
 				<DescriptionText description={name} />
-			</FlexStart>
+			</div>
 		</Link>
 	);
 };
