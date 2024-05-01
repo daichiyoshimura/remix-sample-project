@@ -1,16 +1,14 @@
 import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
 import { isString, writeRequestLog } from '@util';
-import {
-	InternalSeverErrorActionResponse,
-	InvalidMethodErrorActionResponse,
-	internalServerErrorAction,
-	invalidMethodErrorAction,
-	validationErrorAction,
-} from '@server/actions';
 import { RoomAttributes, postRoom } from '@server/api';
-import { getFormDataValue } from '@server/util';
+import {
+	MethodNotAllowedError,
+	ValidationError,
+	getFormDataValue,
+	handleServerError,
+} from '@server/util';
 
-export type RoomListPageActionResponses = PostRoomActionResponse | InvalidMethodErrorActionResponse;
+export type RoomListPageActionResponses = PostRoomActionResponse;
 
 export const roomListPageAction = async (
 	args: ActionFunctionArgs,
@@ -19,29 +17,34 @@ export const roomListPageAction = async (
 		case 'POST':
 			return await postRoomListAction(args);
 		default:
-			return await invalidMethodErrorAction();
+			return handleServerError(new MethodNotAllowedError());
 	}
 };
 
 type PostRoomActionRequest = RoomAttributes;
 
-export type PostRoomActionResponse = never | InternalSeverErrorActionResponse;
+export type PostRoomActionResponse = never;
 
 const postRoomListAction = async (
 	{ request, params }: ActionFunctionArgs,
 ): Promise<TypedResponse<PostRoomActionResponse>> => {
 	try {
-		const accountId: string = isString(params.accountId) ? params.accountId : '';
+		if (!isString(params.accountId)) {
+			return handleServerError(new ValidationError('account-id is required'));
+		}
+
 		const formData = await request.formData();
 		const name = getFormDataValue(formData, 'name');
 		if (!isString(name)) {
-			return validationErrorAction('name is required');
+			return handleServerError(new ValidationError('name is required'));
 		}
+
 		const body: PostRoomActionRequest = {
-			name: name.toString(),
+			name: name,
 		};
-		const postRoomRequest = { accountId: accountId, roomAttributes: body };
+		const postRoomRequest = { accountId: params.accountId, roomAttributes: body };
 		const postRoomResponse = await postRoom(postRoomRequest);
+
 		writeRequestLog({
 			path: '/rooms',
 			method: request.method,
@@ -50,6 +53,6 @@ const postRoomListAction = async (
 		});
 		return redirect(`/rooms/${postRoomResponse.id}`);
 	} catch (error) {
-		return internalServerErrorAction(error);
+		return handleServerError(error);
 	}
 };

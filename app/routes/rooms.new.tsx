@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/react';
+import { Form, Navigation, useOutletContext } from '@remix-run/react';
 import { useModalState } from '@hooks';
-import { isDefined, validate, roomMameRule } from '@util';
+import { validate, roomMameRule } from '@util';
 import {
 	DescriptionText,
 	ErrorTextList,
@@ -14,7 +14,9 @@ import {
 	TitleText,
 } from '@components';
 import { ModalFormLayout, ModalLayout } from '@layouts';
-import { RoomListPageActionResponses } from '@server/actions';
+import { roomListPageAction } from '@server/actions';
+
+export const action = roomListPageAction;
 
 export const ErrorBoundary = ModalErrorBoundary;
 
@@ -22,10 +24,6 @@ const CreateRoomModal = () => {
 	const [isOpen, onClose] = useModalState('/rooms');
 
 	const { state } = useOutletContext<Navigation>();
-
-	const actionData = useActionData<RoomListPageActionResponses>();
-	const hasActionData = isDefined<RoomListPageActionResponses>(actionData);
-	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];
 
 	const [inputName, setInputName] = useState('');
 	const [isNameValid, nameErrorMessageList] = validate<string>(roomMameRule, inputName);
@@ -64,7 +62,6 @@ const CreateRoomModal = () => {
 									required
 								/>
 								<ErrorTextList textList={nameErrorMessageList} />
-								<ErrorTextList textList={serverErrorMessageList} />
 							</>
 						}
 						buttons={

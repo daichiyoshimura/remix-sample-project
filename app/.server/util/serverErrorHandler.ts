@@ -12,7 +12,14 @@ export class ValidationError extends Error {
 	}
 }
 
-type Code = 'Server-InvalidRequest' | 'Server-Unexpected';
+export class MethodNotAllowedError extends Error {
+	constructor() {
+		super('MethodNotAllowed');
+		this.name = 'MethodNotAllowedError';
+	}
+}
+
+type Code = 'Server-InvalidRequest' | 'Server-MethodNotAllowed' | 'Server-Unexpected';
 
 export const handleServerError = (error: unknown): never => {
 	const [code, message] = parse(error);
@@ -32,6 +39,8 @@ export const handleServerError = (error: unknown): never => {
 const parse = (error: unknown): [Code, string] => {
 	if (error instanceof ValidationError) {
 		return ['Server-InvalidRequest', error.message];
+	} else if (error instanceof MethodNotAllowedError) {
+		return ['Server-MethodNotAllowed', error.message];
 	} else {
 		return ['Server-Unexpected', 'We apologize for any inconvenience caused.'];
 	}

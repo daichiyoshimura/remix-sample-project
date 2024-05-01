@@ -8,12 +8,9 @@ import {
 } from '@components';
 import { RoomCard, RoomCardList } from '@features';
 import { NavigationBarLayout, SplitPaneLayout } from '@layouts';
-import { roomListPageAction } from '@server/actions';
 import { roomListPageLoader } from '@server/loaders';
 
 export const loader = roomListPageLoader;
-
-export const action = roomListPageAction;
 
 export const ErrorBoundary = ModalErrorBoundary;
 
