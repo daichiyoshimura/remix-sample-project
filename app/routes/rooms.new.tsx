@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Navigation, useOutletContext } from '@remix-run/react';
 import { useModalState } from '@hooks';
-import { validate, roomMameRule } from '@util';
+import { validate, roomNameRule } from '@util';
 import {
 	DescriptionText,
 	ErrorTextList,
@@ -26,7 +26,7 @@ const CreateRoomModal = () => {
 	const { state } = useOutletContext<Navigation>();
 
 	const [inputName, setInputName] = useState('');
-	const [isNameValid, nameErrorMessageList] = validate<string>(roomMameRule, inputName);
+	const [isNameValid, nameErrorMessageList] = validate<string>(roomNameRule, inputName);
 
 	const handleClose = () => {
 		setInputName('');

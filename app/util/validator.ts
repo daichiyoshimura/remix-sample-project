@@ -8,7 +8,7 @@ export const validate = <T>(rule: z.ZodType<T>, target: T): [boolean, string[]] 
 	return [false, result.error.issues.map((issue) => issue.message)];
 };
 
-export const roomMameRule = z
+export const roomNameRule = z
 	.string()
 	.min(1)
 	.max(64)
