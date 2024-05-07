@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Form, Navigation, useOutletContext } from '@remix-run/react';
+import { Form, Navigation, useActionData, useNavigate, useOutletContext } from '@remix-run/react';
 import { useModalState } from '@hooks';
-import { validate, roomNameRule } from '@util';
+import { validate, roomNameRule, isDefined } from '@util';
 import {
 	DescriptionText,
 	ErrorTextList,
@@ -13,7 +13,7 @@ import {
 	TextInput,
 	TitleText,
 } from '@components';
-import { ModalFormLayout, ModalLayout } from '@layouts';
+import { MessageModalLayout, ModalFormLayout, ModalLayout } from '@layouts';
 import { roomListPageAction } from '@server/actions';
 
 export const action = roomListPageAction;
@@ -33,13 +33,28 @@ const CreateRoomModal = () => {
 		onClose();
 	};
 
-	return (
-		<MutationModal
-			isOpen={isOpen}
-			onClose={handleClose}
-			state={state}
-			inLoading={<LoadingIcon />}
-		>
+	const navigate = useNavigate();
+	const createdRoom = useActionData<typeof action>();
+
+	const render = () => {
+		if (isDefined(createdRoom)) {
+			return (
+				<MessageModalLayout
+					title={<TitleText title={'Create Room'} />}
+					description={<DescriptionText description={`Success!`} />}
+					buttons={
+						<TextButton
+							onClick={() => {
+								navigate(`/rooms/${createdRoom.id}`);
+							}}
+							caption={'OK'}
+						/>
+					}
+				/>
+			);
+		}
+
+		return (
 			<ModalLayout>
 				<TitleText title={'Create Room'} />
 				<DescriptionText
@@ -77,6 +92,17 @@ const CreateRoomModal = () => {
 					/>
 				</Form>
 			</ModalLayout>
+		);
+	};
+
+	return (
+		<MutationModal
+			isOpen={isOpen}
+			onClose={handleClose}
+			state={state}
+			inLoading={<LoadingIcon />}
+		>
+			{render()}
 		</MutationModal>
 	);
 };

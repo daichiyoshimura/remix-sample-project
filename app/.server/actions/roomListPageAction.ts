@@ -1,6 +1,6 @@
-import { ActionFunctionArgs, TypedResponse, redirect } from '@remix-run/node';
+import { ActionFunctionArgs, TypedResponse, json } from '@remix-run/node';
 import { isString, writeRequestLog } from '@util';
-import { RoomAttributes, postRoom } from '@server/api';
+import { Room, RoomAttributes, postRoom } from '@server/api';
 import {
 	MethodNotAllowedError,
 	ValidationError,
@@ -23,7 +23,7 @@ export const roomListPageAction = async (
 
 type PostRoomActionRequest = RoomAttributes;
 
-export type PostRoomActionResponse = never;
+export type PostRoomActionResponse = Room;
 
 const postRoomListAction = async (
 	{ request, params }: ActionFunctionArgs,
@@ -53,7 +53,7 @@ const postRoomListAction = async (
 			request: postRoomRequest,
 			response: postRoomResponse,
 		});
-		return redirect(`/rooms/${postRoomResponse.id}`);
+		return json(postRoomResponse, 200);
 	} catch (error) {
 		return handleServerError(error);
 	}
