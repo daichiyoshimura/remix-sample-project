@@ -6,15 +6,17 @@ import {
 	DescriptionText,
 	ErrorTextList,
 	LoadingIcon,
-	Modal,
 	ModalErrorBoundary,
+	MutationModal,
 	SafeTextButton,
 	TextButton,
 	TextInput,
 	TitleText,
 } from '@components';
 import { MessageModalLayout, ModalFormLayout, ModalLayout } from '@layouts';
-import { RoomProfilePageActionResponses } from '@server/actions';
+import { roomProfilePageAction } from '@server/actions';
+
+export const action = roomProfilePageAction;
 
 export const ErrorBoundary = ModalErrorBoundary;
 
@@ -22,10 +24,6 @@ const EditRoomModal = () => {
 	const [isOpen, onClose] = useModalState(`/rooms/${'1'}`);
 
 	const { state } = useOutletContext<Navigation>();
-
-	const actionData = useActionData<RoomProfilePageActionResponses>();
-	const hasActionData = isDefined<RoomProfilePageActionResponses>(actionData);
-	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];
 
 	const [inputName, setInputName] = useState('');
 	const [isNameValid, nameErrorMessageList] = validate<string>(roomNameRule, inputName);
@@ -35,12 +33,9 @@ const EditRoomModal = () => {
 		onClose();
 	};
 
+	const actionData = useActionData<typeof action>();
 	const render = () => {
-		if (state === ('loading' || 'submitting')) {
-			return <LoadingIcon />;
-		}
-
-		if (state === 'idle' && hasActionData && actionData.success) {
+		if (isDefined(actionData)) {
 			return (
 				<MessageModalLayout
 					title={<TitleText title={'Success'} />}
@@ -51,52 +46,54 @@ const EditRoomModal = () => {
 		}
 
 		return (
-			<>
-				<ModalLayout>
-					<TitleText title={'Edit Room'} />
-					<DescriptionText
-						description={`
+			<ModalLayout>
+				<TitleText title={'Edit Room'} />
+				<DescriptionText
+					description={`
 							Please enter only alphanumeric characters in this field. 
 							It is limited to a maximum length of 64 characters. 
 							The use of symbols such as underscores, hyphens, and spaces is not permitted.
 						`}
+				/>
+				<Form action={`/rooms/${'1'}/edit`} method="PATCH">
+					<ModalFormLayout
+						inputs={
+							<>
+								<TextInput
+									name="name"
+									value={inputName}
+									onChange={setInputName}
+									placeholder="RoomName"
+									required
+								/>
+								<ErrorTextList textList={nameErrorMessageList} />
+							</>
+						}
+						buttons={
+							<>
+								<TextButton onClick={handleClose} caption={'Do not save'} />
+								<SafeTextButton
+									type={'submit'}
+									disabled={!isNameValid}
+									caption={'Save'}
+								/>
+							</>
+						}
 					/>
-					<Form action={`/rooms/${'1'}`} method="PATCH">
-						<ModalFormLayout
-							inputs={
-								<>
-									<TextInput
-										name="name"
-										value={inputName}
-										onChange={setInputName}
-										placeholder="RoomName"
-										required
-									/>
-									<ErrorTextList textList={nameErrorMessageList} />
-									<ErrorTextList textList={serverErrorMessageList} />
-								</>
-							}
-							buttons={
-								<>
-									<TextButton onClick={handleClose} caption={'Do not save'} />
-									<SafeTextButton
-										type={'submit'}
-										disabled={!isNameValid}
-										caption={'Save'}
-									/>
-								</>
-							}
-						/>
-					</Form>
-				</ModalLayout>
-			</>
+				</Form>
+			</ModalLayout>
 		);
 	};
 
 	return (
-		<Modal isOpen={isOpen} onClose={handleClose}>
+		<MutationModal
+			isOpen={isOpen}
+			onClose={handleClose}
+			state={state}
+			inLoading={<LoadingIcon />}
+		>
 			{render()}
-		</Modal>
+		</MutationModal>
 	);
 };
 

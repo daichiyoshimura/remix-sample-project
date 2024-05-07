@@ -9,12 +9,9 @@ import {
 } from '@components';
 import { ParticipantGridItem, ParticipantGridItemProps, RoomProfile } from '@features';
 import { NavigationBarLayout, RoomProfilePageLayout, SplitPaneLayout } from '@layouts';
-import { roomProfilePageAction } from '@server/actions';
 import { roomProfilePageLoader } from '@server/loaders';
 
 export const loader = roomProfilePageLoader;
-
-export const action = roomProfilePageAction;
 
 const RoomProfilePage = () => {
 	const { id, name, createdAt, participants } = useLoaderData<typeof loader>();
