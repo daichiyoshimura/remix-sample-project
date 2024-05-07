@@ -14,6 +14,7 @@ export * from '@components/Button/TextLinkButton';
 export * from '@components/Grid/Grid';
 export * from '@components/Container/DangerZone';
 export * from '@components/ErrorBoundary/ModalErrorBoundary';
+export * from '@components/ErrorBoundary/PageErrorBoundary';
 export * from '@components/Footer/Footer';
 export * from '@components/Header/Header';
 export * from '@components/Menu/Menu';

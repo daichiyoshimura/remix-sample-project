@@ -4,7 +4,7 @@ import {
 	DescriptionText,
 	TitleText,
 	AddLinkButton,
-	ModalErrorBoundary,
+	PageErrorBoundary,
 } from '@components';
 import { RoomCard, RoomCardList } from '@features';
 import { NavigationBarLayout, SplitPaneLayout } from '@layouts';
@@ -12,7 +12,7 @@ import { roomListPageLoader } from '@server/loaders';
 
 export const loader = roomListPageLoader;
 
-export const ErrorBoundary = ModalErrorBoundary;
+export const ErrorBoundary = PageErrorBoundary;
 
 const RoomListPage = () => {
 	const { rooms } = useLoaderData<typeof loader>();
