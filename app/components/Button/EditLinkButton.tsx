@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import { AddIcon, Button } from '@components';
+import { Button, EditIcon } from '@components';
 
 export type EditLinkButtonProps = {
 	to: string;
@@ -9,7 +9,7 @@ export const EditLinkButton = ({ to }: EditLinkButtonProps) => {
 	return (
 		<Link to={to}>
 			<Button>
-				<AddIcon />
+				<EditIcon />
 			</Button>
 		</Link>
 	);
