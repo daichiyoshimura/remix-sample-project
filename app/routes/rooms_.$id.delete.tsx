@@ -5,7 +5,6 @@ import { isDefined } from '@util';
 import {
 	CautionTextButton,
 	DescriptionText,
-	ErrorTextList,
 	LoadingIcon,
 	ModalErrorBoundary,
 	MutationModal,
@@ -13,8 +12,10 @@ import {
 	TextInput,
 	TitleText,
 } from '@components';
-import { ModalFormLayout, ModalLayout } from '@layouts';
-import { RoomProfilePageActionResponses } from '@server/actions';
+import { MessageModalLayout, ModalFormLayout, ModalLayout } from '@layouts';
+import { roomProfilePageAction } from '@server/actions';
+
+export const action = roomProfilePageAction;
 
 export const ErrorBoundary = ModalErrorBoundary;
 
@@ -23,9 +24,7 @@ const DeleteRoomModal = () => {
 
 	const { state } = useOutletContext<Navigation>();
 
-	const actionData = useActionData<RoomProfilePageActionResponses>();
-	const hasActionData = isDefined<RoomProfilePageActionResponses>(actionData);
-	const serverErrorMessageList = hasActionData && !actionData.success ? [actionData.message] : [];
+	const actionData = useActionData<typeof action>();
 
 	const [inputName, setInputName] = useState('');
 
@@ -34,13 +33,18 @@ const DeleteRoomModal = () => {
 		onClose();
 	};
 
-	return (
-		<MutationModal
-			isOpen={isOpen}
-			onClose={handleClose}
-			state={state}
-			inLoading={<LoadingIcon />}
-		>
+	const render = () => {
+		if (isDefined(actionData)) {
+			return (
+				<MessageModalLayout
+					title={<TitleText title={'Success'} />}
+					description={<DescriptionText description={'The Room is deleted'} />}
+					buttons={<TextButton onClick={handleClose} caption={'Close'} />}
+				/>
+			);
+		}
+
+		return (
 			<ModalLayout>
 				<TitleText title={'Are you sure you want to delete?'} />
 				<DescriptionText
@@ -49,7 +53,7 @@ const DeleteRoomModal = () => {
 								press the delete button.
 							`}
 				/>
-				<Form action={`/rooms/${'1'}`} method="DELETE">
+				<Form action={`/rooms/${'1'}/delete`} method="DELETE">
 					<ModalFormLayout
 						inputs={
 							<>
@@ -60,7 +64,6 @@ const DeleteRoomModal = () => {
 									placeholder={'RoomName'}
 									required
 								/>
-								<ErrorTextList textList={serverErrorMessageList} />
 							</>
 						}
 						buttons={
@@ -76,6 +79,17 @@ const DeleteRoomModal = () => {
 					/>
 				</Form>
 			</ModalLayout>
+		);
+	};
+
+	return (
+		<MutationModal
+			isOpen={isOpen}
+			onClose={handleClose}
+			state={state}
+			inLoading={<LoadingIcon />}
+		>
+			{render()}
 		</MutationModal>
 	);
 };
