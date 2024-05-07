@@ -16,6 +16,7 @@ export const ErrorBoundary = PageErrorBoundary;
 
 const RoomListPage = () => {
 	const { rooms } = useLoaderData<typeof loader>();
+
 	const { pathname } = useLocation();
 
 	return (

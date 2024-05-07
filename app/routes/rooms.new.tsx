@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Navigation, useActionData, useNavigate, useOutletContext } from '@remix-run/react';
+import { Form, Navigation, useActionData, useOutletContext } from '@remix-run/react';
 import { useModalState } from '@hooks';
 import { validate, roomNameRule, isDefined } from '@util';
 import {
@@ -11,6 +11,7 @@ import {
 	SafeTextButton,
 	TextButton,
 	TextInput,
+	TextLinkButton,
 	TitleText,
 } from '@components';
 import { MessageModalLayout, ModalFormLayout, ModalLayout } from '@layouts';
@@ -33,23 +34,14 @@ const CreateRoomModal = () => {
 		onClose();
 	};
 
-	const navigate = useNavigate();
 	const createdRoom = useActionData<typeof action>();
-
 	const render = () => {
 		if (isDefined(createdRoom)) {
 			return (
 				<MessageModalLayout
 					title={<TitleText title={'Create Room'} />}
 					description={<DescriptionText description={`Success!`} />}
-					buttons={
-						<TextButton
-							onClick={() => {
-								navigate(`/rooms/${createdRoom.id}`);
-							}}
-							caption={'OK'}
-						/>
-					}
+					buttons={<TextLinkButton to={`/rooms/${createdRoom.id}`} caption={'OK'} />}
 				/>
 			);
 		}
