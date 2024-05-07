@@ -2,10 +2,10 @@ import { TitleText, DescriptionText } from '@components';
 
 export type NoContentsZoneProps = {
 	title: string;
-	description: string;
+	description?: string;
 };
 
-export const NoContentsZone = ({ title, description }: NoContentsZoneProps) => {
+export const NoContentsZone = ({ title, description = '' }: NoContentsZoneProps) => {
 	return (
 		<div className="h-full flex flex-col justify-center space-y-8">
 			<div className="flex justify-center">

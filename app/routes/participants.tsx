@@ -1,17 +1,21 @@
 import { Navigation, Outlet, useLoaderData, useLocation, useOutletContext } from '@remix-run/react';
-import { DescriptionText, TitleText, AddLinkButton } from '@components';
+import {
+	DescriptionText,
+	TitleText,
+	AddLinkButton,
+	PageErrorBoundary,
+	NoContentsZone,
+} from '@components';
 import { ParticipantName, ParticipantNameList } from '@features';
 import { NavigationBarLayout, SideBarLayout, SplitPaneLayout } from '@layouts';
 import { participantListPageLoader } from '@server/loaders';
 
 export const loader = participantListPageLoader;
 
+export const ErrorBoundary = PageErrorBoundary;
+
 const ParticipantListPage = () => {
-	const loaderData = useLoaderData<typeof loader>();
-	if ('message' in loaderData) {
-		throw Error(loaderData.message);
-	}
-	const { participants } = loaderData;
+	const { participants } = useLoaderData<typeof loader>();
 
 	const { pathname } = useLocation();
 
@@ -35,6 +39,7 @@ const ParticipantListPage = () => {
 						/>
 					}
 				>
+					<NoContentsZone title={'Select a participant'} />
 					<Outlet context={useOutletContext<Navigation>()} />
 				</SideBarLayout>
 			}

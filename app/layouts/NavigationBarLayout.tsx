@@ -4,11 +4,11 @@ export type NavigationBarLayoutProps = {
 	location: ReactNode;
 	left?: ReactNode;
 	title: ReactNode;
-	right: ReactNode;
+	right?: ReactNode;
 };
 
 export const NavigationBarLayout = (
-	{ location, left = undefined, title, right }: NavigationBarLayoutProps,
+	{ location, left = undefined, title, right = undefined }: NavigationBarLayoutProps,
 ) => {
 	return (
 		<div className="flex flex-col w-full gap-y-2">
