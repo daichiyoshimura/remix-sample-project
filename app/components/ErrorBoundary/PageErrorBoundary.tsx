@@ -1,8 +1,10 @@
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
-import { DescriptionText, TitleText } from '@components';
+import { isRouteErrorResponse, useLocation, useRouteError } from '@remix-run/react';
+import { AddLinkButton, DescriptionText, NoContentsZone, TitleText } from '@components';
+import { NavigationBarLayout, SplitPaneLayout } from '@layouts';
 import { ServerErrorResponseBody } from '@server/util';
 
 export const PageErrorBoundary = () => {
+	const { pathname } = useLocation();
 	const error = useRouteError();
 	const description = (error: unknown): string => {
 		const [message, code] = ((): [string, string] => {
@@ -16,15 +18,18 @@ export const PageErrorBoundary = () => {
 		})();
 		return `${message} (Code: ${code})`;
 	};
-
 	return (
-		<div className="h-full flex flex-col justify-center space-y-8">
-			<div className="flex justify-center">
-				<TitleText title={'Loading Data Error'} />
-			</div>
-			<div className="flex justify-center">
-				<DescriptionText description={description(error)} />
-			</div>
-		</div>
+		<SplitPaneLayout
+			top={
+				<NavigationBarLayout
+					location={<DescriptionText description={pathname} />}
+					title={<TitleText title={'Rooms'} />}
+					right={<AddLinkButton to={'/rooms/new'} />}
+				/>
+			}
+			bottom={
+				<NoContentsZone title={'Loading Data Error'} description={description(error)} />
+			}
+		/>
 	);
 };
